@@ -21,10 +21,13 @@ activity = discord.Activity(
     name=constants.Bot.status, type=discord.ActivityType.watching,
 )
 
+mentions = discord.AllowedMentions(everyone=False,)
+
 bot = Obsidion(
     case_insensitive=True,
     activity=activity,
     command_prefix=when_mentioned_or(constants.Bot.default_prefix),
+    allowed_mentions=mentions,
 )
 
 # Load all required cogs
