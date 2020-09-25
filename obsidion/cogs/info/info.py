@@ -159,7 +159,7 @@ class info(commands.Cog):
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
     async def serverpe(self, ctx: commands.Context, server_ip: str, port: int = None):
-        """Get info on a minecraft server"""
+        """Get info on a minecraft PE server"""
         await ctx.channel.trigger_typing()
         url = f"{constants.Bot.api}/server/bedrock"
         server_ip, _port = self.get_server(server_ip, port)
