@@ -32,7 +32,7 @@ class images(commands.Cog):
     async def sign(
         self, ctx: commands.Context, *, text: str,
     ):
-        """Create a Minecraft sign with custom text."""
+        """Create a Minecraft sign with custom text"""
         await ctx.channel.trigger_typing()
         split = text.replace(" ", "%20").split("|")
         line1 = split[0] if len(split) >= 1 else "%20"
