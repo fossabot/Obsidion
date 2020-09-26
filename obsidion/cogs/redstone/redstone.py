@@ -42,7 +42,7 @@ class redstone(commands.Cog):
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
     async def itemsfromredstone(self, ctx, item_count: int):
-        """calculate the strength of a comparator output only works for a chest."""
+        """calculate how many items for a redstone signal."""
         signal_strength = max(item_count, ceil((54 * 64 / 14) * (item_count - 1)))
         await ctx.send(f"You need at least {signal_strength} items")
 
