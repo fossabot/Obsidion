@@ -18,9 +18,6 @@
   <a href="https://discordapp.com/oauth2/authorize?client_id=695061551916515439&scope=bot&permissions=314448">
     <img src="https://img.shields.io/badge/Invite-to%20your%20server-blue.svg?style=for-the-badge" alt="Invite to Server">
   </a>
-  <a href="https://crowdin.com/project/red-discordbot">
-    <img src="https://badges.crowdin.net/obsidion/localized.svg" alt="Localized with Crowdin">
-  </a>
   <a href="https://github.com/Rapptz/discord.py/">
       <img src="https://img.shields.io/badge/discord-py-blue.svg" alt="discord.py">
   </a>
@@ -31,9 +28,6 @@
   </a>
   <a href="http://makeapullrequest.com">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
-  </a>
-  <a href="https://deepsource.io/gh/Darkflame72/Obsidion/?ref=repository-badge">
-    <img src="https://img.shields.io/badge/deepsource-enabled-blue.svg" alt="Deepsource Enabled">
   </a>
 </p>
 
