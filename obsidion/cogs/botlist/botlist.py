@@ -21,9 +21,6 @@ class botlist(commands.Cog):
             self.bot,
             constants.Discord_bot_list.dbl_token,
             autopost=True,
-            webhook_path="/dblwebhook",
-            webhook_auth="password",
-            webhook_port=5000,
         )
 
         self.botsfordiscord.start()
