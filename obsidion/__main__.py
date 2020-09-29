@@ -18,10 +18,13 @@ log = logging.getLogger("obsidion.main")
 
 # set activity
 activity = discord.Activity(
-    name=constants.Bot.status, type=discord.ActivityType.watching,
+    name=constants.Bot.status,
+    type=discord.ActivityType.watching,
 )
 
-mentions = discord.AllowedMentions(everyone=False,)
+mentions = discord.AllowedMentions(
+    everyone=False,
+)
 
 bot = Obsidion(
     case_insensitive=True,
@@ -43,10 +46,9 @@ bot.load_extension("obsidion.cogs.hypixel")
 bot.load_extension("obsidion.cogs.images")
 bot.load_extension("obsidion.cogs.info")
 bot.load_extension("obsidion.cogs.misc")
-bot.load_extension("obsidion.cogs.rcon")
+# bot.load_extension("obsidion.cogs.rcon")
 bot.load_extension("obsidion.cogs.redstone")
 bot.load_extension("obsidion.cogs.servers")
-bot.load_extension("obsidion.cogs.servertracking")
 bot.load_extension("obsidion.cogs.events")
 bot.load_extension("obsidion.cogs.config")
 # bot.load_extension("obsidion.cogs.minecraft")
