@@ -1,7 +1,7 @@
 from discord.ext import commands
 from obsidion import constants
 import discord
-from datetime import datetimew
+from datetime import datetime
 
 from obsidion.bot import Obsidion
 
