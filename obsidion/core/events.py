@@ -2,8 +2,11 @@ from discord.ext import commands
 from obsidion import constants
 import discord
 from datetime import datetime
+import logging
 
 from obsidion.bot import Obsidion
+
+log = logging.getLogger(__name__)
 
 
 class Events(commands.Cog):

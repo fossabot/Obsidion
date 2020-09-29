@@ -85,6 +85,7 @@ class miscellaneous(commands.Cog):
         ram = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, 2) / 1000
 
         statics = (
+            f"Guilds: `{len(self.bot.guilds):,}`\n"
             f"Memory Usage: `{ram}MB`\n"
             f"Uptime: `{uptime_str}`\n"
             f"Discord.py: `v{discord.__version__}`"

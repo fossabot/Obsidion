@@ -71,3 +71,6 @@ config.yaml
 config.yaml
 
 .coverage
+
+# Any logs
+*.log

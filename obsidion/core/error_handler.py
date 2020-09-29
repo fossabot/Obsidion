@@ -162,8 +162,6 @@ class ErrorHandler(Cog):
             exc_info=e,
         )
 
-        ctx.bot.stats.incr("errors.unexpected")
-
 
 def setup(bot) -> None:
     """Load the ErrorHandler cog."""
