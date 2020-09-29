@@ -14,9 +14,6 @@ from discord.ext import commands
 import asyncpg
 
 from obsidion import constants
-
-# from obsidion import constants
-from obsidion.async_stats import AsyncStatsClient
 from obsidion.core.global_checks import init_global_checks
 
 log = logging.getLogger(__name__)
@@ -40,16 +37,6 @@ class Obsidion(commands.AutoShardedBot):
         self._resolver = None
 
         self.uptime = None
-
-        statsd_url = constants.Stats.statsd_host
-
-        if not constants.Stats.enabled:
-            # Since statsd is UDP, there are no errors for sending to a down port.
-            # For this reason, setting the statsd host to 127.0.0.1 for development
-            # will effectively disable stats.
-            statsd_url = "127.0.0.1"
-
-        self.stats = AsyncStatsClient(self.loop, statsd_url, 8125, prefix="bot")
 
         # Do basic checks on every command
         init_global_checks(self)
@@ -84,13 +71,6 @@ class Obsidion(commands.AutoShardedBot):
             )
             self.redis_session = await fakeredis.aioredis.create_redis_pool()
         else:
-            # print(constants.Redis.password == None)
-            # if constants.Redis.password is not None:
-            #     self.redis_session = await aioredis.create_redis_pool(
-            #         address=(constants.Redis.host, constants.Redis.port),
-            #         password=constants.Redis.password,
-            #     )
-            # else:
             self.redis_session = await aioredis.create_redis_pool(
                 address=(constants.Redis.host, constants.Redis.port),
             )
@@ -153,7 +133,8 @@ class Obsidion(commands.AutoShardedBot):
         # Use AF_INET as its socket family to prevent HTTPS related problems both locally
         # and in production.
         self._connector = aiohttp.TCPConnector(
-            resolver=self._resolver, family=socket.AF_INET,
+            resolver=self._resolver,
+            family=socket.AF_INET,
         )
 
         # Client.login() will call HTTPClient.static_login() which will create a session using
