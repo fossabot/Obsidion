@@ -88,7 +88,7 @@ class miscellaneous(commands.Cog):
 
         statics = (
             f"Memory Usage: `{ram}MB`\n"
-            # f"Uptime: `{uptime_str}`\n"
+            f"Uptime: `{uptime_str}`\n"
             f"Discord.py: `v{discord.__version__}`"
         )
 
