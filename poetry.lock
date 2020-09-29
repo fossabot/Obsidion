@@ -344,7 +344,7 @@ description = "Flake8 Type Annotation Checks"
 name = "flake8-annotations"
 optional = false
 python-versions = ">=3.6.1,<4.0.0"
-version = "2.4.0"
+version = "2.4.1"
 
 [package.dependencies]
 flake8 = ">=3.7,<3.9"
@@ -532,7 +532,7 @@ description = "An async wrapper for popular minecraft servers"
 name = "mcsrvstats"
 optional = false
 python-versions = ">=3.6"
-version = "0.1.1"
+version = "0.1.2"
 
 [package.dependencies]
 aiohttp = "*"
@@ -783,12 +783,12 @@ marker = "python_version == \"3.7\""
 name = "pytype"
 optional = false
 python-versions = "<3.9,>=3.5"
-version = "2020.9.24"
+version = "2020.9.29"
 
 [package.dependencies]
 attrs = "*"
 importlab = ">=0.5.1"
-ninja = "*"
+ninja = ">=1.10.0.post2"
 pyyaml = ">=3.11"
 six = "*"
 typed_ast = "*"
@@ -1230,8 +1230,8 @@ flake8 = [
     {file = "flake8-3.8.3.tar.gz", hash = "sha256:f04b9fcbac03b0a3e58c0ab3a0ecc462e023a9faf046d57794184028123aa208"},
 ]
 flake8-annotations = [
-    {file = "flake8-annotations-2.4.0.tar.gz", hash = "sha256:09fe1aa3f40cb8fef632a0ab3614050a7584bb884b6134e70cf1fc9eeee642fa"},
-    {file = "flake8_annotations-2.4.0-py3-none-any.whl", hash = "sha256:5bda552f074fd6e34276c7761756fa07d824ffac91ce9c0a8555eb2bc5b92d7a"},
+    {file = "flake8-annotations-2.4.1.tar.gz", hash = "sha256:0bcebb0792f1f96d617ded674dca7bf64181870bfe5dace353a1483551f8e5f1"},
+    {file = "flake8_annotations-2.4.1-py3-none-any.whl", hash = "sha256:bebd11a850f6987a943ce8cdff4159767e0f5f89b3c88aca64680c2175ee02df"},
 ]
 flake8-bandit = [
     {file = "flake8_bandit-2.1.2.tar.gz", hash = "sha256:687fc8da2e4a239b206af2e54a90093572a60d0954f3054e23690739b0b0de3b"},
@@ -1364,8 +1364,8 @@ mccabe = [
     {file = "mccabe-0.6.1.tar.gz", hash = "sha256:dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"},
 ]
 mcsrvstats = [
-    {file = "mcsrvstats-0.1.1-py3-none-any.whl", hash = "sha256:00a1ec9489769a07f149cb908f096e38b3cb8527b44842c2b314917732facb7e"},
-    {file = "mcsrvstats-0.1.1.tar.gz", hash = "sha256:5043c21a3634fdcd7163927709cbecb294fc72c9588125104afc98ae4e13780d"},
+    {file = "mcsrvstats-0.1.2-py2-none-any.whl", hash = "sha256:d1e8fef99b1b9bf674df8f1069cbae88cf66bf983e1e10a698a1d83da7dd8135"},
+    {file = "mcsrvstats-0.1.2.tar.gz", hash = "sha256:fece4150abc33b37f0960c9ce4ce374147d33afefbb100252dbdb03c17afad13"},
 ]
 more-itertools = [
     {file = "more-itertools-8.5.0.tar.gz", hash = "sha256:6f83822ae94818eae2612063a5101a7311e68ae8002005b5e05f03fd74a86a20"},
@@ -1511,15 +1511,15 @@ pytest-mock = [
     {file = "pytest_mock-3.3.1-py3-none-any.whl", hash = "sha256:024e405ad382646318c4281948aadf6fe1135632bea9cc67366ea0c4098ef5f2"},
 ]
 pytype = [
-    {file = "pytype-2020.9.24-cp35-cp35m-macosx_10_14_x86_64.whl", hash = "sha256:de1e8be7623c3a52aa76bb0fe627ade03fba7d41481b3705a42b421bc20f4948"},
-    {file = "pytype-2020.9.24-cp35-cp35m-manylinux2014_x86_64.whl", hash = "sha256:e679d521c9d3ed2c42c62d8d15ab7b333d11c9d0b0f6a17ea43508a9ef8788f1"},
-    {file = "pytype-2020.9.24-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:b69b1684ad658ddb21f33a37871c0ea71a8adaf7a2e66b57091ab8b7c8ab94f3"},
-    {file = "pytype-2020.9.24-cp36-cp36m-manylinux2014_x86_64.whl", hash = "sha256:cbd0d4ecd610781b6fb11105a0a2781eea8025403ed186ed43eb8d1b853ea952"},
-    {file = "pytype-2020.9.24-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:6e3f6044211b58bcf5f71087cdfc704a0f66fc84e26cde2642836d342c163702"},
-    {file = "pytype-2020.9.24-cp37-cp37m-manylinux2014_x86_64.whl", hash = "sha256:513a3a11718632e5fa44a866a488f9e09aaf0be0460e8cbecddb15631ecd3542"},
-    {file = "pytype-2020.9.24-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:928c2fba3b9102fd279b6dfb632f5baca7917e80c57cf8b9eb25369f8c62317c"},
-    {file = "pytype-2020.9.24-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:4948600946302ed929943ba7d2cf93e6d5bfa1e45232187d76fb119e86b92a1b"},
-    {file = "pytype-2020.9.24.tar.gz", hash = "sha256:438583c645fce1945606e9c16e6b2cce2cf16b31375080c9ef8bc7f5f036e7be"},
+    {file = "pytype-2020.9.29-cp35-cp35m-macosx_10_14_x86_64.whl", hash = "sha256:c424a17bd6d1a559291ad22cc2a91596ded5d8653665894d7a1cedf976303ff4"},
+    {file = "pytype-2020.9.29-cp35-cp35m-manylinux2014_x86_64.whl", hash = "sha256:fa53cf1ee3134368c4a330d75ebb9a84acf8126ea5ec102795087924cfcf5cec"},
+    {file = "pytype-2020.9.29-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:ceec03a974f3b728701a85e365a21e62a41143d95d0b099cc23bc490929bf85e"},
+    {file = "pytype-2020.9.29-cp36-cp36m-manylinux2014_x86_64.whl", hash = "sha256:e1dd3e387b850084305d2fb1c55b946d603b98b3bc0dbe57e8b7fe158f9e2cf6"},
+    {file = "pytype-2020.9.29-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:6aeb435f64fc3ab5fbd8a9997f64068e9c78e8d4691459cf46c75c6a7d560ccc"},
+    {file = "pytype-2020.9.29-cp37-cp37m-manylinux2014_x86_64.whl", hash = "sha256:cd781459c3000a3ffe54346471eb6e8ff1a29c2658d9d0aab43ea2ec4eebf12e"},
+    {file = "pytype-2020.9.29-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:2849c861cc3b8a795356a68d9f144634e6e6f0a82ecf81842ba7ec16481bded0"},
+    {file = "pytype-2020.9.29-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:d5550ad4e26794780561e91548ed11ef059ebfadf52aa09c0b61b05ba3a1488a"},
+    {file = "pytype-2020.9.29.tar.gz", hash = "sha256:b44c0904160c6b55ee3f9e00227719a62bb4e3388ae54220da2e0609388325fe"},
 ]
 pyyaml = [
     {file = "PyYAML-5.3.1-cp27-cp27m-win32.whl", hash = "sha256:74809a57b329d6cc0fdccee6318f44b9b8649961fa73144a98735b0aaf029f1f"},
