@@ -1,0 +1,6 @@
+__pycache__
+.github
+.cache
+.gitignore
+*.log
+docker

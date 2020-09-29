@@ -1,29 +1,76 @@
-# Obsisdion Discord Bot
+<h1 align="center">
+  Obsidion Discord Bot
+  <br>
+</h1>
 
-[INVITE LINK](https://discordapp.com/oauth2/authorize?client_id=691589447074054224&scope=bot&permissions=314448) | [SUPPORT SERVER](https://discord.gg/invite/7BRD7s6)
+<h4 align="center">Minecraft, Info, Fun, Hypixel and More</h4>
 
-## About This Bot
+<p align="center">
+  <a href="https://discord.gg/invite/7BRD7s6">
+    <img src="https://discordapp.com/api/guilds/695008516590534758/widget.png?style=shield" alt="Discord Server">
+  </a>
+  <a href="https://www.patreon.com/obsidion">
+    <img src="https://img.shields.io/badge/Support-Obsidion!-yellow.svg" alt="Support Obsidion on Patreon!">
+  </a>
+  <a href="https://www.python.org/downloads/">
+    <img src="https://img.shields.io/badge/Made%20With-Python%203.8-blue.svg?style=for-the-badge" alt="Made with Python 3.8">
+  </a>
+  <a href="https://discordapp.com/oauth2/authorize?client_id=695061551916515439&scope=bot&permissions=314448">
+    <img src="https://img.shields.io/badge/Invite-to%20your%20server-blue.svg?style=for-the-badge" alt="Invite to Server">
+  </a>
+  <a href="https://crowdin.com/project/red-discordbot">
+    <img src="https://badges.crowdin.net/obsidion/localized.svg" alt="Localized with Crowdin">
+  </a>
+  <a href="https://github.com/Rapptz/discord.py/">
+      <img src="https://img.shields.io/badge/discord-py-blue.svg" alt="discord.py">
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/ambv/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style: Black">
+  </a>
+  <a href="http://makeapullrequest.com">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg">
+  </a>
+  <a href="https://deepsource.io/gh/Darkflame72/Obsidion/?ref=repository-badge">
+    <img src="https://img.shields.io/badge/deepsource-enabled-blue.svg" alt="Deepsource Enabled">
+  </a>
+</p>
 
-This is a configurable, fun and useful Minecraft themed Discord Bot.It has a wide range of commands available and can be customised on a per server basis. It includes features such as server tracking, wiki lookup, profile viewing and much more. It uses the [Discord.py](https://github.com/Rapptz/discord.py) library and is fully asynchronous.
+<p align="center">
+  <a href="#overview">Overview</a>
+  •
+  <a href="#commands">Commands</a>
+  •
+  <a href="https://discord.obsidion-dev.com">Website</a>
+  •
+  <a href="https://api.bowie-co.nz">API</a>
+  •
+  <a href="#join-the-community">Community</a>
+  •
+  <a href="#license">License</a>
+  •
+  <a href="developing">Developing</a>
+</p>
 
-## Commands
+# Overview
 
-### Informtaional
+Obsidion is a flexible, reliable Minecraft Bot. This means that msot aspects of how it interectats with your server are controlled by you. It has commands for nearly everything Minecraft related from fun pvp to information about a server. It support Minecraft live servertracking, wiki lookup, pvp commands, viewing your Minecraft profile among other things.
 
-The `Informational` category contains commands that provide information on different things related to minecraft
+# Commands
 
-### Fun
+TODO
 
-The `Fun` category contains commands that provide entertainment in fun and engaging ways
+# Developing
 
-### Images
+TODO
 
-The `Images` category has commands that let you create some cool images and view skinsview skins and achievements
+# Join the community!
 
-### Miscellaneous
+**Obsidion** is in continuous development, if there is a feature you want added or isn't working the way you want feel free to create an issue or message us on discord
 
-The `Miscellaneous` category provides commands that provide information on how to use this bot
+Join us on our [Official Discord Server](https://discord.gg/invite/7BRD7s6)!
 
-### Configurable
+# License
 
-The `Configurable` category provides commands to customize the bot, and options to link Minecraft usernames, servers and active server counts.
+Released under the [GNU AGPL v3](https://www.gnu.org/licenses/agpl-3.0.html) license.

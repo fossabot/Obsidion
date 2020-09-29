@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  bot:
+    build: .
+    volumes:
+      # this is for development only as it makes our code accesable from the host pc
+      # remove for production
+      - .:/obsidion
+    links:
+      - db
+      - redis
+  db:
+    image: postgres:12-alpine
+    volumes:
+      - postgresdb:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: discord
+      POSTGRES_PASSWORD: hunter12
+      POSTGRES_USER: discord
+  redis:
+    image: redis:alpine
+
+volumes:
+  postgresdb:
