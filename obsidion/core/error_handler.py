@@ -3,6 +3,7 @@ import traceback
 
 from discord.ext.commands import Cog, Context, errors
 import discord
+from ..utils.chat_formatting import text_to_file
 
 from obsidion import constants
 
@@ -131,16 +132,28 @@ class ErrorHandler(Cog):
         await ctx.send(
             "Sorry, an unexpected error occurred. It has been recorded and should be fixed soon!\n\n"
         )
+        log.error(
+            f"Error executing command invoked by {ctx.message.author}: {ctx.message.content}",
+            exc_info=e,
+        )
         embed = discord.Embed(title="Bug", colour=0x00FF00)
         channel = ctx.bot.get_channel(constants.Channels.stack_trace_channel)
 
         embed.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
         embed.add_field(name="Command", value=ctx.command)
-        embed.add_field(
-            name="Traceback",
-            value=f"```{''.join(traceback.format_tb(e.__traceback__))}\n{e}```",
-            inline=False,
-        )
+        if len(f"```{(''.join(traceback.format_tb(e.__traceback__)))}\n{e}```") <= 900:
+            embed.add_field(
+                name="Traceback",
+                value=f"```{(''.join(traceback.format_tb(e.__traceback__)))}\n{e}```",
+                inline=False,
+            )
+            file = None
+        else:
+            embed.add_field(name="Traceback", value=e, inline=False)
+            file = text_to_file(
+                f"{''.join(traceback.format_tb(e.__traceback__))}\n{e}", "error.txt"
+            )
+
         embed.timestamp = ctx.message.created_at
 
         if ctx.guild is not None:
@@ -156,11 +169,8 @@ class ErrorHandler(Cog):
         embed.set_footer(text=f"Author ID: {ctx.author.id}")
 
         await channel.send(embed=embed)
-
-        log.error(
-            f"Error executing command invoked by {ctx.message.author}: {ctx.message.content}",
-            exc_info=e,
-        )
+        if file:
+            await channel.send(file=file)
 
 
 def setup(bot) -> None:
