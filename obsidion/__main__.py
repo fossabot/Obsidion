@@ -22,6 +22,10 @@ activity = discord.Activity(
     type=discord.ActivityType.watching,
 )
 
+intents = discord.Intents.none()
+intents.messages = True
+intents.guilds = True
+
 mentions = discord.AllowedMentions(
     everyone=False,
 )
@@ -31,6 +35,7 @@ bot = Obsidion(
     activity=activity,
     command_prefix=when_mentioned_or(constants.Bot.default_prefix),
     allowed_mentions=mentions,
+    intents=intents,
 )
 
 # Load all required cogs
