@@ -260,7 +260,8 @@ class info(commands.Cog):
             )
             return
         embed = discord.Embed(
-            description=data["fields"]["description"], color=0x00FF00,
+            description=data["fields"]["description"],
+            color=0x00FF00,
         )
 
         embed.set_author(

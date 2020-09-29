@@ -30,7 +30,10 @@ class images(commands.Cog):
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
     async def sign(
-        self, ctx: commands.Context, *, text: str,
+        self,
+        ctx: commands.Context,
+        *,
+        text: str,
     ):
         """Create a Minecraft sign with custom text"""
         await ctx.channel.trigger_typing()
