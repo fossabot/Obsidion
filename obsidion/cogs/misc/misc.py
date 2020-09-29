@@ -83,8 +83,6 @@ class miscellaneous(commands.Cog):
         uptime_str = humanize_timedelta(timedelta=delta)
 
         ram = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, 2) / 1000
-        print(self.bot.uptime)
-        print(uptime_str)
 
         statics = (
             f"Memory Usage: `{ram}MB`\n"
