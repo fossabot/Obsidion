@@ -63,12 +63,7 @@ class development(commands.Cog):
     @commands.command(hidden=True)
     async def shutdown(self, ctx: commands.Context):
         """shutdown the bot"""
-        self.bot.close()
-
-    @commands.command(hidden=True)
-    async def reboot(self, _ctx: commands.Context):
-        """shutdown the bot"""
-        self.bot._recreate()
+        await self.bot.close()
 
 
 def setup(bot) -> None:

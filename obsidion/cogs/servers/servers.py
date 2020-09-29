@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from .utils import (
+from mcsrvstats import (
     wyncraftClasses,
     hiveMCStatus,
     hiveMCGameStats,
@@ -497,7 +497,8 @@ class servers(commands.Cog):
                 else:
                     value += f"`{stat}`: {data['stats'][0][stat]}\n"
             embed.add_field(
-                name=f"{game.replace('_', ' ').upper()} Stats", value=value,
+                name=f"{game.replace('_', ' ').upper()} Stats",
+                value=value,
             )
             await ctx.send(embed=embed)
         else:

@@ -13,12 +13,12 @@ import fakeredis.aioredis
 from discord.ext import commands
 import asyncpg
 
-from obsidion import constants
-from obsidion.core.global_checks import init_global_checks
+from . import constants
+from .core.global_checks import init_global_checks
 
 log = logging.getLogger(__name__)
 
-__all__ = ["Obsidion", "ExitCodes"]
+__all__ = ["Obsidion"]
 
 
 class Obsidion(commands.AutoShardedBot):
@@ -81,12 +81,11 @@ class Obsidion(commands.AutoShardedBot):
     async def login(self, *args, **kwargs) -> None:
         """Re-create the connector and set up sessions before logging into Discord."""
         self._recreate()
-        await self.stats.create_socket()
         await super().login(*args, **kwargs)
         self.uptime = datetime.datetime.now()
 
     async def close(self) -> None:
-        """Close the Discord connection and the aiohttp session, connector, statsd client, and resolver."""
+        """Close the Discord connection and the aiohttp session, connector, and resolver."""
         await super().close()
 
         if self.http_session:
@@ -97,9 +96,6 @@ class Obsidion(commands.AutoShardedBot):
 
         if self._resolver:
             await self._resolver.close()
-
-        if self.stats._transport:
-            self.stats._transport.close()
 
         if self.redis_session:
             self.redis_closed = True
@@ -162,27 +158,3 @@ class Obsidion(commands.AutoShardedBot):
     async def logout(self):
         """Logs out of Discord and closes all connections."""
         await super().logout()
-
-    async def shutdown(self, *, restart: bool = False):
-        """Gracefully quit Obsidion.
-        The program will exit with code :code:`0` by default.
-        Parameters
-        ----------
-        restart : bool
-            If :code:`True`, the program will exit with code :code:`26`.
-        """
-        if not restart:
-            self._shutdown_mode = ExitCodes.SHUTDOWN
-        else:
-            self._shutdown_mode = ExitCodes.RESTART
-
-        await self.logout()
-        sys.exit(self._shutdown_mode)
-
-
-class ExitCodes(IntEnum):
-    # This needs to be an int enum to be used
-    # with sys.exit
-    CRITICAL = 1
-    SHUTDOWN = 0
-    RESTART = 26

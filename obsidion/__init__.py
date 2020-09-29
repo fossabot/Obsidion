@@ -9,7 +9,16 @@ __all__ = [
     "_update_event_loop_policy",
 ]
 
-__version__ = "0.3.0.dev1"
+try:
+    from importlib.metadata import version, PackageNotFoundError  # type: ignore
+except ImportError:  # pragma: no cover
+    from importlib_metadata import version, PackageNotFoundError  # type: ignore
+
+
+try:
+    __version__ = version(__name__)
+except PackageNotFoundError:  # pragma: no cover
+    __version__ = "unknown"
 
 # check wether the bot can run
 if _sys.version_info < MIN_PYTHON_VERSION:
