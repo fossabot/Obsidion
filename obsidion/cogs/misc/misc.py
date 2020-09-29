@@ -150,7 +150,7 @@ class miscellaneous(commands.Cog):
         or by spaces.
         """
         source_url = "https://github.com/Darkflame72/Obsidion"
-        branch = "V0.3"
+        branch = "V0.4"
         if command is None:
             return await ctx.send(source_url)
 
