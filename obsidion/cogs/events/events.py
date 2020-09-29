@@ -25,7 +25,6 @@ class events(commands.Cog):
             )
 
             embed.add_field(name="Guild", value=guild_text)
-            embed.add_field(name="Members", value=members, inline=False)
             embed.add_field(name="Region", value=guild.region)
             embed.timestamp = datetime.now()
             if guild.icon_url:

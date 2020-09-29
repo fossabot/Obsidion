@@ -82,18 +82,11 @@ class miscellaneous(commands.Cog):
         delta = datetime.datetime.utcnow() - self.bot.uptime
         uptime_str = humanize_timedelta(timedelta=delta)
 
-        total_users = sum(len(guild.members) for guild in self.bot.guilds)
-        text_channels = sum(len(guild.text_channels) for guild in self.bot.guilds)
-        voice_channels = sum(len(guild.voice_channels) for guild in self.bot.guilds)
-
         ram = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, 2) / 1000
         print(self.bot.uptime)
         print(uptime_str)
 
         statics = (
-            f"Guilds: `{len(self.bot.guilds):,}`\n"
-            f"Users: `{total_users:,}`\n"
-            f"Channels: `{text_channels+voice_channels:,}`\n"
             f"Memory Usage: `{ram}MB`\n"
             # f"Uptime: `{uptime_str}`\n"
             f"Discord.py: `v{discord.__version__}`"
