@@ -1,17 +1,17 @@
+"""Main bot file."""
+
 import asyncio
+import socket
 import datetime
 import logging
-import socket
-import sys
-from enum import IntEnum
 from typing import Optional
 
 import aiohttp
 import aioredis
 import discord
-import fakeredis.aioredis
-from discord.ext import commands
 import asyncpg
+from discord.ext import commands
+import fakeredis.aioredis
 
 from . import constants
 from .core.global_checks import init_global_checks
@@ -22,7 +22,10 @@ __all__ = ["Obsidion"]
 
 
 class Obsidion(commands.AutoShardedBot):
-    def __init__(self, *args, **kwargs):
+    """Main bot autosharded class."""
+
+    def __init__(self, *args, **kwargs) -> None:
+        """Initialise bot and start conections to services."""
 
         super().__init__(*args, **kwargs)
 
@@ -42,9 +45,7 @@ class Obsidion(commands.AutoShardedBot):
         init_global_checks(self)
 
     async def _create_db_pool(self) -> None:
-        """
-        Create the postgres connection pool.
-        """
+        """Create the postgres connection pool."""
         self.db_pool = await asyncpg.create_pool(
             database=constants.Database.database,
             user=constants.Database.username,
@@ -56,13 +57,12 @@ class Obsidion(commands.AutoShardedBot):
         self.db_ready.set()
 
     async def _create_redis_session(self) -> None:
-        """
-        Create the Redis connection pool, and then open the redis event gate.
+        """Create the Redis connection pool.
+
         If constants.Redis.use_fakeredis is True, we'll set up a fake redis pool instead
         of attempting to communicate with a real Redis server. This is useful because it
         means contributors don't necessarily need to get Redis running locally just
-        to run the bot.
-        The fakeredis cache won't have persistence across restarts, but that
+        to run the bot. The fakeredis cache won't have persistence across restarts, but that
         usually won't matter for local bot testing.
         """
         if not constants.Redis.enabled:
@@ -145,16 +145,18 @@ class Obsidion(commands.AutoShardedBot):
 
         self.http_session = aiohttp.ClientSession(connector=self._connector)
 
-    async def get_context(self, message, *, cls=commands.Context):
+    async def get_context(self, message, *, cls=commands.Context) -> None:
+        """Get context."""
         return await super().get_context(message, cls=cls)
 
-    async def process_commands(self, message: discord.Message):
+    async def process_commands(self, message: discord.Message) -> None:
+        """Ignore messages from bots."""
         if not message.author.bot:
             ctx = await self.get_context(message)
             await self.invoke(ctx)
         else:
             ctx = None
 
-    async def logout(self):
+    async def logout(self) -> None:
         """Logs out of Discord and closes all connections."""
         await super().logout()

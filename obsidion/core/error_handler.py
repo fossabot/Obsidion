@@ -1,11 +1,14 @@
+"""Error handling."""
+
 import logging
 import traceback
 
-from discord.ext.commands import Cog, Context, errors
 import discord
-from ..utils.chat_formatting import text_to_file
+from discord.ext.commands import Cog, Context, errors
 
+from ..utils.chat_formatting import text_to_file
 from obsidion import constants
+from obsidion.bot import Obsidion
 
 log = logging.getLogger(__name__)
 
@@ -17,12 +20,13 @@ log = logging.getLogger(__name__)
 class ErrorHandler(Cog):
     """Handles errors emitted from commands."""
 
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
 
     @Cog.listener()
     async def on_command_error(self, ctx: Context, e: errors.CommandError) -> None:
-        """Error handling for the bot"""
+        """Error handling for the bot."""
         command = ctx.command
 
         if hasattr(e, "handled"):
@@ -56,7 +60,7 @@ class ErrorHandler(Cog):
         )
 
     @staticmethod
-    def get_help_command(ctx: Context):
+    def get_help_command(ctx: Context) -> None:
         """Return a prepared `help` command invocation coroutine."""
         if ctx.command:
             return ctx.send_help(ctx.command)
@@ -66,9 +70,7 @@ class ErrorHandler(Cog):
     async def handle_user_input_error(
         self, ctx: Context, e: errors.UserInputError
     ) -> None:
-        """
-        Send an error message in `ctx` for UserInputError, sometimes invoking the help command too.
-        """
+        """Send an error message in `ctx` for UserInputError, sometimes invoking the help command too."""
         prepared_help_command = self.get_help_command(ctx)
 
         if isinstance(e, errors.MissingRequiredArgument):
@@ -97,8 +99,8 @@ class ErrorHandler(Cog):
 
     @staticmethod
     async def handle_check_failure(ctx: Context, e: errors.CheckFailure) -> None:
-        """
-        Send an error message in `ctx` for certain types of CheckFailure.
+        """Send an error message in `ctx` for certain types of CheckFailure.
+
         The following types are handled:
         * BotMissingPermissions
         * BotMissingRole
@@ -173,6 +175,6 @@ class ErrorHandler(Cog):
             await channel.send(file=file)
 
 
-def setup(bot) -> None:
+def setup(bot: Obsidion) -> None:
     """Load the ErrorHandler cog."""
     bot.add_cog(ErrorHandler(bot))

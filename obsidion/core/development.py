@@ -1,25 +1,25 @@
+"""Development related commands."""
+
 import logging
+
 from discord.ext import commands
 
 log = logging.getLogger(__name__)
 
 
 class development(commands.Cog):
-    """
-    commands useful when writing code for the bot
-    should be owner only to prevent someone tampering
-    with the bot
-    """
+    """Commands useful when writing code for the bot."""
 
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
 
-    async def cog_check(self, ctx):
+    async def cog_check(self, ctx: commands.Context) -> None:
+        """Check if user is owner."""
         return await self.bot.is_owner(ctx.author)
 
-    # for live development
     @commands.command(hidden=True)
-    async def load(self, ctx: commands.Context, *, module: str):
+    async def load(self, ctx: commands.Context, *, module: str) -> None:
         """Loads a module."""
         try:
             self.bot.load_extension(f"obsidion.{module}")
@@ -33,7 +33,7 @@ class development(commands.Cog):
             )
 
     @commands.command(hidden=True)
-    async def unload(self, ctx: commands.Context, *, module: str):
+    async def unload(self, ctx: commands.Context, *, module: str) -> None:
         """Unloads a module."""
         try:
             self.bot.unload_extension(f"obsidion.{module}")
@@ -47,7 +47,7 @@ class development(commands.Cog):
             )
 
     @commands.group(name="reload", hidden=True, invoke_without_command=True)
-    async def _reload(self, ctx: commands.Context, *, module: str):
+    async def _reload(self, ctx: commands.Context, *, module: str) -> None:
         """Reloads a module."""
         try:
             self.bot.reload_extension(f"obsidion.{module}")
@@ -61,8 +61,8 @@ class development(commands.Cog):
             )
 
     @commands.command(hidden=True)
-    async def shutdown(self, ctx: commands.Context):
-        """shutdown the bot"""
+    async def shutdown(self, ctx: commands.Context) -> None:
+        """Shutdown the bot."""
         await self.bot.close()
 
 

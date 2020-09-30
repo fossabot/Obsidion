@@ -1,3 +1,5 @@
+"""Obsidion Discord Bot."""
+
 import asyncio as _asyncio
 import sys as _sys
 
@@ -23,13 +25,15 @@ except PackageNotFoundError:  # pragma: no cover
 # check wether the bot can run
 if _sys.version_info < MIN_PYTHON_VERSION:
     print(
-        f"Python {'.'.join(map(str, MIN_PYTHON_VERSION))} is required to run Obsidion, but you have "
-        f"{_sys.version}! Please update Python."
+        f"Python {'.'.join(map(str, MIN_PYTHON_VERSION))}",
+        "is required to run Obsidion, but you have ",
+        f"{_sys.version}! Please update Python.",
     )
     _sys.exit(1)
 
 
-def _update_event_loop_policy():
+def _update_event_loop_policy() -> None:
+    """Update loop policy to use uvloop if possible."""
     if _sys.implementation.name == "cpython":
         # Let's not force this dependency, uvloop is much faster on cpython
         try:

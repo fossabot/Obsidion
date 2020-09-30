@@ -1,6 +1,6 @@
-import logging
 from datetime import datetime
 from time import mktime
+
 import discord
 import feedparser
 from discord.ext import commands, tasks
@@ -10,19 +10,19 @@ from obsidion.bot import Obsidion
 Minecraft_News_RSS = "https://www.minecraft.net/en-us/feeds/community-content/rss"
 Categories = ("Minecraft Builds", "News", "Deep Dives", "Guides")
 
-log = logging.getLogger(__name__)
-
 
 class MinecraftNews(commands.Cog):
-    """Post minecraft news"""
+    """Post minecraft news."""
 
-    def __init__(self, bot: Obsidion):
+    def __init__(self, bot: Obsidion) -> None:
+        """Init."""
         self.bot = bot
         self.last_data = datetime.now()
         self.get_media.start()
 
     @tasks.loop(minutes=10)
     async def get_media(self) -> None:
+        """Get rss media."""
         async with self.bot.http_session.get(Minecraft_News_RSS) as resp:
             text = await resp.text()
         data = feedparser.parse(text)
@@ -65,7 +65,10 @@ class MinecraftNews(commands.Cog):
         embed.set_author(
             name="New Article on Minecraft.net",
             url=f"https://minecraft.net{latest_post['imageurl']}",
-            icon_url="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/img/menu/menu-buy--reversed.gif",
+            icon_url=(
+                "https://www.minecraft.net/etc.clientlibs/minecraft",
+                "/clientlibs/main/resources/img/menu/menu-buy--reversed.gif",
+            ),
         )
 
         # send embed

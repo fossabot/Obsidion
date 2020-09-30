@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+"""Start bot and pull in modules."""
 
 import logging
+from logging.handlers import RotatingFileHandler
+import contextlib
 
 import discord
-import contextlib
 from discord.ext.commands import when_mentioned_or
 
 # Set the event loop policies here so any subsequent `new_event_loop()`
@@ -14,21 +15,24 @@ from obsidion.bot import Obsidion
 
 _update_event_loop_policy()
 
-from logging.handlers import RotatingFileHandler
-
 
 class RemoveNoise(logging.Filter):
-    def __init__(self):
+    """Remove noise from logfile."""
+
+    def __init__(self) -> None:
+        """Init."""
         super().__init__(name="discord.state")
 
-    def filter(self, record):
+    def filter(self, record) -> bool:
+        """Filter out unimportant info."""
         if record.levelname == "WARNING" and "referencing an unknown" in record.msg:
             return False
         return True
 
 
 @contextlib.contextmanager
-def setup_logging():
+def setup_logging() -> None:
+    """Setup logging."""
     try:
         # __enter__
         max_bytes = 32 * 1024 * 1024  # 32 MiB

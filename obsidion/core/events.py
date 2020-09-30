@@ -1,20 +1,27 @@
-from discord.ext import commands
-from obsidion import constants
-import discord
+"""Events to trigger actions."""
+
 from datetime import datetime
 import logging
 
+import discord
+from discord.ext import commands
+
 from obsidion.bot import Obsidion
+from obsidion import constants
 
 log = logging.getLogger(__name__)
 
 
 class Events(commands.Cog):
-    def __init__(self, bot):
+    """Events cog."""
+
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_guild_join(self, guild):
+    async def on_guild_join(self, guild: discord.Guild) -> None:
+        """On a guild joining."""
         if constants.Channels.new_guild_channel:
             embed = discord.Embed(name=f"{self.bot.user.name} has joined a guild")
             embed.set_footer(

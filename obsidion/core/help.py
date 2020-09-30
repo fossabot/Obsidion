@@ -1,30 +1,37 @@
+"""Help related."""
+
 import logging
 
 import discord
 from discord.ext import commands
 from discord.ext.commands import Command
+from fuzzywuzzy import fuzz, process
+
 from obsidion import constants
 from obsidion.bot import Obsidion
-from fuzzywuzzy import fuzz, process
 
 log = logging.getLogger(__name__)
 
 
 class HelpQueryNotFound(ValueError):
-    """
-    Raised when a HelpSession Query doesn't match a command or cog.
+    """Raised when a HelpSession Query doesn't match a command or cog.
+
     Contains the custom attribute of ``possible_matches``.
     Instances of this object contain a dictionary of any command(s) that were close to matching the
     query, where keys are the possible matched command names and values are the likeness match scores.
     """
 
-    def __init__(self, arg: str, possible_matches: dict = None):
+    def __init__(self, arg: str, possible_matches: dict = None) -> None:
+        """Init."""
         super().__init__(arg)
         self.possible_matches = possible_matches
 
 
 class MyHelpCommand(commands.HelpCommand):
-    def __init__(self):
+    """Main help command."""
+
+    def __init__(self) -> None:
+        """Init."""
         super().__init__(
             command_attrs={
                 "help": "Shows help about the bot, a command, or a category",
@@ -33,8 +40,8 @@ class MyHelpCommand(commands.HelpCommand):
         )
 
     async def get_all_help_choices(self) -> set:
-        """
-        Get all the possible options for getting help in the bot.
+        """Get all the possible options for getting help in the bot.
+
         This will only display commands the author has permission to run.
         These include:
         - Category names
@@ -73,8 +80,8 @@ class MyHelpCommand(commands.HelpCommand):
     async def subcommand_not_found(
         self, command: Command, string: str
     ) -> "HelpQueryNotFound":
-        """
-        Redirects the error to `command_not_found`.
+        """Redirects the error to `command_not_found`.
+
         `command_not_found` deals with searching and getting best choices for both commands and subcommands.
         """
         return await self.command_not_found(f"{command.qualified_name} {string}")
@@ -90,8 +97,8 @@ class MyHelpCommand(commands.HelpCommand):
             await self.context.send(embed=embed)
 
     async def command_not_found(self, string: str) -> "HelpQueryNotFound":
-        """
-        Handles when a query does not match a valid command, group, cog or category.
+        """Handles when a query does not match a valid command, group, cog or category.
+
         Will return an instance of the `HelpQueryNotFound` exception with the error message and possible matches.
         """
         choices = await self.get_all_help_choices()
@@ -102,7 +109,8 @@ class MyHelpCommand(commands.HelpCommand):
         return HelpQueryNotFound(f'Query "{string}" not found.', dict(result))
 
     @staticmethod
-    def get_command_signature(command):
+    def get_command_signature(command) -> str:
+        """Get signature of command."""
         parent = command.full_parent_name
         if len(command.aliases) > 0:
             aliases = "|".join(command.aliases)
@@ -114,7 +122,8 @@ class MyHelpCommand(commands.HelpCommand):
             alias = command.name if not parent else f"{parent} {command.name}"
         return f"{alias} {command.signature}"
 
-    async def generate_embed(self, ctx, prefix=None):
+    async def generate_embed(self, ctx, prefix=None) -> None:
+        """Generate embed."""
         embed = discord.Embed(color=0x00FF00)
         if not prefix:
             prefix = ctx.prefix
@@ -124,7 +133,8 @@ class MyHelpCommand(commands.HelpCommand):
         )
         return embed
 
-    async def send_bot_help(self, mapping):
+    async def send_bot_help(self, mapping) -> None:
+        """Send bot help."""
         bot = self.context.bot
         if "@" in str(self.context.prefix):
             prefix = f"@{self.context.bot.user.name}"
@@ -152,7 +162,8 @@ class MyHelpCommand(commands.HelpCommand):
         )
         await self.context.send(embed=embed)
 
-    async def send_cog_help(self, cog):
+    async def send_cog_help(self, cog) -> None:
+        """Send cog help."""
         if "@" in str(self.context.prefix):
             prefix = f"@{self.context.bot.user.name}"
         else:
@@ -178,7 +189,8 @@ class MyHelpCommand(commands.HelpCommand):
 
         await self.context.send(embed=embed)
 
-    async def send_command_help(self, command):
+    async def send_command_help(self, command) -> None:
+        """Send command help."""
         if "@" in str(self.context.prefix):
             prefix = f"@{self.context.bot.user.name}"
         else:
@@ -201,7 +213,8 @@ class MyHelpCommand(commands.HelpCommand):
             )
         await self.context.send(embed=embed)
 
-    async def send_group_help(self, group):
+    async def send_group_help(self, group) -> None:
+        """Send group help."""
         embed = discord.Embed(colour=0x00FF00)
 
         subcommands = group.commands
@@ -246,13 +259,15 @@ class Help(commands.Cog):
     """Custom Embed Pagination Help feature."""
 
     def __init__(self, bot: Obsidion) -> None:
+        """Init."""
         self.bot = bot
         self._original_help_command = bot.help_command
         bot.help_command = MyHelpCommand()
         bot.help_command.cog = self
         self.bot = bot
 
-    def cog_unload(self):
+    def cog_unload(self) -> None:
+        """Unload and got o default help."""
         self.bot.help_command = self._original_help_command
 
 

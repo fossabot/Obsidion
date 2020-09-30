@@ -1,12 +1,13 @@
-# these are checks to run on every command
+"""Checks to run on every command."""
 from discord.ext.commands import Context
 
 
 def init_global_checks(bot):
+    """Global checks to run."""
+
     @bot.check_once
     def minimum_bot_perms(ctx: Context) -> bool:
-        """
-        Too many 403, 401, and 429 Errors can cause bots to get global'd
+        """Too many 403, 401, and 429 Errors can cause bots to get global'd.
 
         It's reasonable to assume the below as a minimum amount of perms for
         commands.
