@@ -1,8 +1,8 @@
 """Start bot and pull in modules."""
 
+import contextlib
 import logging
 from logging.handlers import RotatingFileHandler
-import contextlib
 
 import discord
 from discord.ext.commands import when_mentioned_or

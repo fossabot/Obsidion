@@ -1,15 +1,15 @@
 """Main bot file."""
 
 import asyncio
-import socket
 import datetime
+import socket
 import logging
 from typing import Optional
 
 import aiohttp
 import aioredis
-import discord
 import asyncpg
+import discord
 from discord.ext import commands
 import fakeredis.aioredis
 
@@ -26,7 +26,6 @@ class Obsidion(commands.AutoShardedBot):
 
     def __init__(self, *args, **kwargs) -> None:
         """Initialise bot and start conections to services."""
-
         super().__init__(*args, **kwargs)
 
         self.http_session: Optional[aiohttp.ClientSession] = None
@@ -145,7 +144,9 @@ class Obsidion(commands.AutoShardedBot):
 
         self.http_session = aiohttp.ClientSession(connector=self._connector)
 
-    async def get_context(self, message, *, cls=commands.Context) -> None:
+    async def get_context(
+        self, message: discord.Message, *, cls: commands.Context
+    ) -> None:
         """Get context."""
         return await super().get_context(message, cls=cls)
 

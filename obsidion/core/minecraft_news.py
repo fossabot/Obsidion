@@ -1,9 +1,11 @@
+"""Minecraft posting news."""
+
 from datetime import datetime
 from time import mktime
 
 import discord
-import feedparser
 from discord.ext import commands, tasks
+import feedparser
 
 from obsidion.bot import Obsidion
 

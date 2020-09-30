@@ -1,8 +1,11 @@
 """Checks to run on every command."""
+
 from discord.ext.commands import Context
 
+from obsidion.bot import Obsidion
 
-def init_global_checks(bot):
+
+def init_global_checks(bot: Obsidion) -> None:
     """Global checks to run."""
 
     @bot.check_once
