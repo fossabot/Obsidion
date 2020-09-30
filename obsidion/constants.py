@@ -10,9 +10,9 @@ out in the custom user configuration will stay
 their default values from `config-default.yaml`.
 """
 
+from collections.abc import Mapping
 import logging
 import os
-from collections.abc import Mapping
 from pathlib import Path
 from typing import Optional
 
