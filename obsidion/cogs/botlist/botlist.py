@@ -1,8 +1,10 @@
+"""Botlist info."""
+
 import logging
 
 import dbl
-
 from discord.ext import tasks, commands
+
 from obsidion import constants
 from obsidion.bot import Obsidion
 
@@ -12,7 +14,8 @@ log = logging.getLogger(__name__)
 class botlist(commands.Cog):
     """commands that are bot related."""
 
-    def __init__(self, bot: Obsidion):
+    def __init__(self, bot: Obsidion) -> None:
+        """Init."""
         self.bot = bot
         self.session = bot.http_session
 
@@ -30,7 +33,8 @@ class botlist(commands.Cog):
         self.bots_on_discord.start()
 
     @tasks.loop(minutes=30.0)
-    async def botsfordiscord(self):
+    async def botsfordiscord(self) -> None:
+        """Bots for discord."""
         headers = {
             "Content-Type": "application/json",
             "Authorization": constants.Discord_bot_list.bots4discord_token,
@@ -44,7 +48,8 @@ class botlist(commands.Cog):
         )
 
     @tasks.loop(minutes=30.0)
-    async def discord_boats(self):
+    async def discord_boats(self) -> None:
+        """Discord boats."""
         headers = {
             "Authorization": constants.Discord_bot_list.discordboats_token,
         }
@@ -57,7 +62,8 @@ class botlist(commands.Cog):
         )
 
     @tasks.loop(minutes=30.0)
-    async def discord_bot_list(self):
+    async def discord_bot_list(self) -> None:
+        """Discord bot list."""
         headers = {
             "Content-Type": "application/json",
             "Authorization": constants.Discord_bot_list.discordbotlist_token,
@@ -71,7 +77,8 @@ class botlist(commands.Cog):
         )
 
     @tasks.loop(minutes=30.0)
-    async def discord_labs(self):
+    async def discord_labs(self) -> None:
+        """Discord labs."""
         headers = {
             "token": constants.Discord_bot_list.discodlabs_token,
         }
@@ -84,7 +91,8 @@ class botlist(commands.Cog):
         )
 
     @tasks.loop(minutes=30.0)
-    async def bots_on_discord(self):
+    async def bots_on_discord(self) -> None:
+        """Bots on discord."""
         headers = {
             "Content-Type": "application/json",
             "Authorization": constants.Discord_bot_list.botsondiscord_token,

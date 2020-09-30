@@ -1,5 +1,8 @@
-from .rcon import rcon
+"""Setup rcon."""
+
+from .rcon import Rcon
 
 
 def setup(bot):
-    bot.add_cog(rcon(bot))
+    """Setup."""
+    bot.add_cog(Rcon(bot))

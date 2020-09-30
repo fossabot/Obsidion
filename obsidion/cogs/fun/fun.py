@@ -1,5 +1,8 @@
+"""Fun related commands."""
+
 import logging
 from random import choice
+from typing import List
 
 from discord.ext import commands
 
@@ -49,17 +52,25 @@ alphabet = "abcdefghijklmnopqrstuvwxyz123456789"
 log = logging.getLogger(__name__)
 
 
-def load_from_file(file):
-    """load a file"""
+def load_from_file(file: str) -> List[str]:
+    """Load text from file
+
+    Args:
+        file (str): file name
+
+    Returns:
+        List[str]: list of input
+    """
     with open(f"obsidion/cogs/fun/resources/{file}.txt") as f:
         content = f.readlines()
     return [x.strip() for x in content]
 
 
 class fun(commands.Cog):
-    """commands that are bot related"""
+    """Commands that are fun related."""
 
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
         self.pvp_mes = load_from_file("pvp")
         self.kill_mes = load_from_file("kill")
@@ -67,7 +78,7 @@ class fun(commands.Cog):
 
     @commands.command(aliases=["villagerspeak", "villagerspeech", "hmm"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def villager(self, ctx: commands.Context, *, speech: str):
+    async def villager(self, ctx: commands.Context, *, speech: str) -> None:
         """Convert english to Villager speech hmm."""
         split = speech.split(" ")
         sentence = ""
@@ -78,8 +89,8 @@ class fun(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def enchant(self, ctx: commands.Context, *, msg: str):
-        """Enchant a message"""
+    async def enchant(self, ctx: commands.Context, *, msg: str) -> None:
+        """Enchant a message."""
         response = ""
         for letter in msg:
             if letter in alphabet:
@@ -90,8 +101,8 @@ class fun(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def unenchant(self, ctx: commands.Context, *, msg: str):
-        """Disenchant a message"""
+    async def unenchant(self, ctx: commands.Context, *, msg: str) -> None:
+        """Disenchant a message."""
         response = ""
         for letter in msg:
             if letter in minecraft:
@@ -102,23 +113,22 @@ class fun(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def creeper(self, ctx):
-        """Aw man"""
+    async def creeper(self, ctx: commands.Context) -> None:
+        """Aw man."""
         await ctx.send("Aw man")
 
     @commands.command(aliases=["idea", "bidea"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def buildidea(self, ctx: commands.Context):
-        """Get an idea for a new idea"""
-        # await ctx.send(self.build_ideas)
+    async def buildidea(self, ctx: commands.Context) -> None:
+        """Get an idea for a new idea."""
         await ctx.send(
             f"Here is something cool to build: {choice(self.build_ideas_mes)}."
         )
 
     @commands.command(aliases=["slay"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def kill(self, ctx, member=None):
-        """Kill that pesky friend in a fun and stylish way"""
+    async def kill(self, ctx, member=None) -> None:
+        """Kill that pesky friend in a fun and stylish way."""
         if (
             not member
             or str(member) == f"<@{self.bot.owner_id}>"
@@ -134,8 +144,8 @@ class fun(commands.Cog):
 
     @commands.command(aliases=["battle"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def pvp(self, ctx, member1=None, member2=None):
-        """Duel someone"""
+    async def pvp(self, ctx, member1=None, member2=None) -> None:
+        """Duel someone."""
         if member1:
             if not member2:
                 member2 = ctx.message.author.mention
@@ -150,8 +160,8 @@ class fun(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def rps(self, ctx, user_choice=None):
-        """play Rock Paper Shears"""
+    async def rps(self, ctx, user_choice=None) -> None:
+        """play Rock Paper Shears."""
         options = ["rock", "paper", "shears"]
         if user_choice and user_choice in options:
             c_choice = choice(options)

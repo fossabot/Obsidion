@@ -1,8 +1,11 @@
+"""Info cogs."""
+
 import base64
 import io
 import json
 import logging
 from datetime import datetime
+from typing import Optional
 
 import discord
 from discord.ext import commands
@@ -15,14 +18,23 @@ log = logging.getLogger(__name__)
 
 
 class info(commands.Cog):
-    """commands that are bot related."""
+    """Commands that are bot related."""
 
-    def __init__(self, bot: Obsidion):
-        """initialise the bot"""
+    def __init__(self, bot: Obsidion) -> None:
+        """Initialise the bot"""
         self.bot = bot
 
     @staticmethod
-    async def get_uuid(session, username: str):
+    async def get_uuid(session, username: str) -> Optional[str, bool]:
+        """Get uuid from username.
+
+        Args:
+            session ([type]): aiohttp session
+            username (str): username of player
+
+        Returns:
+            Optional[str, bool]: uuid if vaild username otherwise false
+        """
         url = f"https://api.mojang.com/users/profiles/minecraft/{username}"
         async with session.get(url) as resp:
             if resp.status == 200:
@@ -35,7 +47,7 @@ class info(commands.Cog):
         aliases=["whois", "p", "names", "namehistory", "pastnames", "namehis"]
     )
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def profile(self, ctx: commands.Context, username: str):
+    async def profile(self, ctx: commands.Context, username: str) -> None:
         """View a players Minecraft UUID, Username history and skin."""
         await ctx.channel.trigger_typing()
         if await self.bot.redis_session.exists(f"username_{username}"):
@@ -90,8 +102,8 @@ class info(commands.Cog):
         await ctx.send(embed=embed)
 
     @staticmethod
-    def get_server(ip: str, port):
-        """returns the server icon"""
+    def get_server(ip: str, port) -> None:
+        """Returns the server icon."""
         if ":" in ip:  # deal with them providing port in string instead of seperate
             ip, port = ip.split(":")
             return (ip, port)
@@ -101,8 +113,10 @@ class info(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def server(self, ctx: commands.Context, server_ip: str, port: int = None):
-        """Get info on a minecraft server"""
+    async def server(
+        self, ctx: commands.Context, server_ip: str, port: int = None
+    ) -> None:
+        """Get info on a minecraft server."""
         await ctx.channel.trigger_typing()
         url = f"{constants.Bot.api}/server/java"
         server_ip, _port = self.get_server(server_ip, port)
@@ -158,8 +172,10 @@ class info(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def serverpe(self, ctx: commands.Context, server_ip: str, port: int = None):
-        """Get info on a minecraft PE server"""
+    async def serverpe(
+        self, ctx: commands.Context, server_ip: str, port: int = None
+    ) -> None:
+        """Get info on a minecraft PE server."""
         await ctx.channel.trigger_typing()
         url = f"{constants.Bot.api}/server/bedrock"
         server_ip, _port = self.get_server(server_ip, port)
@@ -205,8 +221,8 @@ class info(commands.Cog):
 
     @commands.command(aliases=["sales"])
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def status(self, ctx: commands.Context):
-        """Check the status of all the Mojang services"""
+    async def status(self, ctx: commands.Context) -> None:
+        """Check the status of all the Mojang services."""
         await ctx.channel.trigger_typing()
         data = await get(ctx.bot.http_session, f"{constants.Bot.api}/mojang/check")
         sales_mapping = {
@@ -245,7 +261,7 @@ class info(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def mcbug(self, ctx: commands.Context, bug: str = None):
+    async def mcbug(self, ctx: commands.Context, bug: str = None) -> None:
         """Gets info on a bug from bugs.mojang.com."""
         if not bug:
             await ctx.send(f"{ctx.message.author.mention},  :x: Please provide a bug.")
@@ -297,8 +313,8 @@ class info(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def wiki(self, ctx: commands.Context, *, query: str):
-        """Get an article from the minecraft wiki"""
+    async def wiki(self, ctx: commands.Context, *, query: str) -> None:
+        """Get an article from the minecraft wiki."""
         await ctx.channel.trigger_typing()
 
         def generate_payload(query):
@@ -351,13 +367,16 @@ class info(commands.Cog):
             await ctx.send(f"I'm sorry, I couldn't find \"{query}\" on Gamepedia")
 
     # @commands.command()
-    async def version(self, ctx):
+    async def version(self, ctx) -> None:
+        """Get version info."""
         await ctx.send("TODO")
 
     # @commands.command()
-    async def colourcodes(self, ctx):
+    async def colourcodes(self, ctx) -> None:
+        """Get colourcodes info."""
         await ctx.send("TODO")
 
     # @commands.command()
-    async def news(self, ctx):
+    async def news(self, ctx) -> None:
+        """Get recent news."""
         await ctx.send("TODO")

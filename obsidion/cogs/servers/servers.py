@@ -1,3 +1,7 @@
+"""Minecraft server info."""
+
+import json
+
 import discord
 from discord.ext import commands
 from mcsrvstats import (
@@ -12,8 +16,8 @@ from mcsrvstats import (
     gommehd,
     veltpvp,
 )
+
 from obsidion.utils.utils import usernameToUUID
-import json
 
 hive_con = {
     # "survival_games": "SG",
@@ -48,13 +52,16 @@ hive_con = {
 }
 
 
-class servers(commands.Cog):
-    def __init__(self, bot):
+class Servers(commands.Cog):
+    """Server info."""
+
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def wyncraft(self, ctx: commands.Context, username: str):
+    async def wyncraft(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on wynncraft."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"wyncraft_{username}"):
@@ -93,7 +100,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def gommehd(self, ctx: commands.Context, username: str):
+    async def gommehd(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on gommehd."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"gommehd_{username}"):
@@ -130,7 +137,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def veltpvp(self, ctx: commands.Context, username: str):
+    async def veltpvp(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on veltpvp."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"veltpvp_{username}"):
@@ -171,7 +178,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def blocksmc(self, ctx: commands.Context, username: str):
+    async def blocksmc(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on blocksmc."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"blocksmc_{username}"):
@@ -208,7 +215,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def universocraft(self, ctx: commands.Context, username: str):
+    async def universocraft(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on universocraft."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"universocraft_{username}"):
@@ -247,7 +254,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def minesaga(self, ctx: commands.Context, username: str):
+    async def minesaga(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on minesaga."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"minesaga_{username}"):
@@ -284,7 +291,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def manacube(self, ctx: commands.Context, username: str):
+    async def manacube(self, ctx: commands.Context, username: str) -> None:
         """Get statistics of a player on manacube."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"manacube_{username}"):
@@ -374,7 +381,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hiverank(self, ctx: commands.Context, username: str):
+    async def hiverank(self, ctx: commands.Context, username: str) -> None:
         """View the rank of a player on hiverank."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"hiveMCRank_{username}"):
@@ -406,8 +413,8 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hivestatus(self, ctx: commands.Context, username: str):
-        """View the status of a player on hive"""
+    async def hivestatus(self, ctx: commands.Context, username: str) -> None:
+        """View the status of a player on hive."""
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"hiveMCStatus_{username}"):
             data = json.loads(
@@ -442,7 +449,7 @@ class servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hivestats(self, ctx: commands.Context, username: str, game: str):
+    async def hivestats(self, ctx: commands.Context, username: str, game: str) -> None:
         """Get statistics of a player on hive."""
         await ctx.trigger_typing()
 

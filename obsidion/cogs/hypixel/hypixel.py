@@ -1,5 +1,6 @@
-from aiohypixel import HypixelSession
+"""Hypixel related commands."""
 
+from aiohypixel import HypixelSession
 import discord
 from discord.ext import commands
 
@@ -7,7 +8,10 @@ from obsidion import constants
 
 
 class hypixel(commands.Cog):
-    def __init__(self, bot):
+    """Hypixel cog."""
+
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
         self.session = bot.http_session
 
@@ -18,7 +22,7 @@ class hypixel(commands.Cog):
         )
 
     @commands.command()
-    async def watchdogstats(self, ctx: commands.Context):
+    async def watchdogstats(self, ctx: commands.Context) -> None:
         """Get the current watchdog statistics."""
         await ctx.channel.trigger_typing()
         data = await self.hypixel_session.get_watchdog_stats()
@@ -34,7 +38,7 @@ class hypixel(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def boosters(self, ctx: commands.Context):
+    async def boosters(self, ctx: commands.Context) -> None:
         """Get the current boosters online."""
         await ctx.channel.trigger_typing()
         data = await self.hypixel_session.get_boosters()

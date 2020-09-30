@@ -1,3 +1,5 @@
+"""Misc."""
+
 import datetime
 import inspect
 import logging
@@ -14,15 +16,16 @@ from obsidion.utils.chat_formatting import humanize_timedelta
 log = logging.getLogger(__name__)
 
 
-class miscellaneous(commands.Cog):
-    """commands that are bot related"""
+class Miscellaneous(commands.Cog):
+    """Commands that are bot related."""
 
-    def __init__(self, bot):
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot
 
     @commands.command(name="licenseinfo")
-    async def license_info(self, ctx: commands.Context):
-        """Info about the license which Obsidion is released under"""
+    async def license_info(self, ctx: commands.Context) -> None:
+        """Info about the license which Obsidion is released under."""
         embed = discord.Embed(
             description=(
                 "This bot is an instance of the Obsidion Discord Bot.\n"
@@ -36,8 +39,8 @@ class miscellaneous(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def invite(self, ctx: commands.Context):
-        """invite the bot to your server."""
+    async def invite(self, ctx: commands.Context) -> None:
+        """Invite the bot to your server."""
         embed = discord.Embed(
             description=f"**[Click here to add {self.bot.user.name} to your Discord server](https://discordapp.com/oauth2/authorize?client_id=691589447074054224&scope=bot&permissions=314432)**",
             color=0x00FF00,
@@ -46,8 +49,8 @@ class miscellaneous(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["upvote", "support"])
-    async def vote(self, ctx: commands.Context):
-        """Help support this bot by helping others to find it"""
+    async def vote(self, ctx: commands.Context) -> None:
+        """Help support this bot by helping others to find it."""
         embed = discord.Embed(color=0x00FF00)
         embed.add_field(
             name="Vote:",
@@ -65,8 +68,8 @@ class miscellaneous(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command()
-    async def ping(self, ctx):
-        """Check ping of the bot"""
+    async def ping(self, ctx) -> None:
+        """Check ping of the bot."""
 
         latency = round(self.bot.latency * 1000)
         embed = discord.Embed(title="Bot's Ping", color=0x00FF00)
@@ -76,7 +79,7 @@ class miscellaneous(commands.Cog):
 
     @commands.command(aliases=["statistics", "botstats"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def stats(self, ctx):
+    async def stats(self, ctx) -> None:
         """View statistics about the bot."""
 
         delta = datetime.datetime.utcnow() - self.bot.uptime
@@ -109,11 +112,11 @@ class miscellaneous(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(aliases=["information"])
-    async def info(self, ctx: commands.Context):
-        """Shows info about Red"""
+    async def info(self, ctx: commands.Context) -> None:
+        """Shows info about Obsidion"""
         author_repo = "https://github.com/Darkflame72"
-        # org_repo = "https://github.com/Obsidion-dev" # I need to move the repo over there at some point
-        obsidion_repo = author_repo + "/Obsidion"
+        org_repo = "https://github.com/Obsidion-dev"
+        obsidion_repo = org_repo + "/Obsidion"
         support_server_url = "https://discord.gg/invite/7BRD7s6"
         dpy_repo = "https://github.com/Rapptz/discord.py"
         python_url = "https://www.python.org/"
@@ -142,9 +145,9 @@ class miscellaneous(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def source(self, ctx, *, command: str = None):
-        """
-        Displays my full source code or for a specific command.
+    async def source(self, ctx, *, command: str = None) -> None:
+        """Displays my full source code or for a specific command.
+
         To display the source code of a subcommand you can separate it by
         periods, e.g. account.link for the link subcommand of the account command
         or by spaces.
@@ -183,9 +186,9 @@ class miscellaneous(commands.Cog):
 
     @commands.command(aliases=["contact", "suggestion"])
     @commands.cooldown(rate=1, per=600.0, type=commands.BucketType.user)
-    async def feedback(self, ctx: commands.Context, *, content: str):
-        """
-        Gives feedback about the bot.
+    async def feedback(self, ctx: commands.Context, *, content: str) -> None:
+        """Gives feedback about the bot.
+
         This is a quick way to request features or bug fixes
         without being in the bot's server.
         The bot will communicate with you via PM about the status
@@ -209,8 +212,8 @@ class miscellaneous(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=120.0, type=commands.BucketType.user)
-    async def bugreport(self, ctx: commands.Context, *, content: str):
-        """Sends a bug report"""
+    async def bugreport(self, ctx: commands.Context, *, content: str) -> None:
+        """Sends a bug report."""
 
         embed = discord.Embed(title="Bug Report", colour=0x00FF00)
         channel = ctx.bot.get_channel(constants.Channels.bug_channel)

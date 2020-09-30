@@ -1,15 +1,20 @@
+"""Images cog."""
+
+import logging
+
 import discord
 from discord.ext import commands
 
 from obsidion.utils.utils import usernameToUUID
 
-import logging
-
 log = logging.getLogger(__name__)
 
 
-class images(commands.Cog):
-    def __init__(self, bot):
+class Images(commands.Cog):
+    """Images cog."""
+
+    def __init__(self, bot) -> None:
+        """Init."""
         self.session = bot.http_session
         self.bot = bot
 
@@ -17,8 +22,8 @@ class images(commands.Cog):
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
     async def achievement(
         self, ctx: commands.Context, block_name: str, title: str, *, text: str
-    ):
-        """Create your very own custom Minecraft achievements"""
+    ) -> None:
+        """Create your very own custom Minecraft achievements."""
         await ctx.channel.trigger_typing()
         text = text.replace(" ", "%20")
         embed = discord.Embed(color=0x00FF00)
@@ -34,8 +39,8 @@ class images(commands.Cog):
         ctx: commands.Context,
         *,
         text: str,
-    ):
-        """Create a Minecraft sign with custom text"""
+    ) -> None:
+        """Create a Minecraft sign with custom text."""
         await ctx.channel.trigger_typing()
         split = text.replace(" ", "%20").split("|")
         line1 = split[0] if len(split) >= 1 else "%20"
@@ -50,7 +55,7 @@ class images(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def avatar(self, ctx: commands.Context, username: str):
+    async def avatar(self, ctx: commands.Context, username: str) -> None:
         """Renders a Minecraft players face."""
         await ctx.channel.trigger_typing()
         uuid = await usernameToUUID(username, ctx.bot.http_session)
@@ -69,7 +74,7 @@ class images(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def skull(self, ctx: commands.Context, username: str = None):
+    async def skull(self, ctx: commands.Context, username: str = None) -> None:
         """Renders a Minecraft players skull."""
         await ctx.channel.trigger_typing()
         uuid = await usernameToUUID(username, ctx.bot.http_session)
@@ -88,7 +93,7 @@ class images(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def skin(self, ctx: commands.Context, username: str):
+    async def skin(self, ctx: commands.Context, username: str) -> None:
         """Renders a Minecraft players skin."""
         await ctx.channel.trigger_typing()
         uuid = await usernameToUUID(username, ctx.bot.http_session)
@@ -107,7 +112,9 @@ class images(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def render(self, ctx: commands.Context, render_type: str, username: str):
+    async def render(
+        self, ctx: commands.Context, render_type: str, username: str
+    ) -> None:
         """Renders a Minecraft players skin in 6 different ways. You can choose from these 6 render types: face, front, frontfull, head, bust & skin."""
         await ctx.channel.trigger_typing()
         renders = ["face", "front", "frontfull", "head", "bust", "skin"]

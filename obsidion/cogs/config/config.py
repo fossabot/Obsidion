@@ -1,6 +1,11 @@
+""" onfig related commands."""
+
 from discord.ext import commands
 
 
 class config(commands.Cog):
-    def __init__(self, bot):
+    """Config class."""
+
+    def __init__(self, bot) -> None:
+        """Init."""
         self.bot = bot

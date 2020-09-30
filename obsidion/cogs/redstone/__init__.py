@@ -1,5 +1,8 @@
-from .redstone import redstone
+"""Redstone."""
+
+from .redstone import Redstone
 
 
 def setup(bot):
-    bot.add_cog(redstone(bot))
+    """Setup."""
+    bot.add_cog(Redstone(bot))

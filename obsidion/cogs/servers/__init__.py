@@ -1,5 +1,8 @@
-from .servers import servers
+"""Setup server info."""
+
+from .servers import Servers
 
 
 def setup(bot):
-    bot.add_cog(servers(bot))
+    """Setup."""
+    bot.add_cog(Servers(bot))
