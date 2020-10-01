@@ -2,8 +2,8 @@
 
 import asyncio
 import datetime
-import socket
 import logging
+import socket
 from typing import Optional
 
 import aiohttp
