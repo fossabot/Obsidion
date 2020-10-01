@@ -29,18 +29,6 @@ speedups = ["aiodns", "brotlipy", "cchardet"]
 
 [[package]]
 category = "main"
-description = "An asynchronous Hypixel API Wrapper written in Python"
-name = "aiohypixel"
-optional = false
-python-versions = ">=3.6,<4.0"
-version = "0.2.1"
-
-[package.dependencies]
-aiohttp = ">=3.5,<4.0"
-dataclasses = ">=0.6.0,<0.7.0"
-
-[[package]]
-category = "main"
 description = "asyncio (PEP 3156) Redis support"
 name = "aioredis"
 optional = false
@@ -79,6 +67,21 @@ version = "0.21.0"
 dev = ["Cython (0.29.20)", "pytest (>=3.6.0)", "Sphinx (>=1.7.3,<1.8.0)", "sphinxcontrib-asyncio (>=0.2.0,<0.3.0)", "sphinx-rtd-theme (>=0.2.4,<0.3.0)", "pycodestyle (>=2.5.0,<2.6.0)", "flake8 (>=3.7.9,<3.8.0)", "uvloop (>=0.14.0,<0.15.0)"]
 docs = ["Sphinx (>=1.7.3,<1.8.0)", "sphinxcontrib-asyncio (>=0.2.0,<0.3.0)", "sphinx-rtd-theme (>=0.2.4,<0.3.0)"]
 test = ["pycodestyle (>=2.5.0,<2.6.0)", "flake8 (>=3.7.9,<3.8.0)", "uvloop (>=0.14.0,<0.15.0)"]
+
+[[package]]
+category = "main"
+description = "An async wrapper for hypixel"
+name = "asyncpixel"
+optional = false
+python-versions = ">=3.7,<4.0"
+version = "0.2.0"
+
+[package.dependencies]
+aiohttp = ">=3.6.2,<4.0.0"
+
+[package.dependencies.importlib_metadata]
+python = "<3.8"
+version = ">=2.0.0,<3.0.0"
 
 [[package]]
 category = "main"
@@ -244,14 +247,6 @@ name = "darglint"
 optional = false
 python-versions = ">=3.5,<4.0"
 version = "1.5.4"
-
-[[package]]
-category = "main"
-description = "A backport of the dataclasses module for Python 3.6"
-name = "dataclasses"
-optional = false
-python-versions = "*"
-version = "0.6"
 
 [[package]]
 category = "dev"
@@ -1012,7 +1007,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "35a92b15802b9da1d7ffcae1f2bc301e514a42d119135e0d14e815cfb8f011a7"
+content-hash = "bb0347c80b8e46c4d548f968ab88251fb00f3a21fc3034f426689771b1aa542b"
 lock-version = "1.0"
 python-versions = "^3.7"
 
@@ -1034,10 +1029,6 @@ aiohttp = [
     {file = "aiohttp-3.6.2-cp37-cp37m-win_amd64.whl", hash = "sha256:32e5f3b7e511aa850829fbe5aa32eb455e5534eaa4b1ce93231d00e2f76e5654"},
     {file = "aiohttp-3.6.2-py3-none-any.whl", hash = "sha256:460bd4237d2dbecc3b5ed57e122992f60188afe46e7319116da5eb8a9dfedba4"},
     {file = "aiohttp-3.6.2.tar.gz", hash = "sha256:259ab809ff0727d0e834ac5e8a283dc5e3e0ecc30c4d80b3cd17a4139ce1f326"},
-]
-aiohypixel = [
-    {file = "aiohypixel-0.2.1-py3-none-any.whl", hash = "sha256:1c1c363301c696bbbff43659bf014f9e033ad727680cebf5a54cc82c92c19801"},
-    {file = "aiohypixel-0.2.1.tar.gz", hash = "sha256:fb669d3fd1b92a1fdd5d974272dda8b775a285c8225c5d66f6e1b9a18c2c1b2f"},
 ]
 aioredis = [
     {file = "aioredis-1.3.1-py3-none-any.whl", hash = "sha256:b61808d7e97b7cd5a92ed574937a079c9387fdadd22bfbfa7ad2fd319ecc26e3"},
@@ -1077,6 +1068,10 @@ asyncpg = [
     {file = "asyncpg-0.21.0-cp38-cp38-win32.whl", hash = "sha256:615c7e3adb46e1f2e3aff45e4ee9401b4f24f9f7153e5530a0753369be72a5c6"},
     {file = "asyncpg-0.21.0-cp38-cp38-win_amd64.whl", hash = "sha256:823eca36108bd64a8600efe7bbf1230aa00f2defa3be42852f3b61ab40cf1226"},
     {file = "asyncpg-0.21.0.tar.gz", hash = "sha256:53cb2a0eb326f61e34ef4da2db01d87ce9c0ebe396f65a295829df334e31863f"},
+]
+asyncpixel = [
+    {file = "asyncpixel-0.2.0-py3-none-any.whl", hash = "sha256:fe2691db03e31b062235dd2f7331c995e5dfe5ab473b6b7492a1f4c815e68821"},
+    {file = "asyncpixel-0.2.0.tar.gz", hash = "sha256:932fdaed927868fd057251fa4093cf1c67a69f02546047410987636307653cf3"},
 ]
 asyncrcon = [
     {file = "asyncrcon-1.1.4-py3-none-any.whl", hash = "sha256:fe748aa25980859399b4638f6ad7d1166bca45efb495fa3963ae1c84e30ed752"},
@@ -1200,10 +1195,6 @@ coverage = [
 darglint = [
     {file = "darglint-1.5.4-py3-none-any.whl", hash = "sha256:e58ff63f0f29a4dc8f9c1e102c7d00539290567d72feb74b7b9d5f8302992b8d"},
     {file = "darglint-1.5.4.tar.gz", hash = "sha256:7ebaafc8559d0db7735b6e15904ee5cca4be56fa85eac21c025c328278c6317a"},
-]
-dataclasses = [
-    {file = "dataclasses-0.6-py3-none-any.whl", hash = "sha256:454a69d788c7fda44efd71e259be79577822f5e3f53f029a22d08004e951dc9f"},
-    {file = "dataclasses-0.6.tar.gz", hash = "sha256:6988bd2b895eef432d562370bb707d540f32f7360ab13da45340101bc2307d84"},
 ]
 decorator = [
     {file = "decorator-4.4.2-py2.py3-none-any.whl", hash = "sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760"},
