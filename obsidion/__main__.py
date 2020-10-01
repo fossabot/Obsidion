@@ -109,7 +109,7 @@ bot.load_extension("obsidion.cogs.config")
 # bot.load_extension("obsidion.cogs.minecraft")
 
 if constants.Discord_bot_list.voting_enabled:
-    bot.load_extension("cogs.botlist")
+    bot.load_extension("obsidion.cogs.botlist")
 
 # run bot
 with setup_logging():

@@ -30,11 +30,12 @@ class botlist(commands.Cog):
         self.discord_boats.start()
         self.discord_bot_list.start()
         self.discord_labs.start()
-        self.bots_on_discord.start()
+        # self.bots_on_discord.start()
 
     @tasks.loop(minutes=30.0)
     async def botsfordiscord(self) -> None:
         """Bots for discord."""
+        await self.bot.wait_until_ready()
         headers = {
             "Content-Type": "application/json",
             "Authorization": constants.Discord_bot_list.bots4discord_token,
@@ -50,6 +51,7 @@ class botlist(commands.Cog):
     @tasks.loop(minutes=30.0)
     async def discord_boats(self) -> None:
         """Discord boats."""
+        await self.bot.wait_until_ready()
         headers = {
             "Authorization": constants.Discord_bot_list.discordboats_token,
         }
@@ -64,6 +66,7 @@ class botlist(commands.Cog):
     @tasks.loop(minutes=30.0)
     async def discord_bot_list(self) -> None:
         """Discord bot list."""
+        await self.bot.wait_until_ready()
         headers = {
             "Content-Type": "application/json",
             "Authorization": constants.Discord_bot_list.discordbotlist_token,
@@ -79,6 +82,7 @@ class botlist(commands.Cog):
     @tasks.loop(minutes=30.0)
     async def discord_labs(self) -> None:
         """Discord labs."""
+        await self.bot.wait_until_ready()
         headers = {
             "token": constants.Discord_bot_list.discodlabs_token,
         }
@@ -93,6 +97,7 @@ class botlist(commands.Cog):
     @tasks.loop(minutes=30.0)
     async def bots_on_discord(self) -> None:
         """Bots on discord."""
+        await self.bot.wait_until_ready()
         headers = {
             "Content-Type": "application/json",
             "Authorization": constants.Discord_bot_list.botsondiscord_token,
