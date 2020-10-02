@@ -1,8 +1,8 @@
 """Obsidion Discord Bot."""
 
 import asyncio as _asyncio
+from importlib.metadata import PackageNotFoundError, version  # type: ignore
 import sys as _sys
-from importlib.metadata import version, PackageNotFoundError  # type: ignore
 
 
 MIN_PYTHON_VERSION = (3, 8, 1)

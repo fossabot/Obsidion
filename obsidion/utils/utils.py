@@ -43,7 +43,7 @@ async def usernameToUUID(username: str, session: ClientSession) -> str:
     if response.status == 204 or data == []:
         return False
 
-    return data[0]["id"]
+    return data["id"]
 
 
 async def UUIDToUsername(uuid: str, session: ClientSession) -> str:
