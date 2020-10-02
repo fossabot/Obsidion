@@ -18,7 +18,7 @@ feedparser = "^6.0.1"
 fuzzywuzzy = "^0.18.0"
 lxml = "^4.5.2"
 mcsrvstats = "^0.1.1"
-python = "^3.8"
+python = "~3.8"
 pyyaml = "^5.3.1"
 uvloop = "^0.14.0"
 
@@ -39,9 +39,9 @@ mypy = "^0.782"
 pytest = "^5.0"
 pytest-cov = "^2.10.1"
 pytest-mock = "^3.3.1"
-pytype = {version = "^2020.9.16", python = "3.7"}
 safety = "^1.9.0"
 typeguard = "^2.9.1"
+pytype = "^2020.9.29"
 
 [tool.black]
 exclude = '''
