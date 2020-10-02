@@ -256,6 +256,7 @@ version = "0.6"
 [[package]]
 category = "dev"
 description = "Decorators for Humans"
+marker = "python_version == \"3.8\""
 name = "decorator"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*"
@@ -469,6 +470,7 @@ version = "2.10"
 [[package]]
 category = "dev"
 description = "A library to calculate python dependency graphs."
+marker = "python_version == \"3.8\""
 name = "importlab"
 optional = false
 python-versions = ">=2.7.0"
@@ -555,6 +557,7 @@ version = "0.4.3"
 [[package]]
 category = "dev"
 description = "Python package for creating and manipulating graphs and networks"
+marker = "python_version == \"3.8\""
 name = "networkx"
 optional = false
 python-versions = ">=3.6"
@@ -579,6 +582,7 @@ scipy = ["scipy"]
 [[package]]
 category = "dev"
 description = "Ninja is a small build system with a focus on speed"
+marker = "python_version == \"3.8\""
 name = "ninja"
 optional = false
 python-versions = "*"
@@ -742,6 +746,7 @@ dev = ["pre-commit", "tox", "pytest-asyncio"]
 [[package]]
 category = "dev"
 description = "Python type inferencer"
+marker = "python_version == \"3.8\""
 name = "pytype"
 optional = false
 python-versions = "<3.9,>=3.5"
@@ -953,9 +958,9 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [metadata]
-content-hash = "b0625f7422111128a51e5cebbc306d37b5257cf18a30bdd7891d08ed3447dcfa"
+content-hash = "864b40e9889f1ba021b021bf2ebe1498591bf132233e4c42792b22ee27fc4f53"
 lock-version = "1.0"
-python-versions = "~3.8"
+python-versions = "^3.8"
 
 [metadata.files]
 aiodns = [
