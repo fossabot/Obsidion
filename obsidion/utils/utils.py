@@ -17,27 +17,26 @@ async def get(session, url: str, params: dict = None, json: dict = None) -> dict
         return False
 
 
-async def usernameToUUID(username: str, session) -> str:
-    async def usernameToUUID(username: str, session: ClientSession) -> str:
-        """Takes in an mc username and tries to convert it to a mc uuid.
+async def usernameToUUID(username: str, session: ClientSession) -> str:
+    """Takes in an mc username and tries to convert it to a mc uuid.
 
-        Args:
-            username (str): username of player which uuid will be from
-            session ([type]): aiohttp session
+    Args:
+        username (str): username of player which uuid will be from
+        session ([type]): aiohttp session
 
-        Returns:
-            str: uuid of player
-        """
-        response = await session.get(
-            f"https://api.mojang.com/users/profiles/minecraft/{username}",
-        )
+    Returns:
+        str: uuid of player
+    """
+    response = await session.get(
+        f"https://api.mojang.com/users/profiles/minecraft/{username}",
+    )
 
-        data = await response.json()
+    data = await response.json()
 
-        if response.status == 204 or data == []:
-            return False
+    if response.status == 204 or data == []:
+        return False
 
-        return data[0]["id"]
+    return data[0]["id"]
 
 
 async def UUIDToUsername(uuid: str, session) -> str:
