@@ -11,7 +11,6 @@ import aioredis
 import asyncpg
 import discord
 from discord.ext import commands
-import fakeredis.aioredis
 
 from . import constants
 from .core.global_checks import init_global_checks
@@ -65,6 +64,9 @@ class Obsidion(commands.AutoShardedBot):
         but that usually won't matter for local bot testing.
         """
         if not constants.Redis.enabled:
+            # Only use in dev as dev dependancy
+            import fakeredis.aioredis
+
             log.info(
                 "Using fakeredis instead of communicating with a real Redis server."
             )
