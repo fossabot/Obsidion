@@ -2,6 +2,8 @@
 
 import asyncio as _asyncio
 import sys as _sys
+from importlib.metadata import version, PackageNotFoundError  # type: ignore
+
 
 MIN_PYTHON_VERSION = (3, 8, 1)
 
@@ -10,12 +12,6 @@ __all__ = [
     "__version__",
     "_update_event_loop_policy",
 ]
-
-try:
-    from importlib.metadata import version, PackageNotFoundError  # type: ignore
-except ImportError:  # pragma: no cover
-    from importlib_metadata import version, PackageNotFoundError  # type: ignore
-
 
 try:
     __version__ = version(__name__)
