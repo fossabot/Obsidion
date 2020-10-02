@@ -25,7 +25,7 @@ class info(commands.Cog):
         self.bot = bot
 
     @staticmethod
-    async def get_uuid(session, username: str) -> Optional[str, bool]:
+    async def get_uuid(session, username: str):
         """Get uuid from username.
 
         Args:
