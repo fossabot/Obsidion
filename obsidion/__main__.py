@@ -81,7 +81,7 @@ mentions = discord.AllowedMentions(
 )
 
 bot = Obsidion(
-    case_insensitive=True,
+    case_insensitive=True,  # type: ignore
     activity=activity,
     command_prefix=when_mentioned_or(constants.Bot.default_prefix),
     allowed_mentions=mentions,

@@ -38,7 +38,7 @@ class Obsidion(commands.AutoShardedBot):
         self._connector = None
         self._resolver = None
 
-        self.uptime = None
+        self.uptime: datetime.datetime
 
         # Do basic checks on every command
         init_global_checks(self)
