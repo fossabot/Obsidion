@@ -5,12 +5,13 @@ import discord
 from discord.ext import commands
 
 from obsidion import constants
+from obsidion.bot import Obsidion
 
 
 class hypixel(commands.Cog):
     """Hypixel cog."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
         self.session = bot.http_session

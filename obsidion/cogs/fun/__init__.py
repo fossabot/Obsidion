@@ -1,8 +1,9 @@
 """Fun setup."""
 
-from .fun import fun
+from obsidion.bot import Obsidion
+from .fun import Fun
 
 
-def setup(bot):
+def setup(bot: Obsidion) -> None:
     """Setup."""
-    bot.add_cog(fun(bot))
+    bot.add_cog(Fun(bot))

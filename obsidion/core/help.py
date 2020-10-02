@@ -174,7 +174,8 @@ class MyHelpCommand(commands.HelpCommand):
                 f"{constants.Bot.clientid}&scope=bot&permissions=314448) | ",
                 "[SUPPORT SERVER](https://discord.gg/invite/7BRD7s6)** | **[GITHUB]",
                 "(https://github.com/Darkflame72/Obsidion/)** | **[WEBSITE]",
-                "(http://obsidion.bowie-co.nz)** | **[PATREON](https://www.patreon.com/obsidion)**",
+                "(http://obsidion.bowie-co.nz)** | "
+                "**[PATREON](https://www.patreon.com/obsidion)**",
             ),
         )
         await self.context.send(embed=embed)
@@ -206,7 +207,8 @@ class MyHelpCommand(commands.HelpCommand):
                 f"{constants.Bot.clientid}&scope=bot&permissions=314448) | ",
                 "[SUPPORT SERVER](https://discord.gg/invite/7BRD7s6)** | **[GITHUB]",
                 "(https://github.com/Darkflame72/Obsidion/)** | **[WEBSITE]",
-                "(http://obsidion.bowie-co.nz)** | **[PATREON](https://www.patreon.com/obsidion)**",
+                "(http://obsidion.bowie-co.nz)** | **[PATREON]"
+                "(https://www.patreon.com/obsidion)**",
             ),
         )
 

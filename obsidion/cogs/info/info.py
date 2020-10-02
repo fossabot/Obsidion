@@ -1,12 +1,12 @@
 """Info cogs."""
 
-from aiohttp import ClientSession
 import base64
 from datetime import datetime
 import io
 import json
 import logging
 
+from aiohttp import ClientSession
 import discord
 from discord.ext import commands
 
@@ -17,15 +17,15 @@ from obsidion.utils.utils import get
 log = logging.getLogger(__name__)
 
 
-class info(commands.Cog):
+class Info(commands.Cog):
     """Commands that are bot related."""
 
     def __init__(self, bot: Obsidion) -> None:
-        """Initialise the bot"""
+        """Initialise the bot."""
         self.bot = bot
 
     @staticmethod
-    async def get_uuid(session: ClientSession, username: str):
+    async def get_uuid(session: ClientSession, username: str) -> str:
         """Get uuid from username.
 
         Args:
@@ -33,7 +33,7 @@ class info(commands.Cog):
             username (str): username of player
 
         Returns:
-            Optional[str, bool]: uuid if vaild username otherwise false
+            str: uuid if vaild username otherwise false
         """
         url = f"https://api.mojang.com/users/profiles/minecraft/{username}"
         async with session.get(url) as resp:
@@ -139,8 +139,8 @@ class info(commands.Cog):
         if not data:
             await ctx.send(
                 (
-                    f"{ctx.author}, :x: The Java edition Minecraft server `{server_ip}` "
-                    "is currently not online or cannot be requested"
+                    f"{ctx.author}, :x: The Java edition Minecraft server `{server_ip}`"
+                    " is currently not online or cannot be requested"
                 )
             )
             return
@@ -210,8 +210,8 @@ class info(commands.Cog):
         if not data:
             await ctx.send(
                 (
-                    f"{ctx.author}, :x: The Bedrock edition Minecraft server `{server_ip}` "
-                    "is currently not online or cannot be requested"
+                    f"{ctx.author}, :x: The Bedrock edition Minecraft server "
+                    "`{server_ip}` is currently not online or cannot be requested"
                 )
             )
             return
@@ -347,7 +347,7 @@ class info(commands.Cog):
         """Get an article from the minecraft wiki."""
         await ctx.channel.trigger_typing()
 
-        def generate_payload(query) -> None:
+        def generate_payload(query: str) -> None:
             """Generate the payload for Gamepedia based on a query string."""
             payload = {
                 "action": "query",

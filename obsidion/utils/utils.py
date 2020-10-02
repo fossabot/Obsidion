@@ -15,7 +15,7 @@ async def get(
         json (dict, optional): json to pass to request. Defaults to None.
 
     Returns:
-        dict: [description]
+        dict: json response
     """
     async with session.get(url, params=params, json=json) as resp:
         if resp.status == 200:
@@ -34,8 +34,8 @@ async def usernameToUUID(username: str, session: ClientSession) -> str:
     Returns:
         str: uuid of player
     """
-    response = await session.post(
-        "https://api.mojang.com/profiles/minecraft", json=[username]
+    response = await session.get(
+        f"https://api.mojang.com/users/profiles/minecraft/{username}",
     )
 
     data = await response.json()

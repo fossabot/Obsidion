@@ -1,13 +1,15 @@
 """Rcon cog."""
 
-from discord.ext import commands
 from asyncrcon import AsyncRCON, AuthenticationException
+from discord.ext import commands
+
+from obsidion.bot import Obsidion
 
 
 class Rcon(commands.Cog):
     """Rcon."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
 

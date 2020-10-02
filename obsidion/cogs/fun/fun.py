@@ -2,9 +2,12 @@
 
 import logging
 from random import choice
-from typing import List
+from typing import List, Optional
 
+import discord
 from discord.ext import commands
+
+from obsidion.bot import Obsidion
 
 minecraft = [
     "ᔑ",
@@ -53,7 +56,7 @@ log = logging.getLogger(__name__)
 
 
 def load_from_file(file: str) -> List[str]:
-    """Load text from file
+    """Load text from file.
 
     Args:
         file (str): file name
@@ -66,10 +69,10 @@ def load_from_file(file: str) -> List[str]:
     return [x.strip() for x in content]
 
 
-class fun(commands.Cog):
+class Fun(commands.Cog):
     """Commands that are fun related."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
         self.pvp_mes = load_from_file("pvp")
@@ -127,7 +130,14 @@ class fun(commands.Cog):
 
     @commands.command(aliases=["slay"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def kill(self, ctx, member=None) -> None:
+    async def kill(
+        self,
+        ctx: commands.Context,
+        member: Optional[
+            str,
+            discord.User,
+        ] = None,
+    ) -> None:
         """Kill that pesky friend in a fun and stylish way."""
         if (
             not member
@@ -144,7 +154,18 @@ class fun(commands.Cog):
 
     @commands.command(aliases=["battle"])
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def pvp(self, ctx, member1=None, member2=None) -> None:
+    async def pvp(
+        self,
+        ctx: commands.Context,
+        member1: Optional[
+            str,
+            discord.User,
+        ] = None,
+        member2: Optional[
+            str,
+            discord.User,
+        ] = None,
+    ) -> None:
         """Duel someone."""
         if member1:
             if not member2:
@@ -160,20 +181,23 @@ class fun(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
-    async def rps(self, ctx, user_choice=None) -> None:
-        """play Rock Paper Shears."""
+    async def rps(self, ctx: commands.Context, user_choice: str = None) -> None:
+        """Play Rock Paper Shears."""
         options = ["rock", "paper", "shears"]
-        if user_choice and user_choice in options:
-            c_choice = choice(options)
-            if user_choice == options[options.index(user_choice) - 1]:
-                await ctx.send(f"You chose {user_choice}, I chose {c_choice} I win.")
-            elif c_choice == user_choice:
-                await ctx.send(
-                    f"You chose {user_choice}, I chose {c_choice} looks like we have a tie."
-                )
-            else:
-                await ctx.send(f"You chose {user_choice}, I chose {c_choice} you win.")
-        else:
+        if user_choice and user_choice not in options:
             await ctx.send(
-                "That is an invalid option can you please choose from rock, paper or shears"
+                (
+                    "That is an invalid option can you please choose from "
+                    "rock, paper or shears"
+                )
             )
+            return
+        c_choice = choice(options)
+        if user_choice == options[options.index(user_choice) - 1]:
+            await ctx.send(f"You chose {user_choice}, I chose {c_choice} I win.")
+        elif c_choice == user_choice:
+            await ctx.send(
+                f"You chose {user_choice}, I chose {c_choice} looks like we have a tie."
+            )
+        else:
+            await ctx.send(f"You chose {user_choice}, I chose {c_choice} you win.")

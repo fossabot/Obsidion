@@ -5,6 +5,7 @@ import logging
 import discord
 from discord.ext import commands
 
+from obsidion.bot import Obsidion
 from obsidion.utils.utils import usernameToUUID
 
 log = logging.getLogger(__name__)
@@ -13,7 +14,7 @@ log = logging.getLogger(__name__)
 class Images(commands.Cog):
     """Images cog."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.session = bot.http_session
         self.bot = bot
@@ -28,7 +29,10 @@ class Images(commands.Cog):
         text = text.replace(" ", "%20")
         embed = discord.Embed(color=0x00FF00)
         embed.set_image(
-            url=f"https://api.bowie-co.nz/api/v1/images/advancement?item={block_name}&title={title}&text={text}"
+            url=(
+                "https://api.bowie-co.nz/api/v1/images/"
+                f"advancement?item={block_name}&title={title}&text={text}"
+            )
         )
         await ctx.send(embed=embed)
 
@@ -49,7 +53,10 @@ class Images(commands.Cog):
         line4 = split[3] if len(split) >= 4 else "%20"
         embed = discord.Embed(color=0x00FF00)
         embed.set_image(
-            url=f"https://api.bowie-co.nz/api/v1/images/sign?line1={line1}&line2={line2}&line3={line3}&line4={line4}"
+            url=(
+                "https://api.bowie-co.nz/api/v1/images/sign?line1="
+                f"{line1}&line2={line2}&line3={line3}&line4={line4}"
+            )
         )
         await ctx.send(embed=embed)
 
@@ -61,7 +68,10 @@ class Images(commands.Cog):
         uuid = await usernameToUUID(username, ctx.bot.http_session)
         if uuid:
             embed = discord.Embed(
-                description=f"Here is: `{username}`'s Face! \n **[DOWNLOAD](https://visage.surgeplay.com/face/512/{uuid})**",
+                description=(
+                    f"Here is: `{username}`'s Face! "
+                    f"\n **[DOWNLOAD](https://visage.surgeplay.com/face/512/{uuid})**"
+                ),
                 color=0x00FF00,
             )
             embed.set_image(url=f"https://visage.surgeplay.com/face/512/{uuid}")
@@ -69,7 +79,10 @@ class Images(commands.Cog):
             await ctx.send(embed=embed)
         else:
             await ctx.send(
-                f"{ctx.message.author.mention}, :x: The user: `{username}` does not exist!"
+                (
+                    f"{ctx.message.author.mention}, :x: The user: "
+                    f"`{username}` does not exist!"
+                )
             )
 
     @commands.command()
@@ -80,7 +93,10 @@ class Images(commands.Cog):
         uuid = await usernameToUUID(username, ctx.bot.http_session)
         if uuid:
             embed = discord.Embed(
-                description=f"Here is: `{username}`'s Skull! \n **[DOWNLOAD](https://visage.surgeplay.com/head/512/{uuid})**",
+                description=(
+                    f"Here is: `{username}`'s Skull! \n "
+                    f"**[DOWNLOAD](https://visage.surgeplay.com/head/512/{uuid})**"
+                ),
                 color=0x00FF00,
             )
             embed.set_image(url=f"https://visage.surgeplay.com/head/512/{uuid}")
@@ -88,7 +104,10 @@ class Images(commands.Cog):
             await ctx.send(embed=embed)
         else:
             await ctx.send(
-                f"{ctx.message.author.mention}, :x: The user: `{username}` does not exist!"
+                (
+                    f"{ctx.message.author.mention}, :x: The user: `{username}` "
+                    "does not exist!"
+                )
             )
 
     @commands.command()
@@ -99,7 +118,10 @@ class Images(commands.Cog):
         uuid = await usernameToUUID(username, ctx.bot.http_session)
         if uuid:
             embed = discord.Embed(
-                description=f"Here is: `{username}`'s Skin! \n **[DOWNLOAD](https://visage.surgeplay.com/full/512/{uuid})**",
+                description=(
+                    f"Here is: `{username}`'s Skin! \n "
+                    f"**[DOWNLOAD](https://visage.surgeplay.com/full/512/{uuid})**"
+                ),
                 color=0x00FF00,
             )
             embed.set_image(url=f"https://visage.surgeplay.com/full/512/{uuid}")
@@ -107,7 +129,10 @@ class Images(commands.Cog):
             await ctx.send(embed=embed)
         else:
             await ctx.send(
-                f"{ctx.message.author.mention}, :x: The user: `{username}` does not exist!"
+                (
+                    f"{ctx.message.author.mention}, :x: The user: "
+                    "`{username}` does not exist!"
+                )
             )
 
     @commands.command()
@@ -115,18 +140,30 @@ class Images(commands.Cog):
     async def render(
         self, ctx: commands.Context, render_type: str, username: str
     ) -> None:
-        """Renders a Minecraft players skin in 6 different ways. You can choose from these 6 render types: face, front, frontfull, head, bust & skin."""
+        """Renders a Minecraft players skin in 6 different ways.
+
+        You can choose from these 6 render types: face,
+        front, frontfull, head, bust & skin.
+        """
         await ctx.channel.trigger_typing()
         renders = ["face", "front", "frontfull", "head", "bust", "skin"]
         if render_type not in renders:
             await ctx.send(
-                f"{ctx.message.author.mention}, Please supply a render type. Your options are:\n `face`, `front`, `frontfull`, `head`, `bust`, `skin` \n Type: ?render <render type> <username>"
+                (
+                    f"{ctx.message.author.mention}, Please supply a render type. Your "
+                    "options are:\n `face`, `front`, `frontfull`, `head`, `bust`, "
+                    "`skin` \n Type: ?render <render type> <username>"
+                )
             )
             return
         uuid = await usernameToUUID(username, ctx.bot.http_session)
         if uuid:
             embed = discord.Embed(
-                description=f"Here is: `{username}`'s {render_type}! \n **[DOWNLOAD](https://visage.surgeplay.com/{render_type}/512/{uuid})**",
+                description=(
+                    f"Here is: `{username}`'s {render_type}! \n "
+                    f"**[DOWNLOAD](https://visage.surgeplay.com/{render_type}"
+                    f"/512/{uuid})**"
+                ),
                 color=0x00FF00,
             )
             embed.set_image(
@@ -136,5 +173,8 @@ class Images(commands.Cog):
             await ctx.send(embed=embed)
         else:
             await ctx.send(
-                f"{ctx.message.author.mention}, :x: The user: `{username}` does not exist!"
+                (
+                    f"{ctx.message.author.mention}, :x: The user: `{username}`"
+                    " does not exist!"
+                )
             )

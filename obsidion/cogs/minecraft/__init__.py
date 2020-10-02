@@ -1,7 +1,7 @@
 """Setup cog."""
 
-from .minecraft import minecraft
 from obsidion.bot import Obsidion
+from .minecraft import minecraft
 
 
 def setup(bot: Obsidion) -> None:

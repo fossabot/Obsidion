@@ -172,6 +172,8 @@ class YAMLGetter(type):
 
 # Dataclasses
 class Bot(metaclass=YAMLGetter):
+    """Bot."""
+
     section = "bot"
 
     clientid: str
@@ -184,6 +186,8 @@ class Bot(metaclass=YAMLGetter):
 
 
 class Channels(metaclass=YAMLGetter):
+    """Channels."""
+
     section = "channels"
 
     new_guild_channel: int
@@ -194,6 +198,8 @@ class Channels(metaclass=YAMLGetter):
 
 
 class Discord_bot_list(metaclass=YAMLGetter):
+    """Discord_bot_list."""
+
     section = "discord_bot_lists"
 
     voting_enabled: bool
@@ -206,6 +212,8 @@ class Discord_bot_list(metaclass=YAMLGetter):
 
 
 class Database(metaclass=YAMLGetter):
+    """Database."""
+
     section = "database"
 
     username: str
@@ -216,6 +224,8 @@ class Database(metaclass=YAMLGetter):
 
 
 class Redis(metaclass=YAMLGetter):
+    """Redis."""
+
     section = "redis"
 
     enabled: bool

@@ -230,7 +230,6 @@ def humanize_timedelta(
     Returns:
         str: String of the timedelta.
     """
-
     try:
         obj = seconds if seconds is not None else timedelta.total_seconds()
     except AttributeError:
