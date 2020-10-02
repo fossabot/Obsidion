@@ -18,6 +18,7 @@ async def get(session, url: str, params: dict = None, json: dict = None) -> dict
 
 
 async def usernameToUUID(username: str, session) -> str:
+    async def usernameToUUID(username: str, session: ClientSession) -> str:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -27,9 +28,8 @@ async def usernameToUUID(username: str, session) -> str:
     Returns:
         str: uuid of player
     """
-
-    response = await session.post(
-        "https://api.mojang.com/profiles/minecraft", json=[username]
+    response = await session.get(
+        f"https://api.mojang.com/users/profiles/minecraft/{username}}",
     )
 
     data = await response.json()

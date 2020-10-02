@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 
 from obsidion import constants
+from obsidion.utils.utils import usernameToUUID
 
 
 class hypixel(commands.Cog):
@@ -48,4 +49,80 @@ class hypixel(commands.Cog):
             description=f"Total Boosters online: {len(data.boosters):,}",
             colour=0x00FF00,
         )
+        embed.set_author(
+            name="Hypixel",
+            url="https://hypixel.net/forums/skyblock.157/",
+            icon_url="https://hypixel.net/favicon-32x32.png",
+        )
+        embed.set_thumbnail(
+            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        )
+        embed.timestamp = ctx.message.created_at
         await ctx.send(embed=embed)
+
+    @commands.command()
+    async def playercount(self, ctx: commands.Context) -> None:
+        """Get the current players online."""
+        await ctx.channel.trigger_typing()
+        data = await self.hypixel_session.get_player_count()
+        embed = discord.Embed(
+            title="Players Online",
+            description=f"Total Players online: {data}",            
+            colour=0x00FF00,
+        )
+        embed.set_author(
+            name="Hypixel",
+            url="https://hypixel.net/forums/skyblock.157/",
+            icon_url="https://hypixel.net/favicon-32x32.png",
+        )
+        embed.set_thumbnail(
+            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        )
+        embed.timestamp = ctx.message.created_at
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    async def skyblocknews(self, ctx: commands.Context) -> None:
+        """Get current Skyblock News."""
+        await ctx.channel.trigger_typing()
+        data = await self.hypixel_session.get_news()
+
+        embed = discord.Embed(
+                title="Skyblock News",
+                description=f"There are currently {len(data)} news articles.",
+                colour=0x00FF00,
+            )
+        embed.set_author(
+            name="Hypixel",
+            url="https://hypixel.net/forums/skyblock.157/",
+            icon_url="https://hypixel.net/favicon-32x32.png",
+        )
+        embed.set_thumbnail(
+            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        )
+        for i in range(len(data)):
+            embed.add_field(name=f"{data[i].title}", value=f"[{data[i].text}]({data[i].link})")
+
+        embed.timestamp = ctx.message.created_at
+        await ctx.send(embed=embed)
+            
+    @commands.command()
+    async def playerstatus(self, ctx: commands.Context, username: str) -> None:
+        """Get the current players online."""
+        await ctx.channel.trigger_typing()
+        data = await self.hypixel_session.get_player_status(uuid=await usernameToUUID(username, ctx.bot.http_session))
+        # embed = discord.Embed(
+        #     title="Players Online",
+        #     description=f"Total Players online: {data}",            
+        #     colour=0x00FF00,
+        # )
+        # embed.set_author(
+        #     name="Hypixel",
+        #     url="https://hypixel.net/forums/skyblock.157/",
+        #     icon_url="https://hypixel.net/favicon-32x32.png",
+        # )
+        # embed.set_thumbnail(
+        #     url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        # )
+        # embed.timestamp = ctx.message.created_at
+        await ctx.send(data)
