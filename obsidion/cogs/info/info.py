@@ -1,11 +1,11 @@
 """Info cogs."""
 
+from aiohttp import ClientSession
 import base64
+from datetime import datetime
 import io
 import json
 import logging
-from datetime import datetime
-from typing import Optional
 
 import discord
 from discord.ext import commands
@@ -25,7 +25,7 @@ class info(commands.Cog):
         self.bot = bot
 
     @staticmethod
-    async def get_uuid(session, username: str):
+    async def get_uuid(session: ClientSession, username: str):
         """Get uuid from username.
 
         Args:
@@ -102,7 +102,7 @@ class info(commands.Cog):
         await ctx.send(embed=embed)
 
     @staticmethod
-    def get_server(ip: str, port) -> None:
+    def get_server(ip: str, port: int) -> None:
         """Returns the server icon."""
         if ":" in ip:  # deal with them providing port in string instead of seperate
             ip, port = ip.split(":")
@@ -138,7 +138,10 @@ class info(commands.Cog):
             self.bot.redis_session.set(key, json.dumps(data), expire=300)
         if not data:
             await ctx.send(
-                f"{ctx.author}, :x: The Java edition Minecraft server `{server_ip}` is currently not online or cannot be requested"
+                (
+                    f"{ctx.author}, :x: The Java edition Minecraft server `{server_ip}` "
+                    "is currently not online or cannot be requested"
+                )
             )
             return
         embed = discord.Embed(title=f"Java Server: {server_ip}", color=0x00FF00)
@@ -146,7 +149,10 @@ class info(commands.Cog):
 
         embed.add_field(
             name="Players",
-            value=f"Online: `{data['players']['online']:,}` \n Maximum: `{data['players']['max']:,}`",
+            value=(
+                f"Online: `{data['players']['online']:,}` \n "
+                "Maximum: `{data['players']['max']:,}`"
+            ),
         )
         if data["players"]["sample"]:
             names = ""
@@ -155,7 +161,10 @@ class info(commands.Cog):
             embed.add_field(name="Information", value=names, inline=False)
         embed.add_field(
             name="Version",
-            value=f"Java Edition \n Running: `{data['version']['name']}` \n Protocol: `{data['version']['protocol']}`",
+            value=(
+                f"Java Edition \n Running: `{data['version']['name']}` \n "
+                f"Protocol: `{data['version']['protocol']}`"
+            ),
             inline=False,
         )
         if data["favicon"]:
@@ -166,7 +175,10 @@ class info(commands.Cog):
             await ctx.send(embed=embed, file=favicon)
         else:
             embed.set_thumbnail(
-                url="https://media.discordapp.net/attachments/493764139290984459/602058959284863051/unknown.png"
+                url=(
+                    "https://media.discordapp.net/attachments/493764139290984459"
+                    "/602058959284863051/unknown.png"
+                )
             )
             await ctx.send(embed=embed)
 
@@ -197,7 +209,10 @@ class info(commands.Cog):
             self.bot.redis_session.set(key, json.dumps(data), expire=300)
         if not data:
             await ctx.send(
-                f"{ctx.author}, :x: The Bedrock edition Minecraft server `{server_ip}` is currently not online or cannot be requested"
+                (
+                    f"{ctx.author}, :x: The Bedrock edition Minecraft server `{server_ip}` "
+                    "is currently not online or cannot be requested"
+                )
             )
             return
         embed = discord.Embed(title=f"Bedrock Server: {server_ip}", color=0x00FF00)
@@ -205,11 +220,17 @@ class info(commands.Cog):
 
         embed.add_field(
             name="Players",
-            value=f"Online: `{data['players']['online']:,}` \n Maximum: `{data['players']['max']:,}`",
+            value=(
+                f"Online: `{data['players']['online']:,}` \n Maximum: "
+                f"`{data['players']['max']:,}`"
+            ),
         )
         embed.add_field(
             name="Version",
-            value=f"Bedrock Edition \n Running: `{data['software']['version']}` \n Map: `{data['map']}`",
+            value=(
+                f"Bedrock Edition \n Running: `{data['software']['version']}` "
+                f"\n Map: `{data['map']}`"
+            ),
             inline=True,
         )
         if data["players"]["names"]:
@@ -253,7 +274,10 @@ class info(commands.Cog):
         embed = discord.Embed(title="Minecraft Service Status", color=0x00FF00)
         embed.add_field(
             name="Minecraft Game Sales",
-            value=f"Total Sales: **{sales_data['total']:,}** Last 24 Hours: **{sales_data['last24h']:,}**",
+            value=(
+                f"Total Sales: **{sales_data['total']:,}** Last 24 Hours: "
+                f"**{sales_data['last24h']:,}**"
+            ),
         )
         embed.add_field(name="Minecraft Services:", value=services, inline=False)
 
@@ -301,10 +325,16 @@ class info(commands.Cog):
         if data["fields"]["resolution"]["name"]:
             details += f"Resolution: {data['fields']['resolution']['name']}\n"
         if "version" in data["fields"]:
-            details += f"Affected: { ', '.join(s['name'] for s in data['fields']['versions'])}\n"
+            details += (
+                "Affected: "
+                f"{', '.join(s['name'] for s in data['fields']['versions'])}\n"
+            )
         if "fixVersions" in data["fields"]:
             if len(data["fields"]["fixVersions"]) >= 1:
-                details += f"Fixed Version: {data['fields']['fixVersions'][0]} + {len(data['fields']['fixVersions'])}\n"
+                details += (
+                    f"Fixed Version: {data['fields']['fixVersions'][0]} + "
+                    f"{len(data['fields']['fixVersions'])}\n"
+                )
 
         embed.add_field(name="Information", value=info)
         embed.add_field(name="Details", value=details)
@@ -317,7 +347,7 @@ class info(commands.Cog):
         """Get an article from the minecraft wiki."""
         await ctx.channel.trigger_typing()
 
-        def generate_payload(query):
+        def generate_payload(query) -> None:
             """Generate the payload for Gamepedia based on a query string."""
             payload = {
                 "action": "query",
@@ -333,8 +363,8 @@ class info(commands.Cog):
 
         base_url = "https://minecraft.gamepedia.com/api.php"
         footer_icon = (
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Wikimedia-logo.png"
-            "/600px-Wikimedia-logo.png"
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53"
+            "/Wikimedia-logo.png/600px-Wikimedia-logo.png"
         )
 
         payload = generate_payload(query)
@@ -367,16 +397,16 @@ class info(commands.Cog):
             await ctx.send(f"I'm sorry, I couldn't find \"{query}\" on Gamepedia")
 
     # @commands.command()
-    async def version(self, ctx) -> None:
+    async def version(self, ctx: commands.Context) -> None:
         """Get version info."""
         await ctx.send("TODO")
 
     # @commands.command()
-    async def colourcodes(self, ctx) -> None:
+    async def colourcodes(self, ctx: commands.Context) -> None:
         """Get colourcodes info."""
         await ctx.send("TODO")
 
     # @commands.command()
-    async def news(self, ctx) -> None:
+    async def news(self, ctx: commands.Context) -> None:
         """Get recent news."""
         await ctx.send("TODO")

@@ -6,9 +6,9 @@ import traceback
 import discord
 from discord.ext.commands import Cog, Context, errors
 
-from ..utils.chat_formatting import text_to_file
 from obsidion import constants
 from obsidion.bot import Obsidion
+from ..utils.chat_formatting import text_to_file
 
 log = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 class ErrorHandler(Cog):
     """Handles errors emitted from commands."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
 
@@ -70,7 +70,7 @@ class ErrorHandler(Cog):
     async def handle_user_input_error(
         self, ctx: Context, e: errors.UserInputError
     ) -> None:
-        """Send an error message in `ctx` for UserInputError, sometimes invoking the help command too."""
+        """Send an error message in `ctx` for UserInputError."""
         prepared_help_command = self.get_help_command(ctx)
 
         if isinstance(e, errors.MissingRequiredArgument):
@@ -101,6 +101,10 @@ class ErrorHandler(Cog):
     async def handle_check_failure(ctx: Context, e: errors.CheckFailure) -> None:
         """Send an error message in `ctx` for certain types of CheckFailure.
 
+        Args:
+            ctx (Context): Context of message
+            e (errors.CheckFailure): [description]error type
+
         The following types are handled:
         * BotMissingPermissions
         * BotMissingRole
@@ -125,17 +129,26 @@ class ErrorHandler(Cog):
                 fmt = " and ".join(missing)
             ctx.bot.stats.incr("errors.bot_permission_error")
             await ctx.send(
-                f"Sorry, it looks like I don't have the **{fmt}**permission(s) I need to do that."
+                (
+                    f"Sorry, it looks like I don't have the **{fmt}**permission(s) "
+                    "I need to do that."
+                )
             )
 
     @staticmethod
     async def handle_unexpected_error(ctx: Context, e: errors.CommandError) -> None:
-        """Send a generic error message in `ctx` and log the exception as an error with exc_info."""
+        """Send a generic error message in `ctx` and log the exception."""
         await ctx.send(
-            "Sorry, an unexpected error occurred. It has been recorded and should be fixed soon!\n\n"
+            (
+                "Sorry, an unexpected error occurred. It has been "
+                "recorded and should be fixed soon!\n\n"
+            )
         )
         log.error(
-            f"Error executing command invoked by {ctx.message.author}: {ctx.message.content}",
+            (
+                f"Error executing command invoked by {ctx.message.author}: ",
+                f"{ctx.message.content}",
+            ),
             exc_info=e,
         )
         embed = discord.Embed(title="Bug", colour=0x00FF00)

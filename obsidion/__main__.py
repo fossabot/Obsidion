@@ -23,7 +23,7 @@ class RemoveNoise(logging.Filter):
         """Init."""
         super().__init__(name="discord.state")
 
-    def filter(self, record) -> bool:
+    def filter(self, record: logging.LogRecord) -> bool:
         """Filter out unimportant info."""
         if record.levelname == "WARNING" and "referencing an unknown" in record.msg:
             return False
