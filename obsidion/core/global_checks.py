@@ -3,7 +3,7 @@
 from discord.ext.commands import Context
 
 
-def init_global_checks(bot) -> None:
+def init_global_checks(bot) -> None:  # noqa: ANN001
     """Global checks to run."""
 
     @bot.check_once

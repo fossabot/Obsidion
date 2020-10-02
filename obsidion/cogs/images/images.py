@@ -1,5 +1,7 @@
 """Images cog."""
 
+# noqa: DAR101
+
 import logging
 
 import discord
@@ -144,7 +146,7 @@ class Images(commands.Cog):
 
         You can choose from these 6 render types: face,
         front, frontfull, head, bust & skin.
-        """
+        """  # noqa: DAR101
         await ctx.channel.trigger_typing()
         renders = ["face", "front", "frontfull", "head", "bust", "skin"]
         if render_type not in renders:

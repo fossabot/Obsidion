@@ -144,7 +144,7 @@ class MyHelpCommand(commands.HelpCommand):
         )
         return embed
 
-    async def send_bot_help(self, mapping) -> None:
+    async def send_bot_help(self, mapping: dict) -> None:
         """Send bot help."""
         bot = self.context.bot
         if "@" in str(self.context.prefix):

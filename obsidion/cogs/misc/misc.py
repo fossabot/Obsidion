@@ -10,8 +10,8 @@ import sys
 import discord
 from discord.ext import commands
 
-from obsidion.bot import Obsidion
 from obsidion import __version__, constants
+from obsidion.bot import Obsidion
 from obsidion.utils.chat_formatting import humanize_timedelta
 
 log = logging.getLogger(__name__)
@@ -170,7 +170,7 @@ class Miscellaneous(commands.Cog):
         To display the source code of a subcommand you can separate it by
         periods, e.g. account.link for the link subcommand of the account command
         or by spaces.
-        """
+        """  # noqa: DAR101, DAR201
         source_url = "https://github.com/Darkflame72/Obsidion"
         branch = "V0.4"
         if command is None:
@@ -216,12 +216,13 @@ class Miscellaneous(commands.Cog):
         The bot will communicate with you via PM about the status
         of your request if possible.
         You can only request feedback once every 10 minutes.
-        """
+        """  # noqa:DAR101
         channel = ctx.bot.get_channel(constants.Channels.feedback_channel)
         if channel is None:
             await ctx.send(
                 (
-                    "Bug reporting is currently disabled please join our support server"
+                    "Bug reporting is currently disabled "
+                    "please join our support server"
                     " [here](https://discord.gg/invite/7BRD7s6) to give it in person."
                 )
             )

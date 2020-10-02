@@ -24,7 +24,7 @@ __all__ = ["Obsidion"]
 class Obsidion(commands.AutoShardedBot):
     """Main bot autosharded class."""
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: str, **kwargs: str) -> None:
         """Initialise bot and start conections to services."""
         super().__init__(*args, **kwargs)
 
@@ -77,7 +77,7 @@ class Obsidion(commands.AutoShardedBot):
         self.redis_closed = False
         self.redis_ready.set()
 
-    async def login(self, *args, **kwargs) -> None:
+    async def login(self, *args: str, **kwargs: str) -> None:
         """Re-create the connector and set up sessions before logging into Discord."""
         self._recreate()
         await super().login(*args, **kwargs)
@@ -155,11 +155,9 @@ class Obsidion(commands.AutoShardedBot):
 
         self.http_session = aiohttp.ClientSession(connector=self._connector)
 
-    async def get_context(
-        self, message: discord.Message, *, cls: commands.Context
-    ) -> None:
+    async def get_context(self, message: discord.Message) -> None:
         """Get context."""
-        return await super().get_context(message, cls=cls)
+        return await super().get_context(message)
 
     async def process_commands(self, message: discord.Message) -> None:
         """Ignore messages from bots."""

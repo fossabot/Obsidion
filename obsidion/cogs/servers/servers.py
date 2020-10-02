@@ -318,7 +318,10 @@ class Servers(commands.Cog):
             icon_url="https://www.minesaga.org/favicon.ico",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         for game in data["game_stats"]:
@@ -397,8 +400,10 @@ class Servers(commands.Cog):
             name=("Manacube Oasis Stats"),
             value=(
                 (
-                    f"Playtime: `{data['oasis']['playtime']}`\nMob Kills: `{data['oasis']['mobKills']}"
-                    f"`\nMana: `{data['oasis']['mana']}`\nMoney: `{data['oasis']['money']}`"
+                    f"Playtime: `{data['oasis']['playtime']}`\n"
+                    f"Mob Kills: `{data['oasis']['mobKills']}"
+                    f"`\nMana: `{data['oasis']['mana']}`"
+                    f"\nMoney: `{data['oasis']['money']}`"
                 )
             ),
         )
@@ -406,8 +411,9 @@ class Servers(commands.Cog):
             name=("Manacube Islands Stats"),
             value=(
                 (
-                    f"Playtime: `{data['islands']['playtime']}`\nMob Kills: "
-                    f"`{data['islands']['mobKills']}`\nSilver: `{data['islands']['silver']}"
+                    f"Playtime: `{data['islands']['playtime']}`\nMob Kills: `"
+                    f"{data['islands']['mobKills']}`"
+                    f"\nSilver: `{data['islands']['silver']}"
                     f"`\nMoney: `{data['islands']['money']}`"
                 )
             ),
@@ -416,8 +422,9 @@ class Servers(commands.Cog):
             name=("Manacube Survival Stats"),
             value=(
                 (
-                    f"Playtime: `{data['survival']['playtime']}`\nMob Kills: "
-                    f"`{data['survival']['mobKills']}`\nMoney: `{data['survival']['money']}"
+                    f"Playtime: `{data['survival']['playtime']}`\nMob Kills: `"
+                    f"{data['survival']['mobKills']}`"
+                    f"\nMoney: `{data['survival']['money']}"
                     f"`\nQuests: `{data['survival']['quests']}`"
                 )
             ),
@@ -427,9 +434,10 @@ class Servers(commands.Cog):
             name=("Manacube Aether Stats"),
             value=(
                 (
-                    f"Playtime: `{data['aether']['playtime']}`\nMining Level: "
-                    f"`{data['aether']['miningLevel']}`\nMoney: `{data['aether']['money']}`"
-                    f"\nRebirths: `{data['aether']['rebirths']}`"
+                    f"Playtime: `{data['aether']['playtime']}`\nMining Level: `"
+                    f"{data['aether']['miningLevel']}`"
+                    f"\nMoney: `{data['aether']['money']}"
+                    f"`\nRebirths: `{data['aether']['rebirths']}`"
                 )
             ),
         )
@@ -437,8 +445,8 @@ class Servers(commands.Cog):
             name=("Manacube Atlas Stats"),
             value=(
                 (
-                    f"Playtime: `{data['atlas']['playtime']}`\nMining Level: "
-                    f"`{data['atlas']['miningLevel']}`\nMoney: `{data['atlas']['money']}"
+                    f"Playtime: `{data['atlas']['playtime']}`\nMining Level: `"
+                    f"{data['atlas']['miningLevel']}`\nMoney: `{data['atlas']['money']}"
                     f"`\nRebirths: `{data['aether']['rebirths']}`"
                 )
             ),
@@ -457,8 +465,10 @@ class Servers(commands.Cog):
             name=("Manacube KitPvP Stats"),
             value=(
                 (
-                    f"Playtime: `{data['kitpvp']['playtime']}`\nLevel: `{data['kitpvp']['level']}"
-                    f"`\nMoney: `{data['kitpvp']['money']}`\nKills: `{data['kitpvp']['kills']}`"
+                    f"Playtime: `{data['kitpvp']['playtime']}`\nLevel: "
+                    f"`{data['kitpvp']['level']}"
+                    f"`\nMoney: `{data['kitpvp']['money']}`\nKills: "
+                    f"`{data['kitpvp']['kills']}`"
                 )
             ),
         )
@@ -544,69 +554,81 @@ class Servers(commands.Cog):
         embed.add_field(name="game", value=(f"Game: `{data['status'][0]['game']}`"))
         await ctx.send(embed=embed)
 
+    @staticmethod
+    def cleanup_hive(data: dict) -> dict:
+        """Cleanup hive data.
+
+        Args:
+            data (dict): [description]
+
+        Returns:
+            dict: [description]
+        """
+        del data["stats"][0]["UUID"]
+        if "cached" in data["stats"][0]:
+            del data["stats"][0]["cached"]
+        if "firstLogin" in data["stats"][0]:
+            del data["stats"][0]["firstLogin"]
+        if "lastLogin" in data["stats"][0]:
+            del data["stats"][0]["lastLogin"]
+        if "achievements" in data["stats"][0]:
+            del data["stats"][0]["achievements"]
+        if "title" in data["stats"][0]:
+            del data["stats"][0]["title"]
+
+        return data
+
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
     async def hivestats(self, ctx: commands.Context, username: str, game: str) -> None:
         """Get statistics of a player on hive."""
         await ctx.trigger_typing()
 
-        if game.lower() in hive_con:
-            if await self.bot.redis_session.exists(
-                f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
-            ):
-                data = json.loads(
-                    await self.bot.redis_session.get(
-                        f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
-                    )
-                )
-            else:
-                data = await hiveMCGameStats(
-                    username, hive_con[game.lower()], ctx.bot.http_session
-                )
-                self.bot.redis_session.set(
-                    f"hiveMCGameStats_{hive_con[game.lower()]}_{username}",
-                    json.dumps(data),
-                    expire=28800,
-                )
-            embed = discord.Embed(color=0xFFAF03)
-            embed.set_author(
-                name=f"Hive Stats for {username}",
-                url=f"https://www.hivemc.com/player/{username}",
-                icon_url="https://www.hivemc.com/img/white-logo.png",
-            )
-            embed.set_thumbnail(
-                url=(
-                    f"https://visage.surgeplay.com/bust/"
-                    f"{await usernameToUUID(username, ctx.bot.http_session)}"
-                )
-            )
-            embed.timestamp = ctx.message.created_at
-            if not data:
-                await ctx.send("No stats found")
-                return
-            del data["stats"][0]["UUID"]
-            if "cached" in data["stats"][0]:
-                del data["stats"][0]["cached"]
-            if "firstLogin" in data["stats"][0]:
-                del data["stats"][0]["firstLogin"]
-            if "lastLogin" in data["stats"][0]:
-                del data["stats"][0]["lastLogin"]
-            if "achievements" in data["stats"][0]:
-                del data["stats"][0]["achievements"]
-            if "title" in data["stats"][0]:
-                del data["stats"][0]["title"]
-            value = ""
-            for stat in data["stats"][0]:
-                if isinstance(data["stats"][0][stat], list) or isinstance(
-                    data["stats"][0][stat], dict
-                ):
-                    pass
-                else:
-                    value += f"`{stat}`: {data['stats'][0][stat]}\n"
-            embed.add_field(
-                name=f"{game.replace('_', ' ').upper()} Stats",
-                value=value,
-            )
-            await ctx.send(embed=embed)
-        else:
+        if game.lower() not in hive_con:
             await ctx.send("Sorry that game was not recognized as a Hive game")
+            return
+        if await self.bot.redis_session.exists(
+            f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
+        ):
+            data = json.loads(
+                await self.bot.redis_session.get(
+                    f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
+                )
+            )
+        else:
+            data = await hiveMCGameStats(
+                username, hive_con[game.lower()], ctx.bot.http_session
+            )
+            self.bot.redis_session.set(
+                f"hiveMCGameStats_{hive_con[game.lower()]}_{username}",
+                json.dumps(data),
+                expire=28800,
+            )
+        if not data:
+            await ctx.send("No stats found")
+            return
+        embed = discord.Embed(color=0xFFAF03)
+        embed.set_author(
+            name=f"Hive Stats for {username}",
+            url=f"https://www.hivemc.com/player/{username}",
+            icon_url="https://www.hivemc.com/img/white-logo.png",
+        )
+        embed.set_thumbnail(
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+            )
+        )
+        embed.timestamp = ctx.message.created_at
+        data = self.cleanup_hive(data)
+        value = ""
+        for stat in data["stats"][0]:
+            if not isinstance(data["stats"][0][stat], list) and not isinstance(
+                data["stats"][0][stat], dict
+            ):
+                value += f"`{stat}`: {data['stats'][0][stat]}\n"
+        embed.add_field(
+            name=f"{game.replace('_', ' ').upper()} Stats",
+            value=value,
+        )
+        await ctx.send(embed=embed)

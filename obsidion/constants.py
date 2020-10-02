@@ -9,12 +9,17 @@ the custom configuration. Any settings left
 out in the custom user configuration will stay
 their default values from `config-default.yaml`.
 """
+# flake8: noqa
 
-from collections.abc import Mapping
+# a lot from
+# https://github.com/python-discord/bot/blob/master/bot/constants.py
+
 import logging
 import os
+from collections.abc import Mapping
+from enum import Enum
 from pathlib import Path
-from typing import Optional
+from typing import Dict, List, Optional
 
 import yaml
 
@@ -139,6 +144,22 @@ class YAMLGetter(type):
     in which the configuration lives, and must be set.
     `subsection` is an optional attribute specifying the section
     within the section from which configuration should be loaded.
+    Example Usage:
+        # config.yaml
+        bot:
+            prefixes:
+                direct_message: ''
+                guild: '!'
+        # config.py
+        class Prefixes(metaclass=YAMLGetter):
+            section = "bot"
+            subsection = "prefixes"
+        # Usage in Python code
+        from config import Prefixes
+        def get_prefix(bot, message):
+            if isinstance(message.channel, PrivateChannel):
+                return Prefixes.direct_message
+            return Prefixes.guild
     """
 
     subsection = None
@@ -235,6 +256,8 @@ class Redis(metaclass=YAMLGetter):
 
 
 class Stats(metaclass=YAMLGetter):
+    """Stats."""
+
     section = "stats"
 
     enabled: bool

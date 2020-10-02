@@ -3,6 +3,7 @@
 import contextlib
 import logging
 from logging.handlers import RotatingFileHandler
+from typing import Iterator
 
 import discord
 from discord.ext.commands import when_mentioned_or
@@ -31,7 +32,7 @@ class RemoveNoise(logging.Filter):
 
 
 @contextlib.contextmanager
-def setup_logging() -> None:
+def setup_logging() -> Iterator[None]:
     """Setup logging."""
     try:
         # __enter__

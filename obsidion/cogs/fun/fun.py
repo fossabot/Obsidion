@@ -2,7 +2,7 @@
 
 import logging
 from random import choice
-from typing import List, Optional
+from typing import List, Optional, Union
 
 import discord
 from discord.ext import commands
@@ -134,8 +134,10 @@ class Fun(commands.Cog):
         self,
         ctx: commands.Context,
         member: Optional[
-            str,
-            discord.User,
+            Union[
+                str,
+                discord.User,
+            ]
         ] = None,
     ) -> None:
         """Kill that pesky friend in a fun and stylish way."""
@@ -158,12 +160,16 @@ class Fun(commands.Cog):
         self,
         ctx: commands.Context,
         member1: Optional[
-            str,
-            discord.User,
+            Union[
+                str,
+                discord.User,
+            ]
         ] = None,
         member2: Optional[
-            str,
-            discord.User,
+            Union[
+                str,
+                discord.User,
+            ]
         ] = None,
     ) -> None:
         """Duel someone."""
