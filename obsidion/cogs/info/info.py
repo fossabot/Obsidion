@@ -5,7 +5,8 @@ import io
 import json
 import logging
 from datetime import datetime
-from typing import Optional
+
+# from typing import Optional
 
 import discord
 from discord.ext import commands
@@ -25,7 +26,7 @@ class info(commands.Cog):
         self.bot = bot
 
     @staticmethod
-    async def get_uuid(session, username: str) -> Optional[str, bool]:
+    async def get_uuid(session, username: str):  # -> Optional[str, bool]:
         """Get uuid from username.
 
         Args:

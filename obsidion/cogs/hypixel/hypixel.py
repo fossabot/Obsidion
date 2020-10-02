@@ -1,6 +1,6 @@
 """Hypixel related commands."""
 
-from asyncpixel import Session
+from asyncpixel import Client
 import discord
 from discord.ext import commands
 
@@ -15,13 +15,13 @@ class hypixel(commands.Cog):
         self.bot = bot
         self.session = bot.http_session
 
-        self.hypixel_session = Session(api_key=str(constants.Bot.hypixelapi_token))
+        self.hypixel_session = Client(api_key=str(constants.Bot.hypixelapi_token))
 
     @commands.command()
     async def watchdogstats(self, ctx: commands.Context) -> None:
         """Get the current watchdog statistics."""
         await ctx.channel.trigger_typing()
-        data = await self.hypixel_session.watchdogstats()
+        data = await self.hypixel_session.get_watchdog_stats()
         embed = discord.Embed(title="Watchdog Stats", colour=0x00FF00)
         embed.add_field(
             name="Total Bans", value=f"{(data.watchdog_total + data.staff_total):,}"
@@ -29,7 +29,7 @@ class hypixel(commands.Cog):
         embed.add_field(
             name="Watchdog Rolling Daily", value=f"{data.watchdog_rollingDaily:,}"
         )
-        embed.add_field(name="Last Minute", value=f"{data.last_minute:,}")
+        # embed.add_field(name="Last Minute", value=f"{data.last_minute:,}")
         embed.add_field(name="Staff Total", value=f"{data.staff_total:,}")
         embed.add_field(
             name="Staff Rolling Daily", value=f"{data.staff_rollingDaily:,}"
