@@ -30,9 +30,6 @@ class ErrorHandler(Cog):
         command = ctx.command
 
         if hasattr(e, "handled"):
-            log.trace(
-                f"Command {command} had its error already handled locally; ignoring."
-            )
             return
 
         if isinstance(e, errors.CommandNotFound) and not hasattr(
@@ -75,27 +72,21 @@ class ErrorHandler(Cog):
 
         if isinstance(e, errors.MissingRequiredArgument):
             await ctx.send(f"Missing required argument `{e.param.name}`.")
-            await prepared_help_command
-            self.bot.stats.incr("errors.missing_required_argument")
+            await prepared_help_command  # pytype: disable=bad-return-type
         elif isinstance(e, errors.TooManyArguments):
             # handle this by running the command and ignoring extra input
             # await ctx.send("Too many arguments provided.")
-            # await prepared_help_command
-            self.bot.stats.incr("errors.too_many_arguments")
+            await prepared_help_command  # pytype: disable=bad-return-type
         elif isinstance(e, errors.BadArgument):
             await ctx.send(f"Bad argument: {e}\n")
-            await prepared_help_command
-            self.bot.stats.incr("errors.bad_argument")
+            await prepared_help_command  # pytype: disable=bad-return-type
         elif isinstance(e, errors.BadUnionArgument):
             await ctx.send(f"Bad argument: {e}\n```{e.errors[-1]}```")
-            self.bot.stats.incr("errors.bad_union_argument")
         elif isinstance(e, errors.ArgumentParsingError):
             await ctx.send(f"Argument parsing error: {e}")
-            self.bot.stats.incr("errors.argument_parsing_error")
         else:
             await ctx.send("Something about your input seems off. Check the arguments:")
-            await prepared_help_command
-            self.bot.stats.incr("errors.other_user_input_error")
+            await prepared_help_command  # pytype: disable=bad-return-type
 
     @staticmethod
     async def handle_check_failure(ctx: Context, e: errors.CheckFailure) -> None:
@@ -127,7 +118,6 @@ class ErrorHandler(Cog):
                 fmt = f"{'**, **'.join(missing[:-1])}, and {missing[-1]}"
             else:
                 fmt = " and ".join(missing)
-            ctx.bot.stats.incr("errors.bot_permission_error")
             await ctx.send(
                 (
                     f"Sorry, it looks like I don't have the **{fmt}**permission(s) "

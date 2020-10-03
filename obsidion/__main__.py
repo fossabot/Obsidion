@@ -80,7 +80,7 @@ mentions = discord.AllowedMentions(
     everyone=False,
 )
 
-bot = Obsidion(
+bot = Obsidion(  # pytype: disable=wrong-arg-types
     case_insensitive=True,  # type: ignore
     activity=activity,
     command_prefix=when_mentioned_or(constants.Bot.default_prefix),

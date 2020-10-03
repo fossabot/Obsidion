@@ -1,11 +1,13 @@
 """Some useful utils."""
 
+from typing import Union
+
 from aiohttp import ClientSession
 
 
 async def get(
     session: ClientSession, url: str, params: dict = None, json: dict = None
-) -> dict:
+) -> Union[dict, bool]:
     """Get the json from a webpage.
 
     Args:
@@ -24,7 +26,7 @@ async def get(
         return False
 
 
-async def usernameToUUID(username: str, session: ClientSession) -> str:
+async def usernameToUUID(username: str, session: ClientSession) -> Union[str, bool]:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -46,7 +48,7 @@ async def usernameToUUID(username: str, session: ClientSession) -> str:
     return data["id"]
 
 
-async def UUIDToUsername(uuid: str, session: ClientSession) -> str:
+async def UUIDToUsername(uuid: str, session: ClientSession) -> Union[str, bool]:
     """Takes in a minecraft UUID and converts it to a minecraft username.
 
     Args:

@@ -5,6 +5,7 @@ from datetime import datetime
 import io
 import json
 import logging
+from typing import Optional, Tuple, Union
 
 from aiohttp import ClientSession
 import discord
@@ -25,7 +26,7 @@ class Info(commands.Cog):
         self.bot = bot
 
     @staticmethod
-    async def get_uuid(session: ClientSession, username: str) -> str:
+    async def get_uuid(session: ClientSession, username: str) -> Union[str, bool]:
         """Get uuid from username.
 
         Args:
@@ -79,7 +80,11 @@ class Info(commands.Cog):
             date = datetime.utcfromtimestamp(
                 int(str(name["changedToAt"])[:-3])
             ).strftime("%b %d, %Y")
-            name_list += f"**{names.index(name)+1}.** `{name1}` - {date} " + "\n"
+            name_list += (
+                f"**{names.index(name)+1}."  # pytype: disable=attribute-error
+                + f"** `{name1}` - {date} "
+                + "\n"
+            )
         original = names[0]["name"]
         name_list += f"**1.** `{original}` - First Username"
 
@@ -102,14 +107,14 @@ class Info(commands.Cog):
         await ctx.send(embed=embed)
 
     @staticmethod
-    def get_server(ip: str, port: int) -> None:
+    def get_server(ip: str, port: int) -> Tuple[int, Optional[int]]:
         """Returns the server icon."""
         if ":" in ip:  # deal with them providing port in string instead of seperate
             ip, port = ip.split(":")
-            return (ip, port)
+            return (int(ip), int(port))
         if port:
-            return (ip, port)
-        return (ip, None)
+            return (int(ip), port)
+        return (int(ip), None)
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
@@ -347,7 +352,7 @@ class Info(commands.Cog):
         """Get an article from the minecraft wiki."""
         await ctx.channel.trigger_typing()
 
-        def generate_payload(query: str) -> None:
+        def generate_payload(query: str) -> dict:
             """Generate the payload for Gamepedia based on a query string."""
             payload = {
                 "action": "query",
@@ -369,7 +374,7 @@ class Info(commands.Cog):
 
         payload = generate_payload(query)
 
-        result = await get(ctx.bot.http_session, base_url, payload)
+        result = await get(ctx.bot.http_session, base_url, params=payload)
 
         try:
             # Get the last page. Usually this is the only page.
