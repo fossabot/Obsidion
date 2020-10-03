@@ -1,9 +1,9 @@
 bot:
-  clientid: node
+  clientid: none
   discord_token: none
   owner_id: 456217109236809748
-  api: https://api.bowie-co.nz/api/v1
-  hypixelapi_token: node
+  api: https://api.obsidion-dev.com/api/v1
+  hypixelapi_token: none
   status: for @Obsidion help
   default_prefix: /
 channels:

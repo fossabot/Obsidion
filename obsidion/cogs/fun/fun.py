@@ -190,6 +190,14 @@ class Fun(commands.Cog):
     async def rps(self, ctx: commands.Context, user_choice: str = None) -> None:
         """Play Rock Paper Shears."""
         options = ["rock", "paper", "shears"]
+        if not user_choice:
+            await ctx.send(
+                (
+                    "That is an invalid option can you please choose from "
+                    "rock, paper or shears"
+                )
+            )
+            return
         if user_choice and user_choice not in options:
             await ctx.send(
                 (

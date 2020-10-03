@@ -57,6 +57,9 @@ class Info(commands.Cog):
             )
         else:
             uuid = await self.get_uuid(ctx.bot.http_session, username)
+            if not uuid:
+                await ctx.send("That username is not been used.")
+                return
             self.bot.redis_session.set(f"username_{username}", uuid, expire=28800)
 
         if not uuid:
