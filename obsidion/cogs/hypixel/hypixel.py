@@ -6,6 +6,7 @@ from discord.ext import commands
 
 from obsidion import constants
 from obsidion.utils.utils import usernameToUUID
+from obsidion.utils.utils import UUIDToUsername
 
 
 class hypixel(commands.Cog):
@@ -110,19 +111,73 @@ class hypixel(commands.Cog):
     async def playerstatus(self, ctx: commands.Context, username: str) -> None:
         """Get the current players online."""
         await ctx.channel.trigger_typing()
-        data = await self.hypixel_session.get_player_status(uuid=await usernameToUUID(username, ctx.bot.http_session))
-        # embed = discord.Embed(
-        #     title="Players Online",
-        #     description=f"Total Players online: {data}",            
-        #     colour=0x00FF00,
-        # )
-        # embed.set_author(
-        #     name="Hypixel",
-        #     url="https://hypixel.net/forums/skyblock.157/",
-        #     icon_url="https://hypixel.net/favicon-32x32.png",
-        # )
-        # embed.set_thumbnail(
-        #     url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
-        # )
-        # embed.timestamp = ctx.message.created_at
-        await ctx.send(data)
+        UUID = await usernameToUUID(username, ctx.bot.http_session)
+        if UUID == False:
+            await ctx.send("Sorry, we could not find that player. Please try a different username.")
+            return
+        else:
+            data = await self.hypixel_session.get_player_status(uuid=UUID)
+
+        if data.online == False:
+            await ctx.send("That player is not currently online.")
+            return
+        else:
+            embed = discord.Embed(
+                title="Player Status",
+                description=f"Current Status of Player {username}",            
+                colour=0x00FF00,
+            )
+            embed.set_author(
+                name="Hypixel",
+                icon_url="https://hypixel.net/favicon-32x32.png",
+            )
+            embed.set_thumbnail(
+                url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+            )
+            embed.add_field(
+                name="Current Game: ", value=f"{data.gameType}"
+            )
+            embed.add_field(
+                name="Current Game Mode: ", value=f"{data.mode}"
+            )
+            embed.timestamp = ctx.message.created_at
+        
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    async def playerfriends(self, ctx: commands.Context, username: str) -> None:
+        """Get the current players online."""
+        await ctx.channel.trigger_typing()
+        UUID = await usernameToUUID(username, ctx.bot.http_session)
+        if UUID == False:
+            await ctx.send("Sorry, we could not find that player. Please try a different username.")
+            return
+        else:
+            data = await self.hypixel_session.get_player_friends(uuid=UUID)
+
+        embed = discord.Embed(
+            title="Player Status",
+            description=f"Current Status of Player {username}",            
+            colour=0x00FF00,
+        )
+        embed.set_author(
+            name="Hypixel",
+            icon_url="https://hypixel.net/favicon-32x32.png",
+        )
+        embed.set_thumbnail(
+            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        )
+        embed.timestamp = ctx.message.created_at
+
+        for i in range(len(data)):
+            friendUUID = data[i]._id
+            await ctx.send(friendUUID)
+            friendUsername = await UUIDToUsername(friendUUID, ctx.bot.http_session)
+            await ctx.send(friendUsername)
+            # embed.add_field(
+            #     name=f"{data[i]._id}", value=f"test"
+            # )
+            
+        
+
+        
