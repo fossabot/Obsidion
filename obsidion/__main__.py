@@ -3,6 +3,7 @@
 import contextlib
 import logging
 from logging.handlers import RotatingFileHandler
+from typing import Iterator
 
 import discord
 from discord.ext.commands import when_mentioned_or
@@ -23,7 +24,7 @@ class RemoveNoise(logging.Filter):
         """Init."""
         super().__init__(name="discord.state")
 
-    def filter(self, record) -> bool:
+    def filter(self, record: logging.LogRecord) -> bool:
         """Filter out unimportant info."""
         if record.levelname == "WARNING" and "referencing an unknown" in record.msg:
             return False
@@ -31,7 +32,7 @@ class RemoveNoise(logging.Filter):
 
 
 @contextlib.contextmanager
-def setup_logging() -> None:
+def setup_logging() -> Iterator[None]:
     """Setup logging."""
     try:
         # __enter__
@@ -79,8 +80,8 @@ mentions = discord.AllowedMentions(
     everyone=False,
 )
 
-bot = Obsidion(
-    case_insensitive=True,
+bot = Obsidion(  # pytype: disable=wrong-arg-types
+    case_insensitive=True,  # type: ignore
     activity=activity,
     command_prefix=when_mentioned_or(constants.Bot.default_prefix),
     allowed_mentions=mentions,

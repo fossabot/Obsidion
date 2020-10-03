@@ -46,7 +46,7 @@ def black(session: Session) -> None:
     session.run("black", *args)
 
 
-@nox.session(python=["3.8", "3.7"])
+@nox.session(python=["3.8"])
 def lint(session: Session) -> None:
     """Lint using flake8."""
     args = session.posargs or locations
@@ -81,7 +81,7 @@ def safety(session: Session) -> None:
         session.run("safety", "check", f"--file={requirements.name}", "--full-report")
 
 
-@nox.session(python=["3.8", "3.7"])
+@nox.session(python=["3.8"])
 def mypy(session: Session) -> None:
     """Type-check using mypy."""
     args = session.posargs or locations
@@ -89,7 +89,7 @@ def mypy(session: Session) -> None:
     session.run("mypy", *args)
 
 
-@nox.session(python="3.7")
+@nox.session(python="3.8")
 def pytype(session: Session) -> None:
     """Type-check using pytype."""
     args = session.posargs or ["--disable=import-error", *locations]
@@ -97,7 +97,7 @@ def pytype(session: Session) -> None:
     session.run("pytype", *args)
 
 
-@nox.session(python=["3.8", "3.7"])
+@nox.session(python=["3.8"])
 def tests(session: Session) -> None:
     """Run the test suite."""
     args = session.posargs or ["--cov", "-m", "not e2e"]
@@ -108,7 +108,7 @@ def tests(session: Session) -> None:
     session.run("pytest", *args)
 
 
-@nox.session(python=["3.8", "3.7"])
+@nox.session(python=["3.8"])
 def typeguard(session: Session) -> None:
     """Runtime type checking using Typeguard."""
     args = session.posargs or ["-m", "not e2e"]

@@ -9,10 +9,14 @@ the custom configuration. Any settings left
 out in the custom user configuration will stay
 their default values from `config-default.yaml`.
 """
+# flake8: noqa
 
-from collections.abc import Mapping
+# a lot from
+# https://github.com/python-discord/bot/blob/master/bot/constants.py
+
 import logging
 import os
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Optional
 
@@ -139,6 +143,22 @@ class YAMLGetter(type):
     in which the configuration lives, and must be set.
     `subsection` is an optional attribute specifying the section
     within the section from which configuration should be loaded.
+    Example Usage:
+        # config.yaml
+        bot:
+            prefixes:
+                direct_message: ''
+                guild: '!'
+        # config.py
+        class Prefixes(metaclass=YAMLGetter):
+            section = "bot"
+            subsection = "prefixes"
+        # Usage in Python code
+        from config import Prefixes
+        def get_prefix(bot, message):
+            if isinstance(message.channel, PrivateChannel):
+                return Prefixes.direct_message
+            return Prefixes.guild
     """
 
     subsection = None
@@ -172,6 +192,8 @@ class YAMLGetter(type):
 
 # Dataclasses
 class Bot(metaclass=YAMLGetter):
+    """Bot."""
+
     section = "bot"
 
     clientid: str
@@ -184,6 +206,8 @@ class Bot(metaclass=YAMLGetter):
 
 
 class Channels(metaclass=YAMLGetter):
+    """Channels."""
+
     section = "channels"
 
     new_guild_channel: int
@@ -194,6 +218,8 @@ class Channels(metaclass=YAMLGetter):
 
 
 class Discord_bot_list(metaclass=YAMLGetter):
+    """Discord_bot_list."""
+
     section = "discord_bot_lists"
 
     voting_enabled: bool
@@ -206,6 +232,8 @@ class Discord_bot_list(metaclass=YAMLGetter):
 
 
 class Database(metaclass=YAMLGetter):
+    """Database."""
+
     section = "database"
 
     username: str
@@ -216,6 +244,8 @@ class Database(metaclass=YAMLGetter):
 
 
 class Redis(metaclass=YAMLGetter):
+    """Redis."""
+
     section = "redis"
 
     enabled: bool
@@ -225,6 +255,8 @@ class Redis(metaclass=YAMLGetter):
 
 
 class Stats(metaclass=YAMLGetter):
+    """Stats."""
+
     section = "stats"
 
     enabled: bool

@@ -1,4 +1,13 @@
-async def get(session, url: str, params: dict = None, json: dict = None) -> dict:
+"""Some useful utils."""
+
+from typing import Union
+
+from aiohttp import ClientSession
+
+
+async def get(
+    session: ClientSession, url: str, params: dict = None, json: dict = None
+) -> Union[dict, bool]:
     """Get the json from a webpage.
 
     Args:
@@ -8,7 +17,7 @@ async def get(session, url: str, params: dict = None, json: dict = None) -> dict
         json (dict, optional): json to pass to request. Defaults to None.
 
     Returns:
-        dict: [description]
+        dict: json response
     """
     async with session.get(url, params=params, json=json) as resp:
         if resp.status == 200:
@@ -17,7 +26,7 @@ async def get(session, url: str, params: dict = None, json: dict = None) -> dict
         return False
 
 
-async def usernameToUUID(username: str, session) -> str:
+async def usernameToUUID(username: str, session: ClientSession) -> Union[str, bool]:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -27,9 +36,8 @@ async def usernameToUUID(username: str, session) -> str:
     Returns:
         str: uuid of player
     """
-
-    response = await session.post(
-        "https://api.mojang.com/profiles/minecraft", json=[username]
+    response = await session.get(
+        f"https://api.mojang.com/users/profiles/minecraft/{username}",
     )
 
     data = await response.json()
@@ -37,10 +45,10 @@ async def usernameToUUID(username: str, session) -> str:
     if response.status == 204 or data == []:
         return False
 
-    return data[0]["id"]
+    return data["id"]
 
 
-async def UUIDToUsername(uuid: str, session) -> str:
+async def UUIDToUsername(uuid: str, session: ClientSession) -> Union[str, bool]:
     """Takes in a minecraft UUID and converts it to a minecraft username.
 
     Args:
@@ -50,7 +58,6 @@ async def UUIDToUsername(uuid: str, session) -> str:
     Returns:
         str: username of player from uuid
     """
-
     data = await session.get(f"https://api.mojang.com/user/profiles/{uuid}/names")
 
     if data.status == 204:
