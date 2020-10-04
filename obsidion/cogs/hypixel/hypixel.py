@@ -15,6 +15,26 @@ import datetime
 
 class MyMenu(menus.Menu):
     async def send_initial_message(self, ctx, channel):
+        data = await self.hypixel_session.get_bazaar()
+
+        embed = discord.Embed(
+                title="Skyblock News",
+                description=f"There are currently {len(data)} news articles.",
+                colour=0x00FF00,
+            )
+        embed.set_author(
+            name="Hypixel",
+            url="https://hypixel.net/forums/skyblock.157/",
+            icon_url="https://hypixel.net/favicon-32x32.png",
+        )
+        embed.set_thumbnail(
+            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        )
+
+        for i in range(len(data.bazaar_items))
+
+        embed.timestamp = ctx.message.created_at
+
         return await channel.send(f'Hello {ctx.author}')
 
     @menus.button('\N{THUMBS UP SIGN}')
@@ -207,26 +227,8 @@ class hypixel(commands.Cog):
     @commands.command()
     async def bazaar(self, ctx: commands.Context) -> None:
         """Get current Skyblock News."""
-        # await ctx.channel.trigger_typing()
-        # data = await self.hypixel_session.get_bazaar()
-
-        # embed = discord.Embed(
-        #         title="Skyblock News",
-        #         description=f"There are currently {len(data)} news articles.",
-        #         colour=0x00FF00,
-        #     )
-        # embed.set_author(
-        #     name="Hypixel",
-        #     url="https://hypixel.net/forums/skyblock.157/",
-        #     icon_url="https://hypixel.net/favicon-32x32.png",
-        # )
-        # embed.set_thumbnail(
-        #     url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
-        # )
-
-        # embed.timestamp = ctx.message.created_at
-
+        await ctx.channel.trigger_typing()
         m = MyMenu()
-        await m.start
+        await m.start(ctx)
 
         
