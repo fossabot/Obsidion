@@ -259,6 +259,21 @@ version = "4.4.2"
 
 [[package]]
 category = "main"
+description = "An extension module to make reaction based menus with discord.py"
+name = "discord-ext-menus"
+optional = false
+python-versions = ">=3.5.3"
+version = "1.0.0a26+g84caae8"
+
+[package.dependencies]
+"discord.py" = ">=1.2.5"
+
+[package.source]
+reference = "84caae8038d0d3adc860957ccef05baeec2e2dd8"
+type = "git"
+url = "https://github.com/Rapptz/discord-ext-menus"
+[[package]]
+category = "main"
 description = "A Python wrapper for the Discord API"
 name = "discord.py"
 optional = false
@@ -1007,7 +1022,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "bb0347c80b8e46c4d548f968ab88251fb00f3a21fc3034f426689771b1aa542b"
+content-hash = "3a6ca3c6cada45bff4593f65dcf1ea78cbfa8af27e560e6b10fab8c88e5e072a"
 lock-version = "1.0"
 python-versions = "^3.7"
 
@@ -1200,6 +1215,7 @@ decorator = [
     {file = "decorator-4.4.2-py2.py3-none-any.whl", hash = "sha256:41fa54c2a0cc4ba648be4fd43cff00aedf5b9465c9bf18d64325bc225f08f760"},
     {file = "decorator-4.4.2.tar.gz", hash = "sha256:e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"},
 ]
+discord-ext-menus = []
 "discord.py" = [
     {file = "discord.py-1.5.0-py3-none-any.whl", hash = "sha256:3acb61fde0d862ed346a191d69c46021e6063673f63963bc984ae09a685ab211"},
     {file = "discord.py-1.5.0.tar.gz", hash = "sha256:e71089886aa157341644bdecad63a72ff56b44406b1a6467b66db31c8e5a5a15"},

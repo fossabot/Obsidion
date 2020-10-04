@@ -3,11 +3,31 @@
 from asyncpixel import Client
 import discord
 from discord.ext import commands
+import obsidion.utils.menus as menus
 
 from obsidion import constants
 from obsidion.utils.utils import usernameToUUID
 from obsidion.utils.utils import UUIDToUsername
+from obsidion.utils.chat_formatting import humanize_timedelta
+import datetime
 
+
+
+class MyMenu(menus.Menu):
+    async def send_initial_message(self, ctx, channel):
+        return await channel.send(f'Hello {ctx.author}')
+
+    @menus.button('\N{THUMBS UP SIGN}')
+    async def on_thumbs_up(self, payload):
+        await self.message.edit(content=f'Thanks {self.ctx.author}!')
+
+    @menus.button('\N{THUMBS DOWN SIGN}')
+    async def on_thumbs_down(self, payload):
+        await self.message.edit(content=f"That's not nice {self.ctx.author}...")
+
+    @menus.button('\N{BLACK SQUARE FOR STOP}\ufe0f')
+    async def on_stop(self, payload):
+        self.stop()
 
 class hypixel(commands.Cog):
     """Hypixel cog."""
@@ -109,7 +129,7 @@ class hypixel(commands.Cog):
             
     @commands.command()
     async def playerstatus(self, ctx: commands.Context, username: str) -> None:
-        """Get the current players online."""
+        """Get the current Status of Players."""
         await ctx.channel.trigger_typing()
         UUID = await usernameToUUID(username, ctx.bot.http_session)
         if UUID == False:
@@ -132,7 +152,7 @@ class hypixel(commands.Cog):
                 icon_url="https://hypixel.net/favicon-32x32.png",
             )
             embed.set_thumbnail(
-                url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+                url=f"https://visage.surgeplay.com/bust/{UUID}"
             )
             embed.add_field(
                 name="Current Game: ", value=f"{data.gameType}"
@@ -146,7 +166,7 @@ class hypixel(commands.Cog):
 
     @commands.command()
     async def playerfriends(self, ctx: commands.Context, username: str) -> None:
-        """Get the current players online."""
+        """Get the current friends of a player"""
         await ctx.channel.trigger_typing()
         UUID = await usernameToUUID(username, ctx.bot.http_session)
         if UUID == False:
@@ -156,8 +176,7 @@ class hypixel(commands.Cog):
             data = await self.hypixel_session.get_player_friends(uuid=UUID)
 
         embed = discord.Embed(
-            title="Player Status",
-            description=f"Current Status of Player {username}",            
+            title=f"Current Friends for {username}",            
             colour=0x00FF00,
         )
         embed.set_author(
@@ -165,19 +184,49 @@ class hypixel(commands.Cog):
             icon_url="https://hypixel.net/favicon-32x32.png",
         )
         embed.set_thumbnail(
-            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+            url=f"https://visage.surgeplay.com/bust/{UUID}"
         )
         embed.timestamp = ctx.message.created_at
 
         for i in range(len(data)):
-            friendUUID = data[i]._id
-            await ctx.send(friendUUID)
-            friendUsername = await UUIDToUsername(friendUUID, ctx.bot.http_session)
-            await ctx.send(friendUsername)
-            # embed.add_field(
-            #     name=f"{data[i]._id}", value=f"test"
-            # )
+            if data[i].uuidReceiver == UUID:
+                friendUsername = await UUIDToUsername(data[i].uuidSender, ctx.bot.http_session)
+            else:
+                friendUsername = await UUIDToUsername(data[i].uuidReceiver, ctx.bot.http_session)
             
-        
+            delta = datetime.datetime.utcnow() - data[i].started
+            friendStarted = humanize_timedelta(timedelta=delta)
+            friendStartedSplit = friendStarted.split(", ")
+            friendStarted = friendStartedSplit[0] + ", " + friendStartedSplit[1]
+            embed.add_field(
+                name=f"{friendUsername}", value=f"Been friends for: {friendStarted}"
+            )
+            
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    async def bazaar(self, ctx: commands.Context) -> None:
+        """Get current Skyblock News."""
+        # await ctx.channel.trigger_typing()
+        # data = await self.hypixel_session.get_bazaar()
+
+        # embed = discord.Embed(
+        #         title="Skyblock News",
+        #         description=f"There are currently {len(data)} news articles.",
+        #         colour=0x00FF00,
+        #     )
+        # embed.set_author(
+        #     name="Hypixel",
+        #     url="https://hypixel.net/forums/skyblock.157/",
+        #     icon_url="https://hypixel.net/favicon-32x32.png",
+        # )
+        # embed.set_thumbnail(
+        #     url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
+        # )
+
+        # embed.timestamp = ctx.message.created_at
+
+        m = MyMenu()
+        await m.start
 
         
