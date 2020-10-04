@@ -219,7 +219,7 @@ class Info(commands.Cog):
             await ctx.send(
                 (
                     f"{ctx.author}, :x: The Bedrock edition Minecraft server "
-                    "`{server_ip}` is currently not online or cannot be requested"
+                    f"`{server_ip}` is currently not online or cannot be requested"
                 )
             )
             return
