@@ -3,7 +3,7 @@
 from asyncpixel import Client
 import discord
 from discord.ext import commands
-import obsidion.utils.menus as menus
+from discord.ext import menus
 
 from obsidion import constants
 from obsidion.utils.utils import usernameToUUID
