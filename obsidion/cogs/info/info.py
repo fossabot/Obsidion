@@ -110,14 +110,14 @@ class Info(commands.Cog):
         await ctx.send(embed=embed)
 
     @staticmethod
-    def get_server(ip: str, port: int) -> Tuple[int, Optional[int]]:
+    def get_server(ip: str, port: int) -> Tuple[str, Optional[int]]:
         """Returns the server icon."""
         if ":" in ip:  # deal with them providing port in string instead of seperate
             ip, port = ip.split(":")
-            return (int(ip), int(port))
+            return (ip, int(port))
         if port:
-            return (int(ip), port)
-        return (int(ip), None)
+            return (ip, port)
+        return (ip, None)
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
@@ -159,7 +159,7 @@ class Info(commands.Cog):
             name="Players",
             value=(
                 f"Online: `{data['players']['online']:,}` \n "
-                "Maximum: `{data['players']['max']:,}`"
+                f"Maximum: `{data['players']['max']:,}`"
             ),
         )
         if data["players"]["sample"]:
