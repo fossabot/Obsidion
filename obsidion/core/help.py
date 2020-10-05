@@ -136,11 +136,9 @@ class MyHelpCommand(commands.HelpCommand):
             prefix = ctx.prefix
         embed.set_author(name="Obsidion Help", icon_url=ctx.me.avatar_url)
         embed.set_footer(
-            text=(
-                f"Type {prefix}help <command> for more info on a command. ",
-                f"You can also type {prefix}help <category> for more info on a ",
-                "category.",
-            )
+            text=f"Type {prefix}help <command> for more info on a command. "
+            + f"You can also type {prefix}help <category> for more info on a "
+            + "category."
         )
         return embed
 
