@@ -69,7 +69,7 @@ class Servers(commands.Cog):
             data = json.loads(await self.bot.redis_session.get(f"wyncraft_{username}"))
         else:
             data = await wyncraftClasses(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"wyncraft_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -90,7 +90,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -114,7 +114,7 @@ class Servers(commands.Cog):
             data = json.loads(await self.bot.redis_session.get(f"gommehd_{username}"))
         else:
             data = await gommehd(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"gommehd_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -134,7 +134,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -157,7 +157,7 @@ class Servers(commands.Cog):
             data = json.loads(await self.bot.redis_session.get(f"veltpvp_{username}"))
         else:
             data = await veltpvp(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"veltpvp_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -177,7 +177,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -212,7 +212,7 @@ class Servers(commands.Cog):
             data = json.loads(await self.bot.redis_session.get(f"blocksmc_{username}"))
         else:
             data = await blocksmc(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"blocksmc_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -232,7 +232,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -257,7 +257,7 @@ class Servers(commands.Cog):
             )
         else:
             data = await universocraft(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"universocraft_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -277,7 +277,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -300,7 +300,7 @@ class Servers(commands.Cog):
             data = json.loads(await self.bot.redis_session.get(f"minesaga_{username}"))
         else:
             data = await minesaga(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"minesaga_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -320,7 +320,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -343,7 +343,7 @@ class Servers(commands.Cog):
             data = json.loads(await self.bot.redis_session.get(f"manacube_{username}"))
         else:
             data = await manacube(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"manacube_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -363,7 +363,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -485,7 +485,7 @@ class Servers(commands.Cog):
             )
         else:
             data = await hiveMCRank(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"hiveMCRank_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -505,7 +505,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -523,7 +523,7 @@ class Servers(commands.Cog):
             )
         else:
             data = await hiveMCStatus(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"hiveMCStatus_{username}", json.dumps(data), expire=28800
             )
         if not data:
@@ -543,7 +543,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at
@@ -599,7 +599,7 @@ class Servers(commands.Cog):
             data = await hiveMCGameStats(
                 username, hive_con[game.lower()], ctx.bot.http_session
             )
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"hiveMCGameStats_{hive_con[game.lower()]}_{username}",
                 json.dumps(data),
                 expire=28800,
@@ -616,7 +616,7 @@ class Servers(commands.Cog):
         embed.set_thumbnail(
             url=(
                 f"https://visage.surgeplay.com/bust/"
-                f"{await usernameToUUID(username, ctx.bot.http_session)}"
+                f"{await usernameToUUID(username, self.bot)}"
             )
         )
         embed.timestamp = ctx.message.created_at

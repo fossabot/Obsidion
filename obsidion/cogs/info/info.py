@@ -5,15 +5,14 @@ from datetime import datetime
 import io
 import json
 import logging
-from typing import Optional, Tuple, Union
+from typing import Optional, Tuple
 
-from aiohttp import ClientSession
 import discord
 from discord.ext import commands
 
 from obsidion import constants
 from obsidion.bot import Obsidion
-from obsidion.utils.utils import get
+from obsidion.utils.utils import ApiError, get, player_info, usernameToUUID
 
 log = logging.getLogger(__name__)
 
@@ -25,25 +24,6 @@ class Info(commands.Cog):
         """Initialise the bot."""
         self.bot = bot
 
-    @staticmethod
-    async def get_uuid(session: ClientSession, username: str) -> Union[str, bool]:
-        """Get uuid from username.
-
-        Args:
-            session ([type]): aiohttp session
-            username (str): username of player
-
-        Returns:
-            str: uuid if vaild username otherwise false
-        """
-        url = f"https://api.mojang.com/users/profiles/minecraft/{username}"
-        async with session.get(url) as resp:
-            if resp.status == 200:
-                data = await resp.json()
-                uuid = data["id"]
-                return uuid
-            return False
-
     @commands.command(
         aliases=["whois", "p", "names", "namehistory", "pastnames", "namehis"]
     )
@@ -51,31 +31,15 @@ class Info(commands.Cog):
     async def profile(self, ctx: commands.Context, username: str) -> None:
         """View a players Minecraft UUID, Username history and skin."""
         await ctx.channel.trigger_typing()
-        if await self.bot.redis_session.exists(f"username_{username}"):
-            uuid = await self.bot.redis_session.get(
-                f"username_{username}", encoding="utf-8"
-            )
-        else:
-            uuid = await self.get_uuid(ctx.bot.http_session, username)
-            if not uuid:
-                await ctx.send("That username is not been used.")
-                return
-            self.bot.redis_session.set(f"username_{username}", uuid, expire=28800)
-
-        if not uuid:
-            await ctx.send("That username is not been used.")
+        try:
+            uuid = await usernameToUUID(username, self.bot)
+        except ApiError:
+            await ctx.send(f"The username `{username}` is not currently in use.")
             return
 
         long_uuid = f"{uuid[0:8]}-{uuid[8:12]}-{uuid[12:16]}-{uuid[16:20]}-{uuid[20:]}"
 
-        if await self.bot.redis_session.exists(uuid):
-            names = json.loads(await self.bot.redis_session.get(uuid))
-        else:
-            names = await get(
-                ctx.bot.http_session,
-                f"https://api.mojang.com/user/profiles/{uuid}/names",
-            )
-            self.bot.redis_session.set(uuid, json.dumps(names), expire=28800)
+        names = await player_info(uuid, self.bot)
 
         name_list = ""
         for name in names[::-1][:-1]:
@@ -128,22 +92,19 @@ class Info(commands.Cog):
         await ctx.channel.trigger_typing()
         url = f"{constants.Bot.api}/server/java"
         server_ip, _port = self.get_server(server_ip, port)
-        if _port:
-            port = _port
+        port = _port if _port else port
+        payload = {"server": server_ip}
+        key = f"server_{server_ip}"
         if port:
-            payload = {"server": server_ip, "port": port}
-        else:
-            payload = {"server": server_ip}
+            payload["port"] = port
+            key += f":{port}"
 
-        if port:
-            key = f"server_{server_ip}:ip"
-        else:
-            key = f"server_{server_ip}"
         if await self.bot.redis_session.exists(key):
             data = json.loads(await self.bot.redis_session.get(key))
         else:
             data = await get(ctx.bot.http_session, url, payload)
             self.bot.redis_session.set(key, json.dumps(data), expire=300)
+
         if not data:
             await ctx.send(
                 (
@@ -403,18 +364,3 @@ class Info(commands.Cog):
 
         except KeyError:
             await ctx.send(f"I'm sorry, I couldn't find \"{query}\" on Gamepedia")
-
-    # @commands.command()
-    async def version(self, ctx: commands.Context) -> None:
-        """Get version info."""
-        await ctx.send("TODO")
-
-    # @commands.command()
-    async def colourcodes(self, ctx: commands.Context) -> None:
-        """Get colourcodes info."""
-        await ctx.send("TODO")
-
-    # @commands.command()
-    async def news(self, ctx: commands.Context) -> None:
-        """Get recent news."""
-        await ctx.send("TODO")

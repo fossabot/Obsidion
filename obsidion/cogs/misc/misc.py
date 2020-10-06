@@ -94,7 +94,7 @@ class Miscellaneous(commands.Cog):
     async def stats(self, ctx: commands.Context) -> None:
         """View statistics about the bot."""
         delta = datetime.datetime.utcnow() - self.bot.uptime
-        uptime_str = humanize_timedelta(timedelta=delta)
+        uptime_str = ",".join(humanize_timedelta(timedelta=delta).split(",")[:2])
 
         ram = round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss, 2) / 1000
 

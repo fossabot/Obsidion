@@ -73,3 +73,11 @@ class Redstone(commands.Cog):
         """Convert ticks to seconds."""
         ticks = seconds * 20
         await ctx.send(f"There are {ticks} ticks in {seconds} seconds")
+
+    @commands.command()
+    async def seed(self, ctx: commands.Context, *, text: str) -> None:
+        """Convert text to minecraft numerical seed."""
+        h = 0
+        for c in text:
+            h = (31 * h + ord(c)) & 0xFFFFFFFF
+        await ctx.send(((h + 0x80000000) & 0xFFFFFFFF) - 0x80000000)
