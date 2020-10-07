@@ -153,7 +153,9 @@ async def prefix_callable(bot: discord.AutoShardedClient, msg: discord.Message) 
     if msg.guild is None:
         prefix.append(constants.Bot.default_prefix)
         return prefix
-    if await bot.db_pool.fetch("SELECT prefix FROM guild WHERE id = $1", msg.guild.id):
+    if await bot.db_pool.fetchval(
+        "SELECT prefix FROM guild WHERE id = $1", msg.guild.id
+    ):
         guild_prefixes = await bot.db_pool.fetchval(
             "SELECT prefix FROM guild WHERE id = $1", msg.guild.id
         )

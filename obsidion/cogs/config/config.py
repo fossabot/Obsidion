@@ -24,17 +24,17 @@ class Config(commands.Cog):
     async def account_link(self, ctx: commands.Context, username: str) -> None:
         """Link account to discord account."""
         if await self.bot.db_pool.fetch(
-            "SELECT username FROM discord_user WHERE id = $1", ctx.guild.id
+            "SELECT username FROM discord_user WHERE id = $1", ctx.author.id
         ):
             await self.bot.db_pool.execute(
-                "UPDATE discord_user SET uername = $1 WHERE id = $2",
+                "UPDATE discord_user SET username = $1 WHERE id = $2",
                 username,
-                ctx.guild.id,
+                ctx.author.id,
             )
         else:
             await self.bot.db_pool.execute(
                 "INSERT INTO discord_user (id, username) VALUES ($1, $2)",
-                ctx.guild.id,
+                ctx.author.id,
                 username,
             )
         await ctx.send(f"Your account has been linked to {username}")
@@ -43,7 +43,7 @@ class Config(commands.Cog):
     async def account_unlink(self, ctx: commands.Context) -> None:
         """Unlink minecraft account to discord account."""
         await self.bot.db_pool.execute(
-            "UPDATE discord_user SET uuid = $1 WHERE id = $2", None, ctx.author.id
+            "UPDATE discord_user SET username = $1 WHERE id = $2", None, ctx.author.id
         )
         await ctx.send("Your account has been unlinked from any minecraft account")
 

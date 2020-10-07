@@ -13,8 +13,9 @@ import discord
 from discord.ext import commands
 
 from . import constants
+from .async_stats import AsyncStatsClient
 from .core.global_checks import init_global_checks
-from .utils.utils import create_db  # type: ignore
+from .utils.utils import create_db
 
 log = logging.getLogger(__name__)
 
@@ -40,6 +41,15 @@ class Obsidion(commands.AutoShardedBot):
 
         self.uptime: datetime.datetime
 
+        statsd_url = constants.Stats.statsd_host
+
+        if not constants.Stats.enabled:
+            # Since statsd is UDP, there are no errors for sending to a down port.
+            # For this reason, setting the statsd host to 127.0.0.1 for development
+            # will effectively disable stats.
+            statsd_url = "127.0.0.1"
+
+        self.stats = AsyncStatsClient(self.loop, statsd_url, 8125, prefix="obsidion")
         # Do basic checks on every command
         init_global_checks(self)
 
@@ -87,6 +97,7 @@ class Obsidion(commands.AutoShardedBot):
     async def login(self, *args: str, **kwargs: str) -> None:
         """Re-create the connector and set up sessions before logging into Discord."""
         self._recreate()
+        await self.stats.create_socket()
         await super().login(*args, **kwargs)
         self.uptime = datetime.datetime.now()
 
@@ -102,6 +113,9 @@ class Obsidion(commands.AutoShardedBot):
 
         if self._resolver:
             await self._resolver.close()
+
+        if self.stats._transport:
+            self.stats._transport.close()
 
         if self.redis_session:
             self.redis_closed = True

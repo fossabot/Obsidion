@@ -40,7 +40,7 @@ class Info(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         try:
             uuid = await usernameToUUID(username, self.bot)
@@ -106,7 +106,7 @@ class Info(commands.Cog):
         )
         if not _server_ip and not _server_ip:
             await ctx.send("Please provide a server or link one using serverlink.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         server_ip = _server_ip if _server_ip else server_ip
         url = f"{constants.Bot.api}/server/java"
@@ -129,7 +129,7 @@ class Info(commands.Cog):
                     " is currently not online or cannot be requested"
                 )
                 return
-            self.bot.redis_session.set(key, json.dumps(data), expire=300)
+            await self.bot.redis_session.set(key, json.dumps(data), expire=300)
         embed = discord.Embed(title=f"Java Server: {server_ip}", color=0x00FF00)
         embed.add_field(name="Description", value=data["description"])
 
@@ -180,7 +180,7 @@ class Info(commands.Cog):
         )
         if not _server_ip and not _server_ip:
             await ctx.send("Please provide a server or link one using serverlink.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         server_ip = _server_ip if _server_ip else server_ip
         url = f"{constants.Bot.api}/server/bedrock"

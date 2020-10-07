@@ -68,7 +68,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         if await self.bot.redis_session.exists(f"wyncraft_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"wyncraft_{username}"))
@@ -120,7 +120,7 @@ class Servers(commands.Cog):
         )
         if not _username and not username:
             await ctx.send("Please provide a server or link one using serverlink.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         username = _username if _username else username
         if await self.bot.redis_session.exists(f"gommehd_{username}"):
@@ -169,7 +169,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         if await self.bot.redis_session.exists(f"veltpvp_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"veltpvp_{username}"))
@@ -229,7 +229,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         if await self.bot.redis_session.exists(f"blocksmc_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"blocksmc_{username}"))
@@ -276,7 +276,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"universocraft_{username}"):
@@ -327,7 +327,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         if await self.bot.redis_session.exists(f"minesaga_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"minesaga_{username}"))
@@ -375,7 +375,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         if await self.bot.redis_session.exists(f"manacube_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"manacube_{username}"))
@@ -519,7 +519,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"hiveMCRank_{username}"):
@@ -563,7 +563,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
         if await self.bot.redis_session.exists(f"hiveMCStatus_{username}"):
             data = json.loads(
@@ -636,7 +636,7 @@ class Servers(commands.Cog):
         username = await get_username(self.bot, username, ctx.author.id)
         if not username:
             await ctx.send("Please provide a username or link one using account link.")
-            await self.bot.send_command_help(ctx.command)
+            await ctx.send_help(ctx.command)
             return
 
         if game.lower() not in hive_con:

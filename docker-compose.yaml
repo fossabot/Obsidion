@@ -9,6 +9,7 @@ services:
     links:
       - db
       - redis
+      - graphite
   db:
     image: postgres:12-alpine
     volumes:
@@ -19,6 +20,10 @@ services:
       POSTGRES_USER: discord
   redis:
     image: redis:alpine
+  graphite:
+    image: graphiteapp/graphite-statsd
+    expose:
+      - 8125/udp
 
 volumes:
   postgresdb:

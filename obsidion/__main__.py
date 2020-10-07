@@ -7,14 +7,21 @@ from typing import Iterator
 
 import discord
 
+from obsidion import _update_event_loop_policy, constants
+
 # Set the event loop policies here so any subsequent `new_event_loop()`
 # calls, in particular those as a result of the following imports,
 # return the correct loop object.
-from obsidion import _update_event_loop_policy, constants
-from obsidion.bot import Obsidion
-from obsidion.utils.utils import prefix_callable  # type: ignore
-
 _update_event_loop_policy()
+
+from obsidion.bot import Obsidion  # noqa: E402, I202, E402
+from obsidion.utils.utils import prefix_callable  # type: ignore # noqa: E402
+
+#
+#     Obsidion - Discord Bot v0.4.0
+#
+#         Made by Darkflame72
+#
 
 
 class RemoveNoise(logging.Filter):
