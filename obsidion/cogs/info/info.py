@@ -12,7 +12,13 @@ from discord.ext import commands
 
 from obsidion import constants
 from obsidion.bot import Obsidion
-from obsidion.utils.utils import ApiError, get, player_info, usernameToUUID
+from obsidion.utils.utils import (
+    ApiError,
+    get,
+    get_username,
+    player_info,
+    usernameToUUID,
+)
 
 log = logging.getLogger(__name__)
 
@@ -28,9 +34,14 @@ class Info(commands.Cog):
         aliases=["whois", "p", "names", "namehistory", "pastnames", "namehis"]
     )
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def profile(self, ctx: commands.Context, username: str) -> None:
+    async def profile(self, ctx: commands.Context, username: str = None) -> None:
         """View a players Minecraft UUID, Username history and skin."""
         await ctx.channel.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         try:
             uuid = await usernameToUUID(username, self.bot)
         except ApiError:
@@ -86,10 +97,18 @@ class Info(commands.Cog):
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
     async def server(
-        self, ctx: commands.Context, server_ip: str, port: int = None
+        self, ctx: commands.Context, server_ip: str = None, port: int = None
     ) -> None:
         """Get info on a minecraft server."""
         await ctx.channel.trigger_typing()
+        _server_ip = await self.bot.db_pool.fetchval(
+            "SELECT server FROM guild WHERE id = $1", ctx.guild.id
+        )
+        if not _server_ip and not _server_ip:
+            await ctx.send("Please provide a server or link one using serverlink.")
+            await self.bot.send_command_help(ctx.command)
+            return
+        server_ip = _server_ip if _server_ip else server_ip
         url = f"{constants.Bot.api}/server/java"
         server_ip, _port = self.get_server(server_ip, port)
         port = _port if _port else port
@@ -102,17 +121,15 @@ class Info(commands.Cog):
         if await self.bot.redis_session.exists(key):
             data = json.loads(await self.bot.redis_session.get(key))
         else:
-            data = await get(ctx.bot.http_session, url, payload)
-            self.bot.redis_session.set(key, json.dumps(data), expire=300)
-
-        if not data:
-            await ctx.send(
-                (
+            try:
+                data = await get(ctx.bot.http_session, url, payload)
+            except ApiError:
+                await ctx.send(
                     f"{ctx.author}, :x: The Java edition Minecraft server `{server_ip}`"
                     " is currently not online or cannot be requested"
                 )
-            )
-            return
+                return
+            self.bot.redis_session.set(key, json.dumps(data), expire=300)
         embed = discord.Embed(title=f"Java Server: {server_ip}", color=0x00FF00)
         embed.add_field(name="Description", value=data["description"])
 
@@ -154,36 +171,43 @@ class Info(commands.Cog):
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
     async def serverpe(
-        self, ctx: commands.Context, server_ip: str, port: int = None
+        self, ctx: commands.Context, server_ip: str = None, port: int = None
     ) -> None:
         """Get info on a minecraft PE server."""
         await ctx.channel.trigger_typing()
+        _server_ip = await self.bot.db_pool.fetchval(
+            "SELECT server FROM guild WHERE id = $1", ctx.guild.id
+        )
+        if not _server_ip and not _server_ip:
+            await ctx.send("Please provide a server or link one using serverlink.")
+            await self.bot.send_command_help(ctx.command)
+            return
+        server_ip = _server_ip if _server_ip else server_ip
         url = f"{constants.Bot.api}/server/bedrock"
         server_ip, _port = self.get_server(server_ip, port)
         if _port:
             port = _port
-        if port:
-            payload = {"server": server_ip, "port": port}
-        else:
-            payload = {"server": server_ip}
 
+        payload = {"server": server_ip}
+
+        key = f"bserver_{server_ip}"
         if port:
-            key = f"bserver_{server_ip}:ip"
-        else:
-            key = f"bserver_{server_ip}"
+            payload["port"] = port
+            key += f":{port}"
+
         if await self.bot.redis_session.exists(key):
             data = json.loads(await self.bot.redis_session.get(key))
         else:
-            data = await get(ctx.bot.http_session, url, payload)
-            self.bot.redis_session.set(key, json.dumps(data), expire=300)
-        if not data:
-            await ctx.send(
-                (
-                    f"{ctx.author}, :x: The Bedrock edition Minecraft server "
-                    f"`{server_ip}` is currently not online or cannot be requested"
+            try:
+                data = await get(ctx.bot.http_session, url, payload)
+            except ApiError:
+                await ctx.send(
+                    f"{ctx.author}, :x: The Bedrock edition Minecraft "
+                    f"server `{server_ip}`"
+                    " is currently not online or cannot be requested"
                 )
-            )
-            return
+                return
+            self.bot.redis_session.set(key, json.dumps(data), expire=300)
         embed = discord.Embed(title=f"Bedrock Server: {server_ip}", color=0x00FF00)
         embed.add_field(name="Description", value=data["motd"])
 

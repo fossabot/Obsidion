@@ -1,10 +1,13 @@
 """Some useful utils."""
 
 import json
+from typing import Union
 
 from aiohttp import ClientSession
+import asyncpg
+import discord
 
-from obsidion.bot import Obsidion
+from obsidion import constants
 
 
 class ApiError(Exception):
@@ -37,7 +40,7 @@ async def get(
         raise ApiError("API returned invalid response.")
 
 
-async def usernameToUUID(username: str, bot: Obsidion) -> str:
+async def usernameToUUID(username: str, bot: discord.AutoShardedClient) -> str:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -58,7 +61,7 @@ async def usernameToUUID(username: str, bot: Obsidion) -> str:
     return data["id"]
 
 
-async def player_info(uuid: str, bot: Obsidion) -> dict:
+async def player_info(uuid: str, bot: discord.AutoShardedClient) -> dict:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -79,7 +82,7 @@ async def player_info(uuid: str, bot: Obsidion) -> dict:
     return data
 
 
-async def UUIDToUsername(uuid: str, bot: Obsidion) -> str:
+async def UUIDToUsername(uuid: str, bot: discord.AutoShardedClient) -> str:
     """Takes in a minecraft UUID and converts it to a minecraft username.
 
     Args:
@@ -92,3 +95,70 @@ async def UUIDToUsername(uuid: str, bot: Obsidion) -> str:
     data = await player_info(uuid, bot)
 
     return data[len(data) - 1]["name"]
+
+
+async def create_db(conn: asyncpg.Connection) -> None:
+    """Create database."""
+    await conn.execute(
+        """
+        CREATE TABLE discord_user(
+            id bigint PRIMARY KEY,
+            username text
+        )
+    """
+    )
+
+    await conn.execute(
+        """
+        CREATE TABLE guild(
+            id bigint PRIMARY KEY,
+            prefix text,
+            server text
+        )
+    """
+    )
+
+
+async def get_username(
+    bot: discord.AutoShardedClient, username: str, user_id: discord.User.id
+) -> Union[str, None]:
+    """Get username from discord.
+
+    Args:
+        bot ([type]): Obsidion
+        username (str): username of player
+        user_id ([type]): id of discord user
+
+    Returns:
+        str: username
+    """
+    _username = await bot.db_pool.fetchval(
+        "SELECT username FROM discord_user WHERE id = $1", user_id
+    )
+    if not _username and not username:
+        return
+    username = _username if _username else username
+    return username
+
+
+async def prefix_callable(bot: discord.AutoShardedClient, msg: discord.Message) -> list:
+    """Prefix."""
+    key = f"prefix_{msg.guild.id}"
+    if await bot.redis_session.exists(key):
+        return json.loads(await bot.redis_session.get(key))
+    user_id = bot.user.id
+    prefix = [f"<@!{user_id}> ", f"<@{user_id}> "]
+
+    # If in direct messages
+    if msg.guild is None:
+        prefix.append(constants.Bot.default_prefix)
+        return prefix
+    if await bot.db_pool.fetch("SELECT prefix FROM guild WHERE id = $1", msg.guild.id):
+        guild_prefixes = await bot.db_pool.fetchval(
+            "SELECT prefix FROM guild WHERE id = $1", msg.guild.id
+        )
+        prefix.append(guild_prefixes)
+    else:
+        prefix.append(constants.Bot.default_prefix)
+    await bot.redis_session.set(key, json.dumps(prefix), expire=28800)
+    return prefix

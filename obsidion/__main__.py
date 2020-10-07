@@ -6,13 +6,13 @@ from logging.handlers import RotatingFileHandler
 from typing import Iterator
 
 import discord
-from discord.ext.commands import when_mentioned_or
 
 # Set the event loop policies here so any subsequent `new_event_loop()`
 # calls, in particular those as a result of the following imports,
 # return the correct loop object.
 from obsidion import _update_event_loop_policy, constants
 from obsidion.bot import Obsidion
+from obsidion.utils.utils import prefix_callable  # type: ignore
 
 _update_event_loop_policy()
 
@@ -83,7 +83,7 @@ mentions = discord.AllowedMentions(
 bot = Obsidion(  # pytype: disable=wrong-arg-types
     case_insensitive=True,  # type: ignore
     activity=activity,
-    command_prefix=when_mentioned_or(constants.Bot.default_prefix),
+    command_prefix=prefix_callable,
     allowed_mentions=mentions,
     intents=intents,
 )

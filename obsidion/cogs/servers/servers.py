@@ -18,7 +18,7 @@ from mcsrvstats import (
 )
 
 from obsidion.bot import Obsidion
-from obsidion.utils.utils import usernameToUUID
+from obsidion.utils.utils import get_username, usernameToUUID
 
 hive_con = {
     # "survival_games": "SG",
@@ -62,9 +62,14 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def wyncraft(self, ctx: commands.Context, username: str) -> None:
+    async def wyncraft(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on wynncraft."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"wyncraft_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"wyncraft_{username}"))
         else:
@@ -107,9 +112,17 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def gommehd(self, ctx: commands.Context, username: str) -> None:
+    async def gommehd(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on gommehd."""
         await ctx.trigger_typing()
+        _username = await self.bot.db_pool.fetchval(
+            "SELECT username FROM guild WHERE id = $1", ctx.author.id
+        )
+        if not _username and not username:
+            await ctx.send("Please provide a server or link one using serverlink.")
+            await self.bot.send_command_help(ctx.command)
+            return
+        username = _username if _username else username
         if await self.bot.redis_session.exists(f"gommehd_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"gommehd_{username}"))
         else:
@@ -150,9 +163,14 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def veltpvp(self, ctx: commands.Context, username: str) -> None:
+    async def veltpvp(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on veltpvp."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"veltpvp_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"veltpvp_{username}"))
         else:
@@ -205,9 +223,14 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def blocksmc(self, ctx: commands.Context, username: str) -> None:
+    async def blocksmc(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on blocksmc."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"blocksmc_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"blocksmc_{username}"))
         else:
@@ -248,8 +271,13 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def universocraft(self, ctx: commands.Context, username: str) -> None:
+    async def universocraft(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on universocraft."""
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"universocraft_{username}"):
             data = json.loads(
@@ -293,9 +321,14 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def minesaga(self, ctx: commands.Context, username: str) -> None:
+    async def minesaga(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on minesaga."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"minesaga_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"minesaga_{username}"))
         else:
@@ -336,9 +369,14 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def manacube(self, ctx: commands.Context, username: str) -> None:
+    async def manacube(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on manacube."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"manacube_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"manacube_{username}"))
         else:
@@ -476,8 +514,13 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hiverank(self, ctx: commands.Context, username: str) -> None:
+    async def hiverank(self, ctx: commands.Context, username: str = None) -> None:
         """View the rank of a player on hiverank."""
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"hiveMCRank_{username}"):
             data = json.loads(
@@ -514,9 +557,14 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hivestatus(self, ctx: commands.Context, username: str) -> None:
+    async def hivestatus(self, ctx: commands.Context, username: str = None) -> None:
         """View the status of a player on hive."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"hiveMCStatus_{username}"):
             data = json.loads(
                 await self.bot.redis_session.get(f"hiveMCStatus_{username}")
@@ -580,9 +628,16 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hivestats(self, ctx: commands.Context, username: str, game: str) -> None:
+    async def hivestats(
+        self, ctx: commands.Context, game: str, username: str = None
+    ) -> None:
         """Get statistics of a player on hive."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await self.bot.send_command_help(ctx.command)
+            return
 
         if game.lower() not in hive_con:
             await ctx.send("Sorry that game was not recognized as a Hive game")

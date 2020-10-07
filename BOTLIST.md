@@ -27,4 +27,3 @@ The `Miscellaneous` category provides commands that provide information on how t
 ### Configurable
 
 The `Configurable` category provides commands to customize the bot, and options to link Minecraft usernames, servers and active server counts.
-

@@ -14,6 +14,7 @@ from discord.ext import commands
 
 from . import constants
 from .core.global_checks import init_global_checks
+from .utils.utils import create_db  # type: ignore
 
 log = logging.getLogger(__name__)
 
@@ -31,7 +32,7 @@ class Obsidion(commands.AutoShardedBot):
         self.redis_session: Optional[aioredis.Redis] = None
         self.redis_ready = asyncio.Event()
         self.redis_closed = False
-        self.db_pool = None
+        self.db_pool: asyncpg.Pool = None
         self.db_ready = asyncio.Event()
 
         self._connector = None
@@ -51,6 +52,10 @@ class Obsidion(commands.AutoShardedBot):
             host=constants.Database.host,
             port=constants.Database.port,
         )
+
+        # Check wether the database has to be created.
+        if not await self.db_pool.fetchval("SELECT to_regclass('public.discord_user')"):
+            await create_db(self.db_pool)
 
         self.db_ready.set()
 

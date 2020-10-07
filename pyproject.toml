@@ -15,7 +15,7 @@ asyncrcon = "^1.1.4"
 beautifulsoup4 = "^4.9.2"
 "discord.py" = "^1.5.0"
 feedparser = "^6.0.1"
-fuzzywuzzy = "^0.18.0"
+fuzzywuzzy = {extras = ["speedup"], version = "^0.18.0"}
 lxml = "^4.5.2"
 mcsrvstats = "^0.1.1"
 python = "^3.8"
@@ -39,9 +39,9 @@ mypy = "^0.782"
 pytest = "^5.0"
 pytest-cov = "^2.10.1"
 pytest-mock = "^3.3.1"
+pytype = {version = "^2020.9.29", python = "3.8"}
 safety = "^1.9.0"
 typeguard = "^2.9.1"
-pytype = {version = "^2020.9.29", python = "3.8"}
 
 [tool.black]
 exclude = '''
@@ -74,4 +74,4 @@ show_missing = true
 
 [build-system]
 build-backend = "poetry.masonry.api"
-requires = ["poetry>=0.12"]
+requires = ["poetry>=1.0"]
