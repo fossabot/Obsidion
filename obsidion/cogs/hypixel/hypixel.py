@@ -31,7 +31,6 @@ class MyMenu(menus.Menu):
             url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
         )
 
-        for i in range(len(data.bazaar_items))
 
         embed.timestamp = ctx.message.created_at
 
