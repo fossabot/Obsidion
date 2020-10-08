@@ -29,7 +29,7 @@ class ErrorHandler(Cog):
         """Error handling for the bot."""
         command = ctx.command
 
-        if "403" in e:
+        if "403" in str(e):
             await ctx.send(
                 "Sorry, I don't have permission to do that!"
                 "Please check my permissions then try again."
