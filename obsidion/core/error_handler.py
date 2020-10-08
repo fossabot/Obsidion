@@ -29,6 +29,10 @@ class ErrorHandler(Cog):
         """Error handling for the bot."""
         command = ctx.command
 
+        if "403" in str(e):
+            await ctx.send("Sorry, I don't have permission to do that! Please check my permissions then try again.")
+            return
+
         if hasattr(e, "handled"):
             return
 
@@ -39,8 +43,8 @@ class ErrorHandler(Cog):
             pass
         elif isinstance(e, errors.UserInputError):
             await self.handle_user_input_error(ctx, e)
-        elif isinstance(e, errors.CheckFailure):
-            await self.handle_check_failure(ctx, e)
+        elif isinstance(e, errors.BotMissingPermissions):
+            await ctx.send("test")
         elif isinstance(e, errors.CommandOnCooldown):
             await ctx.send(
                 f"This command is on cooldown, please retry in {e.retry_after:.2f}s"
