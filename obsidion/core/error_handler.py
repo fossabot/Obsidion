@@ -31,7 +31,8 @@ class ErrorHandler(Cog):
 
         if "403" in str(e):
             await ctx.send(
-                "Sorry, I don't have permission to do that! Please check my permissions then try again."
+                "Sorry, I don't have permission to do that! \n"
+                "Please check my permissions then try again."
             )
             return
 
