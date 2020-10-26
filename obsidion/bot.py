@@ -79,7 +79,7 @@ class Obsidion(commands.AutoShardedBot):
         but that usually won't matter for local bot testing.
         """
         if not constants.Redis.enabled:
-            # Only use in dev as dev dependancy
+            # Only use in dev as dev dependency
             import fakeredis.aioredis
 
             log.info(
@@ -97,8 +97,8 @@ class Obsidion(commands.AutoShardedBot):
     async def login(self, *args: str, **kwargs: str) -> None:
         """Re-create the connector and set up sessions before logging into Discord."""
         self._recreate()
-        await self.stats.create_socket()
         await super().login(*args, **kwargs)
+        await self.stats.create_socket()
         self.uptime = datetime.datetime.now()
 
     async def close(self) -> None:

@@ -60,6 +60,17 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "argcomplete"
+version = "1.12.1"
+description = "Bash tab completion for argparse"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.extras]
+test = ["coverage", "flake8", "pexpect", "wheel"]
+
+[[package]]
 name = "async-timeout"
 version = "3.0.1"
 description = "Timeout context manager for asyncio programs"
@@ -218,6 +229,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "colorlog"
+version = "4.4.0"
+description = "Log formatting with colors!"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
+
+[[package]]
 name = "coverage"
 version = "5.3"
 description = "Code coverage measurement for Python"
@@ -271,6 +293,14 @@ docs = ["sphinx (1.8.5)", "sphinxcontrib-trio (1.1.1)", "sphinxcontrib-websuppor
 voice = ["PyNaCl (1.3.0)"]
 
 [[package]]
+name = "distlib"
+version = "0.3.1"
+description = "Distribution utilities"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "dparse"
 version = "0.5.1"
 description = "A parser for Python dependency files"
@@ -313,6 +343,14 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 sgmllib3k = "*"
+
+[[package]]
+name = "filelock"
+version = "3.0.12"
+description = "A platform independent file lock."
+category = "dev"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "flake8"
@@ -579,6 +617,23 @@ description = "Ninja is a small build system with a focus on speed"
 category = "dev"
 optional = false
 python-versions = "*"
+
+[[package]]
+name = "nox"
+version = "2020.8.22"
+description = "Flexible test automation."
+category = "dev"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+argcomplete = ">=1.9.4,<2.0"
+colorlog = ">=2.6.1,<5.0.0"
+py = ">=1.4.0,<2.0.0"
+virtualenv = ">=14.0.0"
+
+[package.extras]
+tox_to_nox = ["jinja2", "tox"]
 
 [[package]]
 name = "packaging"
@@ -943,6 +998,24 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "virtualenv"
+version = "20.1.0"
+description = "Virtual Python Environment builder"
+category = "dev"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
+
+[package.dependencies]
+appdirs = ">=1.4.3,<2"
+distlib = ">=0.3.1,<1"
+filelock = ">=3.0.0,<4"
+six = ">=1.9.0,<2"
+
+[package.extras]
+docs = ["proselint (>=0.10.2)", "sphinx (>=3)", "sphinx-argparse (>=0.2.5)", "sphinx-rtd-theme (>=0.4.3)", "towncrier (>=19.9.0rc1)"]
+testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", "pytest (>=4)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.1)", "pytest-mock (>=2)", "pytest-randomly (>=1)", "pytest-timeout (>=1)", "pytest-xdist (>=1.31.0)", "packaging (>=20.0)", "xonsh (>=0.9.16)"]
+
+[[package]]
 name = "wcwidth"
 version = "0.2.5"
 description = "Measures the displayed width of unicode strings in a terminal"
@@ -965,7 +1038,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "80d39ba11d490acf6a1f21b422b3e3eff3d7d9a88f1480ea0162c5b6840437b2"
+content-hash = "e0b1f4e1f1336101b9de006c99a24a8a5aecbc0ce170a0f765caf36cb46177ee"
 
 [metadata.files]
 aiodns = [
@@ -997,6 +1070,10 @@ aioredis = [
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
     {file = "appdirs-1.4.4.tar.gz", hash = "sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41"},
+]
+argcomplete = [
+    {file = "argcomplete-1.12.1-py2.py3-none-any.whl", hash = "sha256:5cd1ac4fc49c29d6016fc2cc4b19a3c08c3624544503495bf25989834c443898"},
+    {file = "argcomplete-1.12.1.tar.gz", hash = "sha256:849c2444c35bb2175aea74100ca5f644c29bf716429399c0f2203bb5d9a8e4e6"},
 ]
 async-timeout = [
     {file = "async-timeout-3.0.1.tar.gz", hash = "sha256:0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b25f4c5f"},
@@ -1112,6 +1189,10 @@ colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
     {file = "colorama-0.4.3.tar.gz", hash = "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"},
 ]
+colorlog = [
+    {file = "colorlog-4.4.0-py2.py3-none-any.whl", hash = "sha256:f14f30f58e2ce6ef40b0088307cac7efb9ecff5605fa2267a2d29955f26aff23"},
+    {file = "colorlog-4.4.0.tar.gz", hash = "sha256:0272c537469ab1e63b9915535874d15b671963c9325db0c4891a2aeff97ce3d1"},
+]
 coverage = [
     {file = "coverage-5.3-cp27-cp27m-macosx_10_13_intel.whl", hash = "sha256:bd3166bb3b111e76a4f8e2980fa1addf2920a4ca9b2b8ca36a3bc3dedc618270"},
     {file = "coverage-5.3-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:9342dd70a1e151684727c9c91ea003b2fb33523bf19385d4554f7897ca0141d4"},
@@ -1164,6 +1245,10 @@ decorator = [
     {file = "discord.py-1.5.0-py3-none-any.whl", hash = "sha256:3acb61fde0d862ed346a191d69c46021e6063673f63963bc984ae09a685ab211"},
     {file = "discord.py-1.5.0.tar.gz", hash = "sha256:e71089886aa157341644bdecad63a72ff56b44406b1a6467b66db31c8e5a5a15"},
 ]
+distlib = [
+    {file = "distlib-0.3.1-py2.py3-none-any.whl", hash = "sha256:8c09de2c67b3e7deef7184574fc060ab8a793e7adbb183d942c389c8b13c52fb"},
+    {file = "distlib-0.3.1.zip", hash = "sha256:edf6116872c863e1aa9d5bb7cb5e05a022c519a4594dc703843343a9ddd9bff1"},
+]
 dparse = [
     {file = "dparse-0.5.1-py3-none-any.whl", hash = "sha256:e953a25e44ebb60a5c6efc2add4420c177f1d8404509da88da9729202f306994"},
     {file = "dparse-0.5.1.tar.gz", hash = "sha256:a1b5f169102e1c894f9a7d5ccf6f9402a836a5d24be80a986c7ce9eaed78f367"},
@@ -1175,6 +1260,10 @@ fakeredis = [
 feedparser = [
     {file = "feedparser-6.0.1-py2.py3-none-any.whl", hash = "sha256:c9b436334258e718e224c5ef8a78088557e0d0382506360f702de10667ffde32"},
     {file = "feedparser-6.0.1.tar.gz", hash = "sha256:6ca88edcaa43f428345968df903a87f020843eda5e28d7ea24a612158d61e74c"},
+]
+filelock = [
+    {file = "filelock-3.0.12-py3-none-any.whl", hash = "sha256:929b7d63ec5b7d6b71b0fa5ac14e030b3f70b75747cef1b10da9b879fef15836"},
+    {file = "filelock-3.0.12.tar.gz", hash = "sha256:18d82244ee114f543149c66a6e0c14e9c4f8a1044b5cdaadd0f82159d6a6ff59"},
 ]
 flake8 = [
     {file = "flake8-3.8.4-py2.py3-none-any.whl", hash = "sha256:749dbbd6bfd0cf1318af27bf97a14e28e5ff548ef8e5b1566ccfb25a11e7c839"},
@@ -1373,6 +1462,10 @@ ninja = [
     {file = "ninja-1.10.0.post2-py3-none-win32.whl", hash = "sha256:06a72090f5c5516e57f12699644179504a77585bed6d5f8be9e67219a398ec80"},
     {file = "ninja-1.10.0.post2-py3-none-win_amd64.whl", hash = "sha256:c6059bd04ad235e2326b39bc71bb7989de8d565084b5f269557704747b2910fa"},
     {file = "ninja-1.10.0.post2.tar.gz", hash = "sha256:621fd73513a9bef0cb82e8c531a29ef96580b4d6e797f833cce167054ad812f8"},
+]
+nox = [
+    {file = "nox-2020.8.22-py3-none-any.whl", hash = "sha256:55f8cab16bcfaaea08b141c83bf2b7c779e943518d0de6cd9c38cd8da95d11ea"},
+    {file = "nox-2020.8.22.tar.gz", hash = "sha256:efa5adcf1134012f96bcd0a496ccebd4c9e9da53a831888a2a779462440eebcf"},
 ]
 packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
@@ -1600,6 +1693,10 @@ uvloop = [
     {file = "uvloop-0.14.0-cp38-cp38-macosx_10_11_x86_64.whl", hash = "sha256:bcac356d62edd330080aed082e78d4b580ff260a677508718f88016333e2c9c5"},
     {file = "uvloop-0.14.0-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:4315d2ec3ca393dd5bc0b0089d23101276778c304d42faff5dc4579cb6caef09"},
     {file = "uvloop-0.14.0.tar.gz", hash = "sha256:123ac9c0c7dd71464f58f1b4ee0bbd81285d96cdda8bc3519281b8973e3a461e"},
+]
+virtualenv = [
+    {file = "virtualenv-20.1.0-py2.py3-none-any.whl", hash = "sha256:b0011228208944ce71052987437d3843e05690b2f23d1c7da4263fde104c97a2"},
+    {file = "virtualenv-20.1.0.tar.gz", hash = "sha256:b8d6110f493af256a40d65e29846c69340a947669eec8ce784fcf3dd3af28380"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},

@@ -1,13 +1,16 @@
 """Some useful utils."""
 
 import json
-from typing import Union
+from typing import Union, TYPE_CHECKING
 
 from aiohttp import ClientSession
 import asyncpg
 import discord
 
 from obsidion import constants
+
+if TYPE_CHECKING:
+    from obsidion.bot import Obsidion
 
 
 class ApiError(Exception):
@@ -40,7 +43,7 @@ async def get(
         raise ApiError("API returned invalid response.")
 
 
-async def usernameToUUID(username: str, bot: discord.AutoShardedClient) -> str:
+async def usernameToUUID(username: str, bot: Obsidion) -> str:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -61,7 +64,7 @@ async def usernameToUUID(username: str, bot: discord.AutoShardedClient) -> str:
     return data["id"]
 
 
-async def player_info(uuid: str, bot: discord.AutoShardedClient) -> dict:
+async def player_info(uuid: str, bot: Obsidion) -> dict:
     """Takes in an mc username and tries to convert it to a mc uuid.
 
     Args:
@@ -82,7 +85,7 @@ async def player_info(uuid: str, bot: discord.AutoShardedClient) -> dict:
     return data
 
 
-async def UUIDToUsername(uuid: str, bot: discord.AutoShardedClient) -> str:
+async def UUIDToUsername(uuid: str, bot: Obsidion) -> str:
     """Takes in a minecraft UUID and converts it to a minecraft username.
 
     Args:
@@ -120,7 +123,7 @@ async def create_db(conn: asyncpg.Connection) -> None:
 
 
 async def get_username(
-    bot: discord.AutoShardedClient, username: str, user_id: discord.User.id
+    bot: Obsidion, username: str, user_id: discord.User.id
 ) -> Union[str, None]:
     """Get username from discord.
 
@@ -141,7 +144,7 @@ async def get_username(
     return username
 
 
-async def prefix_callable(bot: discord.AutoShardedClient, msg: discord.Message) -> list:
+async def prefix_callable(bot: Obsidion, msg: discord.Message) -> list:
     """Prefix."""
     key = f"prefix_{msg.guild.id}"
     if await bot.redis_session.exists(key):

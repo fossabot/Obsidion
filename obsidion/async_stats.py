@@ -23,7 +23,7 @@ class AsyncStatsClient(StatsClientBase):
         self._addr = addr
         self._prefix = prefix
         self._loop = loop
-        self._transport = None
+        self._transport: asyncio.BaseTransport
 
     async def create_socket(self) -> None:
         """Use the loop.create_datagram_endpoint method to create a socket."""
