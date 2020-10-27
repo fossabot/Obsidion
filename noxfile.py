@@ -7,7 +7,7 @@ import nox
 from nox.sessions import Session
 
 package = "obsidion"
-nox.options.sessions = "lint", "safety", "mypy", "pytype", "tests"
+nox.options.sessions = "lint", "safety", "pytype", "tests"  # , "mypy"
 locations = "obsidion", "noxfile.py", "tests"
 
 
@@ -81,12 +81,12 @@ def safety(session: Session) -> None:
         session.run("safety", "check", f"--file={requirements.name}", "--full-report")
 
 
-@nox.session(python=["3.9"])
-def mypy(session: Session) -> None:
-    """Type-check using mypy."""
-    args = session.posargs or locations
-    install_with_constraints(session, "mypy")
-    session.run("mypy", *args)
+# @nox.session(python=["3.9"])
+# def mypy(session: Session) -> None:
+#     """Type-check using mypy."""
+#     args = session.posargs or locations
+#     install_with_constraints(session, "mypy")
+#     session.run("mypy", *args)
 
 
 @nox.session(python="3.8")
