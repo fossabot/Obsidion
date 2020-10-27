@@ -3,7 +3,7 @@ authors = ["Darkflame72 <leon@bowie-co.nz>"]
 description = "A Minecraft discord bot"
 license = "AGPL-3.0-or-later"
 name = "obsidion"
-version = "0.4.0"
+version = "1.0.0.dev1"
 
 [tool.poetry.dependencies]
 aiodns = "^2.0.0"
@@ -20,8 +20,8 @@ lxml = "^4.5.2"
 mcsrvstats = "^0.1.1"
 python = "^3.8"
 pyyaml = "^5.3.1"
-uvloop = "^0.14.0"
 statsd = "^3.3.0"
+uvloop = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"
@@ -37,13 +37,13 @@ flake8-bugbear = "^20.1.4"
 flake8-docstrings = "^1.5.0"
 flake8-import-order = "^0.18.1"
 mypy = "^0.782"
+nox = "^2020.8.22"
 pytest = "^5.0"
 pytest-cov = "^2.10.1"
 pytest-mock = "^3.3.1"
 pytype = {version = "^2020.9.29", python = "3.8"}
 safety = "^1.9.0"
 typeguard = "^2.9.1"
-nox = "^2020.8.22"
 
 [tool.black]
 exclude = '''
