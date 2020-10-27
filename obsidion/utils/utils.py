@@ -1,4 +1,5 @@
 """Some useful utils."""
+from __future__ import annotations
 
 import json
 from typing import TYPE_CHECKING, Union
@@ -117,6 +118,18 @@ async def create_db(conn: asyncpg.Connection) -> None:
             id bigint PRIMARY KEY,
             prefix text,
             server text
+        )
+    """
+    )
+    await conn.execute(
+        """
+        CREATE TABLE rcon(
+            id bigint PRIMARY KEY,
+            address text,
+            password text,
+            port bigint,
+            channel bigint,
+            roles anyarray
         )
     """
     )
