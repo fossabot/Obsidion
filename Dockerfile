@@ -8,7 +8,7 @@ WORKDIR /obsidion
 COPY pyproject.toml poetry.lock ./
 
 # install poetry
-RUN pip install "poetry==1.0.10"
+RUN pip install "poetry==1.1.4"
 
 # Currently poetry install is significantly slower than pip install, so we're creating a
 # requirements.txt output and running pip install with it.
