@@ -32,8 +32,8 @@ class development(commands.Cog):
         else:
             await ctx.send(
                 (
-                    f"{ctx.message.author.mention}, :white_check_mark: The cog ",
-                    f"{module} has been succesfully loaded",
+                    f"{ctx.message.author.mention}, :white_check_mark: The cog "
+                    f"`{module}` has been succesfully loaded"
                 )
             )
 
@@ -50,7 +50,7 @@ class development(commands.Cog):
             await ctx.send(
                 (
                     f"{ctx.message.author.mention}, :white_check_mark: "
-                    f"The cog {module} has been succesfully unloaded"
+                    f"The cog `{module}` has been succesfully unloaded"
                 )
             )
 
@@ -67,7 +67,7 @@ class development(commands.Cog):
             await ctx.send(
                 (
                     f"{ctx.message.author.mention}, :white_check_mark: The cog "
-                    f"{module} has been succesfully reloaded"
+                    f"`{module}` has been succesfully reloaded"
                 )
             )
 
