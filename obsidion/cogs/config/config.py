@@ -5,6 +5,7 @@ import discord
 from discord.ext import commands
 
 from obsidion.bot import Obsidion
+from obsidion import constants
 
 
 class Config(commands.Cog):
@@ -18,7 +19,7 @@ class Config(commands.Cog):
     async def account(self, ctx: commands.Context) -> None:
         """Discord account linking."""
         if ctx.invoked_subcommand is None:
-            await ctx.send("Hi")
+            await ctx.send_help(ctx.command)
 
     @account.command(name="link")
     async def account_link(self, ctx: commands.Context, username: str) -> None:
@@ -114,8 +115,14 @@ class Config(commands.Cog):
 
         await ctx.send(f"{ctx.author}, The prefix has been changed to `{new_prefix}`")
 
-    @commands.command()
+    @commands.group()
     async def delete(self, ctx: commands.Context) -> None:
+        """Discord account linking."""
+        if ctx.invoked_subcommand is None:
+            await ctx.send_help(ctx.command)
+
+    @delete.command(name="user")
+    async def delete_user(self, ctx: commands.Context) -> None:
         """This will delete all data that is linked to your account."""
         embed = discord.Embed(
             title="DELETE DATA",
@@ -132,8 +139,38 @@ class Config(commands.Cog):
         if delete.content.lower() == "yes":
             # deletes data
             await self.bot.db_pool.execute(
-                "DELETE FROM guild WHERE id = $1", ctx.author.id
+                "DELETE FROM discord_user WHERE id = $1", ctx.author.id
             )
+
+            await ctx.send(
+                f"{ctx.message.author.mention}, all data linked to your "
+                + "discord account has been deleted."
+            )
+    @delete.command(name="guild")
+    async def delete_guild(self, ctx: commands.Context) -> None:
+        """This will delete all data that is linked to this guild."""
+        embed = discord.Embed(
+            title="DELETE DATA",
+            description="WARNING\n THIS IS AN IRREVERABLE ACTION AND WILL "
+            + f"DELETE ALL DATA LINKED TO YOUR GUILD AND RESET YOUR PREFIX TO {constants.Bot.default_prefix}\nDO YOU WISH TO PROCEED?\nYES/NO",
+            colour=0xFF0000,
+        )
+        await ctx.send(embed=embed)
+
+        def yes(m: discord.Message) -> bool:
+            return m.author == ctx.author and m.content.lower() in ["yes", "no"]
+
+        delete = await self.bot.wait_for("message", check=yes, timeout=10)
+        if delete.content.lower() == "yes":
+            # deletes data
+            await self.bot.db_pool.execute(
+                "DELETE FROM guild WHERE id = $1", ctx.guild.id
+            )
+
+            key = f"prefix_{ctx.guild.id}"
+            user_id = self.bot.user.id
+            prefix = [f"<@!{user_id}> ", f"<@{user_id}> ", constants.Bot.default_prefix]
+            await self.bot.redis_session.set(key, json.dumps(prefix), expire=28800)
 
             await ctx.send(
                 f"{ctx.message.author.mention}, all data linked to your "
