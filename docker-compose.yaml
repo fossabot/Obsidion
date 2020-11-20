@@ -19,11 +19,11 @@ services:
       POSTGRES_PASSWORD: hunter12
       POSTGRES_USER: discord
     ports:
-      - "5432"
+      - "5432:5432"
   redis:
     image: redis:alpine
     ports:
-      - "6379"
+      - "6379:6379"
   graphite:
     image: graphiteapp/graphite-statsd
     expose:
