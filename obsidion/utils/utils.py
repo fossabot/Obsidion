@@ -128,7 +128,7 @@ async def create_db(conn: asyncpg.Connection) -> None:
             address text,
             password text,
             channel bigint,
-            roles anyarray
+            roles biginit[]
         )
     """
     )
