@@ -190,19 +190,16 @@ class hypixel(commands.Cog):
 
     @commands.command()
     async def bazaar(self, ctx: commands.Context) -> None:
-        """Get current Skyblock News."""
+        """Get Bazaar NPC Stats."""
         await ctx.channel.trigger_typing()
 
         menu = PaginatedMenu(ctx)
-
         data = await self.hypixel_session.get_bazaar()
-
         split = list(divide_array(data.bazaar_items, 15))
-
         pagesend = []
 
         for bazaarloop in range(len(split)):
-            pagebazaar = Page(title=f'Bazaar NPC Stats', description=f'Page {bazaarloop + 1} of {len(split) + 1}', color=0x00FF00)
+            pagebazaar = Page(title='Bazaar NPC Stats', description=f'Page {bazaarloop + 1} of {len(split) + 1}', color=0x00FF00)
             pagebazaar.set_author(
                 name="Hypixel",
                 icon_url="https://hypixel.net/favicon-32x32.png",
@@ -217,3 +214,30 @@ class hypixel(commands.Cog):
         menu.add_pages(pagesend)
 
         await menu.open()
+
+    @commands.command()
+    async def auctions(self, ctx: commands.Context) -> None:
+        """Shows the first 1000 auctions"""
+        await ctx.channel.trigger_typing()
+
+        menu = PaginatedMenu(ctx)
+        data = await self.hypixel_session.auctions()
+        split = list(divide_array(data.auctions, 15))
+        pagesend = []
+
+        for auctionsloop in range(len(split)):
+            pageauctions = Page(title=f'Hypixel Auctions', description=f'Page {auctionsloop + 1} of {len(split) + 1}', color=0x00FF00)
+            pageauctions.set_author(name='Hypixel', icon_url='https://hypixel.net/favicon-32x32.png')
+            for item in range(len(split[auctionsloop])):
+                name = split[auctionsloop][item].item_name
+                startingBid = split[auctionsloop][item].starting_bid
+                highestBid = split[auctionsloop][item].highest_bid_amount
+                bids = split[auctionsloop][item].bids
+                pageauctions.add_field(name=name, value=f'Starting Bid: {startingBid} \n Highest Bid: {highestBid} \n Current Bids: {len(bids)}')
+            pagesend.append(pageauctions)
+
+        menu.add_pages(pagesend)
+
+        await menu.open()
+
+        
