@@ -61,3 +61,7 @@ async def UUIDToUsername(uuid: str, session) -> str:
         return False
 
     return data[-1]["name"]
+
+def divide_array(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i + n]

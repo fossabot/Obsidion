@@ -3,50 +3,15 @@
 from asyncpixel import Client
 import discord
 from discord.ext import commands
-from discord.ext import menus
+from dpymenus import Page, PaginatedMenu
 
 from obsidion import constants
 from obsidion.utils.utils import usernameToUUID
 from obsidion.utils.utils import UUIDToUsername
+from obsidion.utils.utils import divide_array
 from obsidion.utils.chat_formatting import humanize_timedelta
 import datetime
 
-
-
-class MyMenu(menus.Menu):
-    async def send_initial_message(self, ctx, channel):
-        data = await self.hypixel_session.get_bazaar()
-
-        embed = discord.Embed(
-                title="Skyblock News",
-                description=f"There are currently {len(data)} news articles.",
-                colour=0x00FF00,
-            )
-        embed.set_author(
-            name="Hypixel",
-            url="https://hypixel.net/forums/skyblock.157/",
-            icon_url="https://hypixel.net/favicon-32x32.png",
-        )
-        embed.set_thumbnail(
-            url="https://hypixel.net/styles/hypixel-v2/images/header-logo.png"
-        )
-
-
-        embed.timestamp = ctx.message.created_at
-
-        return await channel.send(f'Hello {ctx.author}')
-
-    @menus.button('\N{THUMBS UP SIGN}')
-    async def on_thumbs_up(self, payload):
-        await self.message.edit(content=f'Thanks {self.ctx.author}!')
-
-    @menus.button('\N{THUMBS DOWN SIGN}')
-    async def on_thumbs_down(self, payload):
-        await self.message.edit(content=f"That's not nice {self.ctx.author}...")
-
-    @menus.button('\N{BLACK SQUARE FOR STOP}\ufe0f')
-    async def on_stop(self, payload):
-        self.stop()
 
 class hypixel(commands.Cog):
     """Hypixel cog."""
@@ -227,7 +192,28 @@ class hypixel(commands.Cog):
     async def bazaar(self, ctx: commands.Context) -> None:
         """Get current Skyblock News."""
         await ctx.channel.trigger_typing()
-        m = MyMenu()
-        await m.start(ctx)
 
-        
+        menu = PaginatedMenu(ctx)
+
+        data = await self.hypixel_session.get_bazaar()
+
+        split = list(divide_array(data.bazaar_items, 15))
+
+        pagesend = []
+
+        for bazaarloop in range(len(split)):
+            pagebazaar = Page(title=f'Bazaar NPC Stats', description=f'Page {bazaarloop + 1} of {len(split) + 1}', color=0x00FF00)
+            pagebazaar.set_author(
+                name="Hypixel",
+                icon_url="https://hypixel.net/favicon-32x32.png",
+            )
+            for item in range(len(split[bazaarloop])):
+                name = split[bazaarloop][item].name.replace('_', ' ').title()
+                sellprice = round(split[bazaarloop][item].quick_status.sellPrice)
+                buyprice = round(split[bazaarloop][item].quick_status.buyPrice)
+                pagebazaar.add_field(name=name, value=f'Sell Price: {sellprice} \n Buy Price: {buyprice}')
+            pagesend.append(pagebazaar)
+
+        menu.add_pages(pagesend)
+
+        await menu.open()
