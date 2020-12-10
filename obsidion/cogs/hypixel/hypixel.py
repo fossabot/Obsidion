@@ -240,4 +240,14 @@ class hypixel(commands.Cog):
 
         await menu.open()
 
-        
+    @commands.command()
+    async def recentgames(self, ctx: commands.Context, username: str) -> None:
+        """Shows the recent games for a user"""
+        await ctx.channel.trigger_typing()
+
+        uuid = UUIDToUsername(username, ctx.bot.http_session)
+
+        data = await self.hypixel_session.get_recent_games(uuid)
+
+        await ctx.send(data)
+
