@@ -241,6 +241,7 @@ class hypixel(commands.Cog):
         await menu.open()
 
     @commands.command()
+<<<<<<< HEAD
     async def recentGames(self, ctx: commands.Context, username: str) -> None:
         """Shows the first 1000 auctions"""
         await ctx.channel.trigger_typing()
@@ -250,3 +251,15 @@ class hypixel(commands.Cog):
         data = await self.hypixel_session.get_recent_games(UUID)
 
         await ctx.send(data)
+=======
+    async def recentgames(self, ctx: commands.Context, username: str) -> None:
+        """Shows the recent games for a user"""
+        await ctx.channel.trigger_typing()
+
+        uuid = UUIDToUsername(username, ctx.bot.http_session)
+
+        data = await self.hypixel_session.get_recent_games(uuid)
+
+        await ctx.send(data)
+
+>>>>>>> 4ff56a7002c7cd054ee8a384d4754e00d1a8059a
