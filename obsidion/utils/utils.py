@@ -143,7 +143,7 @@ async def get_username(
         bot ([type]): Obsidion
         username (str): username of player
         user_id ([type]): id of discord user
-
+        
     Returns:
         str: username
     """
@@ -179,3 +179,4 @@ async def prefix_callable(bot: Obsidion, msg: discord.Message) -> list:
         prefix.append(constants.Bot.default_prefix)
     await bot.redis_session.set(key, json.dumps(prefix), expire=28800)
     return prefix
+

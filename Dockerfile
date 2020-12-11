@@ -1,5 +1,10 @@
 FROM python:3.8
 
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y git
+
+
 # Create the working directory
 WORKDIR /obsidion
 

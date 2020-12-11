@@ -82,6 +82,7 @@ activity = discord.Activity(
 intents = discord.Intents.none()
 intents.messages = True
 intents.guilds = True
+intents.reactions = True
 
 mentions = discord.AllowedMentions(
     everyone=False,

@@ -176,6 +176,7 @@ class Obsidion(commands.AutoShardedBot):
 
         self.http_session = aiohttp.ClientSession(connector=self._connector)
 
+
     async def get_context(self, message: discord.Message) -> None:
         """Get context."""
         return await super().get_context(message)
@@ -185,8 +186,6 @@ class Obsidion(commands.AutoShardedBot):
         if not message.author.bot:
             ctx = await self.get_context(message)
             await self.invoke(ctx)
-        else:
-            ctx = None
 
     async def logout(self) -> None:
         """Logs out of Discord and closes all connections."""
