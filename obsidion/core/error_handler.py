@@ -6,9 +6,9 @@ import traceback
 import discord
 from discord.ext.commands import Cog, Context, errors
 
-from ..utils.chat_formatting import text_to_file
 from obsidion import constants
 from obsidion.bot import Obsidion
+from ..utils.chat_formatting import text_to_file
 
 log = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ log = logging.getLogger(__name__)
 class ErrorHandler(Cog):
     """Handles errors emitted from commands."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
 
@@ -29,10 +29,14 @@ class ErrorHandler(Cog):
         """Error handling for the bot."""
         command = ctx.command
 
-        if hasattr(e, "handled"):
-            log.trace(
-                f"Command {command} had its error already handled locally; ignoring."
+        if "403" in str(e):
+            await ctx.send(
+                "Sorry, I don't have permission to do that!"
+                "Please check my permissions then try again."
             )
+            return
+
+        if hasattr(e, "handled"):
             return
 
         if isinstance(e, errors.CommandNotFound) and not hasattr(
@@ -70,36 +74,34 @@ class ErrorHandler(Cog):
     async def handle_user_input_error(
         self, ctx: Context, e: errors.UserInputError
     ) -> None:
-        """Send an error message in `ctx` for UserInputError, sometimes invoking the help command too."""
+        """Send an error message in `ctx` for UserInputError."""
         prepared_help_command = self.get_help_command(ctx)
 
         if isinstance(e, errors.MissingRequiredArgument):
             await ctx.send(f"Missing required argument `{e.param.name}`.")
-            await prepared_help_command
-            self.bot.stats.incr("errors.missing_required_argument")
+            await prepared_help_command  # pytype: disable=bad-return-type
         elif isinstance(e, errors.TooManyArguments):
             # handle this by running the command and ignoring extra input
             # await ctx.send("Too many arguments provided.")
-            # await prepared_help_command
-            self.bot.stats.incr("errors.too_many_arguments")
+            await prepared_help_command  # pytype: disable=bad-return-type
         elif isinstance(e, errors.BadArgument):
             await ctx.send(f"Bad argument: {e}\n")
-            await prepared_help_command
-            self.bot.stats.incr("errors.bad_argument")
+            await prepared_help_command  # pytype: disable=bad-return-type
         elif isinstance(e, errors.BadUnionArgument):
             await ctx.send(f"Bad argument: {e}\n```{e.errors[-1]}```")
-            self.bot.stats.incr("errors.bad_union_argument")
         elif isinstance(e, errors.ArgumentParsingError):
             await ctx.send(f"Argument parsing error: {e}")
-            self.bot.stats.incr("errors.argument_parsing_error")
         else:
             await ctx.send("Something about your input seems off. Check the arguments:")
-            await prepared_help_command
-            self.bot.stats.incr("errors.other_user_input_error")
+            await prepared_help_command  # pytype: disable=bad-return-type
 
     @staticmethod
     async def handle_check_failure(ctx: Context, e: errors.CheckFailure) -> None:
         """Send an error message in `ctx` for certain types of CheckFailure.
+
+        Args:
+            ctx (Context): Context of message
+            e (errors.CheckFailure): [description]error type
 
         The following types are handled:
         * BotMissingPermissions
@@ -123,19 +125,27 @@ class ErrorHandler(Cog):
                 fmt = f"{'**, **'.join(missing[:-1])}, and {missing[-1]}"
             else:
                 fmt = " and ".join(missing)
-            ctx.bot.stats.incr("errors.bot_permission_error")
             await ctx.send(
-                f"Sorry, it looks like I don't have the **{fmt}**permission(s) I need to do that."
+                (
+                    f"Sorry, it looks like I don't have the **{fmt}**permission(s) "
+                    "I need to do that."
+                )
             )
 
     @staticmethod
     async def handle_unexpected_error(ctx: Context, e: errors.CommandError) -> None:
-        """Send a generic error message in `ctx` and log the exception as an error with exc_info."""
+        """Send a generic error message in `ctx` and log the exception."""
         await ctx.send(
-            "Sorry, an unexpected error occurred. It has been recorded and should be fixed soon!\n\n"
+            (
+                "Sorry, an unexpected error occurred. It has been "
+                "recorded and should be fixed soon!\n\n"
+            )
         )
         log.error(
-            f"Error executing command invoked by {ctx.message.author}: {ctx.message.content}",
+            (
+                f"Error executing command invoked by {ctx.message.author}: ",
+                f"{ctx.message.content}",
+            ),
             exc_info=e,
         )
         embed = discord.Embed(title="Bug", colour=0x00FF00)

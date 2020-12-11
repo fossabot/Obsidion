@@ -3,17 +3,25 @@
 import contextlib
 import logging
 from logging.handlers import RotatingFileHandler
+from typing import Iterator
 
 import discord
-from discord.ext.commands import when_mentioned_or
+
+from obsidion import _update_event_loop_policy, constants
 
 # Set the event loop policies here so any subsequent `new_event_loop()`
 # calls, in particular those as a result of the following imports,
 # return the correct loop object.
-from obsidion import _update_event_loop_policy, constants
-from obsidion.bot import Obsidion
-
 _update_event_loop_policy()
+
+from obsidion.bot import Obsidion  # noqa: E402, I202, E402
+from obsidion.utils.utils import prefix_callable  # type: ignore # noqa: E402
+
+#
+#     Obsidion - Discord Bot v0.4.0
+#
+#         Made by Darkflame72
+#
 
 
 class RemoveNoise(logging.Filter):
@@ -23,7 +31,7 @@ class RemoveNoise(logging.Filter):
         """Init."""
         super().__init__(name="discord.state")
 
-    def filter(self, record) -> bool:
+    def filter(self, record: logging.LogRecord) -> bool:
         """Filter out unimportant info."""
         if record.levelname == "WARNING" and "referencing an unknown" in record.msg:
             return False
@@ -31,7 +39,7 @@ class RemoveNoise(logging.Filter):
 
 
 @contextlib.contextmanager
-def setup_logging() -> None:
+def setup_logging() -> Iterator[None]:
     """Setup logging."""
     try:
         # __enter__
@@ -80,10 +88,10 @@ mentions = discord.AllowedMentions(
     everyone=False,
 )
 
-bot = Obsidion(
-    case_insensitive=True,
+bot = Obsidion(  # pytype: disable=wrong-arg-types
+    case_insensitive=True,  # type: ignore
     activity=activity,
-    command_prefix=when_mentioned_or(constants.Bot.default_prefix),
+    command_prefix=prefix_callable,
     allowed_mentions=mentions,
     intents=intents,
 )

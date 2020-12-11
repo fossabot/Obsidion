@@ -1,4 +1,4 @@
-FROM python:3.8-slim
+FROM python:3.8
 
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -13,7 +13,7 @@ WORKDIR /obsidion
 COPY pyproject.toml poetry.lock ./
 
 # install poetry
-RUN pip install "poetry==1.0.10"
+RUN pip install "poetry==1.1.4"
 
 # Currently poetry install is significantly slower than pip install, so we're creating a
 # requirements.txt output and running pip install with it.

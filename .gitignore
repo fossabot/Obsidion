@@ -75,5 +75,9 @@ config.yaml
 # Any logs
 *.log
 
+
 #GitHub Codespaces
 pythonenv3.8
+
+.pytype/*
+

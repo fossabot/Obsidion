@@ -1,9 +1,9 @@
 """Import config."""
 
-from .config import config
 from obsidion.bot import Obsidion
+from .config import Config
 
 
 def setup(bot: Obsidion) -> None:
     """Setup."""
-    bot.add_cog(config(bot))
+    bot.add_cog(Config(bot))

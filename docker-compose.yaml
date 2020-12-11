@@ -9,6 +9,7 @@ services:
     links:
       - db
       - redis
+      - graphite
   db:
     image: postgres:12-alpine
     volumes:
@@ -17,8 +18,16 @@ services:
       POSTGRES_DB: discord
       POSTGRES_PASSWORD: hunter12
       POSTGRES_USER: discord
+    ports:
+      - "5432:5432"
   redis:
     image: redis:alpine
+    ports:
+      - "6379:6379"
+  graphite:
+    image: graphiteapp/graphite-statsd
+    expose:
+      - 8125/udp
 
 volumes:
   postgresdb:

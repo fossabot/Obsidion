@@ -3,7 +3,7 @@
 import logging
 
 import dbl
-from discord.ext import tasks, commands
+from discord.ext import commands, tasks
 
 from obsidion import constants
 from obsidion.bot import Obsidion

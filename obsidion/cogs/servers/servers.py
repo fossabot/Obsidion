@@ -5,19 +5,20 @@ import json
 import discord
 from discord.ext import commands
 from mcsrvstats import (
-    wyncraftClasses,
-    hiveMCStatus,
+    blocksmc,
+    gommehd,
     hiveMCGameStats,
     hiveMCRank,
+    hiveMCStatus,
     manacube,
-    blocksmc,
-    universocraft,
     minesaga,
-    gommehd,
+    universocraft,
     veltpvp,
+    wyncraftClasses,
 )
 
-from obsidion.utils.utils import usernameToUUID
+from obsidion.bot import Obsidion
+from obsidion.utils.utils import get_username, usernameToUUID
 
 hive_con = {
     # "survival_games": "SG",
@@ -55,25 +56,33 @@ hive_con = {
 class Servers(commands.Cog):
     """Server info."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def wyncraft(self, ctx: commands.Context, username: str) -> None:
+    async def wyncraft(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on wynncraft."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"wyncraft_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"wyncraft_{username}"))
         else:
             data = await wyncraftClasses(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"wyncraft_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto Wynncraft or their status is not available."
+                (
+                    f"`{username}` has not logged onto Wynncraft "
+                    "or their status is not available."
+                )
             )
             return
         len_data = len(data["classes"])
@@ -84,7 +93,10 @@ class Servers(commands.Cog):
             icon_url="https://cdn.wynncraft.com/img/wynn.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         for i in range(len_data):
@@ -100,19 +112,30 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def gommehd(self, ctx: commands.Context, username: str) -> None:
+    async def gommehd(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on gommehd."""
         await ctx.trigger_typing()
+        _username = await self.bot.db_pool.fetchval(
+            "SELECT username FROM guild WHERE id = $1", ctx.author.id
+        )
+        if not _username and not username:
+            await ctx.send("Please provide a server or link one using serverlink.")
+            await ctx.send_help(ctx.command)
+            return
+        username = _username if _username else username
         if await self.bot.redis_session.exists(f"gommehd_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"gommehd_{username}"))
         else:
             data = await gommehd(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"gommehd_{username}", json.dumps(data), expire=28800
             )
-        if data == False:
+        if not data:
             await ctx.send(
-                f"`{username}` has not logged onto GommeHD or their status is not available."
+                (
+                    f"`{username}` has not logged onto "
+                    "GommeHD or their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0xF1A90F)
@@ -122,7 +145,10 @@ class Servers(commands.Cog):
             icon_url="https://www.gommehd.net/images/brandmark@3x.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         for game in data["game_stats"]:
@@ -137,19 +163,27 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def veltpvp(self, ctx: commands.Context, username: str) -> None:
+    async def veltpvp(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on veltpvp."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"veltpvp_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"veltpvp_{username}"))
         else:
             data = await veltpvp(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"veltpvp_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto VeltPVP or their status is not available."
+                (
+                    f"`{username}` has not logged onto VeltPVP or "
+                    f"their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0x2E39A7)
@@ -159,38 +193,57 @@ class Servers(commands.Cog):
             icon_url="https://www.veltpvp.com/resources/images/nav-logo.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         embed.add_field(
             name=("VeltPVP Stats"),
             value=(
-                f"Rank: `{data['rank']}`\nLast Seen: `{data['last_seen']}`\nCurrent Status: `{data['current_status']}`\nFirst Joined: `{data['first_joined']}`\nTime Played: `{data['time_played']}`"
+                (
+                    f"Rank: `{data['rank']}`\nLast Seen: `{data['last_seen']}"
+                    f"`\nCurrent Status: `{data['current_status']}`\nFirst Joined: "
+                    f"`{data['first_joined']}`\nTime Played: `{data['time_played']}`"
+                )
             ),
         )
         embed.add_field(
             name=("VeltPVP HCF Stats"),
             value=(
-                f"Kills: `{data['game_stats'][0]['HCF']['Kills']}`\nDeaths: `{data['game_stats'][0]['HCF']['Deaths']}`\nKDR: `{data['game_stats'][0]['HCF']['KDR']}`"
+                (
+                    f"Kills: `{data['game_stats'][0]['HCF']['Kills']}"
+                    f"`\nDeaths: `{data['game_stats'][0]['HCF']['Deaths']}"
+                    f"`\nKDR: `{data['game_stats'][0]['HCF']['KDR']}`"
+                )
             ),
         )
         await ctx.send(embed=embed)
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def blocksmc(self, ctx: commands.Context, username: str) -> None:
+    async def blocksmc(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on blocksmc."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"blocksmc_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"blocksmc_{username}"))
         else:
             data = await blocksmc(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"blocksmc_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto BlocksMC or their status is not available."
+                (
+                    f"`{username}` has not logged onto BlocksMC "
+                    "or their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0x008CD3)
@@ -200,7 +253,10 @@ class Servers(commands.Cog):
             icon_url="https://blocksmc.com/templates3/src/logo-gray-sm.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         for game in data["game_stats"]:
@@ -215,8 +271,13 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def universocraft(self, ctx: commands.Context, username: str) -> None:
+    async def universocraft(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on universocraft."""
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"universocraft_{username}"):
             data = json.loads(
@@ -224,12 +285,15 @@ class Servers(commands.Cog):
             )
         else:
             data = await universocraft(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"universocraft_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto UniversoCraft or their status is not available."
+                (
+                    f"`{username}` has not logged onto UniversoCraft "
+                    "or their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0x82C228)
@@ -239,7 +303,10 @@ class Servers(commands.Cog):
             icon_url="https://www.universocraft.com/favicon.ico",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         for game in data["game_stats"]:
@@ -254,19 +321,27 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def minesaga(self, ctx: commands.Context, username: str) -> None:
+    async def minesaga(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on minesaga."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"minesaga_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"minesaga_{username}"))
         else:
             data = await minesaga(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"minesaga_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto Minesaga or their status is not available."
+                (
+                    f"`{username}` has not logged onto Minesaga "
+                    "or their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0x6696C2)
@@ -276,7 +351,10 @@ class Servers(commands.Cog):
             icon_url="https://www.minesaga.org/favicon.ico",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         for game in data["game_stats"]:
@@ -291,19 +369,27 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def manacube(self, ctx: commands.Context, username: str) -> None:
+    async def manacube(self, ctx: commands.Context, username: str = None) -> None:
         """Get statistics of a player on manacube."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"manacube_{username}"):
             data = json.loads(await self.bot.redis_session.get(f"manacube_{username}"))
         else:
             data = await manacube(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"manacube_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto Minesaga or their status is not available."
+                (
+                    f"`{username}` has not logged onto Minesaga "
+                    "or their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0x11B7C4)
@@ -313,76 +399,128 @@ class Servers(commands.Cog):
             icon_url="https://manacube.com/styles/ndzn/manacube/img/logo-cube.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         embed.add_field(
             name=("Manacube Stats"),
             value=(
-                f"Rank: `{data['rank']}`\nCubits: `{data['cubits']}`\nFirst Seen: `{data['firstSeen']}`\nLast Seen: `{data['lastSeenAgo']}`"
+                (
+                    f"Rank: `{data['rank']}`\nCubits: `{data['cubits']}`\nFirst Seen: "
+                    f"`{data['firstSeen']}`\nLast Seen: `{data['lastSeenAgo']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Parkour Stats"),
             value=(
-                f"Playtime: `{data['parkour']['playtime']}`\nMana: `{data['parkour']['mana']}`\nScore: `{data['parkour']['score']}`\nCourses: `{data['parkour']['courses']}`"
+                (
+                    f"Playtime: `{data['parkour']['playtime']}`\nMana: `"
+                    f"{data['parkour']['mana']}`\nScore: `{data['parkour']['score']}"
+                    f"`\nCourses: `{data['parkour']['courses']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Axtec Stats"),
             value=(
-                f"Playtime: `{data['aztec']['playtime']}`\nMob Kills: `{data['aztec']['mobKills']}`\nMana: `{data['aztec']['mana']}`\nMoney: `{data['aztec']['money']}`"
+                (
+                    f"Playtime: `{data['aztec']['playtime']}`\nMob Kills: "
+                    f"`{data['aztec']['mobKills']}`\nMana: `{data['aztec']['mana']}"
+                    f"`\nMoney: `{data['aztec']['money']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Oasis Stats"),
             value=(
-                f"Playtime: `{data['oasis']['playtime']}`\nMob Kills: `{data['oasis']['mobKills']}`\nMana: `{data['oasis']['mana']}`\nMoney: `{data['oasis']['money']}`"
+                (
+                    f"Playtime: `{data['oasis']['playtime']}`\n"
+                    f"Mob Kills: `{data['oasis']['mobKills']}"
+                    f"`\nMana: `{data['oasis']['mana']}`"
+                    f"\nMoney: `{data['oasis']['money']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Islands Stats"),
             value=(
-                f"Playtime: `{data['islands']['playtime']}`\nMob Kills: `{data['islands']['mobKills']}`\nSilver: `{data['islands']['silver']}`\nMoney: `{data['islands']['money']}`"
+                (
+                    f"Playtime: `{data['islands']['playtime']}`\nMob Kills: `"
+                    f"{data['islands']['mobKills']}`"
+                    f"\nSilver: `{data['islands']['silver']}"
+                    f"`\nMoney: `{data['islands']['money']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Survival Stats"),
             value=(
-                f"Playtime: `{data['survival']['playtime']}`\nMob Kills: `{data['survival']['mobKills']}`\nMoney: `{data['survival']['money']}`\nQuests: `{data['survival']['quests']}`"
+                (
+                    f"Playtime: `{data['survival']['playtime']}`\nMob Kills: `"
+                    f"{data['survival']['mobKills']}`"
+                    f"\nMoney: `{data['survival']['money']}"
+                    f"`\nQuests: `{data['survival']['quests']}`"
+                )
             ),
         )
 
         embed.add_field(
             name=("Manacube Aether Stats"),
             value=(
-                f"Playtime: `{data['aether']['playtime']}`\nMining Level: `{data['aether']['miningLevel']}`\nMoney: `{data['aether']['money']}`\nRebirths: `{data['aether']['rebirths']}`"
+                (
+                    f"Playtime: `{data['aether']['playtime']}`\nMining Level: `"
+                    f"{data['aether']['miningLevel']}`"
+                    f"\nMoney: `{data['aether']['money']}"
+                    f"`\nRebirths: `{data['aether']['rebirths']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Atlas Stats"),
             value=(
-                f"Playtime: `{data['atlas']['playtime']}`\nMining Level: `{data['atlas']['miningLevel']}`\nMoney: `{data['atlas']['money']}`\nRebirths: `{data['aether']['rebirths']}`"
+                (
+                    f"Playtime: `{data['atlas']['playtime']}`\nMining Level: `"
+                    f"{data['atlas']['miningLevel']}`\nMoney: `{data['atlas']['money']}"
+                    f"`\nRebirths: `{data['aether']['rebirths']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube Creative Stats"),
             value=(
-                f"Playtime: `{data['creative']['playtime']}`\nBlocks Placed: `{data['creative']['blocksplaced']}`\nBlocks Broken: `{data['creative']['blocksbroken']}`"
+                (
+                    f"Playtime: `{data['creative']['playtime']}`\nBlocks Placed: `"
+                    f"{data['creative']['blocksplaced']}`\nBlocks Broken: "
+                    f"`{data['creative']['blocksbroken']}`"
+                )
             ),
         )
         embed.add_field(
             name=("Manacube KitPvP Stats"),
             value=(
-                f"Playtime: `{data['kitpvp']['playtime']}`\nLevel: `{data['kitpvp']['level']}`\nMoney: `{data['kitpvp']['money']}`\nKills: `{data['kitpvp']['kills']}`"
+                (
+                    f"Playtime: `{data['kitpvp']['playtime']}`\nLevel: "
+                    f"`{data['kitpvp']['level']}"
+                    f"`\nMoney: `{data['kitpvp']['money']}`\nKills: "
+                    f"`{data['kitpvp']['kills']}`"
+                )
             ),
         )
         await ctx.send(embed=embed)
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hiverank(self, ctx: commands.Context, username: str) -> None:
+    async def hiverank(self, ctx: commands.Context, username: str = None) -> None:
         """View the rank of a player on hiverank."""
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         await ctx.trigger_typing()
         if await self.bot.redis_session.exists(f"hiveMCRank_{username}"):
             data = json.loads(
@@ -390,12 +528,15 @@ class Servers(commands.Cog):
             )
         else:
             data = await hiveMCRank(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"hiveMCRank_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto Hive or there are no ranks available."
+                (
+                    f"`{username}` has not logged onto Hive "
+                    "or there are no ranks available."
+                )
             )
             return
         embed = discord.Embed(color=0xFFAF03)
@@ -405,7 +546,10 @@ class Servers(commands.Cog):
             icon_url="https://www.hivemc.com/img/white-logo.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         embed.add_field(name="rank", value=(f"Rank: `{data['rank'][0]}`"))
@@ -413,21 +557,29 @@ class Servers(commands.Cog):
 
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hivestatus(self, ctx: commands.Context, username: str) -> None:
+    async def hivestatus(self, ctx: commands.Context, username: str = None) -> None:
         """View the status of a player on hive."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
         if await self.bot.redis_session.exists(f"hiveMCStatus_{username}"):
             data = json.loads(
                 await self.bot.redis_session.get(f"hiveMCStatus_{username}")
             )
         else:
             data = await hiveMCStatus(username, ctx.bot.http_session)
-            self.bot.redis_session.set(
+            await self.bot.redis_session.set(
                 f"hiveMCStatus_{username}", json.dumps(data), expire=28800
             )
         if not data:
             await ctx.send(
-                f"`{username}` has not logged onto Hive or their status is not available."
+                (
+                    f"`{username}` has not logged onto Hive or "
+                    "their status is not available."
+                )
             )
             return
         embed = discord.Embed(color=0xFFAF03)
@@ -437,7 +589,10 @@ class Servers(commands.Cog):
             icon_url="https://www.hivemc.com/img/white-logo.png",
         )
         embed.set_thumbnail(
-            url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
         )
         embed.timestamp = ctx.message.created_at
         embed.add_field(
@@ -447,66 +602,88 @@ class Servers(commands.Cog):
         embed.add_field(name="game", value=(f"Game: `{data['status'][0]['game']}`"))
         await ctx.send(embed=embed)
 
+    @staticmethod
+    def cleanup_hive(data: dict) -> dict:
+        """Cleanup hive data.
+
+        Args:
+            data (dict): [description]
+
+        Returns:
+            dict: [description]
+        """
+        del data["stats"][0]["UUID"]
+        if "cached" in data["stats"][0]:
+            del data["stats"][0]["cached"]
+        if "firstLogin" in data["stats"][0]:
+            del data["stats"][0]["firstLogin"]
+        if "lastLogin" in data["stats"][0]:
+            del data["stats"][0]["lastLogin"]
+        if "achievements" in data["stats"][0]:
+            del data["stats"][0]["achievements"]
+        if "title" in data["stats"][0]:
+            del data["stats"][0]["title"]
+
+        return data
+
     @commands.command()
     @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
-    async def hivestats(self, ctx: commands.Context, username: str, game: str) -> None:
+    async def hivestats(
+        self, ctx: commands.Context, game: str, username: str = None
+    ) -> None:
         """Get statistics of a player on hive."""
         await ctx.trigger_typing()
+        username = await get_username(self.bot, username, ctx.author.id)
+        if not username:
+            await ctx.send("Please provide a username or link one using account link.")
+            await ctx.send_help(ctx.command)
+            return
 
-        if game.lower() in hive_con:
-            if await self.bot.redis_session.exists(
-                f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
-            ):
-                data = json.loads(
-                    await self.bot.redis_session.get(
-                        f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
-                    )
-                )
-            else:
-                data = await hiveMCGameStats(
-                    username, hive_con[game.lower()], ctx.bot.http_session
-                )
-                self.bot.redis_session.set(
-                    f"hiveMCGameStats_{hive_con[game.lower()]}_{username}",
-                    json.dumps(data),
-                    expire=28800,
-                )
-            embed = discord.Embed(color=0xFFAF03)
-            embed.set_author(
-                name=f"Hive Stats for {username}",
-                url=f"https://www.hivemc.com/player/{username}",
-                icon_url="https://www.hivemc.com/img/white-logo.png",
-            )
-            embed.set_thumbnail(
-                url=f"https://visage.surgeplay.com/bust/{await usernameToUUID(username, ctx.bot.http_session)}"
-            )
-            embed.timestamp = ctx.message.created_at
-            if not data:
-                await ctx.send("No stats found")
-                return
-            del data["stats"][0]["UUID"]
-            if "cached" in data["stats"][0]:
-                del data["stats"][0]["cached"]
-            if "firstLogin" in data["stats"][0]:
-                del data["stats"][0]["firstLogin"]
-            if "lastLogin" in data["stats"][0]:
-                del data["stats"][0]["lastLogin"]
-            if "achievements" in data["stats"][0]:
-                del data["stats"][0]["achievements"]
-            if "title" in data["stats"][0]:
-                del data["stats"][0]["title"]
-            value = ""
-            for stat in data["stats"][0]:
-                if isinstance(data["stats"][0][stat], list) or isinstance(
-                    data["stats"][0][stat], dict
-                ):
-                    pass
-                else:
-                    value += f"`{stat}`: {data['stats'][0][stat]}\n"
-            embed.add_field(
-                name=f"{game.replace('_', ' ').upper()} Stats",
-                value=value,
-            )
-            await ctx.send(embed=embed)
-        else:
+        if game.lower() not in hive_con:
             await ctx.send("Sorry that game was not recognized as a Hive game")
+            return
+        if await self.bot.redis_session.exists(
+            f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
+        ):
+            data = json.loads(
+                await self.bot.redis_session.get(
+                    f"hiveMCGameStats_{hive_con[game.lower()]}_{username}"
+                )
+            )
+        else:
+            data = await hiveMCGameStats(
+                username, hive_con[game.lower()], ctx.bot.http_session
+            )
+            await self.bot.redis_session.set(
+                f"hiveMCGameStats_{hive_con[game.lower()]}_{username}",
+                json.dumps(data),
+                expire=28800,
+            )
+        if not data:
+            await ctx.send("No stats found")
+            return
+        embed = discord.Embed(color=0xFFAF03)
+        embed.set_author(
+            name=f"Hive Stats for {username}",
+            url=f"https://www.hivemc.com/player/{username}",
+            icon_url="https://www.hivemc.com/img/white-logo.png",
+        )
+        embed.set_thumbnail(
+            url=(
+                f"https://visage.surgeplay.com/bust/"
+                f"{await usernameToUUID(username, self.bot)}"
+            )
+        )
+        embed.timestamp = ctx.message.created_at
+        data = self.cleanup_hive(data)
+        value = ""
+        for stat in data["stats"][0]:
+            if not isinstance(data["stats"][0][stat], list) and not isinstance(
+                data["stats"][0][stat], dict
+            ):
+                value += f"`{stat}`: {data['stats'][0][stat]}\n"
+        embed.add_field(
+            name=f"{game.replace('_', ' ').upper()} Stats",
+            value=value,
+        )
+        await ctx.send(embed=embed)

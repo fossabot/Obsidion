@@ -1,7 +1,9 @@
 """Obsidion Discord Bot."""
 
 import asyncio as _asyncio
+from importlib.metadata import PackageNotFoundError, version  # type: ignore
 import sys as _sys
+
 
 MIN_PYTHON_VERSION = (3, 8, 1)
 
@@ -10,12 +12,6 @@ __all__ = [
     "__version__",
     "_update_event_loop_policy",
 ]
-
-try:
-    from importlib.metadata import version, PackageNotFoundError  # type: ignore
-except ImportError:  # pragma: no cover
-    from importlib_metadata import version, PackageNotFoundError  # type: ignore
-
 
 try:
     __version__ = version(__name__)

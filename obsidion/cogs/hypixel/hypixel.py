@@ -11,12 +11,14 @@ from obsidion.utils.utils import UUIDToUsername
 from obsidion.utils.utils import divide_array
 from obsidion.utils.chat_formatting import humanize_timedelta
 import datetime
+from obsidion.bot import Obsidion
+
 
 
 class hypixel(commands.Cog):
     """Hypixel cog."""
 
-    def __init__(self, bot) -> None:
+    def __init__(self, bot: Obsidion) -> None:
         """Init."""
         self.bot = bot
         self.session = bot.http_session
