@@ -1,35 +1,75 @@
-FROM python:3.8
+# `python-base` sets up all our shared environment variables
+FROM python:3.8.1-slim-buster as python-base
 
-# Create the working directory
-WORKDIR /obsidion
+# python
+ENV PYTHONUNBUFFERED=1 \
+    # prevents python creating .pyc files
+    PYTHONDONTWRITEBYTECODE=1 \
+    \
+    # pip
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    \
+    # poetry
+    # https://python-poetry.org/docs/configuration/#using-environment-variables
+    POETRY_VERSION=1.0.4 \
+    # make poetry install to this location
+    POETRY_HOME="/opt/poetry" \
+    # make poetry create the virtual environment in the project's root
+    # it gets named `.venv`
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    # do not ask any interactive question
+    POETRY_NO_INTERACTION=1 \
+    \
+    # paths
+    # this is where our requirements + virtual environment will live
+    PYSETUP_PATH="/opt/pysetup" \
+    VENV_PATH="/opt/pysetup/.venv"
 
-# Only copying these files here in order to take advantage of Docker cache. We only want the
-# next stage (poetry install) to run if these files change, but not the rest of the app.
-COPY pyproject.toml poetry.lock ./
 
-# install poetry
-RUN pip install "poetry==1.1.4"
+# prepend poetry and venv to path
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
-# Currently poetry install is significantly slower than pip install, so we're creating a
-# requirements.txt output and running pip install with it.
-# Follow this issue: https://github.com/python-poetry/poetry/issues/338
-# Setting --without-hashes because of this issue: https://github.com/pypa/pip/issues/4995
-RUN poetry config virtualenvs.create false \
-    && poetry export --without-hashes -f requirements.txt \
-    |  poetry run pip install -r /dev/stdin \
-    && poetry debug
 
-COPY  . ./
+# `builder-base` stage is used to build deps + create our virtual environment
+FROM python-base as builder-base
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+    # deps for installing poetry
+    curl \
+    # deps for building python deps
+    build-essential
 
-# Because initially we only copy the lock and pyproject file, we can only install the dependencies
-# in the RUN above, as the `packages` portion of the pyproject.toml file is not
-# available at this point. Now, after the whole package has been copied in, we run `poetry install`
-# again to only install packages, scripts, etc. (and thus it should be very quick).
-# See this issue for more context: https://github.com/python-poetry/poetry/issues/1899
-RUN poetry install --no-interaction --no-dev
+# install poetry - respects $POETRY_VERSION & $POETRY_HOME
+RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
-# We're setting the entrypoint to `poetry run` because poetry installed entry points aren't
-# available in the PATH by default, but it is available for `poetry run`
-ENTRYPOINT ["python"]
+# copy project requirement files here to ensure they will be cached.
+WORKDIR $PYSETUP_PATH
+COPY poetry.lock pyproject.toml ./
 
-CMD ["-m", "obsidion"]
+# install runtime deps - uses $POETRY_VIRTUALENVS_IN_PROJECT internally
+RUN poetry install --no-dev
+
+
+# `development` image is used during development / testing
+FROM python-base as development
+WORKDIR $PYSETUP_PATH
+
+# copy in our built poetry + venv
+COPY --from=builder-base $POETRY_HOME $POETRY_HOME
+COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
+
+# quicker install as runtime deps are already installed
+RUN poetry install
+
+# will become mountpoint of our code
+WORKDIR /app
+
+
+# `production` image used for runtime
+FROM python-base as production
+COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
+COPY ./obsidion /app/obsidion/
+WORKDIR /app
+CMD ["python", "-m", "obsidion"]

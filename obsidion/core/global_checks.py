@@ -1,31 +1,16 @@
-"""Checks to run on every command."""
+"""The checks in this module run on every command."""
+from __future__ import annotations
+from discord.ext import commands
+from typing import TYPE_CHECKING
 
-from discord.ext.commands import Context
+if TYPE_CHECKING:
+    from obsidion.core.bot import Obsidion
 
 
-def init_global_checks(bot) -> None:  # noqa: ANN001
-    """Global checks to run."""
-
-    @bot.check_once
-    def minimum_bot_perms(ctx: Context) -> bool:
-        """Too many 403, 401, and 429 Errors can cause bots to get global'd.
-
-        Args:
-            ctx (Context): Message context
-
-        Returns:
-            bool: wether has perms
-        """
-        return ctx.channel.permissions_for(ctx.me).send_messages
+def init_global_checks(bot: Obsidion):
+    """Initiate global checks."""
 
     @bot.check_once
-    def bots(ctx: Context) -> bool:
-        """Check the user is not a bot.
-
-        Args:
-            ctx (Context): Message context
-
-        Returns:
-            bool: wether the author is a bot
-        """
-        return not ctx.author.bot
+    async def check_message_is_eligible_as_command(ctx: commands.Context) -> bool:
+        """Check wether message is eligible."""
+        return await ctx.bot.message_eligible_as_command(ctx.message)

@@ -1,0 +1,5 @@
+2021-01-09 19:30:59,828:INFO:obsidion: Succesfully loaded bot version: 0.4.0
+2021-01-09 19:30:59,847:INFO:obsidion: Set event loop to use uvloop
+2021-01-09 19:30:59,883:INFO:obsidion: Ready to go, spinning up the gears
+2021-01-09 19:30:59,892:INFO:discord.client: Cleaning up tasks.
+2021-01-09 19:30:59,892:INFO:discord.client: Closing the event loop.

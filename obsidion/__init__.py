@@ -1,8 +1,16 @@
-"""Obsidion Discord Bot."""
+"""Obsidion Minecraft Discord Bot."""
 
 import asyncio as _asyncio
-from importlib.metadata import PackageNotFoundError, version  # type: ignore
+from importlib.metadata import PackageNotFoundError, version
 import sys as _sys
+import logging
+
+# Start logging
+from obsidion.core.logging import setup_logging
+
+setup_logging()
+
+log = logging.getLogger("obsidion")
 
 
 MIN_PYTHON_VERSION = (3, 8, 1)
@@ -15,11 +23,21 @@ __all__ = [
 
 try:
     __version__ = version(__name__)
-except PackageNotFoundError:  # pragma: no cover
+    log.info("Succesfully loaded bot version: %s", __version__)
+except PackageNotFoundError:
     __version__ = "unknown"
+    log.warning(
+        'Unable to load bot version, using "unkown", '
+        + "please check your pyproject.toml file"
+    )
 
 # check wether the bot can run
 if _sys.version_info < MIN_PYTHON_VERSION:
+    log.critical(
+        "Python %s is required to run Obsidion, but you have %s! Please update Python.",
+        ".".join(map(str, MIN_PYTHON_VERSION)),
+        _sys.version,
+    )
     print(
         f"Python {'.'.join(map(str, MIN_PYTHON_VERSION))}",
         "is required to run Obsidion, but you have ",
@@ -35,6 +53,10 @@ def _update_event_loop_policy() -> None:
         try:
             import uvloop as _uvloop
         except ImportError:
+            log.info(
+                "Unable to set event loop to use uvloop, using slower default instead."
+            )
             pass
         else:
+            log.info("Set event loop to use uvloop")
             _asyncio.set_event_loop_policy(_uvloop.EventLoopPolicy())

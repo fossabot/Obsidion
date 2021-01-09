@@ -18,12 +18,12 @@ services:
       POSTGRES_DB: discord
       POSTGRES_PASSWORD: hunter12
       POSTGRES_USER: discord
+    ports:
+      - "5432"
   redis:
     image: redis:alpine
   graphite:
-    image: graphiteapp/graphite-statsd
-    expose:
-      - 8125/udp
+    image: graphiteapp/graphite-statsd:latest
 
 volumes:
   postgresdb:
