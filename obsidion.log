@@ -1,7 +1,0 @@
-2021-01-09 19:53:41,841:INFO:obsidion: Succesfully loaded bot version: 0.4.0
-2021-01-09 19:53:41,861:INFO:obsidion: Set event loop to use uvloop
-2021-01-09 19:53:41,881:INFO:obsidion: Ready to go, spinning up the gears
-2021-01-09 19:53:41,891:INFO:discord.client: logging in using static token
-2021-01-09 19:53:42,934:INFO:discord.gateway: Shard ID 0 has sent the IDENTIFY payload.
-2021-01-09 19:53:43,437:INFO:discord.gateway: Shard ID 0 has connected to Gateway: ["gateway-prd-main-p2c0",{"micros":79874,"calls":["discord-sessions-prd-2-85",{"micros":74430,"calls":["start_session",{"micros":51156,"calls":["api-prd-main-gzj7",{"micros":48543,"calls":["get_user",{"micros":2734},"add_authorized_ip",{"micros":5736},"get_guilds",{"micros":10783},"coros_wait",{"micros":1}]}]},"guilds_connect",{"micros":2,"calls":[]},"presence_connect",{"micros":7214,"calls":[]}]}]}] (Session ID: 8f073cf4858549a312b22c550f61a5a4).
-2021-01-09 19:53:43,452:INFO:obsidion: Connected to Discord. Getting ready...
