@@ -54,8 +54,6 @@ class Dev(commands.Cog):
             )
         else:
             await ctx.reply(("The cog `{module}` has been succesfully unloaded"))
-                )
-            )
 
     @commands.command(name="reload")
     @commands.is_owner()
