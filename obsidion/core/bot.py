@@ -1,6 +1,4 @@
 """Main bot file."""
-from datetime import datetime
-
 import discord
 from discord.ext.commands import AutoShardedBot
 

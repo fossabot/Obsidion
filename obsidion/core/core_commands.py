@@ -64,7 +64,7 @@ class Core(commands.Cog):
             "(c) Obsidion-dev"
         ).format(obsidion_repo, author_repo, org_repo, support_server_url)
 
-        embed = discord.Embed()
+        embed = discord.Embed(color=self.bot.color)
         embed.add_field(name=("Instance owned by"), value=str(owner))
         embed.add_field(name="Python", value=python_version)
         embed.add_field(name="discord.py", value=dpy_version)
@@ -94,13 +94,22 @@ class Core(commands.Cog):
     @commands.command()
     async def invite(self, ctx: commands.Context) -> None:
         """Invite the bot to your server."""
+        perms = discord.Permissions()
+        perms.add_reactions = True
+        perms.send_messages = True
+        perms.read_messages = True
+        perms.use_external_emojis = True
+        url = discord.utils.oauth_url(
+            self.bot.user.id,
+            permissions=perms,
+            redirect_uri="https://discord.obsidion-dev.com",
+        )
         embed = discord.Embed(
             description=(
-                f"**[Click here to add {self.bot.user.name} to your "
-                "Discord server](https://discordapp.com/oauth2/authorize?client_id="
-                "691589447074054224&scope=bot&permissions=314432)**"
+                f"You can invite {self.bot.user.name} to your Discord server by"
+                f" [clicking here]({url})."
             ),
-            color=0x00FF00,
+            color=self.bot.color,
         )
 
         await ctx.send(embed=embed)
@@ -192,6 +201,7 @@ class Core(commands.Cog):
                 "license is available to you at "
                 "<https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
             ),
+            color=self.bot.color
         )
 
         await ctx.send(embed=embed)
