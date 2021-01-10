@@ -32,7 +32,7 @@ class Events(commands.Cog):
             permissions=perms,
             redirect_uri="https://discord.obsidion-dev.com",
         )
-        self._invite = url
+        self.bot._invite = url
 
     @commands.Cog.listener("on_ready")
     async def on_ready(self):

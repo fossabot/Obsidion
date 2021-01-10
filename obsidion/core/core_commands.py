@@ -6,6 +6,7 @@ import contextlib
 import logging
 import inspect
 import os
+import re
 
 
 import discord
@@ -13,6 +14,7 @@ from obsidion import __version__
 from .utils.chat_formatting import (
     humanize_timedelta,
     pagify,
+    box,
 )
 from .utils.predicates import MessagePredicate
 
@@ -95,20 +97,10 @@ class Core(commands.Cog):
     @commands.command()
     async def invite(self, ctx: commands.Context) -> None:
         """Invite the bot to your server."""
-        perms = discord.Permissions()
-        perms.add_reactions = True
-        perms.send_messages = True
-        perms.read_messages = True
-        perms.use_external_emojis = True
-        url = discord.utils.oauth_url(
-            self.bot.user.id,
-            permissions=perms,
-            redirect_uri="https://discord.obsidion-dev.com",
-        )
         embed = discord.Embed(
             description=(
                 f"You can invite {self.bot.user.name} to your Discord server by"
-                f" [clicking here]({url})."
+                f" [clicking here]({self.bot._invite})."
             ),
             color=self.bot.color,
         )
@@ -272,3 +264,27 @@ class Core(commands.Cog):
             if not silently:
                 await ctx.send("Restarting...")
         await ctx.bot.shutdown(restart=True)
+
+    @commands.command()
+    @commands.is_owner()
+    async def traceback(self, ctx: commands.Context, public: bool = False):
+        """Sends to the owner the last command exception that has occurred.
+
+        If public (yes is specified), it will be sent to the chat instead."""
+        if not public:
+            destination = ctx.author
+        else:
+            destination = ctx.channel
+
+        if self.bot._last_exception:
+            for page in pagify(self.bot._last_exception, shorten_by=10):
+                try:
+                    await destination.send(box(page, lang="py"))
+                except discord.HTTPException:
+                    await ctx.channel.send(
+                        "I couldn't send the traceback message to you in DM. "
+                        "Either you blocked me or you disabled DMs in this server."
+                    )
+                    return
+        else:
+            await ctx.send(("No exception has occurred yet."))
