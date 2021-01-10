@@ -1,3 +1,4 @@
+"""Core Commands."""
 import datetime
 import sys
 import asyncio
@@ -10,7 +11,6 @@ import os
 import discord
 from obsidion import __version__
 from .utils.chat_formatting import (
-    box,
     humanize_timedelta,
     pagify,
 )
@@ -26,6 +26,7 @@ class Core(commands.Cog):
     """Commands related to core functions."""
 
     def __init__(self, bot):
+        """Init Core Commands."""
         self.bot = bot
 
     @commands.command(hidden=True)
@@ -163,6 +164,7 @@ class Core(commands.Cog):
             await self.leave_confirmation(guilds[pred.result], ctx)
 
     async def leave_confirmation(self, guild, ctx):
+        """Leave confirmation."""
         if guild.owner.id == ctx.bot.user.id:
             await ctx.send(("I cannot leave a guild I am the owner of."))
             return
@@ -184,9 +186,7 @@ class Core(commands.Cog):
 
     # Removing this command from forks is a violation of the AGPLv3 under which it is licensed.
     # Otherwise interfering with the ability for this command to be accessible is also a violation.
-    @commands.command(
-        name="licenseinfo",
-    )
+    @commands.command(name="licenseinfo", aliases=["license"])
     async def license_info_command(self, ctx: commands.Context):
         """
         Get info about Obsidion's licenses.
@@ -201,7 +201,7 @@ class Core(commands.Cog):
                 "license is available to you at "
                 "<https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
             ),
-            color=self.bot.color
+            color=self.bot.color,
         )
 
         await ctx.send(embed=embed)
@@ -215,7 +215,7 @@ class Core(commands.Cog):
         or by spaces.
         """  # noqa: DAR101, DAR201
         source_url = "https://github.com/Obsidion-dev/Obsidion"
-        branch = "V0.4"
+        branch = "master"
         if command is None:
             return await ctx.send(source_url)
 
@@ -248,3 +248,27 @@ class Core(commands.Cog):
             f"-L{firstlineno + len(lines) - 1}>"
         )
         await ctx.send(final_url)
+
+    @commands.command(name="shutdown")
+    @commands.is_owner()
+    async def _shutdown(self, ctx: commands.Context, silently: bool = False):
+        """Shuts down the bot."""
+        wave = "\N{WAVING HAND SIGN}"
+        skin = "\N{EMOJI MODIFIER FITZPATRICK TYPE-3}"
+        with contextlib.suppress(discord.HTTPException):
+            if not silently:
+                await ctx.send("Shutting down... " + wave + skin)
+        await ctx.bot.shutdown()
+
+    @commands.command(name="restart")
+    @commands.is_owner()
+    async def _restart(self, ctx: commands.Context, silently: bool = False):
+        """Attempts to restart Obsidion.
+
+        Makes [botname] quit with exit code 26.
+        The restart is not guaranteed: it must be dealt
+        with by the process manager in use."""
+        with contextlib.suppress(discord.HTTPException):
+            if not silently:
+                await ctx.send("Restarting...")
+        await ctx.bot.shutdown(restart=True)

@@ -1,3 +1,4 @@
+"""Development Commands."""
 import ast
 import asyncio
 import aiohttp
@@ -22,9 +23,10 @@ START_CODE_BLOCK_RE = re.compile(r"^((```py)(?=\s)|(```))")
 
 
 class Dev(commands.Cog):
-    """Various development focused utilities."""
+    """Development Commands."""
 
     def __init__(self, bot):
+        """Init Development Cog."""
         self._last_result = None
         self.sessions = {}
         self.bot = bot
@@ -70,13 +72,15 @@ class Dev(commands.Cog):
 
     @staticmethod
     def async_compile(source, filename, mode):
+        """Async Compile."""
         return compile(
             source, filename, mode, flags=ast.PyCF_ALLOW_TOP_LEVEL_AWAIT, optimize=0
         )
 
     @staticmethod
     async def maybe_await(coro):
-        for i in range(2):
+        """Maybe await code."""
+        for _ in range(2):
             if inspect.isawaitable(coro):
                 coro = await coro
             else:

@@ -3,6 +3,7 @@ import logging
 
 from discord import Intents, AllowedMentions, ActivityType, Activity
 from discord.ext.commands import when_mentioned_or
+from obsidion.core.help import Help
 
 from obsidion import _update_event_loop_policy
 from obsidion.core.bot import Obsidion
@@ -45,7 +46,7 @@ def main():
         "case_insensitive": True,
         "description": "",
         "self_bot": False,
-        # "help_command": None,
+        "help_command": Help(),
         "owner_ids": [],
         "activity": activity,
         "intents": intents,

@@ -23,6 +23,7 @@ pydantic = {extras = ["dotenv"], version = "^1.7.3"}
 python = "^3.8"
 uvloop = "^0.14.0"
 SQLAlchemy = "^1.3.22"
+asyncpixel = "^1.0.1"
 
 [tool.poetry.dev-dependencies]
 Pygments = "^2.7.2"

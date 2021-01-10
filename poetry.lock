@@ -118,6 +118,18 @@ docs = ["Sphinx (>=1.7.3,<1.8.0)", "sphinxcontrib-asyncio (>=0.2.0,<0.3.0)", "sp
 test = ["pycodestyle (>=2.5.0,<2.6.0)", "flake8 (>=3.7.9,<3.8.0)", "uvloop (>=0.14.0,<0.15.0)"]
 
 [[package]]
+name = "asyncpixel"
+version = "1.0.1"
+description = "Asyncpixel"
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[package.dependencies]
+aiohttp = ">=3.6.2,<4.0.0"
+pydantic = ">=1.7.3,<2.0.0"
+
+[[package]]
 name = "asyncrcon"
 version = "1.1.4"
 description = "Client implementation of Minecrafts RCON protocol using asyncio"
@@ -1162,7 +1174,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "da1488c396c9e05d0046d0b74b337a2dd6269260f338053178d503866e754041"
+content-hash = "af9abed2e0c88784e2c3d41b52a4ca2387b37017f4c5ef96d213f167692dbd9d"
 
 [metadata.files]
 aiodns = [
@@ -1262,6 +1274,10 @@ asyncpg = [
     {file = "asyncpg-0.21.0-cp38-cp38-win32.whl", hash = "sha256:615c7e3adb46e1f2e3aff45e4ee9401b4f24f9f7153e5530a0753369be72a5c6"},
     {file = "asyncpg-0.21.0-cp38-cp38-win_amd64.whl", hash = "sha256:823eca36108bd64a8600efe7bbf1230aa00f2defa3be42852f3b61ab40cf1226"},
     {file = "asyncpg-0.21.0.tar.gz", hash = "sha256:53cb2a0eb326f61e34ef4da2db01d87ce9c0ebe396f65a295829df334e31863f"},
+]
+asyncpixel = [
+    {file = "asyncpixel-1.0.1-py3-none-any.whl", hash = "sha256:e47eb6e66c47cabac68dc11646cdc5f9f162182acd650d1c26b7074aafc38519"},
+    {file = "asyncpixel-1.0.1.tar.gz", hash = "sha256:3715b2107a65d05f5b2c66906c1c3fa887a4de34f0948cef5cab5aa821207de9"},
 ]
 asyncrcon = [
     {file = "asyncrcon-1.1.4-py3-none-any.whl", hash = "sha256:fe748aa25980859399b4638f6ad7d1166bca45efb495fa3963ae1c84e30ed752"},

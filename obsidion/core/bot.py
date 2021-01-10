@@ -1,6 +1,8 @@
 """Main bot file."""
 import discord
 from discord.ext.commands import AutoShardedBot
+import sys
+from enum import IntEnum
 
 from .global_checks import init_global_checks
 from .core_commands import Core
@@ -15,14 +17,16 @@ class Obsidion(AutoShardedBot):
         """Initialise bot with args passed through."""
         super().__init__(*args, **kwargs)
 
+        self._shutdown_mode = ExitCodes.CRITICAL
         self.uptime = None
         self.color = discord.Embed.Empty
         self._last_exception = None
+        self._invite = None
 
     async def pre_flight(self):
         init_global_checks(self)
 
-        # Load important cogsw
+        # Load important cogs
         self.add_cog(Events(self))
         self.add_cog(Core(self))
         if get_settings().DEV:
@@ -80,3 +84,31 @@ class Obsidion(AutoShardedBot):
         #     return False
 
         return True
+
+    async def shutdown(self, *, restart: bool = False):
+        """Gracefully quit Red.
+
+        The program will exit with code :code:`0` by default.
+
+        Parameters
+        ----------
+        restart : bool
+            If :code:`True`, the program will exit with code :code:`26`. If the
+            launcher sees this, it will attempt to restart the bot.
+
+        """
+        if not restart:
+            self._shutdown_mode = ExitCodes.SHUTDOWN
+        else:
+            self._shutdown_mode = ExitCodes.RESTART
+
+        await self.logout()
+        sys.exit(self._shutdown_mode)
+
+
+class ExitCodes(IntEnum):
+    # This needs to be an int enum to be used
+    # with sys.exit
+    CRITICAL = 1
+    SHUTDOWN = 0
+    RESTART = 26

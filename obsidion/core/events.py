@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 import traceback
+import discord
 
 from discord.ext import commands
 
@@ -20,6 +21,18 @@ class Events(commands.Cog):
     async def on_connect(self):
         if self.bot.uptime is None:
             log.info("Connected to Discord. Getting ready...")
+
+        perms = discord.Permissions()
+        perms.add_reactions = True
+        perms.send_messages = True
+        perms.read_messages = True
+        perms.use_external_emojis = True
+        url = discord.utils.oauth_url(
+            self.bot.user.id,
+            permissions=perms,
+            redirect_uri="https://discord.obsidion-dev.com",
+        )
+        self._invite = url
 
     @commands.Cog.listener("on_ready")
     async def on_ready(self):
@@ -77,24 +90,6 @@ class Events(commands.Cog):
             )
             self.bot._last_exception = exception_log
             await ctx.send(inline(message))
-        # elif isinstance(error, commands.CommandNotFound):
-        #     help_settings = await HelpSettings.from_context(ctx)
-        #     fuzzy_commands = await fuzzy_command_search(
-        #         ctx,
-        #         commands=RedHelpFormatter.help_filter_func(
-        #             ctx, self.bot.walk_commands(), help_settings=help_settings
-        #         ),
-        #     )
-        #     if not fuzzy_commands:
-        #         pass
-        #     elif await ctx.embed_requested():
-        #         await ctx.send(
-        #             embed=await format_fuzzy_results(ctx, fuzzy_commands, embed=True)
-        #         )
-        #     else:
-        #         await ctx.send(
-        #             await format_fuzzy_results(ctx, fuzzy_commands, embed=False)
-        #         )
         elif isinstance(error, commands.BotMissingPermissions):
             if bin(error.missing.value).count("1") == 1:  # Only one perm missing
                 msg = (
@@ -105,9 +100,6 @@ class Events(commands.Cog):
                     "I require {permission_list} permissions to execute that command."
                 ).format(permission_list=format_perms_list(error.missing))
             await ctx.send(msg)
-        elif isinstance(error, commands.UserFeedbackCheckFailure):
-            if error.message:
-                await ctx.send(error.message)
         elif isinstance(error, commands.NoPrivateMessage):
             await ctx.send(("That command is not available in DMs."))
         elif isinstance(error, commands.PrivateMessageOnly):
