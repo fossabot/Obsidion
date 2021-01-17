@@ -10,6 +10,8 @@ services:
       - db
       - redis
       - graphite
+    env_file:
+      - .env
   db:
     image: postgres:12-alpine
     volumes:

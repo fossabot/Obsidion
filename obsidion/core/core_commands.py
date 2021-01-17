@@ -7,6 +7,7 @@ import logging
 import inspect
 import os
 import re
+from typing import List
 
 
 import discord
@@ -131,8 +132,10 @@ class Core(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def servers(self, ctx: commands.Context):
-        """Lists and allows [botname] to leave servers."""
-        guilds = sorted(list(self.bot.guilds), key=lambda s: s.name.lower())
+        """Lists and allows Obsidion to leave servers."""
+        guilds: List[discord.guild.Guild] = sorted(
+            list(self.bot.guilds), key=lambda s: s.name.lower()
+        )
         msg = ""
         responses = []
         for i, server in enumerate(guilds, 1):
@@ -153,9 +156,10 @@ class Core(commands.Cog):
             except discord.errors.NotFound:
                 pass
         else:
+            print(type((guilds[0])))
             await self.leave_confirmation(guilds[pred.result], ctx)
 
-    async def leave_confirmation(self, guild, ctx):
+    async def leave_confirmation(self, guild, ctx: commands.Context):
         """Leave confirmation."""
         if guild.owner.id == ctx.bot.user.id:
             await ctx.send(("I cannot leave a guild I am the owner of."))

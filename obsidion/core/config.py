@@ -3,7 +3,8 @@
 from uuid import UUID
 from functools import lru_cache
 
-from pydantic import BaseSettings, HttpUrl, PositiveInt
+from pydantic import BaseSettings, HttpUrl, PositiveInt, RedisDsn, PostgresDsn
+from pydantic.color import Color
 
 
 class Settings(BaseSettings):
@@ -18,15 +19,10 @@ class Settings(BaseSettings):
     STACK_TRACE_CHANNEL: PositiveInt = None
     FEEDBACK_CHANNEL: PositiveInt = None
     BUG_CHANNEL: PositiveInt = None
-    DB_USERNAME: str = "discord"
-    DB_HOST: str = "db"
-    DB_PASSWORD: str = "hunter12"
-    DB_DATABASE: str = "discord"
-    DB_PORT: PositiveInt = 5432
-    REDIS_HOST: str = "redis"
-    REDIS_PORT: PositiveInt = 6379
-    REDIS_PASSWORD: str = None
+    DB: PostgresDsn = None
+    REDIS: RedisDsn = None
     DEV: bool = False
+    COLOR: Color = None
 
     class Config:
         """Config for pydantic."""

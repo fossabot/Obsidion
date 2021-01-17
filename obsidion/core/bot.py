@@ -3,6 +3,8 @@ import discord
 from discord.ext.commands import AutoShardedBot
 import sys
 from enum import IntEnum
+import aioredis
+import asyncpg
 
 from .global_checks import init_global_checks
 from .core_commands import Core
@@ -22,9 +24,14 @@ class Obsidion(AutoShardedBot):
         self.color = discord.Embed.Empty
         self._last_exception = None
         self._invite = None
+        self.cache = None
+        self.db = None
 
     async def pre_flight(self):
         init_global_checks(self)
+
+        self.cache = await aioredis.create_redis_pool(str(get_settings().REDIS))
+        self.db = await asyncpg.create_pool(str(get_settings().DB))
 
         # Load important cogs
         self.add_cog(Events(self))
