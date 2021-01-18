@@ -24,13 +24,13 @@ class Obsidion(AutoShardedBot):
         self.color = discord.Embed.Empty
         self._last_exception = None
         self._invite = None
-        self.cache = None
+        self.redis = None
         self.db = None
 
     async def pre_flight(self):
         init_global_checks(self)
 
-        self.cache = await aioredis.create_redis_pool(str(get_settings().REDIS))
+        self.redis = await aioredis.create_redis_pool(str(get_settings().REDIS))
         self.db = await asyncpg.create_pool(str(get_settings().DB))
 
         # Load important cogs

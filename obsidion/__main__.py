@@ -8,6 +8,7 @@ from obsidion.core.help import Help
 from obsidion import _update_event_loop_policy
 from obsidion.core.bot import Obsidion
 from obsidion.core import get_settings
+from obsidion.core.config import prefix_callable
 
 _update_event_loop_policy()
 
@@ -20,8 +21,8 @@ async def get_prefix(bot, message):
         # Use default prefix in DM's
         return when_mentioned_or(get_settings().DEFAULT_PREFIX)(bot, message)
     else:
-        # extras = await prefixes_for(message.guild)
-        extras = [get_settings().DEFAULT_PREFIX]
+        extras = await prefix_callable(bot, message.guild)
+        # extras = [get_settings().DEFAULT_PREFIX]
         return when_mentioned_or(*extras)(bot, message)
 
 

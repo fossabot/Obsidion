@@ -24,6 +24,7 @@ python = "^3.8"
 uvloop = "^0.14.0"
 SQLAlchemy = "1.4.0b1"
 asyncpixel = "^1.0.1"
+psycopg2-binary = "^2.8.6"
 
 [tool.poetry.dev-dependencies]
 Pygments = "^2.7.2"
