@@ -7,7 +7,6 @@ import logging
 from pydantic import BaseSettings, HttpUrl, PositiveInt, RedisDsn, PostgresDsn
 from pydantic.color import Color
 import discord
-import json
 
 log = logging.getLogger("obsidion")
 
