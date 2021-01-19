@@ -3,5 +3,7 @@ project_identifier_env: CROWDIN_PROJECT_ID
 base_path: ./obsidion/
 preserve_hierarchy: true
 files:
+  - source: cogs/**/messages.pot
+    translation: /%original_path%/%locale%.po
   - source: core/**/messages.pot
     translation: /%original_path%/%locale%.po
