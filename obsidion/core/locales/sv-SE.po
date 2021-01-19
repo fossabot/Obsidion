@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
 "POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:16\n"
+"PO-Revision-Date: 2021-01-19 15:24\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "MIME-Version: 1.0\n"
@@ -20,112 +20,117 @@ msgstr ""
 #: obsidion/core/core_commands.py:32
 #, docstring
 msgid "Commands related to core functions."
-msgstr ""
+msgstr "Kommandon som är relaterade till kärnfunktioner."
 
 #: obsidion/core/core_commands.py:40
 #, docstring
 msgid "Pong."
-msgstr ""
+msgstr "Pong."
 
 #: obsidion/core/core_commands.py:45
 #, docstring
 msgid "Shows info about Obsidion."
-msgstr ""
+msgstr "Visar info om Obsidion."
 
 #: obsidion/core/core_commands.py:65
 msgid "This bot is an instance of [Obsidion, an open source Discord bot]({}) created by [Darkflame72]({}) and [improved by many]({}).\n\n"
 "Obsidion is backed by a passionate community who contributes and creates content for everyone to enjoy. [Join us today]({}) and help us improve!\n\n"
 "(c) Obsidion-dev"
-msgstr ""
+msgstr "Den här boten är en förekomst av [ Obsidion, en öppen källkod ] ({ }) som skapats av [Darkflame72]({ }) och [ förbättrats med många ] ({ }).\n\n"
+"Obsidion stöds av en passionerad gemenskap som bidrar och skapar innehåll för alla att njuta av. [ Delta i dag ] ({ }) och hjälp oss att förbättra!\n\n"
+"(c) Obsidion-dev"
 
 #: obsidion/core/core_commands.py:83
 msgid "Bringing joy since 23rd March 2020 (over {} days ago!)"
-msgstr ""
+msgstr "Glädjedödare sedan 23 mars 2020 (över { } dagar sedan!)"
 
 #: obsidion/core/core_commands.py:91
 #, docstring
 msgid "Shows Obsidion's uptime."
-msgstr ""
+msgstr "Visar Obsidions uptid."
 
 #: obsidion/core/core_commands.py:94
 msgid "Less than one second"
-msgstr ""
+msgstr "Mindre än en sekund"
 
 #: obsidion/core/core_commands.py:96
 msgid "Been up for: **{time_quantity}** (since {timestamp} UTC)"
-msgstr ""
+msgstr "Varit uppe för: **{time_quantity}** (sedan {timestamp} UTC)"
 
 #: obsidion/core/core_commands.py:103
 #, docstring
 msgid "Invite the bot to your server."
-msgstr ""
+msgstr "Bjud in roboten till servern."
 
 #: obsidion/core/core_commands.py:105
 msgid "You can invite {name} to your Discord server by [clicking here]({invite})."
-msgstr ""
+msgstr "Du kan bjuda in {name} till Discord-servern genom att [ klicka här ] ({invite})."
 
 #: obsidion/core/core_commands.py:118
 #, docstring
 msgid "Leaves the current server."
-msgstr ""
+msgstr "Sparar den aktuella servern."
 
 #: obsidion/core/core_commands.py:119
 msgid "Are you sure you want me to leave this server? (y/n)"
-msgstr ""
+msgstr "Är du säker på att du vill att jag ska lämna den här servern? (j/n)"
 
 #: obsidion/core/core_commands.py:125 obsidion/core/core_commands.py:180
 msgid "Response timed out."
-msgstr ""
+msgstr "Tidsgräns överskreds."
 
 #: obsidion/core/core_commands.py:129
 msgid "Alright. Bye :wave:"
-msgstr ""
+msgstr "Då så. Bye :wave:"
 
 #: obsidion/core/core_commands.py:130
 msgid "Leaving guild '{}'"
-msgstr ""
+msgstr "Lämnar guild '{ }'"
 
 #: obsidion/core/core_commands.py:133
 msgid "Alright, I'll stay then. :)"
-msgstr ""
+msgstr "Okej, jag stannar då. :)"
 
 #: obsidion/core/core_commands.py:138
 #, docstring
 msgid "Lists and allows [botname] to leave servers."
-msgstr ""
+msgstr "Listor och tillåter [botname] att lämna servrar."
 
 #: obsidion/core/core_commands.py:149
 msgid "To leave a server, just type its number."
-msgstr ""
+msgstr "Om du vill lämna en server skriver du bara dess nummer."
 
 #: obsidion/core/core_commands.py:164
 msgid "I cannot leave a guild I am the owner of."
-msgstr ""
+msgstr "Jag kan inte lämna ett gille som jag är ägare till."
 
 #: obsidion/core/core_commands.py:168
 msgid "Are you sure you want me to leave {}? (yes/no)"
-msgstr ""
+msgstr "Är du säker på att du vill att jag ska lämna { }? (ja/nej)"
 
 #: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
 #: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
-msgstr ""
+msgstr "-Okej."
 
 #: obsidion/core/core_commands.py:178
 msgid "Alright then."
-msgstr ""
+msgstr "Okej då."
 
 #: obsidion/core/core_commands.py:186
 #, docstring
 msgid "\n"
 "        Get info about Obsidion's licenses.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Hämta information om Obsidions licenser.\n"
+"        "
 
 #: obsidion/core/core_commands.py:191
 msgid "This bot is an instance of the Obsidion Discord Bot.\n"
 "Obsidion is an open source application made available to the public and licensed under the GNU AGPL v3. The full text of this license is available to you at <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
-msgstr ""
+msgstr "Den här boten är en förekomst av Obsidion Discord Bot.\n"
+"Obsidion är en öppen källkod som görs tillgänglig för allmänheten och licensieras enligt GNU AGPL v3. Den fullständiga texten till licensen är tillgänglig för dig på <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
 
 #: obsidion/core/core_commands.py:206
 #, docstring
@@ -134,12 +139,16 @@ msgid "Displays my full source code or for a specific command.\n\n"
 "        periods, e.g. account.link for the link subcommand of the account command\n"
 "        or by spaces.\n"
 "        "
-msgstr ""
+msgstr "Visar min fullständiga källkod eller för ett visst kommando.\n\n"
+"        För att visa källkoden för ett underkommando kan du separera den med\n"
+"        -perioder, t.ex. account.link för länkunderkommandot för kontokommandot\n"
+"        eller med blanktecken.\n"
+"        "
 
 #: obsidion/core/core_commands.py:250
 #, docstring
 msgid "Shuts down the bot."
-msgstr ""
+msgstr "Det stänger ner roboten."
 
 #: obsidion/core/core_commands.py:261
 #, docstring
@@ -147,26 +156,30 @@ msgid "Attempts to restart Obsidion.\n\n"
 "        Makes [botname] quit with exit code 26.\n"
 "        The restart is not guaranteed: it must be dealt\n"
 "        with by the process manager in use."
-msgstr ""
+msgstr "Försök att starta om Obsidion.\n\n"
+"        Gör att [botname] avslutas med exit-kod 26.\n"
+"        Omstarten är inte garanterad. Den måste behandlas\n"
+"        med den processhanterare som används."
 
 #: obsidion/core/core_commands.py:274
 #, docstring
 msgid "Sends to the owner the last command exception that has occurred.\n\n"
 "        If public (yes is specified), it will be sent to the chat instead."
-msgstr ""
+msgstr "Skickar till ägaren det sista kommandoundantag som har inträffat.\n\n"
+"        Om allmänheten (ja är angivet) skickas den till chatten i stället."
 
 #: obsidion/core/core_commands.py:288
 msgid "I couldn't send the traceback message to you in DM. Either you blocked me or you disabled DMs in this server."
-msgstr ""
+msgstr "Jag kunde inte skicka spårningsmeddelandet till dig i DM. Antingen blockerade du mig eller så avaktiverade du DM på den här servern."
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
-msgstr ""
+msgstr "Inget undantag har inträffat ännu."
 
 #: obsidion/core/core_commands.py:299
 #, docstring
 msgid "Changes Obsidion's settings."
-msgstr ""
+msgstr "Ändrar Obsidions inställningar."
 
 #: obsidion/core/core_commands.py:304
 #, docstring
@@ -175,98 +188,103 @@ msgid "\n"
 "        Acceptable values for the colour parameter can be found at:\n\n"
 "        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Anger en standardfärg som ska användas för boggarnas inbäddar.\n\n"
+"        Acceptabla värden för färgparametrar finns på:\n\n"
+"        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
+"        "
 
 #: obsidion/core/core_commands.py:314
 msgid "The color has been reset."
-msgstr ""
+msgstr "Färgen har återställts."
 
 #: obsidion/core/core_commands.py:317
 msgid "The color has been set."
-msgstr ""
+msgstr "Färgen har angetts."
 
 #: obsidion/core/core_commands.py:322
 #, docstring
 msgid "Sets [botname]'s avatar\n\n"
 "        Supports either an attachment or an image URL."
-msgstr ""
+msgstr "Ställer in [botname]' s avatar\n\n"
+"        Hanterar antingen en bilaga eller en bild-URL."
 
 #: obsidion/core/core_commands.py:336
 msgid "That URL is invalid."
-msgstr ""
+msgstr "Den URL-adressen är ogiltig."
 
 #: obsidion/core/core_commands.py:339
 msgid "Something went wrong while trying to get the image."
-msgstr ""
+msgstr "Det var nåt som gick fel när jag försökte få bilden."
 
 #: obsidion/core/core_commands.py:350
 msgid "Failed. Remember that you can edit my avatar up to two times a hour. The URL or attachment must be a valid image in either JPG or PNG format."
-msgstr ""
+msgstr "Misslyckades. Kom ihåg att du kan redigera min avatar upp till två gånger i timmen. URL-adressen eller bilagan måste vara en giltig bild i JPG-eller PNG-format."
 
 #: obsidion/core/core_commands.py:357
 msgid "JPG / PNG format only."
-msgstr ""
+msgstr "Endast JPG-/PNG-format."
 
 #: obsidion/core/core_commands.py:364
 #, docstring
 msgid "Removes [botname]'s avatar."
-msgstr ""
+msgstr "Tar bort [botname]' s avatar."
 
 #: obsidion/core/core_commands.py:367
 msgid "Avatar removed."
-msgstr ""
+msgstr "Avatar avlägsnat sig."
 
 #: obsidion/core/core_commands.py:373
 #, docstring
 msgid "Sets [botname]'s playing status."
-msgstr ""
+msgstr "Ställer in [botname]' s spelstatus."
 
 #: obsidion/core/core_commands.py:392
 msgid "Status set to ``Playing {game.name}``."
-msgstr ""
+msgstr "Status inställd på: \"Planera {game.name}\"."
 
 #: obsidion/core/core_commands.py:395
 msgid "Game cleared."
-msgstr ""
+msgstr "Spelet rensat"
 
 #: obsidion/core/core_commands.py:401
 #, docstring
 msgid "Sets [botname]'s listening status."
-msgstr ""
+msgstr "Ställer in [botname]' s lyssningsstatus."
 
 #: obsidion/core/core_commands.py:417
 msgid "Status set to ``Listening to {listening}``."
-msgstr ""
+msgstr "Status inställd på: \"Lyssning till {listening}\"."
 
 #: obsidion/core/core_commands.py:422
 msgid "Listening cleared."
-msgstr ""
+msgstr "Lyssnande rensad."
 
 #: obsidion/core/core_commands.py:428
 #, docstring
 msgid "Sets [botname]'s watching status."
-msgstr ""
+msgstr "Ställer in [botname]: s bevakningsstatus."
 
 #: obsidion/core/core_commands.py:444
 msgid "Status set to ``Watching {watching}``."
-msgstr ""
+msgstr "Status inställd på \"\" Watchande {watching}\"."
 
 #: obsidion/core/core_commands.py:447
 msgid "Watching cleared."
-msgstr ""
+msgstr "Tittar in."
 
 #: obsidion/core/core_commands.py:453
 #, docstring
 msgid "Sets [botname]'s competing status."
-msgstr ""
+msgstr "Ställer in [botname]' s konkurrerande status."
 
 #: obsidion/core/core_commands.py:469
 msgid "Status set to ``Competing in {competing}``."
-msgstr ""
+msgstr "Status inställd på ` ` Competing in {competing} ` `."
 
 #: obsidion/core/core_commands.py:474
 msgid "Competing cleared."
-msgstr ""
+msgstr "Kompilering rensad."
 
 #: obsidion/core/core_commands.py:480
 #, docstring
@@ -277,48 +295,55 @@ msgid "Sets [botname]'s status.\n\n"
 "            dnd\n"
 "            invisible\n"
 "        "
-msgstr ""
+msgstr "Ställer in [botname].\n\n"
+"        Tillgängliga statusar:\n"
+"            online\n"
+"            tomgång\n"
+"            dnd\n"
+"            osynliga\n"
+"        "
 
 #: obsidion/core/core_commands.py:503
 msgid "Status changed to {}."
-msgstr ""
+msgstr "Status ändrades till { }."
 
 #: obsidion/core/core_commands.py:511
 #, docstring
 msgid "Sets [botname]'s streaming status.\n\n"
 "        Leaving both streamer and stream_title empty will clear it."
-msgstr ""
+msgstr "Ställer in [botname]' s streaming status.\n\n"
+"        Om du lämnar både strömnings-och strömningstiteln tom rensas den."
 
 #: obsidion/core/core_commands.py:534
 #, docstring
 msgid "Sets Obsidion's nickname."
-msgstr ""
+msgstr "Sets Obsidion smeknamn."
 
 #: obsidion/core/core_commands.py:538
 msgid "Failed to change nickname. Must be 32 characters or fewer."
-msgstr ""
+msgstr "Misslyckades ändra smeknamn. Måste vara 32 tecken eller färre."
 
 #: obsidion/core/core_commands.py:543
 msgid "I lack the permissions to change my own nickname."
-msgstr ""
+msgstr "Jag saknar tillstånd att ändra mitt eget smeknamn."
 
 #: obsidion/core/core_commands.py:550
 #, docstring
 msgid "Sets Obsidion's global prefix(es)."
-msgstr ""
+msgstr "Ställer in Obsidions globala prefixet (er)."
 
 #: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
 msgid "Prefix set."
-msgstr ""
+msgstr "Prefixuppsättning."
 
 #: obsidion/core/core_commands.py:558
 #, docstring
 msgid "Sets Obsidion's server prefix(es)."
-msgstr ""
+msgstr "Ställer in Obsidions serverprefix (er)."
 
 #: obsidion/core/core_commands.py:561
 msgid "Guild prefixes have been reset."
-msgstr ""
+msgstr "Föruträttningar har återställts."
 
 #: obsidion/core/core_commands.py:653
 #, docstring
@@ -328,59 +353,64 @@ msgid "Sends a DM to a user.\n\n"
 "        'Appearance' tab. Enable 'Developer Mode', then right click\n"
 "        a user and click on 'Copy ID'.\n"
 "        "
-msgstr ""
+msgstr "Skickar en DM till en användare.\n\n"
+"        Det här kommandot behöver ett användar-ID att arbeta med.\n"
+"        För att få ett användarnamn, gå till Discord's inställningar och öppna fliken\n"
+"        'Utseende'. Aktivera utvecklarläge och högerklicka på\n"
+"        och klicka på \"Kopiera ID\".\n"
+"        "
 
 #: obsidion/core/core_commands.py:663
 msgid "Invalid ID, user not found, or user is a bot. You can only send messages to people I share a server with."
-msgstr ""
+msgstr "Ogiltigt ID, en användare som inte hittas eller så är användaren en robot. Du kan bara skicka meddelanden till personer som jag delar en server med."
 
 #: obsidion/core/core_commands.py:675
 msgid "Owner of {}"
-msgstr ""
+msgstr "Ägare av { }"
 
 #: obsidion/core/core_commands.py:676
 msgid "You can reply to this message with {}contact"
-msgstr ""
+msgstr "Du kan svara på det här meddelandet med { } kontakt"
 
 #: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
 msgid "Sorry, I couldn't deliver your message to {}"
-msgstr ""
+msgstr "Förlåt, jag kunde inte leverera ditt meddelande till { }"
 
 #: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
 msgid "Message delivered to {}"
-msgstr ""
+msgstr "Meddelande levererat till { }"
 
 #: obsidion/core/dev_commands.py:30
 #, docstring
 msgid "Development Commands."
-msgstr ""
+msgstr "Utvecklskommandon"
 
 #: obsidion/core/dev_commands.py:41
 #, docstring
 msgid "Loads a module."
-msgstr ""
+msgstr "Laddar en modul."
 
 #: obsidion/core/dev_commands.py:49
 msgid "The cog `{module}` has been succesfully loaded"
-msgstr ""
+msgstr "Cog \"{module}\" har laddats fullt ut"
 
 #: obsidion/core/dev_commands.py:54
 #, docstring
 msgid "Unloads a module."
-msgstr ""
+msgstr "Avläser en modul."
 
 #: obsidion/core/dev_commands.py:62
 msgid "The cog `{module}` has been succesfully unloaded"
-msgstr ""
+msgstr "Cog \"{module}\" har lossats utan last"
 
 #: obsidion/core/dev_commands.py:67
 #, docstring
 msgid "Reloads a module."
-msgstr ""
+msgstr "Laddar om en modul."
 
 #: obsidion/core/dev_commands.py:75
 msgid "The cog `{module}` has been succesfully reloaded"
-msgstr ""
+msgstr "Cog \"{module}\" har laddats om."
 
 #: obsidion/core/dev_commands.py:131
 #, docstring
@@ -430,43 +460,49 @@ msgid "Open an interactive REPL.\n\n"
 "        backtick. This includes codeblocks, and as such multiple lines can be\n"
 "        evaluated.\n"
 "        "
-msgstr ""
+msgstr "Öppna ett interaktivt REPL.\n\n"
+"        . REPL kommer bara att känna igen kod som meddelanden som börjar med en\n"
+"        -backtick. Detta inkluderar kodblock, och som sådana kan flera rader vara\n"
+"        .\n"
+"        "
 
 #: obsidion/core/dev_commands.py:273
 msgid "Already running a REPL session in this channel. Exit it with `quit`."
-msgstr ""
+msgstr "Du har redan kört en REPL-session i den här kanalen. Avsluta det med \"sluta\"."
 
 #: obsidion/core/dev_commands.py:279
 msgid "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
-msgstr ""
+msgstr "Du har redan kört en REPL-session i den här kanalen. Återuppta REPL med \"{ } repl CV\"."
 
 #: obsidion/core/dev_commands.py:287
 msgid "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
-msgstr ""
+msgstr "Ange kod för att köra eller utvärdera. \"avsluta ()\" eller \"avsluta\". \"{ } repl paus\" för att pausa."
 
 #: obsidion/core/dev_commands.py:359
 #, docstring
 msgid "Pauses/resumes the REPL running in the current channel"
-msgstr ""
+msgstr "Pausar / återupptar det REPL som körs i den aktuella kanalen"
 
 #: obsidion/core/dev_commands.py:362
 msgid "There is no currently running REPL session in this channel."
-msgstr ""
+msgstr "Det finns ingen REPL-session för tillfället i den här kanalen."
 
 #: obsidion/core/dev_commands.py:371
 msgid "The REPL session in this channel has been resumed."
-msgstr ""
+msgstr "REPL-sessionen i den här kanalen har återupptagits."
 
 #: obsidion/core/dev_commands.py:373
 msgid "The REPL session in this channel is now paused."
-msgstr ""
+msgstr "REPL-sessionen i den här kanalen är nu pausad."
 
 #: obsidion/core/dev_commands.py:378
 #, docstring
 msgid "Mock another user invoking a command.\n\n"
 "        The prefix must not be entered.\n"
 "        "
-msgstr ""
+msgstr "Mock en annan användare anropa ett kommando.\n\n"
+"        Prefixet får inte anges.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:391
 #, docstring
@@ -474,46 +510,49 @@ msgid "Dispatch a message event as if it were sent by a different user.\n\n"
 "        Only reads the raw content of the message. Attachments, embeds etc. are\n"
 "        ignored.\n"
 "        "
-msgstr ""
+msgstr "Skicka en meddelandehändelse som om den skickades av en annan användare.\n\n"
+"        Läser bara den råa innehållet i meddelandet. Bilagor, bäddar osv. är\n"
+"        som ignorerats.\n"
+"        "
 
 #: obsidion/core/events.py:20
 #, docstring
 msgid "Important bot events."
-msgstr ""
+msgstr "Viktiga bovar."
 
 #: obsidion/core/events.py:106
 msgid "I require the {permission} permission to execute that command."
-msgstr ""
+msgstr "Jag kräver {permission} -behörigheten att köra det kommandot."
 
 #: obsidion/core/events.py:127
 msgid "This command is on cooldown. Try again in {delay}."
-msgstr ""
+msgstr "Det här kommandot är nerkyld. Försök igen i {delay}."
 
 #: obsidion/core/events.py:131
 msgid "This command is on cooldown. Try again in 1 second."
-msgstr ""
+msgstr "Det här kommandot är nerkyld. Försök igen om 1 sekund."
 
 #: obsidion/core/events.py:136
 msgid "Too many people using this command. It can only be used {number} times concurrently."
-msgstr ""
+msgstr "Det är för många som använder det här kommandot. Den kan bara användas {number} gånger samtidigt."
 
 #: obsidion/core/events.py:141
 msgid "Too many people using this command. It can only be used once concurrently."
-msgstr ""
+msgstr "Det är för många som använder det här kommandot. Den kan bara användas en gång samtidigt."
 
 #: obsidion/core/events.py:147
 msgid "That command is still completing, it can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Detta kommando är fortfarande slutförande, det kan endast användas {number} gånger per {type} samtidigt."
 
 #: obsidion/core/events.py:152
 msgid "That command is still completing, it can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Kommandot kan bara användas en gång per {type} samtidigt."
 
 #: obsidion/core/events.py:158
 msgid "Too many people using this command. It can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Det är för många som använder det här kommandot. Den kan bara användas {number} gånger per {type} samtidigt."
 
 #: obsidion/core/events.py:163
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Det är för många som använder det här kommandot. Den kan endast användas en gång per {type} samtidigt."
 
