@@ -7,5 +7,3 @@ files:
     translation: /%original_path%/%locale%.po
   - source: core/**/messages.pot
     translation: /%original_path%/%locale%.po
-  - source: cogs/**/messages.pot
-    translation: /%original_path%/%locale%.po

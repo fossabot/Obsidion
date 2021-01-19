@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-01-20 02:22+1300\n"
+"POT-Creation-Date: 2021-01-20 04:01+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,8 @@ msgstr ""
 msgid "Are you sure you want me to leave {}? (yes/no)"
 msgstr ""
 
-#: obsidion/core/core_commands.py:176
+#: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
+#: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
 msgstr ""
 
@@ -168,6 +169,208 @@ msgstr ""
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
+msgstr ""
+
+#: obsidion/core/core_commands.py:299
+#, docstring
+msgid "Changes Obsidion's settings."
+msgstr ""
+
+#: obsidion/core/core_commands.py:304
+#, docstring
+msgid ""
+"\n"
+"        Sets a default colour to be used for the bot's embeds.\n"
+"\n"
+"        Acceptable values for the colour parameter can be found at:\n"
+"\n"
+"        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
+"        "
+msgstr ""
+
+#: obsidion/core/core_commands.py:314
+msgid "The color has been reset."
+msgstr ""
+
+#: obsidion/core/core_commands.py:317
+msgid "The color has been set."
+msgstr ""
+
+#: obsidion/core/core_commands.py:322
+#, docstring
+msgid ""
+"Sets [botname]'s avatar\n"
+"\n"
+"        Supports either an attachment or an image URL."
+msgstr ""
+
+#: obsidion/core/core_commands.py:336
+msgid "That URL is invalid."
+msgstr ""
+
+#: obsidion/core/core_commands.py:339
+msgid "Something went wrong while trying to get the image."
+msgstr ""
+
+#: obsidion/core/core_commands.py:350
+msgid ""
+"Failed. Remember that you can edit my avatar up to two times a hour. The URL"
+" or attachment must be a valid image in either JPG or PNG format."
+msgstr ""
+
+#: obsidion/core/core_commands.py:357
+msgid "JPG / PNG format only."
+msgstr ""
+
+#: obsidion/core/core_commands.py:364
+#, docstring
+msgid "Removes [botname]'s avatar."
+msgstr ""
+
+#: obsidion/core/core_commands.py:367
+msgid "Avatar removed."
+msgstr ""
+
+#: obsidion/core/core_commands.py:373
+#, docstring
+msgid "Sets [botname]'s playing status."
+msgstr ""
+
+#: obsidion/core/core_commands.py:392
+msgid "Status set to ``Playing {game.name}``."
+msgstr ""
+
+#: obsidion/core/core_commands.py:395
+msgid "Game cleared."
+msgstr ""
+
+#: obsidion/core/core_commands.py:401
+#, docstring
+msgid "Sets [botname]'s listening status."
+msgstr ""
+
+#: obsidion/core/core_commands.py:417
+msgid "Status set to ``Listening to {listening}``."
+msgstr ""
+
+#: obsidion/core/core_commands.py:422
+msgid "Listening cleared."
+msgstr ""
+
+#: obsidion/core/core_commands.py:428
+#, docstring
+msgid "Sets [botname]'s watching status."
+msgstr ""
+
+#: obsidion/core/core_commands.py:444
+msgid "Status set to ``Watching {watching}``."
+msgstr ""
+
+#: obsidion/core/core_commands.py:447
+msgid "Watching cleared."
+msgstr ""
+
+#: obsidion/core/core_commands.py:453
+#, docstring
+msgid "Sets [botname]'s competing status."
+msgstr ""
+
+#: obsidion/core/core_commands.py:469
+msgid "Status set to ``Competing in {competing}``."
+msgstr ""
+
+#: obsidion/core/core_commands.py:474
+msgid "Competing cleared."
+msgstr ""
+
+#: obsidion/core/core_commands.py:480
+#, docstring
+msgid ""
+"Sets [botname]'s status.\n"
+"\n"
+"        Available statuses:\n"
+"            online\n"
+"            idle\n"
+"            dnd\n"
+"            invisible\n"
+"        "
+msgstr ""
+
+#: obsidion/core/core_commands.py:503
+msgid "Status changed to {}."
+msgstr ""
+
+#: obsidion/core/core_commands.py:511
+#, docstring
+msgid ""
+"Sets [botname]'s streaming status.\n"
+"\n"
+"        Leaving both streamer and stream_title empty will clear it."
+msgstr ""
+
+#: obsidion/core/core_commands.py:534
+#, docstring
+msgid "Sets Obsidion's nickname."
+msgstr ""
+
+#: obsidion/core/core_commands.py:538
+msgid "Failed to change nickname. Must be 32 characters or fewer."
+msgstr ""
+
+#: obsidion/core/core_commands.py:543
+msgid "I lack the permissions to change my own nickname."
+msgstr ""
+
+#: obsidion/core/core_commands.py:550
+#, docstring
+msgid "Sets Obsidion's global prefix(es)."
+msgstr ""
+
+#: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
+msgid "Prefix set."
+msgstr ""
+
+#: obsidion/core/core_commands.py:558
+#, docstring
+msgid "Sets Obsidion's server prefix(es)."
+msgstr ""
+
+#: obsidion/core/core_commands.py:561
+msgid "Guild prefixes have been reset."
+msgstr ""
+
+#: obsidion/core/core_commands.py:653
+#, docstring
+msgid ""
+"Sends a DM to a user.\n"
+"\n"
+"        This command needs a user ID to work.\n"
+"        To get a user ID, go to Discord's settings and open the\n"
+"        'Appearance' tab. Enable 'Developer Mode', then right click\n"
+"        a user and click on 'Copy ID'.\n"
+"        "
+msgstr ""
+
+#: obsidion/core/core_commands.py:663
+msgid ""
+"Invalid ID, user not found, or user is a bot. You can only send messages to "
+"people I share a server with."
+msgstr ""
+
+#: obsidion/core/core_commands.py:675
+msgid "Owner of {}"
+msgstr ""
+
+#: obsidion/core/core_commands.py:676
+msgid "You can reply to this message with {}contact"
+msgstr ""
+
+#: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
+msgid "Sorry, I couldn't deliver your message to {}"
+msgstr ""
+
+#: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
+msgid "Message delivered to {}"
 msgstr ""
 
 #: obsidion/core/dev_commands.py:30
