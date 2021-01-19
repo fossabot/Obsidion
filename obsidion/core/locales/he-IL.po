@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
 "POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:15\n"
+"PO-Revision-Date: 2021-01-19 15:25\n"
 "Last-Translator: \n"
 "Language-Team: Hebrew\n"
 "MIME-Version: 1.0\n"
@@ -20,112 +20,117 @@ msgstr ""
 #: obsidion/core/core_commands.py:32
 #, docstring
 msgid "Commands related to core functions."
-msgstr ""
+msgstr "פקודות הקשורות לפונקציות ליבה."
 
 #: obsidion/core/core_commands.py:40
 #, docstring
 msgid "Pong."
-msgstr ""
+msgstr "פונג."
 
 #: obsidion/core/core_commands.py:45
 #, docstring
 msgid "Shows info about Obsidion."
-msgstr ""
+msgstr "מציג מידע אודות Obsidion."
 
 #: obsidion/core/core_commands.py:65
 msgid "This bot is an instance of [Obsidion, an open source Discord bot]({}) created by [Darkflame72]({}) and [improved by many]({}).\n\n"
 "Obsidion is backed by a passionate community who contributes and creates content for everyone to enjoy. [Join us today]({}) and help us improve!\n\n"
 "(c) Obsidion-dev"
-msgstr ""
+msgstr "רובוט זה הוא מופע של [Obsidion, בוט בקוד פתוח] ({}) שנוצר על ידי [Darkflame72]({}) ו - [המשופר על ידי רבים] ({}).\n\n"
+"Obsidion מגובה על ידי קהילה נלהבת שתורמת ויוצרת תוכן עבור כולם ליהנות. [הצטרפו אלינו היום] ({}) ולעזור לנו לשפר!\n\n"
+"(ג) Obsidion"
 
 #: obsidion/core/core_commands.py:83
 msgid "Bringing joy since 23rd March 2020 (over {} days ago!)"
-msgstr ""
+msgstr "מביא שמחה מאז 23 במרץ 2020 (מעל {} לפני ימים!)"
 
 #: obsidion/core/core_commands.py:91
 #, docstring
 msgid "Shows Obsidion's uptime."
-msgstr ""
+msgstr "מציג את הזמן של אוסידיון."
 
 #: obsidion/core/core_commands.py:94
 msgid "Less than one second"
-msgstr ""
+msgstr "פחות משני"
 
 #: obsidion/core/core_commands.py:96
 msgid "Been up for: **{time_quantity}** (since {timestamp} UTC)"
-msgstr ""
+msgstr "היה עד עבור: **{time_quantity}** (מאז {timestamp} UTC)"
 
 #: obsidion/core/core_commands.py:103
 #, docstring
 msgid "Invite the bot to your server."
-msgstr ""
+msgstr "הזמינו את הרובוט לשרת שלכם."
 
 #: obsidion/core/core_commands.py:105
 msgid "You can invite {name} to your Discord server by [clicking here]({invite})."
-msgstr ""
+msgstr "ניתן להזמין {name} לשרת זניחה שלכם על-ידי [לחיצה כאן] ({invite})."
 
 #: obsidion/core/core_commands.py:118
 #, docstring
 msgid "Leaves the current server."
-msgstr ""
+msgstr "משאיר את השרת הנוכחי."
 
 #: obsidion/core/core_commands.py:119
 msgid "Are you sure you want me to leave this server? (y/n)"
-msgstr ""
+msgstr "אתה בטוח שאתה רוצה שאעזוב את השרת? (י/ן)"
 
 #: obsidion/core/core_commands.py:125 obsidion/core/core_commands.py:180
 msgid "Response timed out."
-msgstr ""
+msgstr "התגובה חרגה ממגבלת הזמן."
 
 #: obsidion/core/core_commands.py:129
 msgid "Alright. Bye :wave:"
-msgstr ""
+msgstr "בסדר. ביי :wave:"
 
 #: obsidion/core/core_commands.py:130
 msgid "Leaving guild '{}'"
-msgstr ""
+msgstr "עזיבת הגילדה ' {} '"
 
 #: obsidion/core/core_commands.py:133
 msgid "Alright, I'll stay then. :)"
-msgstr ""
+msgstr "בסדר, אני אשאר אז. :)"
 
 #: obsidion/core/core_commands.py:138
 #, docstring
 msgid "Lists and allows [botname] to leave servers."
-msgstr ""
+msgstr "מפרט ומאפשר [botname] לעזוב שרתים."
 
 #: obsidion/core/core_commands.py:149
 msgid "To leave a server, just type its number."
-msgstr ""
+msgstr "כדי להשאיר שרת, הקלידו את המספר שלו."
 
 #: obsidion/core/core_commands.py:164
 msgid "I cannot leave a guild I am the owner of."
-msgstr ""
+msgstr "אני לא יכול לעזוב את הגילדה אני הבעלים של."
 
 #: obsidion/core/core_commands.py:168
 msgid "Are you sure you want me to leave {}? (yes/no)"
-msgstr ""
+msgstr "את בטוחה שאת רוצה שאעזוב? (כן/לא)"
 
 #: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
 #: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
-msgstr ""
+msgstr "בוצע."
 
 #: obsidion/core/core_commands.py:178
 msgid "Alright then."
-msgstr ""
+msgstr "בסדר גמור אם כך."
 
 #: obsidion/core/core_commands.py:186
 #, docstring
 msgid "\n"
 "        Get info about Obsidion's licenses.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        קבל מידע על הרשיונות של Obsidion.\n"
+"        "
 
 #: obsidion/core/core_commands.py:191
 msgid "This bot is an instance of the Obsidion Discord Bot.\n"
 "Obsidion is an open source application made available to the public and licensed under the GNU AGPL v3. The full text of this license is available to you at <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
-msgstr ""
+msgstr "רובוט זה הוא מופע של Obsidion Bot.\n"
+"Obsidion הוא יישום מקור פתוח אשר זמין לציבור ומורשה תחת ה-GNU AGPL v3. התמליל המלא של רשיון זה זמין לכם בכתובת <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
 
 #: obsidion/core/core_commands.py:206
 #, docstring
@@ -134,12 +139,16 @@ msgid "Displays my full source code or for a specific command.\n\n"
 "        periods, e.g. account.link for the link subcommand of the account command\n"
 "        or by spaces.\n"
 "        "
-msgstr ""
+msgstr "הצגת קוד המקור המלא שלי או עבור פקודה ספציפית.\n\n"
+"        כדי להציג את קוד המקור של תת-פקודה, ניתן להפריד אותו באמצעות\n"
+"        תקופות, לדוגמה account.link עבור תת-הפקודה של הקישור של פקודת החשבון\n"
+"        או לפי רווחים.\n"
+"        "
 
 #: obsidion/core/core_commands.py:250
 #, docstring
 msgid "Shuts down the bot."
-msgstr ""
+msgstr "הוא שם למטה את הרובוט."
 
 #: obsidion/core/core_commands.py:261
 #, docstring
@@ -147,26 +156,30 @@ msgid "Attempts to restart Obsidion.\n\n"
 "        Makes [botname] quit with exit code 26.\n"
 "        The restart is not guaranteed: it must be dealt\n"
 "        with by the process manager in use."
-msgstr ""
+msgstr "ניסיונות להפעיל מחדש את אוסידיון\n\n"
+"        עושה [botname] להפסיק עם קוד יציאה 26.\n"
+"        הפעלה מחדש אינה מובטחת: יש לטפל ב-\n"
+"        עם מנהל התהליך בשימוש."
 
 #: obsidion/core/core_commands.py:274
 #, docstring
 msgid "Sends to the owner the last command exception that has occurred.\n\n"
 "        If public (yes is specified), it will be sent to the chat instead."
-msgstr ""
+msgstr "שולח לבעלים את חריגת הפקודה האחרונה שהתרחשה.\n\n"
+"        אם ציבורי (כן מצוין), הוא יישלח לצ ' אט במקום זאת."
 
 #: obsidion/core/core_commands.py:288
 msgid "I couldn't send the traceback message to you in DM. Either you blocked me or you disabled DMs in this server."
-msgstr ""
+msgstr "לא יכולתי לשלוח לך את ההודעה. או שאתה חסמת אותי או שאתה מושבת DMs בשרת זה."
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
-msgstr ""
+msgstr "עדיין לא אירעה חריגה."
 
 #: obsidion/core/core_commands.py:299
 #, docstring
 msgid "Changes Obsidion's settings."
-msgstr ""
+msgstr "משנה את ההגדרות של אוסידיון."
 
 #: obsidion/core/core_commands.py:304
 #, docstring
@@ -175,98 +188,103 @@ msgid "\n"
 "        Acceptable values for the colour parameter can be found at:\n\n"
 "        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        הגדרת צבע ברירת מחדל לשימוש עבור המיטות של הרובוט.\n\n"
+"        ערכי קבלה עבור פרמטר הצבע ניתן למצוא במיקום:\n\n"
+"        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Colourממיר\n"
+"        "
 
 #: obsidion/core/core_commands.py:314
 msgid "The color has been reset."
-msgstr ""
+msgstr "הצבע אופס."
 
 #: obsidion/core/core_commands.py:317
 msgid "The color has been set."
-msgstr ""
+msgstr "הצבע הוגדר."
 
 #: obsidion/core/core_commands.py:322
 #, docstring
 msgid "Sets [botname]'s avatar\n\n"
 "        Supports either an attachment or an image URL."
-msgstr ""
+msgstr "הגדרת [botname]של האווטאר\n\n"
+"        תומך או קובץ מצורף או URL של תמונה."
 
 #: obsidion/core/core_commands.py:336
 msgid "That URL is invalid."
-msgstr ""
+msgstr "ה-URL אינו חוקי."
 
 #: obsidion/core/core_commands.py:339
 msgid "Something went wrong while trying to get the image."
-msgstr ""
+msgstr "משהו השתבש בזמן שניסה להשיג את התמונה."
 
 #: obsidion/core/core_commands.py:350
 msgid "Failed. Remember that you can edit my avatar up to two times a hour. The URL or attachment must be a valid image in either JPG or PNG format."
-msgstr ""
+msgstr "נכשל. זכור שאתה יכול לערוך את האוואטר שלי עד שתי פעמים בשעה. ה-URL או הצרופה חייבים להיות תמונה חוקית במבנה JPG או PNG."
 
 #: obsidion/core/core_commands.py:357
 msgid "JPG / PNG format only."
-msgstr ""
+msgstr "מבנה JPG/PNG בלבד."
 
 #: obsidion/core/core_commands.py:364
 #, docstring
 msgid "Removes [botname]'s avatar."
-msgstr ""
+msgstr "מסלק את האוואטר של [botname]."
 
 #: obsidion/core/core_commands.py:367
 msgid "Avatar removed."
-msgstr ""
+msgstr "אוואטר סולק."
 
 #: obsidion/core/core_commands.py:373
 #, docstring
 msgid "Sets [botname]'s playing status."
-msgstr ""
+msgstr "הגדרת מצב המשחק של [botname]."
 
 #: obsidion/core/core_commands.py:392
 msgid "Status set to ``Playing {game.name}``."
-msgstr ""
+msgstr "סטאטוס של ' משחק {game.name} ` ` `."
 
 #: obsidion/core/core_commands.py:395
 msgid "Game cleared."
-msgstr ""
+msgstr "המשחק פינה."
 
 #: obsidion/core/core_commands.py:401
 #, docstring
 msgid "Sets [botname]'s listening status."
-msgstr ""
+msgstr "הגדרת מצב ההאזנה של [botname]."
 
 #: obsidion/core/core_commands.py:417
 msgid "Status set to ``Listening to {listening}``."
-msgstr ""
+msgstr "הסטאטוס מוגדר ל ' האזנה ל- {listening} ` `."
 
 #: obsidion/core/core_commands.py:422
 msgid "Listening cleared."
-msgstr ""
+msgstr "הקשבה נבחרה."
 
 #: obsidion/core/core_commands.py:428
 #, docstring
 msgid "Sets [botname]'s watching status."
-msgstr ""
+msgstr "הגדרת מצב הצפייה של [botname]."
 
 #: obsidion/core/core_commands.py:444
 msgid "Status set to ``Watching {watching}``."
-msgstr ""
+msgstr "הסטאטוס שמוגדר ל ' צופה {watching} ` `."
 
 #: obsidion/core/core_commands.py:447
 msgid "Watching cleared."
-msgstr ""
+msgstr "צפייה מנוקה."
 
 #: obsidion/core/core_commands.py:453
 #, docstring
 msgid "Sets [botname]'s competing status."
-msgstr ""
+msgstr "הגדרת המצב הממתחרה של [botname]."
 
 #: obsidion/core/core_commands.py:469
 msgid "Status set to ``Competing in {competing}``."
-msgstr ""
+msgstr "הסטאטוס מוגדר ל ' Competing ב- {competing} ` `."
 
 #: obsidion/core/core_commands.py:474
 msgid "Competing cleared."
-msgstr ""
+msgstr "השוויון נוקה."
 
 #: obsidion/core/core_commands.py:480
 #, docstring
@@ -277,48 +295,55 @@ msgid "Sets [botname]'s status.\n\n"
 "            dnd\n"
 "            invisible\n"
 "        "
-msgstr ""
+msgstr "מגדיר את הסטאטוס של [botname].\n\n"
+"        סטאטוסים זמינים:\n"
+"            באינטרנט\n"
+"            סרק\n"
+"            dnd\n"
+"            בלתי נראים\n"
+"        "
 
 #: obsidion/core/core_commands.py:503
 msgid "Status changed to {}."
-msgstr ""
+msgstr "הסטאטוס השתנה ל - {}."
 
 #: obsidion/core/core_commands.py:511
 #, docstring
 msgid "Sets [botname]'s streaming status.\n\n"
 "        Leaving both streamer and stream_title empty will clear it."
-msgstr ""
+msgstr "הגדרת מצב הזרמת [botname].\n\n"
+"        השארת שני הפסים והיפסים ריקים ינקו אותה."
 
 #: obsidion/core/core_commands.py:534
 #, docstring
 msgid "Sets Obsidion's nickname."
-msgstr ""
+msgstr "מגדיר את הכינוי של אוסידיון."
 
 #: obsidion/core/core_commands.py:538
 msgid "Failed to change nickname. Must be 32 characters or fewer."
-msgstr ""
+msgstr "שינוי הכינוי נכשל. חייב להיות 32 תווים או פחות."
 
 #: obsidion/core/core_commands.py:543
 msgid "I lack the permissions to change my own nickname."
-msgstr ""
+msgstr "אין לי את ההרשאות לשנות את הכינוי שלי."
 
 #: obsidion/core/core_commands.py:550
 #, docstring
 msgid "Sets Obsidion's global prefix(es)."
-msgstr ""
+msgstr "הגדרת הקידומת הגלובלית של Obsidion (es)."
 
 #: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
 msgid "Prefix set."
-msgstr ""
+msgstr "ערכת קידומת."
 
 #: obsidion/core/core_commands.py:558
 #, docstring
 msgid "Sets Obsidion's server prefix(es)."
-msgstr ""
+msgstr "הגדרת קידומת השרת של Obsidion (es)."
 
 #: obsidion/core/core_commands.py:561
 msgid "Guild prefixes have been reset."
-msgstr ""
+msgstr "הקידומות של הגילדה אופסו."
 
 #: obsidion/core/core_commands.py:653
 #, docstring
@@ -328,59 +353,64 @@ msgid "Sends a DM to a user.\n\n"
 "        'Appearance' tab. Enable 'Developer Mode', then right click\n"
 "        a user and click on 'Copy ID'.\n"
 "        "
-msgstr ""
+msgstr "שולח DM למשתמש.\n\n"
+"        פקודה זו זקוקה לזיהוי משתמש לעבודה.\n"
+"        כדי לקבל זיהוי משתמש, עברו אל ההגדרות של 'דיון' ופתחו את הלשונית 'מראה\n"
+"        '. הפעילו את 'מצב מפתח', ולאחר מכן לחצו עם לחצן העכבר הימני על\n"
+"        משתמש ולחצו על 'העתקת זיהוי'.\n"
+"        "
 
 #: obsidion/core/core_commands.py:663
 msgid "Invalid ID, user not found, or user is a bot. You can only send messages to people I share a server with."
-msgstr ""
+msgstr "זיהוי לא חוקי, המשתמש לא נמצא, או שהמשתמש הוא רובוט. תוכלו לשלוח הודעות רק לאנשים שאיתם אני חולק שרת."
 
 #: obsidion/core/core_commands.py:675
 msgid "Owner of {}"
-msgstr ""
+msgstr "בעלים של {}"
 
 #: obsidion/core/core_commands.py:676
 msgid "You can reply to this message with {}contact"
-msgstr ""
+msgstr "תוכלו להשיב להודעה זו עם איש הקשר {}"
 
 #: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
 msgid "Sorry, I couldn't deliver your message to {}"
-msgstr ""
+msgstr "מצטער, לא יכולתי למסור את ההודעה שלך ל - {}"
 
 #: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
 msgid "Message delivered to {}"
-msgstr ""
+msgstr "ההודעה נמסרה אל {}"
 
 #: obsidion/core/dev_commands.py:30
 #, docstring
 msgid "Development Commands."
-msgstr ""
+msgstr "פקודות פיתוח."
 
 #: obsidion/core/dev_commands.py:41
 #, docstring
 msgid "Loads a module."
-msgstr ""
+msgstr "טעינת מודול."
 
 #: obsidion/core/dev_commands.py:49
 msgid "The cog `{module}` has been succesfully loaded"
-msgstr ""
+msgstr "Cog `{module}כבר נטען בהצלחה"
 
 #: obsidion/core/dev_commands.py:54
 #, docstring
 msgid "Unloads a module."
-msgstr ""
+msgstr "ביטול טעינת מודול."
 
 #: obsidion/core/dev_commands.py:62
 msgid "The cog `{module}` has been succesfully unloaded"
-msgstr ""
+msgstr "Cog `{module}סודם במלואו"
 
 #: obsidion/core/dev_commands.py:67
 #, docstring
 msgid "Reloads a module."
-msgstr ""
+msgstr "טוען מודול."
 
 #: obsidion/core/dev_commands.py:75
 msgid "The cog `{module}` has been succesfully reloaded"
-msgstr ""
+msgstr "Cog `{module}כבר נטען מחדש"
 
 #: obsidion/core/dev_commands.py:131
 #, docstring
@@ -421,7 +451,22 @@ msgid "Execute asynchronous code.\n\n"
 "            commands - redbot.core.commands\n"
 "            _        - The result of the last dev command.\n"
 "        "
-msgstr ""
+msgstr "ביצוע קוד אסינכרוני.\n\n"
+"        קוד זה עוטף קוד לתוך גוף של פונקציה אסינק ולאחר מכן\n"
+"        שיחות וממתין לו. הרובוט יגיב עם כל דבר המודפס ל-\n"
+"        stdout, וכן את ערך ההחזר של הפונקציה.\n\n"
+"        הקוד יכול להיות בתוך קודקוד, קוד inline או לא, כאשר\n"
+"        כאשר הם אינם מעורבים והם מעוצבים כהלכה.\n\n"
+"        סביבת עבודה:\n"
+"            -הקשר הפעלת קוד\n"
+"            אובייקט רובוט\n"
+"            ערוץ-אובייקט הערוץ הנוכחי\n"
+"            אובייקט מחבר-\n"
+"            הודעה-אובייקט מחבר הפקודה 210-110-111-012 הודעת הפקודה\n"
+"            פקודות-הפקודה\n"
+"            פקודות-redבוט.core.core.לפקודות\n"
+"            _ - התוצאה של פקודת dev האחרונה.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:253
 #, docstring
@@ -430,43 +475,49 @@ msgid "Open an interactive REPL.\n\n"
 "        backtick. This includes codeblocks, and as such multiple lines can be\n"
 "        evaluated.\n"
 "        "
-msgstr ""
+msgstr "פתיחת REPL אינטראקטיבית.\n\n"
+"        ה-REPL יזהה רק קוד כהודעות המתחילות עם backtick\n"
+"        . דבר זה כולל קודי קוד, וכשורות מרובות כגון זה יכול להיות\n"
+"        הערכה.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:273
 msgid "Already running a REPL session in this channel. Exit it with `quit`."
-msgstr ""
+msgstr "כבר מריץ מהלך עבודה של REPL בערוץ זה. צא מזה עם 'פרש'."
 
 #: obsidion/core/dev_commands.py:279
 msgid "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
-msgstr ""
+msgstr "כבר מריץ מהלך עבודה של REPL בערוץ זה. חדשו את ה-REPL עם קורות החיים של סול ' {}."
 
 #: obsidion/core/dev_commands.py:287
 msgid "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
-msgstr ""
+msgstr "ציינו קוד לביצוע או הערכה. 'יציאה' או 'יציאה' כדי לצאת. {} {} פסק זמן כדי לעצור."
 
 #: obsidion/core/dev_commands.py:359
 #, docstring
 msgid "Pauses/resumes the REPL running in the current channel"
-msgstr ""
+msgstr "תעבור/קורות חיים של REPL שרץ בערוץ הנוכחי"
 
 #: obsidion/core/dev_commands.py:362
 msgid "There is no currently running REPL session in this channel."
-msgstr ""
+msgstr "אין כרגע מהלך עבודה של REPL בערוץ זה."
 
 #: obsidion/core/dev_commands.py:371
 msgid "The REPL session in this channel has been resumed."
-msgstr ""
+msgstr "מהלך העבודה של REPL בערוץ זה חודש."
 
 #: obsidion/core/dev_commands.py:373
 msgid "The REPL session in this channel is now paused."
-msgstr ""
+msgstr "מהלך ה-REPL בערוץ זה מושבת כעת."
 
 #: obsidion/core/dev_commands.py:378
 #, docstring
 msgid "Mock another user invoking a command.\n\n"
 "        The prefix must not be entered.\n"
 "        "
-msgstr ""
+msgstr "מוק משתמש אחר מפעיל פקודה.\n\n"
+"        לא ניתן לציין את הקידומת.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:391
 #, docstring
@@ -474,46 +525,49 @@ msgid "Dispatch a message event as if it were sent by a different user.\n\n"
 "        Only reads the raw content of the message. Attachments, embeds etc. are\n"
 "        ignored.\n"
 "        "
-msgstr ""
+msgstr "שלחו אירוע הודעה כאילו הוא נשלח על ידי משתמש אחר.\n\n"
+"        רק קורא את התוכן הגולמי של ההודעה. קבצים מצורפים, מיטושים וכו ' הם\n"
+"        .\n"
+"        "
 
 #: obsidion/core/events.py:20
 #, docstring
 msgid "Important bot events."
-msgstr ""
+msgstr "אירועים חשובים של בוט."
 
 #: obsidion/core/events.py:106
 msgid "I require the {permission} permission to execute that command."
-msgstr ""
+msgstr "אני דורש את הרשות {permission} כדי לבצע את הפקודה הזאת."
 
 #: obsidion/core/events.py:127
 msgid "This command is on cooldown. Try again in {delay}."
-msgstr ""
+msgstr "פקודה זו היא על התקררות. נסה שוב ב {delay}."
 
 #: obsidion/core/events.py:131
 msgid "This command is on cooldown. Try again in 1 second."
-msgstr ""
+msgstr "פקודה זו היא על התקררות. נסו שוב בעוד דקה אחת."
 
 #: obsidion/core/events.py:136
 msgid "Too many people using this command. It can only be used {number} times concurrently."
-msgstr ""
+msgstr "יותר מדי אנשים משתמשים בפקודה זו. ניתן להשתמש בו רק {number} פעמים בו-זמנית."
 
 #: obsidion/core/events.py:141
 msgid "Too many people using this command. It can only be used once concurrently."
-msgstr ""
+msgstr "יותר מדי אנשים משתמשים בפקודה זו. ניתן להשתמש בו רק פעם אחת."
 
 #: obsidion/core/events.py:147
 msgid "That command is still completing, it can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "פקודה זו עדיין מסתיימת, ניתן להשתמש בה רק {number} פעמים לכל {type} בו-זמנית."
 
 #: obsidion/core/events.py:152
 msgid "That command is still completing, it can only be used once per {type} concurrently."
-msgstr ""
+msgstr "פקודה זו עדיין מסתיימת, ניתן להשתמש בה רק פעם אחת לכל {type} במקביל."
 
 #: obsidion/core/events.py:158
 msgid "Too many people using this command. It can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "יותר מדי אנשים משתמשים בפקודה זו. ניתן להשתמש בו רק {number} פעמים לכל {type} בו-זמנית."
 
 #: obsidion/core/events.py:163
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
-msgstr ""
+msgstr "יותר מדי אנשים משתמשים בפקודה זו. ניתן להשתמש בו רק פעם אחת עבור {type} בו-זמנית."
 
