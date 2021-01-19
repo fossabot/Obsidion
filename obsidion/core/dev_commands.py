@@ -18,10 +18,14 @@ from discord.ext import commands
 from .utils.chat_formatting import box, pagify
 from .utils.predicates import MessagePredicate
 from .utils.utils import send_interactive
+from obsidion.core.i18n import Translator, cog_i18n
 
 START_CODE_BLOCK_RE = re.compile(r"^((```py)(?=\s)|(```))")
 
+_ = Translator("Dev", __file__)
 
+
+@cog_i18n(_)
 class Dev(commands.Cog):
     """Development Commands."""
 
@@ -42,7 +46,7 @@ class Dev(commands.Cog):
                 f"{ctx.message.author.mention}, :x: {e.__class__.__name__}: {e}"
             )
         else:
-            await ctx.reply(("The cog `{module}` has been succesfully loaded"))
+            await ctx.reply(_("The cog `{module}` has been succesfully loaded"))
 
     @commands.command()
     @commands.is_owner()
@@ -55,7 +59,7 @@ class Dev(commands.Cog):
                 f"{ctx.message.author.mention}, :x: {e.__class__.__name__}: {e}"
             )
         else:
-            await ctx.reply(("The cog `{module}` has been succesfully unloaded"))
+            await ctx.reply(_("The cog `{module}` has been succesfully unloaded"))
 
     @commands.command(name="reload")
     @commands.is_owner()
@@ -68,7 +72,7 @@ class Dev(commands.Cog):
                 f"{ctx.message.author.mention}, :x: {e.__class__.__name__}: {e}"
             )
         else:
-            await ctx.reply(("The cog `{module}` has been succesfully reloaded"))
+            await ctx.reply(_("The cog `{module}` has been succesfully reloaded"))
 
     @staticmethod
     def async_compile(source, filename, mode):
@@ -266,13 +270,13 @@ class Dev(commands.Cog):
         if ctx.channel.id in self.sessions:
             if self.sessions[ctx.channel.id]:
                 await ctx.send(
-                    (
+                    _(
                         "Already running a REPL session in this channel. Exit it with `quit`."
                     )
                 )
             else:
                 await ctx.send(
-                    (
+                    _(
                         "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
                     ).format(ctx.prefix)
                 )
@@ -280,7 +284,7 @@ class Dev(commands.Cog):
 
         self.sessions[ctx.channel.id] = True
         await ctx.send(
-            (
+            _(
                 "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
             ).format(ctx.prefix)
         )
@@ -355,7 +359,7 @@ class Dev(commands.Cog):
         """Pauses/resumes the REPL running in the current channel"""
         if ctx.channel.id not in self.sessions:
             await ctx.send(
-                ("There is no currently running REPL session in this channel.")
+                _("There is no currently running REPL session in this channel.")
             )
             return
 
@@ -364,9 +368,9 @@ class Dev(commands.Cog):
         self.sessions[ctx.channel.id] = toggle
 
         if toggle:
-            await ctx.send(("The REPL session in this channel has been resumed."))
+            await ctx.send(_("The REPL session in this channel has been resumed."))
         else:
-            await ctx.send(("The REPL session in this channel is now paused."))
+            await ctx.send(_("The REPL session in this channel is now paused."))
 
     @commands.command()
     @commands.is_owner()

@@ -21,6 +21,7 @@ def upgrade():
         "guild",
         sa.Column("id", sa.BIGINT, primary_key=True),
         sa.Column("prefix", sa.Unicode(200)),
+        sa.Column("locale", sa.Unicode(200)),
     )
 
 

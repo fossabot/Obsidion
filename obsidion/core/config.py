@@ -36,22 +36,6 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
 
-async def prefix_callable(bot, guild: discord.Guild) -> str:
-    """Prefix."""
-    key = f"prefix_{guild.id}"
-    if await bot.redis.exists(key):
-        return await bot.redis.get(key)
-    db_prefix = await bot.db.fetchval(
-        "SELECT prefix FROM guild WHERE id = $1", guild.id
-    )
-    if db_prefix:
-        prefix = db_prefix
-    else:
-        prefix = get_settings().DEFAULT_PREFIX
-    await bot.redis.set(key, prefix, expire=28800)
-    return prefix
-
-
 @lru_cache()
 def get_settings() -> Settings:
     """Get settings object and cache it."""

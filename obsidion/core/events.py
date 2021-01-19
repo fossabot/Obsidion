@@ -6,11 +6,16 @@ import discord
 from discord.ext import commands
 
 from .utils.chat_formatting import humanize_timedelta, inline, format_perms_list
+from .i18n import set_contextual_locales_from_guild
+from obsidion.core.i18n import Translator, cog_i18n
 
 
 log = logging.getLogger("obsidion")
 
+_ = Translator("Dev", __file__)
 
+
+@cog_i18n(_)
 class Events(commands.Cog):
     """Important bot events."""
 
@@ -33,6 +38,12 @@ class Events(commands.Cog):
             redirect_uri="https://discord.obsidion-dev.com",
         )
         self.bot._invite = url
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        await set_contextual_locales_from_guild(self.bot, message.guild)
+
+        await self.bot.process_commands(message)
 
     @commands.Cog.listener("on_ready")
     async def on_ready(self):
@@ -92,7 +103,7 @@ class Events(commands.Cog):
             await ctx.send(inline(message))
         elif isinstance(error, commands.BotMissingPermissions):
             if bin(error.missing.value).count("1") == 1:  # Only one perm missing
-                msg = (
+                msg = _(
                     "I require the {permission} permission to execute that command."
                 ).format(permission=format_perms_list(error.missing))
             else:
@@ -113,43 +124,43 @@ class Events(commands.Cog):
                 await self.bot.invoke(new_ctx)
                 return
             if delay := humanize_timedelta(seconds=error.retry_after):
-                msg = ("This command is on cooldown. Try again in {delay}.").format(
+                msg = _("This command is on cooldown. Try again in {delay}.").format(
                     delay=delay
                 )
             else:
-                msg = "This command is on cooldown. Try again in 1 second."
+                msg = _("This command is on cooldown. Try again in 1 second.")
             await ctx.send(msg, delete_after=error.retry_after)
         elif isinstance(error, commands.MaxConcurrencyReached):
             if error.per is commands.BucketType.default:
                 if error.number > 1:
-                    msg = (
+                    msg = _(
                         "Too many people using this command."
                         " It can only be used {number} times concurrently."
                     ).format(number=error.number)
                 else:
-                    msg = (
+                    msg = _(
                         "Too many people using this command."
                         " It can only be used once concurrently."
                     )
             elif error.per in (commands.BucketType.user, commands.BucketType.member):
                 if error.number > 1:
-                    msg = (
+                    msg = _(
                         "That command is still completing,"
                         " it can only be used {number} times per {type} concurrently."
                     ).format(number=error.number, type=error.per.name)
                 else:
-                    msg = (
+                    msg = _(
                         "That command is still completing,"
                         " it can only be used once per {type} concurrently."
                     ).format(type=error.per.name)
             else:
                 if error.number > 1:
-                    msg = (
+                    msg = _(
                         "Too many people using this command."
                         " It can only be used {number} times per {type} concurrently."
                     ).format(number=error.number, type=error.per.name)
                 else:
-                    msg = (
+                    msg = _(
                         "Too many people using this command."
                         " It can only be used once per {type} concurrently."
                     ).format(type=error.per.name)

@@ -2,8 +2,11 @@ from discord.ext.commands import HelpCommand
 import itertools
 from discord.ext.commands import Command
 import discord
+from .i18n import Translator
 
 from fuzzywuzzy import fuzz, process
+
+_ = Translator("Help", __file__)
 
 
 class HelpQueryNotFound(ValueError):

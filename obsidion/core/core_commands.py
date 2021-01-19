@@ -6,8 +6,8 @@ import contextlib
 import logging
 import inspect
 import os
-import re
 from typing import List
+import aiohttp
 
 
 import discord
@@ -18,13 +18,16 @@ from .utils.chat_formatting import (
     box,
 )
 from .utils.predicates import MessagePredicate
-
+from obsidion.core.i18n import Translator, cog_i18n
 
 from discord.ext import commands
 
 log = logging.getLogger("obsidion")
 
+_ = Translator("Dev", __file__)
 
+
+@cog_i18n(_)
 class Core(commands.Cog):
     """Commands related to core functions."""
 
@@ -59,7 +62,7 @@ class Core(commands.Cog):
         python_version = "[{}.{}.{}]({})".format(*sys.version_info[:3], python_url)
         obsidion_version = "[{}]({})".format(__version__, obsidion_repo)
 
-        about = (
+        about = _(
             "This bot is an instance of [Obsidion, an open source Discord bot]({}) "
             "created by [Darkflame72]({}) and [improved by many]({}).\n\n"
             "Obsidion is backed by a passionate community who contributes and "
@@ -77,7 +80,7 @@ class Core(commands.Cog):
         embed.add_field(name=("About Obsidion"), value=about, inline=False)
 
         embed.set_footer(
-            text=("Bringing joy since 23rd March 2020 (over {} days ago!)").format(
+            text=_("Bringing joy since 23rd March 2020 (over {} days ago!)").format(
                 days_since
             )
         )
@@ -88,9 +91,9 @@ class Core(commands.Cog):
         """Shows Obsidion's uptime."""
         since = ctx.bot.uptime.strftime("%Y-%m-%d %H:%M:%S")
         delta = datetime.datetime.utcnow() - self.bot.uptime
-        uptime_str = humanize_timedelta(timedelta=delta) or ("Less than one second")
+        uptime_str = humanize_timedelta(timedelta=delta) or _("Less than one second")
         await ctx.send(
-            ("Been up for: **{time_quantity}** (since {timestamp} UTC)").format(
+            _("Been up for: **{time_quantity}** (since {timestamp} UTC)").format(
                 time_quantity=uptime_str, timestamp=since
             )
         )
@@ -99,10 +102,10 @@ class Core(commands.Cog):
     async def invite(self, ctx: commands.Context) -> None:
         """Invite the bot to your server."""
         embed = discord.Embed(
-            description=(
-                f"You can invite {self.bot.user.name} to your Discord server by"
-                f" [clicking here]({self.bot._invite})."
-            ),
+            description=_(
+                "You can invite {name} to your Discord server by"
+                " [clicking here]({invite})."
+            ).format(name=self.bot.user.name, invite=self.bot._invite),
             color=self.bot.color,
         )
 
@@ -113,29 +116,27 @@ class Core(commands.Cog):
     @commands.is_owner()
     async def leave(self, ctx: commands.Context):
         """Leaves the current server."""
-        await ctx.send(("Are you sure you want me to leave this server? (y/n)"))
+        await ctx.send(_("Are you sure you want me to leave this server? (y/n)"))
 
         pred = MessagePredicate.yes_or_no(ctx)
         try:
             await self.bot.wait_for("message", check=pred)
         except asyncio.TimeoutError:
-            await ctx.send(("Response timed out."))
+            await ctx.send(_("Response timed out."))
             return
         else:
             if pred.result is True:
-                await ctx.send(("Alright. Bye :wave:"))
-                log.debug(("Leaving guild '{}'").format(ctx.guild.name))
+                await ctx.send(_("Alright. Bye :wave:"))
+                log.debug(_("Leaving guild '{}'").format(ctx.guild.name))
                 await ctx.guild.leave()
             else:
-                await ctx.send(("Alright, I'll stay then. :)"))
+                await ctx.send(_("Alright, I'll stay then. :)"))
 
     @commands.command()
     @commands.is_owner()
     async def servers(self, ctx: commands.Context):
-        """Lists and allows Obsidion to leave servers."""
-        guilds: List[discord.guild.Guild] = sorted(
-            list(self.bot.guilds), key=lambda s: s.name.lower()
-        )
+        """Lists and allows [botname] to leave servers."""
+        guilds = sorted(list(self.bot.guilds), key=lambda s: s.name.lower())
         msg = ""
         responses = []
         for i, server in enumerate(guilds, 1):
@@ -145,7 +146,7 @@ class Core(commands.Cog):
         for page in pagify(msg, ["\n"]):
             await ctx.send(page)
 
-        query = await ctx.send(("To leave a server, just type its number."))
+        query = await ctx.send(_("To leave a server, just type its number."))
 
         pred = MessagePredicate.contained_in(responses, ctx)
         try:
@@ -156,17 +157,15 @@ class Core(commands.Cog):
             except discord.errors.NotFound:
                 pass
         else:
-            print(type((guilds[0])))
             await self.leave_confirmation(guilds[pred.result], ctx)
 
-    async def leave_confirmation(self, guild, ctx: commands.Context):
-        """Leave confirmation."""
+    async def leave_confirmation(self, guild, ctx):
         if guild.owner.id == ctx.bot.user.id:
-            await ctx.send(("I cannot leave a guild I am the owner of."))
+            await ctx.send(_("I cannot leave a guild I am the owner of."))
             return
 
         await ctx.send(
-            ("Are you sure you want me to leave {}? (yes/no)").format(guild.name)
+            _("Are you sure you want me to leave {}? (yes/no)").format(guild.name)
         )
         pred = MessagePredicate.yes_or_no(ctx)
         try:
@@ -174,11 +173,11 @@ class Core(commands.Cog):
             if pred.result is True:
                 await guild.leave()
                 if guild != ctx.guild:
-                    await ctx.send(("Done."))
+                    await ctx.send(_("Done."))
             else:
-                await ctx.send(("Alright then."))
+                await ctx.send(_("Alright then."))
         except asyncio.TimeoutError:
-            await ctx.send(("Response timed out."))
+            await ctx.send(_("Response timed out."))
 
     # Removing this command from forks is a violation of the AGPLv3 under which it is licensed.
     # Otherwise interfering with the ability for this command to be accessible is also a violation.
@@ -189,7 +188,7 @@ class Core(commands.Cog):
         """
 
         embed = discord.Embed(
-            description=(
+            description=_(
                 "This bot is an instance of the Obsidion Discord Bot.\n"
                 "Obsidion is an open source application made available "
                 "to the public and "
@@ -286,9 +285,11 @@ class Core(commands.Cog):
                     await destination.send(box(page, lang="py"))
                 except discord.HTTPException:
                     await ctx.channel.send(
-                        "I couldn't send the traceback message to you in DM. "
-                        "Either you blocked me or you disabled DMs in this server."
+                        _(
+                            "I couldn't send the traceback message to you in DM. "
+                            "Either you blocked me or you disabled DMs in this server."
+                        )
                     )
                     return
         else:
-            await ctx.send(("No exception has occurred yet."))
+            await ctx.send(_("No exception has occurred yet."))

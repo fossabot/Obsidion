@@ -1,3 +1,6 @@
+#Global
+@Darkflame72
+
 /obsidion/cogs/hypixel/* @AjayACST
 /obsidion/cogs/servers/* @AjayACST
 
@@ -9,3 +12,6 @@ codecov.yml @Darkflame72
 mypy.ini @Darkflame72
 .flake8 @Darkflame72
 .pre-commit-config.yaml @Darkflame72
+
+*.po
+@AbhishekACST
