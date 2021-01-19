@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
 "POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:15\n"
+"PO-Revision-Date: 2021-01-19 15:25\n"
 "Last-Translator: \n"
 "Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
@@ -20,112 +20,117 @@ msgstr ""
 #: obsidion/core/core_commands.py:32
 #, docstring
 msgid "Commands related to core functions."
-msgstr ""
+msgstr "Comandi correlati alle funzioni core."
 
 #: obsidion/core/core_commands.py:40
 #, docstring
 msgid "Pong."
-msgstr ""
+msgstr "Pong."
 
 #: obsidion/core/core_commands.py:45
 #, docstring
 msgid "Shows info about Obsidion."
-msgstr ""
+msgstr "Mostra info su Obsidion."
 
 #: obsidion/core/core_commands.py:65
 msgid "This bot is an instance of [Obsidion, an open source Discord bot]({}) created by [Darkflame72]({}) and [improved by many]({}).\n\n"
 "Obsidion is backed by a passionate community who contributes and creates content for everyone to enjoy. [Join us today]({}) and help us improve!\n\n"
 "(c) Obsidion-dev"
-msgstr ""
+msgstr "Questo bot è un'istanza di [ Obsidion, un bot open source Discord] ({}) creato da [Darkflame72]({}) e [ migliorato da molti] ({}).\n\n"
+"Obsidion è appoggiata da una comunità appassionata che contribuisce e crea contenuti per tutti a godere. [ Unire noi oggi] ({}) e aiutarci a migliorare!\n\n"
+"(c) Obsidion-dev"
 
 #: obsidion/core/core_commands.py:83
 msgid "Bringing joy since 23rd March 2020 (over {} days ago!)"
-msgstr ""
+msgstr "Portando gioia dal 23 marzo 2020 (over {} giorni fa!)"
 
 #: obsidion/core/core_commands.py:91
 #, docstring
 msgid "Shows Obsidion's uptime."
-msgstr ""
+msgstr "Mostra l'uptime di Obsidion."
 
 #: obsidion/core/core_commands.py:94
 msgid "Less than one second"
-msgstr ""
+msgstr "Meno di un secondo"
 
 #: obsidion/core/core_commands.py:96
 msgid "Been up for: **{time_quantity}** (since {timestamp} UTC)"
-msgstr ""
+msgstr "Formato per: **{time_quantity}** (dal {timestamp} UTC)"
 
 #: obsidion/core/core_commands.py:103
 #, docstring
 msgid "Invite the bot to your server."
-msgstr ""
+msgstr "Invita il bot al tuo server."
 
 #: obsidion/core/core_commands.py:105
 msgid "You can invite {name} to your Discord server by [clicking here]({invite})."
-msgstr ""
+msgstr "Puoi invitare {name} al tuo server Discordo da [ cliccando qui] ({invite})."
 
 #: obsidion/core/core_commands.py:118
 #, docstring
 msgid "Leaves the current server."
-msgstr ""
+msgstr "Lascia il server corrente."
 
 #: obsidion/core/core_commands.py:119
 msgid "Are you sure you want me to leave this server? (y/n)"
-msgstr ""
+msgstr "Sei sicuro di volere che lasci questo server? (y/n)"
 
 #: obsidion/core/core_commands.py:125 obsidion/core/core_commands.py:180
 msgid "Response timed out."
-msgstr ""
+msgstr "Risposta in timeout."
 
 #: obsidion/core/core_commands.py:129
 msgid "Alright. Bye :wave:"
-msgstr ""
+msgstr "Va bene. Ciao :wave:"
 
 #: obsidion/core/core_commands.py:130
 msgid "Leaving guild '{}'"
-msgstr ""
+msgstr "Lasciare la corporazione '{}'"
 
 #: obsidion/core/core_commands.py:133
 msgid "Alright, I'll stay then. :)"
-msgstr ""
+msgstr "Va bene, resterò allora. :)"
 
 #: obsidion/core/core_commands.py:138
 #, docstring
 msgid "Lists and allows [botname] to leave servers."
-msgstr ""
+msgstr "Elenca e consente a [botname] di lasciare server."
 
 #: obsidion/core/core_commands.py:149
 msgid "To leave a server, just type its number."
-msgstr ""
+msgstr "Per lasciare un server basta digitare il suo numero."
 
 #: obsidion/core/core_commands.py:164
 msgid "I cannot leave a guild I am the owner of."
-msgstr ""
+msgstr "Non posso lasciare una corporazione di cui sono proprietario."
 
 #: obsidion/core/core_commands.py:168
 msgid "Are you sure you want me to leave {}? (yes/no)"
-msgstr ""
+msgstr "Sei sicuro di volermi lasciare {}? (sì/no)"
 
 #: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
 #: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
-msgstr ""
+msgstr "Fatto."
 
 #: obsidion/core/core_commands.py:178
 msgid "Alright then."
-msgstr ""
+msgstr "Bene allora."
 
 #: obsidion/core/core_commands.py:186
 #, docstring
 msgid "\n"
 "        Get info about Obsidion's licenses.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Ottieni info sulle licenze di Obsidion.\n"
+"        "
 
 #: obsidion/core/core_commands.py:191
 msgid "This bot is an instance of the Obsidion Discord Bot.\n"
 "Obsidion is an open source application made available to the public and licensed under the GNU AGPL v3. The full text of this license is available to you at <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
-msgstr ""
+msgstr "Questo bot è un'istanza dell'Obsidion Discord Bot.\n"
+"Obsidion è un'applicazione open source messa a disposizione del pubblico e concessa in licenza ai sensi della GNU AGPL v3. Il testo completo di questa licenza è disponibile a <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
 
 #: obsidion/core/core_commands.py:206
 #, docstring
@@ -134,12 +139,16 @@ msgid "Displays my full source code or for a specific command.\n\n"
 "        periods, e.g. account.link for the link subcommand of the account command\n"
 "        or by spaces.\n"
 "        "
-msgstr ""
+msgstr "Visualizza il mio codice sorgente completo o per un comando specifico.\n\n"
+"        Per visualizzare il codice sorgente di un sottocomando è possibile separarlo di\n"
+"        periodi, ad esempio account.link per il comando di collegamento del comando account\n"
+"        o per spazi.\n"
+"        "
 
 #: obsidion/core/core_commands.py:250
 #, docstring
 msgid "Shuts down the bot."
-msgstr ""
+msgstr "Chiude il bot."
 
 #: obsidion/core/core_commands.py:261
 #, docstring
@@ -147,26 +156,30 @@ msgid "Attempts to restart Obsidion.\n\n"
 "        Makes [botname] quit with exit code 26.\n"
 "        The restart is not guaranteed: it must be dealt\n"
 "        with by the process manager in use."
-msgstr ""
+msgstr "Tentativi di riavvio di Obsidion.\n\n"
+"        Maghi [botname] quit con codice di uscita 26.\n"
+"        Il riavvio non è garantito: deve essere affrontato il\n"
+"        con il gestore del processo in uso."
 
 #: obsidion/core/core_commands.py:274
 #, docstring
 msgid "Sends to the owner the last command exception that has occurred.\n\n"
 "        If public (yes is specified), it will be sent to the chat instead."
-msgstr ""
+msgstr "Invia al proprietario l'ultima eccezione di comando che si è verificata.\n\n"
+"        Se pubblico (sì è specificato), sarà inviato alla chat invece."
 
 #: obsidion/core/core_commands.py:288
 msgid "I couldn't send the traceback message to you in DM. Either you blocked me or you disabled DMs in this server."
-msgstr ""
+msgstr "Non ho potuto inviare il messaggio tracollo a te in DM. O mi hai bloccato o hai disabilitato DMs in questo server."
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
-msgstr ""
+msgstr "Non è stata ancora verificata alcuna eccezione."
 
 #: obsidion/core/core_commands.py:299
 #, docstring
 msgid "Changes Obsidion's settings."
-msgstr ""
+msgstr "Cambia le impostazioni di Obsidion."
 
 #: obsidion/core/core_commands.py:304
 #, docstring
@@ -175,98 +188,103 @@ msgid "\n"
 "        Acceptable values for the colour parameter can be found at:\n\n"
 "        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Imposta un colore predefinito da utilizzare per gli emicli del bot.\n\n"
+"        Valori accettabili per il parametro colore possono essere trovati a:\n\n"
+"        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
+"        "
 
 #: obsidion/core/core_commands.py:314
 msgid "The color has been reset."
-msgstr ""
+msgstr "Il colore è stato reimpostato."
 
 #: obsidion/core/core_commands.py:317
 msgid "The color has been set."
-msgstr ""
+msgstr "Il colore è stato impostato."
 
 #: obsidion/core/core_commands.py:322
 #, docstring
 msgid "Sets [botname]'s avatar\n\n"
 "        Supports either an attachment or an image URL."
-msgstr ""
+msgstr "Imposta [botname]' s avatar\n\n"
+"        Supporta un allegato o un URL di immagine."
 
 #: obsidion/core/core_commands.py:336
 msgid "That URL is invalid."
-msgstr ""
+msgstr "Tale URL non è valido."
 
 #: obsidion/core/core_commands.py:339
 msgid "Something went wrong while trying to get the image."
-msgstr ""
+msgstr "Qualcosa è andato storto mentre cercava di ottenere l'immagine."
 
 #: obsidion/core/core_commands.py:350
 msgid "Failed. Remember that you can edit my avatar up to two times a hour. The URL or attachment must be a valid image in either JPG or PNG format."
-msgstr ""
+msgstr "Esito negativo. Ricorda che puoi modificare il mio avatar fino a due volte all'ora. L'URL o l'allegato devono essere un'immagine valida in formato JPG o PNG."
 
 #: obsidion/core/core_commands.py:357
 msgid "JPG / PNG format only."
-msgstr ""
+msgstr "Solo formato JPG / PNG."
 
 #: obsidion/core/core_commands.py:364
 #, docstring
 msgid "Removes [botname]'s avatar."
-msgstr ""
+msgstr "Rimuove [botname]' s avatar."
 
 #: obsidion/core/core_commands.py:367
 msgid "Avatar removed."
-msgstr ""
+msgstr "Avatar rimosso."
 
 #: obsidion/core/core_commands.py:373
 #, docstring
 msgid "Sets [botname]'s playing status."
-msgstr ""
+msgstr "Imposta lo stato di gioco di [botname]'."
 
 #: obsidion/core/core_commands.py:392
 msgid "Status set to ``Playing {game.name}``."
-msgstr ""
+msgstr "Status impostato a ` ` Playing {game.name} ` `."
 
 #: obsidion/core/core_commands.py:395
 msgid "Game cleared."
-msgstr ""
+msgstr "Gioco sdoganato."
 
 #: obsidion/core/core_commands.py:401
 #, docstring
 msgid "Sets [botname]'s listening status."
-msgstr ""
+msgstr "Imposta lo stato di ascolto di [botname]'."
 
 #: obsidion/core/core_commands.py:417
 msgid "Status set to ``Listening to {listening}``."
-msgstr ""
+msgstr "Stato impostato a ` ` Ascolto a {listening} ` `."
 
 #: obsidion/core/core_commands.py:422
 msgid "Listening cleared."
-msgstr ""
+msgstr "Ascolto sdoganato."
 
 #: obsidion/core/core_commands.py:428
 #, docstring
 msgid "Sets [botname]'s watching status."
-msgstr ""
+msgstr "Imposta lo stato di osservazione di [botname]' s."
 
 #: obsidion/core/core_commands.py:444
 msgid "Status set to ``Watching {watching}``."
-msgstr ""
+msgstr "Stato impostato su ` ` Watching {watching} ` `."
 
 #: obsidion/core/core_commands.py:447
 msgid "Watching cleared."
-msgstr ""
+msgstr "Guardare sdoganato."
 
 #: obsidion/core/core_commands.py:453
 #, docstring
 msgid "Sets [botname]'s competing status."
-msgstr ""
+msgstr "Imposta lo stato di competizione di [botname]' s."
 
 #: obsidion/core/core_commands.py:469
 msgid "Status set to ``Competing in {competing}``."
-msgstr ""
+msgstr "Status impostato a ` ` Competing in {competing} ` `."
 
 #: obsidion/core/core_commands.py:474
 msgid "Competing cleared."
-msgstr ""
+msgstr "Concorrenza sdoganata."
 
 #: obsidion/core/core_commands.py:480
 #, docstring
@@ -277,48 +295,55 @@ msgid "Sets [botname]'s status.\n\n"
 "            dnd\n"
 "            invisible\n"
 "        "
-msgstr ""
+msgstr "Imposta lo stato di [botname].\n\n"
+"        Dati disponibili:\n"
+"            online\n"
+"            idle\n"
+"            dnd\n"
+"            invisibile\n"
+"        "
 
 #: obsidion/core/core_commands.py:503
 msgid "Status changed to {}."
-msgstr ""
+msgstr "Stato modificato in {}."
 
 #: obsidion/core/core_commands.py:511
 #, docstring
 msgid "Sets [botname]'s streaming status.\n\n"
 "        Leaving both streamer and stream_title empty will clear it."
-msgstr ""
+msgstr "Imposta lo stato di streaming di [botname]' s.\n\n"
+"        Lasciare sia streamer che stream_title vuoto lo chiarirà."
 
 #: obsidion/core/core_commands.py:534
 #, docstring
 msgid "Sets Obsidion's nickname."
-msgstr ""
+msgstr "Imposta il soprannome di Obsidion."
 
 #: obsidion/core/core_commands.py:538
 msgid "Failed to change nickname. Must be 32 characters or fewer."
-msgstr ""
+msgstr "Impossibile cambiare nickname. Devono essere 32 caratteri o meno."
 
 #: obsidion/core/core_commands.py:543
 msgid "I lack the permissions to change my own nickname."
-msgstr ""
+msgstr "Mi mancano i permessi per cambiare il mio soprannome."
 
 #: obsidion/core/core_commands.py:550
 #, docstring
 msgid "Sets Obsidion's global prefix(es)."
-msgstr ""
+msgstr "Imposta il prefisso globale di Obsidion (es)."
 
 #: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
 msgid "Prefix set."
-msgstr ""
+msgstr "Set di prefisso."
 
 #: obsidion/core/core_commands.py:558
 #, docstring
 msgid "Sets Obsidion's server prefix(es)."
-msgstr ""
+msgstr "Imposta il prefisso del server di Obsidion (es)."
 
 #: obsidion/core/core_commands.py:561
 msgid "Guild prefixes have been reset."
-msgstr ""
+msgstr "I prefissi di Guild sono stati reimpostati."
 
 #: obsidion/core/core_commands.py:653
 #, docstring
@@ -328,59 +353,64 @@ msgid "Sends a DM to a user.\n\n"
 "        'Appearance' tab. Enable 'Developer Mode', then right click\n"
 "        a user and click on 'Copy ID'.\n"
 "        "
-msgstr ""
+msgstr "Invia un DM a un utente.\n\n"
+"        Questo comando ha bisogno di un ID utente per funzionare.\n"
+"        Per ottenere un ID utente, andare alle impostazioni di Discord e aprire la scheda\n"
+"        'Aspetto'. Abilitare 'Developer Mode', quindi fare clic con il tasto destro del mouse su\n"
+"        e clicca su 'Copia ID'.\n"
+"        "
 
 #: obsidion/core/core_commands.py:663
 msgid "Invalid ID, user not found, or user is a bot. You can only send messages to people I share a server with."
-msgstr ""
+msgstr "ID non valido, utente non trovato o utente è un bot. È possibile inviare messaggi solo alle persone con cui condivido un server."
 
 #: obsidion/core/core_commands.py:675
 msgid "Owner of {}"
-msgstr ""
+msgstr "Proprietario di {}"
 
 #: obsidion/core/core_commands.py:676
 msgid "You can reply to this message with {}contact"
-msgstr ""
+msgstr "È possibile rispondere a questo messaggio con {} contatto"
 
 #: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
 msgid "Sorry, I couldn't deliver your message to {}"
-msgstr ""
+msgstr "Spiacente, non ho potuto consegnare il tuo messaggio a {}"
 
 #: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
 msgid "Message delivered to {}"
-msgstr ""
+msgstr "Messaggio consegnato a {}"
 
 #: obsidion/core/dev_commands.py:30
 #, docstring
 msgid "Development Commands."
-msgstr ""
+msgstr "Comandi di sviluppo."
 
 #: obsidion/core/dev_commands.py:41
 #, docstring
 msgid "Loads a module."
-msgstr ""
+msgstr "Carica un modulo."
 
 #: obsidion/core/dev_commands.py:49
 msgid "The cog `{module}` has been succesfully loaded"
-msgstr ""
+msgstr "Il cog `{module}` è stato correttamente caricato"
 
 #: obsidion/core/dev_commands.py:54
 #, docstring
 msgid "Unloads a module."
-msgstr ""
+msgstr "Scarica un modulo."
 
 #: obsidion/core/dev_commands.py:62
 msgid "The cog `{module}` has been succesfully unloaded"
-msgstr ""
+msgstr "Il cog `{module}` è stato correttamente scaricato"
 
 #: obsidion/core/dev_commands.py:67
 #, docstring
 msgid "Reloads a module."
-msgstr ""
+msgstr "Ricarica un modulo."
 
 #: obsidion/core/dev_commands.py:75
 msgid "The cog `{module}` has been succesfully reloaded"
-msgstr ""
+msgstr "Il cog `{module}` è stato correttamente ricaricato"
 
 #: obsidion/core/dev_commands.py:131
 #, docstring
@@ -421,7 +451,22 @@ msgid "Execute asynchronous code.\n\n"
 "            commands - redbot.core.commands\n"
 "            _        - The result of the last dev command.\n"
 "        "
-msgstr ""
+msgstr "Eseguire codice asincrono.\n\n"
+"        Questo comando avvolge il codice nel corpo di una funzione async e poi\n"
+"        chiamate e lo attende. Il bot risponderà con qualsiasi cosa stampata a\n"
+"        stdout, nonché il valore di ritorno della funzione.\n\n"
+"        Il codice può essere all'interno di un codeblock, codice inline o nemmeno, a partire da\n"
+"        come non sono mescolati e sono formattati correttamente.\n\n"
+"        Ambiente Variabili:\n"
+"            ctx - comando di richiamo comando\n"
+"            bot - bot oggetto\n"
+"            canale - l'oggetto canale corrente\n"
+"            autore - comando autore oggetto\n"
+"            messaggio - il messaggio del comando oggetto\n"
+"            discor-discord.py libreria\n"
+"            comandi - redbot.core.comandi\n"
+"            _ - Il risultato dell'ultimo comando dev.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:253
 #, docstring
@@ -430,43 +475,49 @@ msgid "Open an interactive REPL.\n\n"
 "        backtick. This includes codeblocks, and as such multiple lines can be\n"
 "        evaluated.\n"
 "        "
-msgstr ""
+msgstr "Open an interactive REPL.\n\n"
+"        Il REPL riconoscerà solo il codice come messaggi che iniziano con un backtick di\n"
+"        . Questo include i codeblock, e come tali linee multiple possono essere\n"
+"        valutate.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:273
 msgid "Already running a REPL session in this channel. Exit it with `quit`."
-msgstr ""
+msgstr "Già esecuzione di una sessione REPL in questo canale. Uscire con ` quit `."
 
 #: obsidion/core/dev_commands.py:279
 msgid "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
-msgstr ""
+msgstr "Già esecuzione di una sessione REPL in questo canale. Riprendere il REPL con ` {} repl riprendere `."
 
 #: obsidion/core/dev_commands.py:287
 msgid "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
-msgstr ""
+msgstr "Inserire il codice per eseguire o valutare. ` uscita () ` o ` quit ` per uscire. ` {} repl pausa ` in pausa."
 
 #: obsidion/core/dev_commands.py:359
 #, docstring
 msgid "Pauses/resumes the REPL running in the current channel"
-msgstr ""
+msgstr "Pause / riprende il REPL in esecuzione nel canale corrente"
 
 #: obsidion/core/dev_commands.py:362
 msgid "There is no currently running REPL session in this channel."
-msgstr ""
+msgstr "Non esiste una sessione REPL attualmente in esecuzione in questo canale."
 
 #: obsidion/core/dev_commands.py:371
 msgid "The REPL session in this channel has been resumed."
-msgstr ""
+msgstr "La sessione REPL in questo canale è stata ripresa."
 
 #: obsidion/core/dev_commands.py:373
 msgid "The REPL session in this channel is now paused."
-msgstr ""
+msgstr "La sessione REPL in questo canale è ora in pausa."
 
 #: obsidion/core/dev_commands.py:378
 #, docstring
 msgid "Mock another user invoking a command.\n\n"
 "        The prefix must not be entered.\n"
 "        "
-msgstr ""
+msgstr "Mock un altro utente che richiama un comando.\n\n"
+"        Il prefisso non deve essere inserito.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:391
 #, docstring
@@ -474,46 +525,49 @@ msgid "Dispatch a message event as if it were sent by a different user.\n\n"
 "        Only reads the raw content of the message. Attachments, embeds etc. are\n"
 "        ignored.\n"
 "        "
-msgstr ""
+msgstr "Invia un evento di messaggio come se fosse inviato da un utente diverso.\n\n"
+"        Solo legge il contenuto grezzo del messaggio. Gli allegati, i letti ecc. sono\n"
+"        ignorati.\n"
+"        "
 
 #: obsidion/core/events.py:20
 #, docstring
 msgid "Important bot events."
-msgstr ""
+msgstr "Eventi bot importanti."
 
 #: obsidion/core/events.py:106
 msgid "I require the {permission} permission to execute that command."
-msgstr ""
+msgstr "Richiedo il permesso del {permission} di eseguire quel comando."
 
 #: obsidion/core/events.py:127
 msgid "This command is on cooldown. Try again in {delay}."
-msgstr ""
+msgstr "Questo comando è in cooldown. Riprovare nel {delay}."
 
 #: obsidion/core/events.py:131
 msgid "This command is on cooldown. Try again in 1 second."
-msgstr ""
+msgstr "Questo comando è in cooldown. Riprovare nel 1 second."
 
 #: obsidion/core/events.py:136
 msgid "Too many people using this command. It can only be used {number} times concurrently."
-msgstr ""
+msgstr "Troppe persone che usano questo comando. Può essere utilizzato solo {number} volte contemporaneamente."
 
 #: obsidion/core/events.py:141
 msgid "Too many people using this command. It can only be used once concurrently."
-msgstr ""
+msgstr "Troppe persone che usano questo comando. Può essere utilizzato solo una volta contemporaneamente."
 
 #: obsidion/core/events.py:147
 msgid "That command is still completing, it can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Quel comando è ancora completato, può essere utilizzato solo {number} volte per {type} conattualmente."
 
 #: obsidion/core/events.py:152
 msgid "That command is still completing, it can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Quel comando è ancora completato, può essere utilizzato solo una volta per {type} conattualmente."
 
 #: obsidion/core/events.py:158
 msgid "Too many people using this command. It can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Troppe persone che usano questo comando. Può essere utilizzato solo {number} volte per {type} conattualmente."
 
 #: obsidion/core/events.py:163
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Troppe persone che usano questo comando. Può essere utilizzato solo una volta per {type} conattualmente."
 
