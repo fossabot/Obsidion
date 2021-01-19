@@ -1,14 +1,8 @@
-"commit_message": "Fix: New translations %original_file_name% from Crowdin"
-"append_commit_message": false
-
-"files":
-  [
-    {
-      "source": "core/**/messages.pot",
-      "translation": "/%original_path%/%locale%.po",
-    },
-    {
-      "source": "cogs/**/messages.pot",
-      "translation": "/%original_path%/%locale%.po",
-    },
-  ]
+base_path: obsidion
+base_url: "https://api.crowdin.com"
+preserve_hierarchy: true
+files:
+  - source: core/**/messages.pot
+    translation: /%original_path%/%locale%.po
+  - source: cogs/**/messages.pot
+    translation: /%original_path%/%locale%.po

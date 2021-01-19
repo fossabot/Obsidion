@@ -293,3 +293,415 @@ class Core(commands.Cog):
                     return
         else:
             await ctx.send(_("No exception has occurred yet."))
+
+    @commands.group(name="set")
+    async def _set(self, ctx: commands.Context):
+        """Changes Obsidion's settings."""
+
+    @_set.command(aliases=["color"])
+    @commands.is_owner()
+    async def colour(self, ctx: commands.Context, *, colour: discord.Colour = None):
+        """
+        Sets a default colour to be used for the bot's embeds.
+
+        Acceptable values for the colour parameter can be found at:
+
+        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter
+        """
+        if colour is None:
+            ctx.bot._color = discord.Color.red()
+            await ctx.bot._config.color.set(discord.Color.red().value)
+            return await ctx.send(_("The color has been reset."))
+        ctx.bot._color = colour
+        await ctx.bot._config.color.set(colour.value)
+        await ctx.send(_("The color has been set."))
+
+    @_set.group(invoke_without_command=True)
+    @commands.is_owner()
+    async def avatar(self, ctx: commands.Context, url: str = None):
+        """Sets [botname]'s avatar
+
+        Supports either an attachment or an image URL."""
+        if len(ctx.message.attachments) > 0:  # Attachments take priority
+            data = await ctx.message.attachments[0].read()
+        elif url is not None:
+            if url.startswith("<") and url.endswith(">"):
+                url = url[1:-1]
+
+            async with aiohttp.ClientSession() as session:
+                try:
+                    async with session.get(url) as r:
+                        data = await r.read()
+                except aiohttp.InvalidURL:
+                    return await ctx.send(_("That URL is invalid."))
+                except aiohttp.ClientError:
+                    return await ctx.send(
+                        _("Something went wrong while trying to get the image.")
+                    )
+        else:
+            await ctx.send_help()
+            return
+
+        try:
+            async with ctx.typing():
+                await ctx.bot.user.edit(avatar=data)
+        except discord.HTTPException:
+            await ctx.send(
+                _(
+                    "Failed. Remember that you can edit my avatar "
+                    "up to two times a hour. The URL or attachment "
+                    "must be a valid image in either JPG or PNG format."
+                )
+            )
+        except discord.InvalidArgument:
+            await ctx.send(_("JPG / PNG format only."))
+        else:
+            await ctx.send(_("Done."))
+
+    @avatar.command(name="remove", aliases=["clear"])
+    @commands.is_owner()
+    async def avatar_remove(self, ctx: commands.Context):
+        """Removes [botname]'s avatar."""
+        async with ctx.typing():
+            await ctx.bot.user.edit(avatar=None)
+        await ctx.send(_("Avatar removed."))
+
+    @_set.command(name="playing", aliases=["game"])
+    @commands.guild_only()
+    @commands.is_owner()
+    async def _game(self, ctx: commands.Context, *, game: str = None):
+        """Sets [botname]'s playing status."""
+
+        if game:
+            if len(game) > 128:
+                await ctx.send(
+                    "The maximum length of game descriptions is 128 characters."
+                )
+                return
+            game = discord.Game(name=game)
+        else:
+            game = None
+        status = (
+            ctx.bot.guilds[0].me.status
+            if len(ctx.bot.guilds) > 0
+            else discord.Status.online
+        )
+        await ctx.bot.change_presence(status=status, activity=game)
+        if game:
+            await ctx.send(
+                _("Status set to ``Playing {game.name}``.").format(game=game)
+            )
+        else:
+            await ctx.send(_("Game cleared."))
+
+    @_set.command(name="listening")
+    @commands.guild_only()
+    @commands.is_owner()
+    async def _listening(self, ctx: commands.Context, *, listening: str = None):
+        """Sets [botname]'s listening status."""
+
+        status = (
+            ctx.bot.guilds[0].me.status
+            if len(ctx.bot.guilds) > 0
+            else discord.Status.online
+        )
+        if listening:
+            activity = discord.Activity(
+                name=listening, type=discord.ActivityType.listening
+            )
+        else:
+            activity = None
+        await ctx.bot.change_presence(status=status, activity=activity)
+        if activity:
+            await ctx.send(
+                _("Status set to ``Listening to {listening}``.").format(
+                    listening=listening
+                )
+            )
+        else:
+            await ctx.send(_("Listening cleared."))
+
+    @_set.command(name="watching")
+    @commands.guild_only()
+    @commands.is_owner()
+    async def _watching(self, ctx: commands.Context, *, watching: str = None):
+        """Sets [botname]'s watching status."""
+
+        status = (
+            ctx.bot.guilds[0].me.status
+            if len(ctx.bot.guilds) > 0
+            else discord.Status.online
+        )
+        if watching:
+            activity = discord.Activity(
+                name=watching, type=discord.ActivityType.watching
+            )
+        else:
+            activity = None
+        await ctx.bot.change_presence(status=status, activity=activity)
+        if activity:
+            await ctx.send(
+                _("Status set to ``Watching {watching}``.").format(watching=watching)
+            )
+        else:
+            await ctx.send(_("Watching cleared."))
+
+    @_set.command(name="competing")
+    @commands.guild_only()
+    @commands.is_owner()
+    async def _competing(self, ctx: commands.Context, *, competing: str = None):
+        """Sets [botname]'s competing status."""
+
+        status = (
+            ctx.bot.guilds[0].me.status
+            if len(ctx.bot.guilds) > 0
+            else discord.Status.online
+        )
+        if competing:
+            activity = discord.Activity(
+                name=competing, type=discord.ActivityType.competing
+            )
+        else:
+            activity = None
+        await ctx.bot.change_presence(status=status, activity=activity)
+        if activity:
+            await ctx.send(
+                _("Status set to ``Competing in {competing}``.").format(
+                    competing=competing
+                )
+            )
+        else:
+            await ctx.send(_("Competing cleared."))
+
+    @_set.command()
+    @commands.guild_only()
+    @commands.is_owner()
+    async def status(self, ctx: commands.Context, *, status: str):
+        """Sets [botname]'s status.
+
+        Available statuses:
+            online
+            idle
+            dnd
+            invisible
+        """
+
+        statuses = {
+            "online": discord.Status.online,
+            "idle": discord.Status.idle,
+            "dnd": discord.Status.dnd,
+            "invisible": discord.Status.invisible,
+        }
+
+        game = ctx.bot.guilds[0].me.activity if len(ctx.bot.guilds) > 0 else None
+        try:
+            status = statuses[status.lower()]
+        except KeyError:
+            await ctx.send_help()
+        else:
+            await ctx.bot.change_presence(status=status, activity=game)
+            await ctx.send(_("Status changed to {}.").format(status))
+
+    @_set.command(
+        name="streaming", aliases=["stream"], usage="[(<streamer> <stream_title>)]"
+    )
+    @commands.guild_only()
+    @commands.is_owner()
+    async def stream(self, ctx: commands.Context, streamer=None, *, stream_title=None):
+        """Sets [botname]'s streaming status.
+
+        Leaving both streamer and stream_title empty will clear it."""
+
+        status = ctx.bot.guilds[0].me.status if len(ctx.bot.guilds) > 0 else None
+
+        if stream_title:
+            stream_title = stream_title.strip()
+            if "twitch.tv/" not in streamer:
+                streamer = "https://www.twitch.tv/" + streamer
+            activity = discord.Streaming(url=streamer, name=stream_title)
+            await ctx.bot.change_presence(status=status, activity=activity)
+        elif streamer is not None:
+            await ctx.send_help()
+            return
+        else:
+            await ctx.bot.change_presence(activity=None, status=status)
+        await ctx.send(_("Done."))
+
+    @_set.command(name="nickname")
+    @commands.has_guild_permissions(manage_nicknames=True)
+    @commands.guild_only()
+    async def _nickname(self, ctx: commands.Context, *, nickname: str = None):
+        """Sets Obsidion's nickname."""
+        try:
+            if nickname and len(nickname) > 32:
+                await ctx.send(
+                    _("Failed to change nickname. Must be 32 characters or fewer.")
+                )
+                return
+            await ctx.guild.me.edit(nick=nickname)
+        except discord.Forbidden:
+            await ctx.send(_("I lack the permissions to change my own nickname."))
+        else:
+            await ctx.send(_("Done."))
+
+    @_set.command(aliases=["gprefixes"], require_var_positional=True)
+    @commands.is_owner()
+    async def globalprefix(self, ctx: commands.Context, *prefixes: str):
+        """Sets Obsidion's global prefix(es)."""
+        await ctx.bot.set_prefixes(guild=None, prefixes=prefixes)
+        await ctx.send(_("Prefix set."))
+
+    @_set.command(aliases=["serverprefixes"])
+    @commands.bot_has_guild_permissions(manage_guild=True)
+    @commands.guild_only()
+    async def prefix(self, ctx: commands.Context, *prefixes: str):
+        """Sets Obsidion's server prefix(es)."""
+        if not prefixes:
+            await ctx.bot.set_prefixes(guild=ctx.guild, prefixes=[])
+            await ctx.send(_("Guild prefixes have been reset."))
+            return
+        prefixes = sorted(prefixes, reverse=True)
+        await ctx.bot.set_prefixes(guild=ctx.guild, prefixes=prefixes)
+        await ctx.send(_("Prefix set."))
+
+    # @_set.command()
+    # @commands.guild_only()
+    # @checks.guildowner_or_permissions(manage_guild=True)
+    # async def locale(self, ctx: commands.Context, language_code: str):
+    #     """
+    #     Changes the bot's locale in this server.
+
+    #     `<language_code>` can be any language code with country code included,
+    #     e.g. `en-US`, `de-DE`, `fr-FR`, `pl-PL`, etc.
+
+    #     Go to Red's Crowdin page to see locales that are available with translations:
+    #     https://translate.discord.red
+
+    #     Use "default" to return to the bot's default set language.
+    #     To reset to English, use "en-US".
+    #     """
+    #     if language_code.lower() == "default":
+    #         global_locale = await self.bot._config.locale()
+    #         i18n.set_contextual_locale(global_locale)
+    #         await self.bot._i18n_cache.set_locale(ctx.guild, None)
+    #         await ctx.send(_("Locale has been set to the default."))
+    #         return
+    #     try:
+    #         locale = BabelLocale.parse(language_code, sep="-")
+    #     except (ValueError, UnknownLocaleError):
+    #         await ctx.send(_("Invalid language code. Use format: `en-US`"))
+    #         return
+    #     if locale.territory is None:
+    #         await ctx.send(
+    #             _(
+    #                 "Invalid format - language code has to include country code, e.g. `en-US`"
+    #             )
+    #         )
+    #         return
+    #     standardized_locale_name = f"{locale.language}-{locale.territory}"
+    #     i18n.set_contextual_locale(standardized_locale_name)
+    #     await self.bot._i18n_cache.set_locale(ctx.guild, standardized_locale_name)
+    #     await ctx.send(_("Locale has been set."))
+
+    # @_set.command(aliases=["region"])
+    # @checks.guildowner_or_permissions(manage_guild=True)
+    # async def regionalformat(self, ctx: commands.Context, language_code: str = None):
+    #     """
+    #     Changes bot's regional format in this server. This is used for formatting date, time and numbers.
+
+    #     `<language_code>` can be any language code with country code included,
+    #     e.g. `en-US`, `de-DE`, `fr-FR`, `pl-PL`, etc.
+
+    #     Leave `<language_code>` empty to base regional formatting on bot's locale in this server.
+    #     """
+    #     if language_code is None:
+    #         i18n.set_contextual_regional_format(None)
+    #         await self.bot._i18n_cache.set_regional_format(ctx.guild, None)
+    #         await ctx.send(
+    #             _(
+    #                 "Regional formatting will now be based on bot's locale in this server."
+    #             )
+    #         )
+    #         return
+
+    #     try:
+    #         locale = BabelLocale.parse(language_code, sep="-")
+    #     except (ValueError, UnknownLocaleError):
+    #         await ctx.send(_("Invalid language code. Use format: `en-US`"))
+    #         return
+    #     if locale.territory is None:
+    #         await ctx.send(
+    #             _(
+    #                 "Invalid format - language code has to include country code, e.g. `en-US`"
+    #             )
+    #         )
+    #         return
+    #     standardized_locale_name = f"{locale.language}-{locale.territory}"
+    #     i18n.set_contextual_regional_format(standardized_locale_name)
+    #     await self.bot._i18n_cache.set_regional_format(
+    #         ctx.guild, standardized_locale_name
+    #     )
+    #     await ctx.send(
+    #         _(
+    #             "Regional formatting will now be based on `{language_code}` locale."
+    #         ).format(language_code=standardized_locale_name)
+    #     )
+
+    @commands.command()
+    @commands.is_owner()
+    async def dm(self, ctx: commands.Context, user_id: int, *, message: str):
+        """Sends a DM to a user.
+
+        This command needs a user ID to work.
+        To get a user ID, go to Discord's settings and open the
+        'Appearance' tab. Enable 'Developer Mode', then right click
+        a user and click on 'Copy ID'.
+        """
+        destination = self.bot.get_user(user_id)
+        if destination is None or destination.bot:
+            await ctx.send(
+                _(
+                    "Invalid ID, user not found, or user is a bot. "
+                    "You can only send messages to people I share "
+                    "a server with."
+                )
+            )
+            return
+
+        prefixes = await ctx.bot.get_valid_prefixes()
+        prefix = re.sub(
+            rf"<@!?{ctx.me.id}>", f"@{ctx.me.name}".replace("\\", r"\\"), prefixes[0]
+        )
+        description = _("Owner of {}").format(ctx.bot.user)
+        content = _("You can reply to this message with {}contact").format(prefix)
+        if await ctx.embed_requested():
+            e = discord.Embed(colour=discord.Colour.red(), description=message)
+
+            e.set_footer(text=content)
+            if ctx.bot.user.avatar_url:
+                e.set_author(name=description, icon_url=ctx.bot.user.avatar_url)
+            else:
+                e.set_author(name=description)
+
+            try:
+                await destination.send(embed=e)
+            except discord.HTTPException:
+                await ctx.send(
+                    _("Sorry, I couldn't deliver your message to {}").format(
+                        destination
+                    )
+                )
+            else:
+                await ctx.send(_("Message delivered to {}").format(destination))
+        else:
+            response = "{}\nMessage:\n\n{}".format(description, message)
+            try:
+                await destination.send("{}\n{}".format(box(response), content))
+            except discord.HTTPException:
+                await ctx.send(
+                    _("Sorry, I couldn't deliver your message to {}").format(
+                        destination
+                    )
+                )
+            else:
+                await ctx.send(_("Message delivered to {}").format(destination))
