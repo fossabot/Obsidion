@@ -5,3 +5,5 @@ preserve_hierarchy: true
 files:
   - source: core/**/messages.pot
     translation: /%original_path%/%locale%.po
+  - source: cogs/**/messages.pot
+    translation: /%original_path%/%locale%.po
