@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
 "POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:16\n"
+"PO-Revision-Date: 2021-01-19 15:24\n"
 "Last-Translator: \n"
 "Language-Team: Turkish\n"
 "MIME-Version: 1.0\n"
@@ -20,112 +20,117 @@ msgstr ""
 #: obsidion/core/core_commands.py:32
 #, docstring
 msgid "Commands related to core functions."
-msgstr ""
+msgstr "Temel işlevlerle ilgili komutlar."
 
 #: obsidion/core/core_commands.py:40
 #, docstring
 msgid "Pong."
-msgstr ""
+msgstr "Pong."
 
 #: obsidion/core/core_commands.py:45
 #, docstring
 msgid "Shows info about Obsidion."
-msgstr ""
+msgstr "Obsidion ile ilgili bilgileri gösterir."
 
 #: obsidion/core/core_commands.py:65
 msgid "This bot is an instance of [Obsidion, an open source Discord bot]({}) created by [Darkflame72]({}) and [improved by many]({}).\n\n"
 "Obsidion is backed by a passionate community who contributes and creates content for everyone to enjoy. [Join us today]({}) and help us improve!\n\n"
 "(c) Obsidion-dev"
-msgstr ""
+msgstr "Bu bot, [Darkflame72]({ }) tarafından oluşturulan ve [ birçok] ({ }) tarafından geliştirilmiş olan bir [ Obsidion, bir açık kaynak Discord bot] ({ }) eşgörünümü ve [ { }).\n\n"
+"Obsidion, herkes için katkıda bulunan ve içeriği oluşturan tutkulu bir topluluk tarafından destekleniyor. [ Bugün bize katılın] ({ }) ve gelişmemize yardımcı olun!\n\n"
+"(c) Obsidion-dev"
 
 #: obsidion/core/core_commands.py:83
 msgid "Bringing joy since 23rd March 2020 (over {} days ago!)"
-msgstr ""
+msgstr "23 mart 2020 ' den bu yana sevinç getiriyorum ({ } gün önce!)"
 
 #: obsidion/core/core_commands.py:91
 #, docstring
 msgid "Shows Obsidion's uptime."
-msgstr ""
+msgstr "Obsidion 'un zamanını gösterir."
 
 #: obsidion/core/core_commands.py:94
 msgid "Less than one second"
-msgstr ""
+msgstr "Bir saniyeden az"
 
 #: obsidion/core/core_commands.py:96
 msgid "Been up for: **{time_quantity}** (since {timestamp} UTC)"
-msgstr ""
+msgstr "Şu şekilde: **{time_quantity}** ( {timestamp} UTC ' den beri)"
 
 #: obsidion/core/core_commands.py:103
 #, docstring
 msgid "Invite the bot to your server."
-msgstr ""
+msgstr "Robotu sunucunuza davet edin."
 
 #: obsidion/core/core_commands.py:105
 msgid "You can invite {name} to your Discord server by [clicking here]({invite})."
-msgstr ""
+msgstr "{name} 'yi, Discord sunucunuza [ burayı tıklatarak] ({invite}) davet ederek davet edebilirsiniz."
 
 #: obsidion/core/core_commands.py:118
 #, docstring
 msgid "Leaves the current server."
-msgstr ""
+msgstr "Yürürlükteki sunucuyu bırakır."
 
 #: obsidion/core/core_commands.py:119
 msgid "Are you sure you want me to leave this server? (y/n)"
-msgstr ""
+msgstr "Bu sunucuyu bırakmamı istediğinizden emin misiniz? (y/n)"
 
 #: obsidion/core/core_commands.py:125 obsidion/core/core_commands.py:180
 msgid "Response timed out."
-msgstr ""
+msgstr "Yanıt zamanaşımına uğradı."
 
 #: obsidion/core/core_commands.py:129
 msgid "Alright. Bye :wave:"
-msgstr ""
+msgstr "Tamam. Güle güle :wave:"
 
 #: obsidion/core/core_commands.py:130
 msgid "Leaving guild '{}'"
-msgstr ""
+msgstr "'{ }' loncası bırakılıyor"
 
 #: obsidion/core/core_commands.py:133
 msgid "Alright, I'll stay then. :)"
-msgstr ""
+msgstr "Peki, o zaman ben kalırım. :)"
 
 #: obsidion/core/core_commands.py:138
 #, docstring
 msgid "Lists and allows [botname] to leave servers."
-msgstr ""
+msgstr "[botname] 'nin sunucuları listelemenizi ve bu sunuculardan izin vermelerini sağlar."
 
 #: obsidion/core/core_commands.py:149
 msgid "To leave a server, just type its number."
-msgstr ""
+msgstr "Bir sunucuyu bırakmak için, yalnızca numarasını yazın."
 
 #: obsidion/core/core_commands.py:164
 msgid "I cannot leave a guild I am the owner of."
-msgstr ""
+msgstr "Sahip olduğum bir gulden ayrılamayacağım."
 
 #: obsidion/core/core_commands.py:168
 msgid "Are you sure you want me to leave {}? (yes/no)"
-msgstr ""
+msgstr "{ } ' dan ayrılmamı istediğinizden emin misiniz? (evet/hayır)"
 
 #: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
 #: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
-msgstr ""
+msgstr "Bitti."
 
 #: obsidion/core/core_commands.py:178
 msgid "Alright then."
-msgstr ""
+msgstr "Tamam o zaman."
 
 #: obsidion/core/core_commands.py:186
 #, docstring
 msgid "\n"
 "        Get info about Obsidion's licenses.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Obsidion 'un lisansları hakkında bilgi alın.\n"
+"        "
 
 #: obsidion/core/core_commands.py:191
 msgid "This bot is an instance of the Obsidion Discord Bot.\n"
 "Obsidion is an open source application made available to the public and licensed under the GNU AGPL v3. The full text of this license is available to you at <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
-msgstr ""
+msgstr "Bu bot, Obsidion Discord Bot 'un bir örneğidir.\n"
+"Obsidion, GNU AGPL v3 kapsamında halka açık ve lisanslanan açık kaynaklı bir uygulamadır. <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE> numaralı telefondan bu lisansın tam metni kullanımınız"
 
 #: obsidion/core/core_commands.py:206
 #, docstring
@@ -134,12 +139,16 @@ msgid "Displays my full source code or for a specific command.\n\n"
 "        periods, e.g. account.link for the link subcommand of the account command\n"
 "        or by spaces.\n"
 "        "
-msgstr ""
+msgstr "Tam kaynak kodumu ya da belirli bir komutu görüntüler.\n\n"
+"        Bir altkomutun kaynak kodunu,\n"
+"        hesap komutunun bağlantı altkomutu için account.link gibi,\n"
+"        ya da boşluklarla ayırabileceğiniz bir altkomutun kaynak kodunu görüntülemek için.\n"
+"        "
 
 #: obsidion/core/core_commands.py:250
 #, docstring
 msgid "Shuts down the bot."
-msgstr ""
+msgstr "Robotu kapanıyor."
 
 #: obsidion/core/core_commands.py:261
 #, docstring
@@ -147,26 +156,30 @@ msgid "Attempts to restart Obsidion.\n\n"
 "        Makes [botname] quit with exit code 26.\n"
 "        The restart is not guaranteed: it must be dealt\n"
 "        with by the process manager in use."
-msgstr ""
+msgstr "Obsidion 'u yeniden başlatma girişimleri.\n\n"
+" [botname] çıkış kodu 26 ile çıkış yapar.\n"
+"        Yeniden başlatma işlemi garanti edilmez: kullanımda olan süreç yöneticisi tarafından\n"
+"        çözümünde ele alınmalıdır."
 
 #: obsidion/core/core_commands.py:274
 #, docstring
 msgid "Sends to the owner the last command exception that has occurred.\n\n"
 "        If public (yes is specified), it will be sent to the chat instead."
-msgstr ""
+msgstr "Oluşturan son komut kural dışı durumunu sahibine gönderir.\n\n"
+"        Genel (evet belirtildiyse), bunun yerine sohbete gönderilecektir."
 
 #: obsidion/core/core_commands.py:288
 msgid "I couldn't send the traceback message to you in DM. Either you blocked me or you disabled DMs in this server."
-msgstr ""
+msgstr "Sana mesaj yollayamadım, DM ' de. Ya beni engelliyorsunuz ya da bu sunucuda DM ' leri devre dışı bırakıyorsunuz."
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
-msgstr ""
+msgstr "Henüz bir kural dışı durum oluşmadı."
 
 #: obsidion/core/core_commands.py:299
 #, docstring
 msgid "Changes Obsidion's settings."
-msgstr ""
+msgstr "Obsidion 'un ayarlarını değiştirir."
 
 #: obsidion/core/core_commands.py:304
 #, docstring
@@ -175,98 +188,103 @@ msgid "\n"
 "        Acceptable values for the colour parameter can be found at:\n\n"
 "        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Botun mumyaları için kullanılacak bir varsayılan renk belirler.\n\n"
+"        Renk parametresi için kabul edilebilir değerler şu adreste bulunabilir:\n\n"
+"        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.CourConverter\n"
+"        "
 
 #: obsidion/core/core_commands.py:314
 msgid "The color has been reset."
-msgstr ""
+msgstr "Renk sıfırlandı."
 
 #: obsidion/core/core_commands.py:317
 msgid "The color has been set."
-msgstr ""
+msgstr "Renk ayarlandı."
 
 #: obsidion/core/core_commands.py:322
 #, docstring
 msgid "Sets [botname]'s avatar\n\n"
 "        Supports either an attachment or an image URL."
-msgstr ""
+msgstr "[botname]' nin avatarı\n\n"
+"        olarak ayarlar, bir eki ya da görüntü URL 'sini destekler."
 
 #: obsidion/core/core_commands.py:336
 msgid "That URL is invalid."
-msgstr ""
+msgstr "Bu URL geçersiz."
 
 #: obsidion/core/core_commands.py:339
 msgid "Something went wrong while trying to get the image."
-msgstr ""
+msgstr "Görüntüyü elde etmeye çalışırken bir şeyler ters gitti."
 
 #: obsidion/core/core_commands.py:350
 msgid "Failed. Remember that you can edit my avatar up to two times a hour. The URL or attachment must be a valid image in either JPG or PNG format."
-msgstr ""
+msgstr "Başarısız oldu. Bir saat içinde benim avatarımı iki kata kadar düzenleyebileceğini unutma. URL ya da ek, JPG ya da PNG biçiminde geçerli bir görüntü olmalıdır."
 
 #: obsidion/core/core_commands.py:357
 msgid "JPG / PNG format only."
-msgstr ""
+msgstr "Yalnızca JPG/PNG biçimi."
 
 #: obsidion/core/core_commands.py:364
 #, docstring
 msgid "Removes [botname]'s avatar."
-msgstr ""
+msgstr "[botname]' nin avatarını kaldırır."
 
 #: obsidion/core/core_commands.py:367
 msgid "Avatar removed."
-msgstr ""
+msgstr "Avatar çıkarıldı."
 
 #: obsidion/core/core_commands.py:373
 #, docstring
 msgid "Sets [botname]'s playing status."
-msgstr ""
+msgstr "[botname]' nin oyun durumunu ayarlar."
 
 #: obsidion/core/core_commands.py:392
 msgid "Status set to ``Playing {game.name}``."
-msgstr ""
+msgstr "Durum, ` ` {game.name} ` ` Oynanır ` olarak ayarlandı."
 
 #: obsidion/core/core_commands.py:395
 msgid "Game cleared."
-msgstr ""
+msgstr "Oyun temizlendi."
 
 #: obsidion/core/core_commands.py:401
 #, docstring
 msgid "Sets [botname]'s listening status."
-msgstr ""
+msgstr "[botname]' nin dinleme durumunu ayarlar."
 
 #: obsidion/core/core_commands.py:417
 msgid "Status set to ``Listening to {listening}``."
-msgstr ""
+msgstr "Durum, ` ` {listening} ` yi Dinliyor olarak ayarlandı."
 
 #: obsidion/core/core_commands.py:422
 msgid "Listening cleared."
-msgstr ""
+msgstr "Dinleme temize çıktı."
 
 #: obsidion/core/core_commands.py:428
 #, docstring
 msgid "Sets [botname]'s watching status."
-msgstr ""
+msgstr "[botname]izleme durumunu ayarlar."
 
 #: obsidion/core/core_commands.py:444
 msgid "Status set to ``Watching {watching}``."
-msgstr ""
+msgstr "Durum, ` ` {watching} ` ` için 'İzleniyor' olarak ayarlandı."
 
 #: obsidion/core/core_commands.py:447
 msgid "Watching cleared."
-msgstr ""
+msgstr "İzledik."
 
 #: obsidion/core/core_commands.py:453
 #, docstring
 msgid "Sets [botname]'s competing status."
-msgstr ""
+msgstr "[botname]' nin rakip durumunu ayarlar."
 
 #: obsidion/core/core_commands.py:469
 msgid "Status set to ``Competing in {competing}``."
-msgstr ""
+msgstr "Durum, ` ` {competing} ` içinde YENİCİLER olarak ayarlandı `."
 
 #: obsidion/core/core_commands.py:474
 msgid "Competing cleared."
-msgstr ""
+msgstr "Rakip temizlendi."
 
 #: obsidion/core/core_commands.py:480
 #, docstring
@@ -277,48 +295,55 @@ msgid "Sets [botname]'s status.\n\n"
 "            dnd\n"
 "            invisible\n"
 "        "
-msgstr ""
+msgstr "[botname]' nin durumunu ayarlar.\n\n"
+"        Kullanılabilir durumlar:\n"
+"            online\n"
+"            boşta duran\n"
+"            dnd\n"
+"            görünmez\n"
+"        "
 
 #: obsidion/core/core_commands.py:503
 msgid "Status changed to {}."
-msgstr ""
+msgstr "Durum { } olarak değiştirildi."
 
 #: obsidion/core/core_commands.py:511
 #, docstring
 msgid "Sets [botname]'s streaming status.\n\n"
 "        Leaving both streamer and stream_title empty will clear it."
-msgstr ""
+msgstr "[botname]' nin akış durumunu ayarlar.\n\n"
+"        Hem daha sorunsuz, hem de stream_title boş bırakılacak şekilde bırakılacak."
 
 #: obsidion/core/core_commands.py:534
 #, docstring
 msgid "Sets Obsidion's nickname."
-msgstr ""
+msgstr "Obsidion 'un takma adını ayarlar."
 
 #: obsidion/core/core_commands.py:538
 msgid "Failed to change nickname. Must be 32 characters or fewer."
-msgstr ""
+msgstr "Takma ad değiştirilemedi. 32 karakter ya da daha az karakter olmalıdır."
 
 #: obsidion/core/core_commands.py:543
 msgid "I lack the permissions to change my own nickname."
-msgstr ""
+msgstr "Kendi lakabımı değiştirme iznim yok."
 
 #: obsidion/core/core_commands.py:550
 #, docstring
 msgid "Sets Obsidion's global prefix(es)."
-msgstr ""
+msgstr "Obsidion 'un genel önekini (es) ayarlar."
 
 #: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
 msgid "Prefix set."
-msgstr ""
+msgstr "Önek kümesi."
 
 #: obsidion/core/core_commands.py:558
 #, docstring
 msgid "Sets Obsidion's server prefix(es)."
-msgstr ""
+msgstr "Obsidion 'un sunucu önekini (es) ayarlar."
 
 #: obsidion/core/core_commands.py:561
 msgid "Guild prefixes have been reset."
-msgstr ""
+msgstr "Gulf önekleri sıfırlandı."
 
 #: obsidion/core/core_commands.py:653
 #, docstring
@@ -328,59 +353,64 @@ msgid "Sends a DM to a user.\n\n"
 "        'Appearance' tab. Enable 'Developer Mode', then right click\n"
 "        a user and click on 'Copy ID'.\n"
 "        "
-msgstr ""
+msgstr "Kullanıcıya bir DM gönderir.\n\n"
+"        Bu komutun çalışması için bir kullanıcı kimliği gerekir.\n"
+"        Kullanıcı Kimliğini almak için, Discord ayarına gidin ve\n"
+"        'Görünüş' sekmesini açın. 'Geliştirici Modu' seçeneğini etkinleştirin, ardından\n"
+"        seçeneğini sağ tıklatın ve 'Kimliği Kopyala' seçeneğini tıklatın.\n"
+"        "
 
 #: obsidion/core/core_commands.py:663
 msgid "Invalid ID, user not found, or user is a bot. You can only send messages to people I share a server with."
-msgstr ""
+msgstr "Geçersiz tanıtıcı, kullanıcı bulunamadı ya da kullanıcı bir bot. Yalnızca bir sunucuyu paylaştığım kişilere ileti gönderebilirsiniz."
 
 #: obsidion/core/core_commands.py:675
 msgid "Owner of {}"
-msgstr ""
+msgstr "{ } Sahibi"
 
 #: obsidion/core/core_commands.py:676
 msgid "You can reply to this message with {}contact"
-msgstr ""
+msgstr "Bu iletiyi { } kişisiyle yanıtlayabilirsiniz"
 
 #: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
 msgid "Sorry, I couldn't deliver your message to {}"
-msgstr ""
+msgstr "Üzgünüz, { } iletinizi teslim edemedim."
 
 #: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
 msgid "Message delivered to {}"
-msgstr ""
+msgstr "İletinin teslim edildiği yer: { }"
 
 #: obsidion/core/dev_commands.py:30
 #, docstring
 msgid "Development Commands."
-msgstr ""
+msgstr "Geliştirme Komutları."
 
 #: obsidion/core/dev_commands.py:41
 #, docstring
 msgid "Loads a module."
-msgstr ""
+msgstr "Bir modül yükler."
 
 #: obsidion/core/dev_commands.py:49
 msgid "The cog `{module}` has been succesfully loaded"
-msgstr ""
+msgstr "'{module}` cog ` {module} ` başarıyla yüklendi"
 
 #: obsidion/core/dev_commands.py:54
 #, docstring
 msgid "Unloads a module."
-msgstr ""
+msgstr "Bir modülü boşa alır."
 
 #: obsidion/core/dev_commands.py:62
 msgid "The cog `{module}` has been succesfully unloaded"
-msgstr ""
+msgstr "Cog `{module}` başarıyla boşaltıldı"
 
 #: obsidion/core/dev_commands.py:67
 #, docstring
 msgid "Reloads a module."
-msgstr ""
+msgstr "Bir modülü yeniden yükler."
 
 #: obsidion/core/dev_commands.py:75
 msgid "The cog `{module}` has been succesfully reloaded"
-msgstr ""
+msgstr "Cog `{module}` başarılı bir şekilde yeniden yüklendi"
 
 #: obsidion/core/dev_commands.py:131
 #, docstring
@@ -421,7 +451,22 @@ msgid "Execute asynchronous code.\n\n"
 "            commands - redbot.core.commands\n"
 "            _        - The result of the last dev command.\n"
 "        "
-msgstr ""
+msgstr "Zamanuyumsuz kodu yürüt.\n\n"
+"        Bu komut, kodu async fonksiyonunun gövdesine sarar ve daha sonra\n"
+"        aramalarını arar ve bekler. Robot,\n"
+"        stdout 'a yazdırılan herhangi bir şeyle ve işlevin dönüş değeri ile yanıt verecektir.\n\n"
+"        Kod bir codeblock, iç kod ya da hiçbiri karışık olmadığından ve düzgün biçimlendirildiğinden, uzun\n"
+"        biçiminde olabilir.\n\n"
+"        Ortam Değişkenleri:\n"
+"            ctx-komut çağırma bağlamı\n"
+"            bot-bot nesnesi\n"
+"            kanal-mevcut kanal nesnesi\n"
+"            yazar-komut yazarın üye nesnesi\n"
+"            mesaj-komutun mesaj nesnesi\n"
+"            discord-discord.py kitaplık\n"
+"            komutları-redbot.core.commans\n"
+"            _-son dev komutu sonucu.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:253
 #, docstring
@@ -430,43 +475,49 @@ msgid "Open an interactive REPL.\n\n"
 "        backtick. This includes codeblocks, and as such multiple lines can be\n"
 "        evaluated.\n"
 "        "
-msgstr ""
+msgstr "Etkileşimli bir REPL açın.\n\n"
+"        REPL, kodu yalnızca\n"
+"        arka kenetiyle başlayan iletiler olarak tanıyacaktır. Bu, kod öbeklerini içerir ve bu tür birden çok satır\n"
+"        olarak değerlendirilebilir.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:273
 msgid "Already running a REPL session in this channel. Exit it with `quit`."
-msgstr ""
+msgstr "Bu kanalda zaten bir REPL oturumu çalıştırılıyor. \"İşi bırak\" ile çık."
 
 #: obsidion/core/dev_commands.py:279
 msgid "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
-msgstr ""
+msgstr "Bu kanalda zaten bir REPL oturumu çalıştırılıyor. REPL ' yi ` { } repl sürdür ` ile sürdürün."
 
 #: obsidion/core/dev_commands.py:287
 msgid "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
-msgstr ""
+msgstr "Yürütülecek ya da değerlendirilecek kodu girin. ` exit () ` ya da çıkmak için ` quit `. Duraklatmak için ` { } repl duraklat `."
 
 #: obsidion/core/dev_commands.py:359
 #, docstring
 msgid "Pauses/resumes the REPL running in the current channel"
-msgstr ""
+msgstr "Geçerli kanalda çalışan REPL ' yi duraklatma/sürdürür"
 
 #: obsidion/core/dev_commands.py:362
 msgid "There is no currently running REPL session in this channel."
-msgstr ""
+msgstr "Bu kanalda şu anda çalışmakta olan bir REPL oturumu yok."
 
 #: obsidion/core/dev_commands.py:371
 msgid "The REPL session in this channel has been resumed."
-msgstr ""
+msgstr "Bu kanaldaki REPL oturumuna devam edildi."
 
 #: obsidion/core/dev_commands.py:373
 msgid "The REPL session in this channel is now paused."
-msgstr ""
+msgstr "Bu kanaldaki REPL oturumu duraklatıldı."
 
 #: obsidion/core/dev_commands.py:378
 #, docstring
 msgid "Mock another user invoking a command.\n\n"
 "        The prefix must not be entered.\n"
 "        "
-msgstr ""
+msgstr "Bir komutu çağıran başka bir kullanıcı ile alay edin.\n\n"
+"        Önek girilmemelidir.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:391
 #, docstring
@@ -474,46 +525,49 @@ msgid "Dispatch a message event as if it were sent by a different user.\n\n"
 "        Only reads the raw content of the message. Attachments, embeds etc. are\n"
 "        ignored.\n"
 "        "
-msgstr ""
+msgstr "Bir ileti olayını, farklı bir kullanıcı tarafından gönderilmiş gibi dağıt.\n\n"
+"        Yalnızca iletinin işlenmemiş içeriğini okur. Ekler, emsaler vb.\n"
+"        yoksayılır.\n"
+"        "
 
 #: obsidion/core/events.py:20
 #, docstring
 msgid "Important bot events."
-msgstr ""
+msgstr "Önemli bot olayları."
 
 #: obsidion/core/events.py:106
 msgid "I require the {permission} permission to execute that command."
-msgstr ""
+msgstr "Bu komutu yürütmek için {permission} izninin olması gerekir."
 
 #: obsidion/core/events.py:127
 msgid "This command is on cooldown. Try again in {delay}."
-msgstr ""
+msgstr "Bu komut soğutucunda. {delay} 'de yeniden deneyin."
 
 #: obsidion/core/events.py:131
 msgid "This command is on cooldown. Try again in 1 second."
-msgstr ""
+msgstr "Bu komut soğutucunda. 1 saniye içinde yeniden deneyin."
 
 #: obsidion/core/events.py:136
 msgid "Too many people using this command. It can only be used {number} times concurrently."
-msgstr ""
+msgstr "Bu komutu kullanan çok sayıda kişi var. Yalnızca {number} kez koşutzamanlı olarak kullanılabilir."
 
 #: obsidion/core/events.py:141
 msgid "Too many people using this command. It can only be used once concurrently."
-msgstr ""
+msgstr "Bu komutu kullanan çok sayıda kişi var. Bir kez koşutzamanlı olarak kullanılabilir."
 
 #: obsidion/core/events.py:147
 msgid "That command is still completing, it can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Bu komut hala tamamlanıyor, ancak {number} kez koşutzamanlı olarak {type} kez kullanılabilir."
 
 #: obsidion/core/events.py:152
 msgid "That command is still completing, it can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Bu komut hala tamamlanıyor, ancak {type} başına bir kez koşutzamanlı olarak kullanılabilir."
 
 #: obsidion/core/events.py:158
 msgid "Too many people using this command. It can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Bu komutu kullanan çok sayıda kişi var. {type} koşutzamanlı olarak yalnızca {number} kez kullanılabilir."
 
 #: obsidion/core/events.py:163
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Bu komutu kullanan çok sayıda kişi var. Yalnızca {type} koşutzamanlı olarak bir kez kullanılabilir."
 
