@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
 "POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:15\n"
+"PO-Revision-Date: 2021-01-19 15:25\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "MIME-Version: 1.0\n"
@@ -20,62 +20,64 @@ msgstr ""
 #: obsidion/core/core_commands.py:32
 #, docstring
 msgid "Commands related to core functions."
-msgstr ""
+msgstr "Kommandit liittyvät ydintoimintoihin."
 
 #: obsidion/core/core_commands.py:40
 #, docstring
 msgid "Pong."
-msgstr ""
+msgstr "Pong!"
 
 #: obsidion/core/core_commands.py:45
 #, docstring
 msgid "Shows info about Obsidion."
-msgstr ""
+msgstr "Näyttää tietoja Obsidionista."
 
 #: obsidion/core/core_commands.py:65
 msgid "This bot is an instance of [Obsidion, an open source Discord bot]({}) created by [Darkflame72]({}) and [improved by many]({}).\n\n"
 "Obsidion is backed by a passionate community who contributes and creates content for everyone to enjoy. [Join us today]({}) and help us improve!\n\n"
 "(c) Obsidion-dev"
-msgstr ""
+msgstr "Tämä botti on [Obsidion, avoimen lähdekoodin botti] ilmentymä, jonka on luonut [Darkflame72]({}) ja [parannetut monet] ({}).\n\n"
+"Obsidion tukee intohimoinen yhteisö, joka edistää ja luo sisältöä kaikille nauttia. [Liity meihin tänään] ({}) ja auta meitä parantamaan!\n\n"
+"(c) Obsidion-dev"
 
 #: obsidion/core/core_commands.py:83
 msgid "Bringing joy since 23rd March 2020 (over {} days ago!)"
-msgstr ""
+msgstr "Iloa 23. Maaliskuuta 2020 lähtien (yli {} päivää sitten!)"
 
 #: obsidion/core/core_commands.py:91
 #, docstring
 msgid "Shows Obsidion's uptime."
-msgstr ""
+msgstr "Näyttää Obsidionin päiviltä."
 
 #: obsidion/core/core_commands.py:94
 msgid "Less than one second"
-msgstr ""
+msgstr "Alle sekunnin"
 
 #: obsidion/core/core_commands.py:96
 msgid "Been up for: **{time_quantity}** (since {timestamp} UTC)"
-msgstr ""
+msgstr "Ollut:{time_quantity}** (vuodesta {timestamp} UTC)"
 
 #: obsidion/core/core_commands.py:103
 #, docstring
 msgid "Invite the bot to your server."
-msgstr ""
+msgstr "Kutsu robotti palvelimelle."
 
 #: obsidion/core/core_commands.py:105
 msgid "You can invite {name} to your Discord server by [clicking here]({invite})."
-msgstr ""
+msgstr "Voit kutsua {name} yhteystietoosi [napsauttamalla tätä] ({invite})."
 
 #: obsidion/core/core_commands.py:118
 #, docstring
 msgid "Leaves the current server."
-msgstr ""
+msgstr "Jättää nykyisen palvelimen."
 
 #: obsidion/core/core_commands.py:119
 msgid "Are you sure you want me to leave this server? (y/n)"
-msgstr ""
+msgstr "Haluatko varmasti, että jätän tämän palvelimen? (kyllä/n)"
 
 #: obsidion/core/core_commands.py:125 obsidion/core/core_commands.py:180
 msgid "Response timed out."
-msgstr ""
+msgstr "Vastaus on aikakatkaistu."
 
 #: obsidion/core/core_commands.py:129
 msgid "Alright. Bye :wave:"
@@ -83,49 +85,52 @@ msgstr ""
 
 #: obsidion/core/core_commands.py:130
 msgid "Leaving guild '{}'"
-msgstr ""
+msgstr "Kilasta lähteminen {}"
 
 #: obsidion/core/core_commands.py:133
 msgid "Alright, I'll stay then. :)"
-msgstr ""
+msgstr "Hyvä on, jään sitten. :)"
 
 #: obsidion/core/core_commands.py:138
 #, docstring
 msgid "Lists and allows [botname] to leave servers."
-msgstr ""
+msgstr "Lists ja sallii [botname] jättää palvelimia."
 
 #: obsidion/core/core_commands.py:149
 msgid "To leave a server, just type its number."
-msgstr ""
+msgstr "Jos haluat jättää palvelimen, kirjoita sen numero."
 
 #: obsidion/core/core_commands.py:164
 msgid "I cannot leave a guild I am the owner of."
-msgstr ""
+msgstr "En voi jättää killan omistajaa."
 
 #: obsidion/core/core_commands.py:168
 msgid "Are you sure you want me to leave {}? (yes/no)"
-msgstr ""
+msgstr "Haluatko varmasti, että lähden? (kyllä/ei)"
 
 #: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
 #: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
-msgstr ""
+msgstr "Tehty."
 
 #: obsidion/core/core_commands.py:178
 msgid "Alright then."
-msgstr ""
+msgstr "Hyvä on sitten."
 
 #: obsidion/core/core_commands.py:186
 #, docstring
 msgid "\n"
 "        Get info about Obsidion's licenses.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Hanki tietoa Obsidionin lisensseistä.\n"
+"        "
 
 #: obsidion/core/core_commands.py:191
 msgid "This bot is an instance of the Obsidion Discord Bot.\n"
 "Obsidion is an open source application made available to the public and licensed under the GNU AGPL v3. The full text of this license is available to you at <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
-msgstr ""
+msgstr "Tämä robotti on esimerkki Obsidion Discord Bot.\n"
+"Obsidion on avoin lähdesovellus, joka on julkisesti saatavilla ja lisensoitu GNU AGPL v3 :n nojalla. Tämän lisenssin koko teksti on käytettävissä osoitteessa <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
 
 #: obsidion/core/core_commands.py:206
 #, docstring
@@ -134,12 +139,16 @@ msgid "Displays my full source code or for a specific command.\n\n"
 "        periods, e.g. account.link for the link subcommand of the account command\n"
 "        or by spaces.\n"
 "        "
-msgstr ""
+msgstr "Tuo näkyviin koko lähdekoodin tai tietyn komennon.\n\n"
+"        Alikomennuksen lähdekoodin näyttö voi erottaa sen\n"
+"        jaksosta, esimerkiksi tilin linkki-komennon\n"
+"        tai välilyönnit.\n"
+"        "
 
 #: obsidion/core/core_commands.py:250
 #, docstring
 msgid "Shuts down the bot."
-msgstr ""
+msgstr "Sulkee botin."
 
 #: obsidion/core/core_commands.py:261
 #, docstring
@@ -153,20 +162,21 @@ msgstr ""
 #, docstring
 msgid "Sends to the owner the last command exception that has occurred.\n\n"
 "        If public (yes is specified), it will be sent to the chat instead."
-msgstr ""
+msgstr "Omistaa omistajalle viimeisen komennon, joka on ilmennyt.\n\n"
+"        Jos julkinen (kyllä on määritetty), se lähetetään sen sijaan keskusteluun."
 
 #: obsidion/core/core_commands.py:288
 msgid "I couldn't send the traceback message to you in DM. Either you blocked me or you disabled DMs in this server."
-msgstr ""
+msgstr "En voinut lähettää viestiä sinulle DM: lle. Joko estit minut tai työrajoitteiset DMs tässä palvelimessa."
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
-msgstr ""
+msgstr "Poikkeusta ei ole vielä ilmennyt."
 
 #: obsidion/core/core_commands.py:299
 #, docstring
 msgid "Changes Obsidion's settings."
-msgstr ""
+msgstr "Muuttaa Obsidionin asetuksia."
 
 #: obsidion/core/core_commands.py:304
 #, docstring
@@ -179,94 +189,95 @@ msgstr ""
 
 #: obsidion/core/core_commands.py:314
 msgid "The color has been reset."
-msgstr ""
+msgstr "Väri on nollattu."
 
 #: obsidion/core/core_commands.py:317
 msgid "The color has been set."
-msgstr ""
+msgstr "Väri on asetettu."
 
 #: obsidion/core/core_commands.py:322
 #, docstring
 msgid "Sets [botname]'s avatar\n\n"
 "        Supports either an attachment or an image URL."
-msgstr ""
+msgstr "Sets [botname]'s avatar\n\n"
+"        tukee joko liitettä tai kuvan URL-osoitetta."
 
 #: obsidion/core/core_commands.py:336
 msgid "That URL is invalid."
-msgstr ""
+msgstr "URL-osoite ei kelpaa."
 
 #: obsidion/core/core_commands.py:339
 msgid "Something went wrong while trying to get the image."
-msgstr ""
+msgstr "Jokin meni vikaan yrittäessään saada kuvaa."
 
 #: obsidion/core/core_commands.py:350
 msgid "Failed. Remember that you can edit my avatar up to two times a hour. The URL or attachment must be a valid image in either JPG or PNG format."
-msgstr ""
+msgstr "Epäonnistunut. Muista, että voit muokata avatarini jopa kaksi kertaa tunnissa. URL-osoitteen tai liitteen on oltava kelvollinen JPG-tai PNG-muodossa."
 
 #: obsidion/core/core_commands.py:357
 msgid "JPG / PNG format only."
-msgstr ""
+msgstr "Vain JPG-tai PNG-muodossa."
 
 #: obsidion/core/core_commands.py:364
 #, docstring
 msgid "Removes [botname]'s avatar."
-msgstr ""
+msgstr "Poistaa [botname]:n avatarin."
 
 #: obsidion/core/core_commands.py:367
 msgid "Avatar removed."
-msgstr ""
+msgstr "Avatar on poistettu."
 
 #: obsidion/core/core_commands.py:373
 #, docstring
 msgid "Sets [botname]'s playing status."
-msgstr ""
+msgstr "Se on [botname]:n asema."
 
 #: obsidion/core/core_commands.py:392
 msgid "Status set to ``Playing {game.name}``."
-msgstr ""
+msgstr "Tila on {game.name}."
 
 #: obsidion/core/core_commands.py:395
 msgid "Game cleared."
-msgstr ""
+msgstr "Peli selvä."
 
 #: obsidion/core/core_commands.py:401
 #, docstring
 msgid "Sets [botname]'s listening status."
-msgstr ""
+msgstr "Sets [botname]kuunteluasema."
 
 #: obsidion/core/core_commands.py:417
 msgid "Status set to ``Listening to {listening}``."
-msgstr ""
+msgstr "Tila on valmis - {listening}."
 
 #: obsidion/core/core_commands.py:422
 msgid "Listening cleared."
-msgstr ""
+msgstr "Kuunteleminen selvä."
 
 #: obsidion/core/core_commands.py:428
 #, docstring
 msgid "Sets [botname]'s watching status."
-msgstr ""
+msgstr "Sets [botname]statusta."
 
 #: obsidion/core/core_commands.py:444
 msgid "Status set to ``Watching {watching}``."
-msgstr ""
+msgstr "Tila on asetettu tarkkailemaan {watching}."
 
 #: obsidion/core/core_commands.py:447
 msgid "Watching cleared."
-msgstr ""
+msgstr "-Katson tyhjin käsin."
 
 #: obsidion/core/core_commands.py:453
 #, docstring
 msgid "Sets [botname]'s competing status."
-msgstr ""
+msgstr "Sets [botname]kilpaileva asema."
 
 #: obsidion/core/core_commands.py:469
 msgid "Status set to ``Competing in {competing}``."
-msgstr ""
+msgstr "Tila, joka vastaa {competing} :ta."
 
 #: obsidion/core/core_commands.py:474
 msgid "Competing cleared."
-msgstr ""
+msgstr "Kilpailevat tyhjiksi."
 
 #: obsidion/core/core_commands.py:480
 #, docstring
@@ -277,48 +288,55 @@ msgid "Sets [botname]'s status.\n\n"
 "            dnd\n"
 "            invisible\n"
 "        "
-msgstr ""
+msgstr "Sets [botname]:n tila.\n\n"
+"        Saatavilla olevat tilat:\n"
+"            online\n"
+"            joutokäynti\n"
+"            dnd\n"
+"            Näkymätön\n"
+"        "
 
 #: obsidion/core/core_commands.py:503
 msgid "Status changed to {}."
-msgstr ""
+msgstr "Tila on muuttunut."
 
 #: obsidion/core/core_commands.py:511
 #, docstring
 msgid "Sets [botname]'s streaming status.\n\n"
 "        Leaving both streamer and stream_title empty will clear it."
-msgstr ""
+msgstr "Sets [botname]:n suoratoistotila.\n\n"
+"        Tyhjä ja virtaviivainen tyhjäarvo tyhjentää sen."
 
 #: obsidion/core/core_commands.py:534
 #, docstring
 msgid "Sets Obsidion's nickname."
-msgstr ""
+msgstr "-Sets Obsidionin lempinimi."
 
 #: obsidion/core/core_commands.py:538
 msgid "Failed to change nickname. Must be 32 characters or fewer."
-msgstr ""
+msgstr "Kutsumanimen muuttaminen ei onnistunut. Sen on oltava vähintään 32 merkkiä."
 
 #: obsidion/core/core_commands.py:543
 msgid "I lack the permissions to change my own nickname."
-msgstr ""
+msgstr "Minulla ei ole lupaa muuttaa omaa lempinimeäni."
 
 #: obsidion/core/core_commands.py:550
 #, docstring
 msgid "Sets Obsidion's global prefix(es)."
-msgstr ""
+msgstr "Sets Obsidionin yleinen etuliite (es)."
 
 #: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
 msgid "Prefix set."
-msgstr ""
+msgstr "Ennuste asetettu."
 
 #: obsidion/core/core_commands.py:558
 #, docstring
 msgid "Sets Obsidion's server prefix(es)."
-msgstr ""
+msgstr "Sets Obsidionin palvelimen etuliite (es)"
 
 #: obsidion/core/core_commands.py:561
 msgid "Guild prefixes have been reset."
-msgstr ""
+msgstr "Luo etuliitteet uudelleen."
 
 #: obsidion/core/core_commands.py:653
 #, docstring
@@ -332,55 +350,55 @@ msgstr ""
 
 #: obsidion/core/core_commands.py:663
 msgid "Invalid ID, user not found, or user is a bot. You can only send messages to people I share a server with."
-msgstr ""
+msgstr "Virheellinen tunnus, jota ei löydy, tai käyttäjä on robotti. Voit lähettää viestejä vain niille, joiden kanssa jaan palvelimen."
 
 #: obsidion/core/core_commands.py:675
 msgid "Owner of {}"
-msgstr ""
+msgstr "Omistaja {}"
 
 #: obsidion/core/core_commands.py:676
 msgid "You can reply to this message with {}contact"
-msgstr ""
+msgstr "Voit vastata tähän viestiin {}"
 
 #: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
 msgid "Sorry, I couldn't deliver your message to {}"
-msgstr ""
+msgstr "Anteeksi, en voinut toimittaa viestiäsi sinulle."
 
 #: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
 msgid "Message delivered to {}"
-msgstr ""
+msgstr "Viesti toimitettu käyttäjälle {}"
 
 #: obsidion/core/dev_commands.py:30
 #, docstring
 msgid "Development Commands."
-msgstr ""
+msgstr "Kehityskomennot."
 
 #: obsidion/core/dev_commands.py:41
 #, docstring
 msgid "Loads a module."
-msgstr ""
+msgstr "Loadista moduuli."
 
 #: obsidion/core/dev_commands.py:49
 msgid "The cog `{module}` has been succesfully loaded"
-msgstr ""
+msgstr "Cog \"{module}\" on ladattu."
 
 #: obsidion/core/dev_commands.py:54
 #, docstring
 msgid "Unloads a module."
-msgstr ""
+msgstr "Pura moduuli."
 
 #: obsidion/core/dev_commands.py:62
 msgid "The cog `{module}` has been succesfully unloaded"
-msgstr ""
+msgstr "Cog \"{module}\" on purettu."
 
 #: obsidion/core/dev_commands.py:67
 #, docstring
 msgid "Reloads a module."
-msgstr ""
+msgstr "Lataa moduulin."
 
 #: obsidion/core/dev_commands.py:75
 msgid "The cog `{module}` has been succesfully reloaded"
-msgstr ""
+msgstr "Cog \"{module}\" on ladattu uudelleen."
 
 #: obsidion/core/dev_commands.py:131
 #, docstring
@@ -430,36 +448,40 @@ msgid "Open an interactive REPL.\n\n"
 "        backtick. This includes codeblocks, and as such multiple lines can be\n"
 "        evaluated.\n"
 "        "
-msgstr ""
+msgstr "Avoin vuorovaikutteinen REPL.\n\n"
+"        REPL-järjestelmä tunnistaa vain koodin, joka alkaa\n"
+"        -koodilla. Tämä sisältää koodaeblockit, ja niin monta riviä voi olla\n"
+"        arvioitu.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:273
 msgid "Already running a REPL session in this channel. Exit it with `quit`."
-msgstr ""
+msgstr "Tällä kanavalla on jo REPL-istunto. Poistu \"lopeta\"."
 
 #: obsidion/core/dev_commands.py:279
 msgid "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
-msgstr ""
+msgstr "Tällä kanavalla on jo REPL-istunto. Varmista, että REPL-tiedosto on määritetty uudelleen."
 
 #: obsidion/core/dev_commands.py:287
 msgid "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
-msgstr ""
+msgstr "Syötä koodi, joka toteuttaa tai arvioi. Poistukaa () tai poistukaa. -Pysäyttäkää tauko."
 
 #: obsidion/core/dev_commands.py:359
 #, docstring
 msgid "Pauses/resumes the REPL running in the current channel"
-msgstr ""
+msgstr "Käyttö/uudelleen käytössä olevan kanavan REPL-toiminto"
 
 #: obsidion/core/dev_commands.py:362
 msgid "There is no currently running REPL session in this channel."
-msgstr ""
+msgstr "Tällä kanavalla ei ole tällä hetkellä REPL-istuntoa."
 
 #: obsidion/core/dev_commands.py:371
 msgid "The REPL session in this channel has been resumed."
-msgstr ""
+msgstr "Tämän kanavan REPL-istunto on aloitettu uudelleen."
 
 #: obsidion/core/dev_commands.py:373
 msgid "The REPL session in this channel is now paused."
-msgstr ""
+msgstr "Tämän kanavan REPL-istunto on nyt keskeytetty."
 
 #: obsidion/core/dev_commands.py:378
 #, docstring
@@ -474,46 +496,49 @@ msgid "Dispatch a message event as if it were sent by a different user.\n\n"
 "        Only reads the raw content of the message. Attachments, embeds etc. are\n"
 "        ignored.\n"
 "        "
-msgstr ""
+msgstr "Lähetä viesti, jos jokin toinen käyttäjä on lähettänyt sanoman.\n\n"
+"        Vain sanoman raaka sisältö näkyy. Liitteet, embedit jne. Ovat\n"
+"        .\n"
+"        "
 
 #: obsidion/core/events.py:20
 #, docstring
 msgid "Important bot events."
-msgstr ""
+msgstr "Tärkeitä botin tapahtumia."
 
 #: obsidion/core/events.py:106
 msgid "I require the {permission} permission to execute that command."
-msgstr ""
+msgstr "Tarvitsen {permission} luvan suorittaa tuo komento."
 
 #: obsidion/core/events.py:127
 msgid "This command is on cooldown. Try again in {delay}."
-msgstr ""
+msgstr "Tämä komento on jäähtynyt. Yritä uudelleen {delay}."
 
 #: obsidion/core/events.py:131
 msgid "This command is on cooldown. Try again in 1 second."
-msgstr ""
+msgstr "Tämä komento on jäähtynyt. Yritä uudestaan."
 
 #: obsidion/core/events.py:136
 msgid "Too many people using this command. It can only be used {number} times concurrently."
-msgstr ""
+msgstr "Liian moni käyttää tätä komentoa. Sitä voidaan käyttää vain {number} kertaa samanaikaisesti."
 
 #: obsidion/core/events.py:141
 msgid "Too many people using this command. It can only be used once concurrently."
-msgstr ""
+msgstr "Liian moni käyttää tätä komentoa. Sitä voidaan käyttää vain kerran samanaikaisesti."
 
 #: obsidion/core/events.py:147
 msgid "That command is still completing, it can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Tämä komento on edelleen valmis, se voidaan käyttää vain {number} kertaa per {type} samanaikaisesti."
 
 #: obsidion/core/events.py:152
 msgid "That command is still completing, it can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Tämä komento on edelleen valmis, se voidaan käyttää vain kerran per {type} samanaikaisesti."
 
 #: obsidion/core/events.py:158
 msgid "Too many people using this command. It can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Liian moni käyttää tätä komentoa. Se voidaan käyttää vain {number} kertaa per {type} samanaikaisesti."
 
 #: obsidion/core/events.py:163
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Liian moni käyttää tätä komentoa. Sitä voidaan käyttää vain kerran {type} samanaikaisesti."
 
