@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
 "POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:15\n"
+"PO-Revision-Date: 2021-01-19 15:25\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "MIME-Version: 1.0\n"
@@ -20,112 +20,117 @@ msgstr ""
 #: obsidion/core/core_commands.py:32
 #, docstring
 msgid "Commands related to core functions."
-msgstr ""
+msgstr "Εντολές που σχετίζονται με λειτουργίες πυρήνα."
 
 #: obsidion/core/core_commands.py:40
 #, docstring
 msgid "Pong."
-msgstr ""
+msgstr "-Πονγκ."
 
 #: obsidion/core/core_commands.py:45
 #, docstring
 msgid "Shows info about Obsidion."
-msgstr ""
+msgstr "Εμφανίζει πληροφορίες για το Obsidion."
 
 #: obsidion/core/core_commands.py:65
 msgid "This bot is an instance of [Obsidion, an open source Discord bot]({}) created by [Darkflame72]({}) and [improved by many]({}).\n\n"
 "Obsidion is backed by a passionate community who contributes and creates content for everyone to enjoy. [Join us today]({}) and help us improve!\n\n"
 "(c) Obsidion-dev"
-msgstr ""
+msgstr "Αυτό το bot είναι μια χρήση του [Obsidion, ένα ανοικτό bot προέλευσης] ({}) που δημιουργήθηκε από [Darkflame72]({}) και [βελτιώθηκε από πολλούς] ({}).\n\n"
+"Obsidion υποστηρίζεται από μια παθιασμένη κοινότητα που συμβάλλει και δημιουργεί περιεχόμενο για όλους να απολαύσουν. [Ελάτε μαζί μας σήμερα] ({}) και βοηθήστε μας να βελτιώσουμε!\n\n"
+"(γ) Obsidion-dev"
 
 #: obsidion/core/core_commands.py:83
 msgid "Bringing joy since 23rd March 2020 (over {} days ago!)"
-msgstr ""
+msgstr "Φέρνοντας χαρά από τις 23 Μαρτίου 2020 (πάνω από {} ημέρες πριν!)"
 
 #: obsidion/core/core_commands.py:91
 #, docstring
 msgid "Shows Obsidion's uptime."
-msgstr ""
+msgstr "Δείχνει το uptime του Obsidion."
 
 #: obsidion/core/core_commands.py:94
 msgid "Less than one second"
-msgstr ""
+msgstr "Λιγότερο από ένα δευτερόλεπτο."
 
 #: obsidion/core/core_commands.py:96
 msgid "Been up for: **{time_quantity}** (since {timestamp} UTC)"
-msgstr ""
+msgstr "Έχει αυξηθεί για: **{time_quantity}** (από {timestamp} UTC)"
 
 #: obsidion/core/core_commands.py:103
 #, docstring
 msgid "Invite the bot to your server."
-msgstr ""
+msgstr "Καλέστε το bot στον εξυπηρετητή σας."
 
 #: obsidion/core/core_commands.py:105
 msgid "You can invite {name} to your Discord server by [clicking here]({invite})."
-msgstr ""
+msgstr "Μπορείτε να προσκαλέσετε {name} στον εξυπηρετητή Discord πατώντας [εδώ] ({invite})."
 
 #: obsidion/core/core_commands.py:118
 #, docstring
 msgid "Leaves the current server."
-msgstr ""
+msgstr "Αφήνει τον τρέχοντα διακομιστή."
 
 #: obsidion/core/core_commands.py:119
 msgid "Are you sure you want me to leave this server? (y/n)"
-msgstr ""
+msgstr "Είστε βέβαιοι ότι θέλετε να φύγω από αυτόν τον διακομιστή? (ν/ν)"
 
 #: obsidion/core/core_commands.py:125 obsidion/core/core_commands.py:180
 msgid "Response timed out."
-msgstr ""
+msgstr "Η απόκριση έληξε."
 
 #: obsidion/core/core_commands.py:129
 msgid "Alright. Bye :wave:"
-msgstr ""
+msgstr "Εντάξει. Αντίο :wave:"
 
 #: obsidion/core/core_commands.py:130
 msgid "Leaving guild '{}'"
-msgstr ""
+msgstr "Αφήνοντας την συντεχνία ' {} '"
 
 #: obsidion/core/core_commands.py:133
 msgid "Alright, I'll stay then. :)"
-msgstr ""
+msgstr "Εντάξει, θα μείνω τότε. :)"
 
 #: obsidion/core/core_commands.py:138
 #, docstring
 msgid "Lists and allows [botname] to leave servers."
-msgstr ""
+msgstr "Λίστα και επιτρέπει [botname] να αφήσει τους διακομιστές."
 
 #: obsidion/core/core_commands.py:149
 msgid "To leave a server, just type its number."
-msgstr ""
+msgstr "Για να αφήσετε ένα διακομιστή, απλά πληκτρολογήστε τον αριθμό του."
 
 #: obsidion/core/core_commands.py:164
 msgid "I cannot leave a guild I am the owner of."
-msgstr ""
+msgstr "Δεν μπορώ να αφήσω μια συντεχνία που είμαι ιδιοκτήτρια."
 
 #: obsidion/core/core_commands.py:168
 msgid "Are you sure you want me to leave {}? (yes/no)"
-msgstr ""
+msgstr "Είσαι σίγουρος ότι θέλεις να φύγω; ναι/όχι)"
 
 #: obsidion/core/core_commands.py:176 obsidion/core/core_commands.py:359
 #: obsidion/core/core_commands.py:528 obsidion/core/core_commands.py:545
 msgid "Done."
-msgstr ""
+msgstr "-Έγινε."
 
 #: obsidion/core/core_commands.py:178
 msgid "Alright then."
-msgstr ""
+msgstr "Εντάξει τότε."
 
 #: obsidion/core/core_commands.py:186
 #, docstring
 msgid "\n"
 "        Get info about Obsidion's licenses.\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Πάρτε πληροφορίες σχετικά με τις άδειες του Obsidion.\n"
+"        "
 
 #: obsidion/core/core_commands.py:191
 msgid "This bot is an instance of the Obsidion Discord Bot.\n"
 "Obsidion is an open source application made available to the public and licensed under the GNU AGPL v3. The full text of this license is available to you at <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
-msgstr ""
+msgstr "Αυτό το bot είναι μια περίπτωση του Obsidion Discord Bot.\n"
+"Obsidion είναι μια εφαρμογή ανοικτού κώδικα που διατίθεται στο κοινό και έχει αδειοδοτηθεί στο GNU AGPL v3. Το πλήρες κείμενο αυτής της άδειας χρήσης είναι διαθέσιμο στο <https://github.com/Obsidion-dev/Obsidion/blob/master/LICENSE>"
 
 #: obsidion/core/core_commands.py:206
 #, docstring
@@ -134,12 +139,16 @@ msgid "Displays my full source code or for a specific command.\n\n"
 "        periods, e.g. account.link for the link subcommand of the account command\n"
 "        or by spaces.\n"
 "        "
-msgstr ""
+msgstr "Εμφανίζει τον πλήρη πρωτογενή κώδικα ή για μια συγκεκριμένη εντολή.\n\n"
+"        Για να εμφανιστεί ο πρωτογενής κώδικας μιας υποεντολής μπορείτε να τον διαχωρίσετε με\n"
+"        περιόδους, π.χ. Account.link για την υποεντολή διασύνδεσης της εντολής\n"
+"        ή από κενά διαστήματα.\n"
+"        "
 
 #: obsidion/core/core_commands.py:250
 #, docstring
 msgid "Shuts down the bot."
-msgstr ""
+msgstr "Κλείνει το ρομπότ."
 
 #: obsidion/core/core_commands.py:261
 #, docstring
@@ -147,26 +156,30 @@ msgid "Attempts to restart Obsidion.\n\n"
 "        Makes [botname] quit with exit code 26.\n"
 "        The restart is not guaranteed: it must be dealt\n"
 "        with by the process manager in use."
-msgstr ""
+msgstr "Απόπειρες επανεκκίνησης της Obsidion.\n\n"
+"        Κάνει [botname] έξοδο με κωδικό εξόδου 26.\n"
+"        Η επανεκκίνηση δεν είναι εγγυημένη: πρέπει να μοιραστεί\n"
+"        με το διαχειριστή διεργασιών σε χρήση."
 
 #: obsidion/core/core_commands.py:274
 #, docstring
 msgid "Sends to the owner the last command exception that has occurred.\n\n"
 "        If public (yes is specified), it will be sent to the chat instead."
-msgstr ""
+msgstr "Αποστέλλνει στον κάτοχο την τελευταία εξαίρεση που έχει προκύψει.\n\n"
+"        Αν το κοινό (ναι έχει οριστεί), θα σταλεί στη συνομιλία."
 
 #: obsidion/core/core_commands.py:288
 msgid "I couldn't send the traceback message to you in DM. Either you blocked me or you disabled DMs in this server."
-msgstr ""
+msgstr "Δεν μπορούσα να σου στείλω το μήνυμα. Είτε με μπλοκάρετε είτε απενεργοποιήσατε τα DMs σε αυτό τον εξυπηρετητή."
 
 #: obsidion/core/core_commands.py:295
 msgid "No exception has occurred yet."
-msgstr ""
+msgstr "Δεν προέκυψε καμία εξαίρεση."
 
 #: obsidion/core/core_commands.py:299
 #, docstring
 msgid "Changes Obsidion's settings."
-msgstr ""
+msgstr "Αλλάζει τις ρυθμίσεις του Obsidion."
 
 #: obsidion/core/core_commands.py:304
 #, docstring
@@ -175,98 +188,103 @@ msgid "\n"
 "        Acceptable values for the colour parameter can be found at:\n\n"
 "        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
 "        "
-msgstr ""
+msgstr "\n"
+"        Ορίζει ένα προεπιλεγμένο χρώμα που θα χρησιμοποιείται για τις embeds του bot.\n\n"
+"        Αποδεκτές τιμές για την παράμετρο χρώματος:\n\n"
+"        https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.ColourConverter\n"
+"        "
 
 #: obsidion/core/core_commands.py:314
 msgid "The color has been reset."
-msgstr ""
+msgstr "Έγινε επαναφορά του χρώματος."
 
 #: obsidion/core/core_commands.py:317
 msgid "The color has been set."
-msgstr ""
+msgstr "Το χρώμα έχει οριστεί."
 
 #: obsidion/core/core_commands.py:322
 #, docstring
 msgid "Sets [botname]'s avatar\n\n"
 "        Supports either an attachment or an image URL."
-msgstr ""
+msgstr "Σετ [botname]'s avatar\n\n"
+"        Υποστηρίζει είτε ένα συνημμένο ή μια εικόνα URL."
 
 #: obsidion/core/core_commands.py:336
 msgid "That URL is invalid."
-msgstr ""
+msgstr "Η διεύθυνση URL δεν είναι έγκυρη."
 
 #: obsidion/core/core_commands.py:339
 msgid "Something went wrong while trying to get the image."
-msgstr ""
+msgstr "Κάτι πήγε στραβά προσπαθώντας να πάρει την εικόνα."
 
 #: obsidion/core/core_commands.py:350
 msgid "Failed. Remember that you can edit my avatar up to two times a hour. The URL or attachment must be a valid image in either JPG or PNG format."
-msgstr ""
+msgstr "Απέτυχε. Να θυμάστε ότι μπορείτε να επεξεργαστείτε άβαταρ μου μέχρι δύο φορές την ώρα. Η διεύθυνση URL ή το συνημμένο πρέπει να είναι μια έγκυρη εικόνα σε μορφή JPG ή PNG."
 
 #: obsidion/core/core_commands.py:357
 msgid "JPG / PNG format only."
-msgstr ""
+msgstr "Μορφή JPG/PNG."
 
 #: obsidion/core/core_commands.py:364
 #, docstring
 msgid "Removes [botname]'s avatar."
-msgstr ""
+msgstr "Αφαιρεί το άβαταρ [botname]."
 
 #: obsidion/core/core_commands.py:367
 msgid "Avatar removed."
-msgstr ""
+msgstr "Ο Avatar αφαιρέθηκε."
 
 #: obsidion/core/core_commands.py:373
 #, docstring
 msgid "Sets [botname]'s playing status."
-msgstr ""
+msgstr "Ορίζει την κατάσταση αναπαραγωγής [botname]."
 
 #: obsidion/core/core_commands.py:392
 msgid "Status set to ``Playing {game.name}``."
-msgstr ""
+msgstr "Κατάσταση \" ` Παίζοντας {game.name} ` `."
 
 #: obsidion/core/core_commands.py:395
 msgid "Game cleared."
-msgstr ""
+msgstr "Το παιχνίδι καθάρισε."
 
 #: obsidion/core/core_commands.py:401
 #, docstring
 msgid "Sets [botname]'s listening status."
-msgstr ""
+msgstr "Ορίζει την κατάσταση ακρόασης [botname]."
 
 #: obsidion/core/core_commands.py:417
 msgid "Status set to ``Listening to {listening}``."
-msgstr ""
+msgstr "Κατάσταση που θα ` ` Ακούγοντας {listening} ` `."
 
 #: obsidion/core/core_commands.py:422
 msgid "Listening cleared."
-msgstr ""
+msgstr "Ακρόαση εκκαθαριστεί."
 
 #: obsidion/core/core_commands.py:428
 #, docstring
 msgid "Sets [botname]'s watching status."
-msgstr ""
+msgstr "Ορίζει την κατάσταση παρακολούθησης [botname]."
 
 #: obsidion/core/core_commands.py:444
 msgid "Status set to ``Watching {watching}``."
-msgstr ""
+msgstr "Κατάσταση που θα ` ` ` Παρακολουθώντας {watching} ` `."
 
 #: obsidion/core/core_commands.py:447
 msgid "Watching cleared."
-msgstr ""
+msgstr "Παρατημένος καθαρός."
 
 #: obsidion/core/core_commands.py:453
 #, docstring
 msgid "Sets [botname]'s competing status."
-msgstr ""
+msgstr "Ορίζει την ανταγωνιστική κατάσταση [botname]."
 
 #: obsidion/core/core_commands.py:469
 msgid "Status set to ``Competing in {competing}``."
-msgstr ""
+msgstr "Κατάσταση που θα \" ` Ανταγωνίζεται σε {competing} ` `."
 
 #: obsidion/core/core_commands.py:474
 msgid "Competing cleared."
-msgstr ""
+msgstr "Ο ανταγωνισμός είναι καθαρός."
 
 #: obsidion/core/core_commands.py:480
 #, docstring
@@ -277,48 +295,55 @@ msgid "Sets [botname]'s status.\n\n"
 "            dnd\n"
 "            invisible\n"
 "        "
-msgstr ""
+msgstr "Ορίζει την κατάσταση [botname].\n\n"
+"        Διαθέσιμα αγάλματα:\n"
+"            σε απευθείας σύνδεση\n"
+"            σε αδράνεια\n"
+"            dnd\n"
+"            αόρατο\n"
+"        "
 
 #: obsidion/core/core_commands.py:503
 msgid "Status changed to {}."
-msgstr ""
+msgstr "Η κατάσταση άλλαξε σε {}."
 
 #: obsidion/core/core_commands.py:511
 #, docstring
 msgid "Sets [botname]'s streaming status.\n\n"
 "        Leaving both streamer and stream_title empty will clear it."
-msgstr ""
+msgstr "Ορίζει την κατάσταση ροής [botname].\n\n"
+"        Η αποχώρηση τόσο του εκσυγχρονισμού όσο και του εξορθολογισμού θα είναι σαφής."
 
 #: obsidion/core/core_commands.py:534
 #, docstring
 msgid "Sets Obsidion's nickname."
-msgstr ""
+msgstr "Ορίζει το ψευδώνυμο του Obsidion."
 
 #: obsidion/core/core_commands.py:538
 msgid "Failed to change nickname. Must be 32 characters or fewer."
-msgstr ""
+msgstr "Αποτυχία αλλαγής του προσωνυμίου. Πρέπει να είναι 32 χαρακτήρες ή λιγότεροι."
 
 #: obsidion/core/core_commands.py:543
 msgid "I lack the permissions to change my own nickname."
-msgstr ""
+msgstr "Μου λείπουν τα δικαιώματα για να αλλάξω το παρατσούκλι μου."
 
 #: obsidion/core/core_commands.py:550
 #, docstring
 msgid "Sets Obsidion's global prefix(es)."
-msgstr ""
+msgstr "Ορίζει το καθολικό πρόθημα του Obsidion."
 
 #: obsidion/core/core_commands.py:552 obsidion/core/core_commands.py:565
 msgid "Prefix set."
-msgstr ""
+msgstr "Πρόθεμα σετ."
 
 #: obsidion/core/core_commands.py:558
 #, docstring
 msgid "Sets Obsidion's server prefix(es)."
-msgstr ""
+msgstr "Ορίζει το πρόθημα εξυπηρετητή του Obsidion."
 
 #: obsidion/core/core_commands.py:561
 msgid "Guild prefixes have been reset."
-msgstr ""
+msgstr "Έγινε επαναφορά των προθημάτων."
 
 #: obsidion/core/core_commands.py:653
 #, docstring
@@ -328,59 +353,64 @@ msgid "Sends a DM to a user.\n\n"
 "        'Appearance' tab. Enable 'Developer Mode', then right click\n"
 "        a user and click on 'Copy ID'.\n"
 "        "
-msgstr ""
+msgstr "Στέλνει ένα DM στο χρήστη.\n\n"
+"        Αυτή η εντολή χρειάζεται μια ταυτότητα χρήστη για εργασία.\n"
+"        Για να πάρετε μια ταυτότητα χρήστη, μεταβείτε στις ρυθμίσεις της Discord και ανοίξτε την καρτέλα\n"
+"        'Εμφάνιση'. Ενεργοποιήστε την επιλογή 'Προγραμματιστής', πατήστε με το δεξί κουμπί του ποντικιού στο\n"
+"        και πατήστε 'Αντιγραφή ταυτότητας'.\n"
+"        "
 
 #: obsidion/core/core_commands.py:663
 msgid "Invalid ID, user not found, or user is a bot. You can only send messages to people I share a server with."
-msgstr ""
+msgstr "Μη έγκυρη ταυτότητα, ο χρήστης δεν βρέθηκε ή ο χρήστης είναι bot. Μπορείτε να στείλετε μηνύματα μόνο σε πρόσωπα με τα οποία έχω έναν εξυπηρετητή."
 
 #: obsidion/core/core_commands.py:675
 msgid "Owner of {}"
-msgstr ""
+msgstr "Κάτοχος του {}"
 
 #: obsidion/core/core_commands.py:676
 msgid "You can reply to this message with {}contact"
-msgstr ""
+msgstr "Μπορείτε να απαντήσετε σε αυτό το μήνυμα με {} επαφή"
 
 #: obsidion/core/core_commands.py:690 obsidion/core/core_commands.py:702
 msgid "Sorry, I couldn't deliver your message to {}"
-msgstr ""
+msgstr "Συγγνώμη, δεν μπορούσα να παραδώσω το μήνυμά σας στο {}"
 
 #: obsidion/core/core_commands.py:695 obsidion/core/core_commands.py:707
 msgid "Message delivered to {}"
-msgstr ""
+msgstr "Μήνυμα που παραδόθηκε στο {}"
 
 #: obsidion/core/dev_commands.py:30
 #, docstring
 msgid "Development Commands."
-msgstr ""
+msgstr "Εντολές Ανάπτυξης."
 
 #: obsidion/core/dev_commands.py:41
 #, docstring
 msgid "Loads a module."
-msgstr ""
+msgstr "Φορτώνει μια μονάδα."
 
 #: obsidion/core/dev_commands.py:49
 msgid "The cog `{module}` has been succesfully loaded"
-msgstr ""
+msgstr "Το cog `{module}έχει πληρωθεί με επιτυχία"
 
 #: obsidion/core/dev_commands.py:54
 #, docstring
 msgid "Unloads a module."
-msgstr ""
+msgstr "Αποφορτώνει μια μονάδα."
 
 #: obsidion/core/dev_commands.py:62
 msgid "The cog `{module}` has been succesfully unloaded"
-msgstr ""
+msgstr "Το cog `{module}` έχει αποπληρωθεί"
 
 #: obsidion/core/dev_commands.py:67
 #, docstring
 msgid "Reloads a module."
-msgstr ""
+msgstr "Σχετάζει μια μονάδα."
 
 #: obsidion/core/dev_commands.py:75
 msgid "The cog `{module}` has been succesfully reloaded"
-msgstr ""
+msgstr "Το cog `{module}έχει επαναφορτωθεί"
 
 #: obsidion/core/dev_commands.py:131
 #, docstring
@@ -421,7 +451,22 @@ msgid "Execute asynchronous code.\n\n"
 "            commands - redbot.core.commands\n"
 "            _        - The result of the last dev command.\n"
 "        "
-msgstr ""
+msgstr "Εκτελέστε ασύγχρονο κώδικα.\n\n"
+"        Αυτή η εντολή τυλίγει τον κώδικα στο σώμα μιας συνάρτησης async και στη συνέχεια\n"
+"        κλήσεις και το περιμένει. Το bot θα ανταποκριθεί με οτιδήποτε τυπωμένο σε\n"
+"        stdout, καθώς και την επιστρεφόμενη αξία της λειτουργίας.\n\n"
+"        Ο κωδικός μπορεί να είναι μέσα σε ένα codeblock, inline code ή ούτε, όσο\n"
+"        , καθώς δεν αναμιγνύονται και σχηματοποιούνται σωστά.\n\n"
+"        Μεταβλητές περιβάλλοντος:\n"
+"            ctx-εντολής περιβάλλον κλήσης\n"
+"            bot-bot object\n"
+"            κανάλι-το τρέχον αντικείμενο καναλιού\n"
+"            Μήνυμα μέλους του συγγραφέα-εντολή του συντάκτη της εντολής\n"
+"            μήνυμα-το αντικείμενο μηνύματος της εντολής\n"
+"            discord-discord.py library\n"
+"            εντολές-redbot.core.commands\n"
+"            _ - Το αποτέλεσμα της τελευταίας εντολής dev.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:253
 #, docstring
@@ -430,43 +475,49 @@ msgid "Open an interactive REPL.\n\n"
 "        backtick. This includes codeblocks, and as such multiple lines can be\n"
 "        evaluated.\n"
 "        "
-msgstr ""
+msgstr "Ανοίξτε ένα διαδραστικό REPL.\n\n"
+"        Η REPL θα αναγνωρίσει μόνο τον κώδικα ως μηνύματα που ξεκινούν με μια backtick\n"
+"        . Αυτό περιλαμβάνει codeblocks, και καθώς τέτοιες πολλές γραμμές μπορεί να είναι\n"
+"        αξιολογηθεί.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:273
 msgid "Already running a REPL session in this channel. Exit it with `quit`."
-msgstr ""
+msgstr "Ήδη εκτελείται μια συνεδρία REPL σε αυτό το κανάλι. Βγείτε έξω με το \"Παραιτείστε\"."
 
 #: obsidion/core/dev_commands.py:279
 msgid "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
-msgstr ""
+msgstr "Ήδη εκτελείται μια συνεδρία REPL σε αυτό το κανάλι. Συνέχιση της REPL με το \"{} repl συνεχίσετε\"."
 
 #: obsidion/core/dev_commands.py:287
 msgid "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
-msgstr ""
+msgstr "Καταχωρήστε κώδικα για εκτέλεση ή αποτίμηση. \"έξοδος ()\" ή \"παραιτηθεί\" για την έξοδο. \"Η παύση\" θα σταματήσει."
 
 #: obsidion/core/dev_commands.py:359
 #, docstring
 msgid "Pauses/resumes the REPL running in the current channel"
-msgstr ""
+msgstr "Παύση/συνεχίζει την εκτέλεση REPL στο τρέχον κανάλι"
 
 #: obsidion/core/dev_commands.py:362
 msgid "There is no currently running REPL session in this channel."
-msgstr ""
+msgstr "Δεν υπάρχει ενεργή συνεδρία REPL σε αυτό το κανάλι."
 
 #: obsidion/core/dev_commands.py:371
 msgid "The REPL session in this channel has been resumed."
-msgstr ""
+msgstr "Η συνεδρία REPL σε αυτό το κανάλι έχει επαναληφθεί."
 
 #: obsidion/core/dev_commands.py:373
 msgid "The REPL session in this channel is now paused."
-msgstr ""
+msgstr "Η συνεδρία REPL σε αυτό το κανάλι έχει πλέον παύση."
 
 #: obsidion/core/dev_commands.py:378
 #, docstring
 msgid "Mock another user invoking a command.\n\n"
 "        The prefix must not be entered.\n"
 "        "
-msgstr ""
+msgstr "Mock ένας άλλος χρήστης που καλεί μια εντολή.\n\n"
+"        Το πρόθημα δεν πρέπει να καταχωρηθεί.\n"
+"        "
 
 #: obsidion/core/dev_commands.py:391
 #, docstring
@@ -474,46 +525,49 @@ msgid "Dispatch a message event as if it were sent by a different user.\n\n"
 "        Only reads the raw content of the message. Attachments, embeds etc. are\n"
 "        ignored.\n"
 "        "
-msgstr ""
+msgstr "Αποστολή συμβάντος μηνύματος σαν να εστάλη από διαφορετικό χρήστη.\n\n"
+"        Διαβάζει μόνο την πρώτη ύλη του μηνύματος. Συνημμένα, embeds κλπ. είναι\n"
+"        αγνοούνται.\n"
+"        "
 
 #: obsidion/core/events.py:20
 #, docstring
 msgid "Important bot events."
-msgstr ""
+msgstr "Σημαντικά γεγονότα bot."
 
 #: obsidion/core/events.py:106
 msgid "I require the {permission} permission to execute that command."
-msgstr ""
+msgstr "Απαιτώ την άδεια {permission} για την εκτέλεση της εντολής."
 
 #: obsidion/core/events.py:127
 msgid "This command is on cooldown. Try again in {delay}."
-msgstr ""
+msgstr "Αυτή η εντολή είναι σε ψύξη. Προσπαθήστε ξανά στο {delay}."
 
 #: obsidion/core/events.py:131
 msgid "This command is on cooldown. Try again in 1 second."
-msgstr ""
+msgstr "Αυτή η εντολή είναι σε ψύξη. Προσπαθήστε ξανά σε 1 δευτερόλεπτο."
 
 #: obsidion/core/events.py:136
 msgid "Too many people using this command. It can only be used {number} times concurrently."
-msgstr ""
+msgstr "Πολλοί άνθρωποι χρησιμοποιούν αυτή την εντολή. Μπορεί να χρησιμοποιηθεί μόνο {number} φορές ταυτόχρονα."
 
 #: obsidion/core/events.py:141
 msgid "Too many people using this command. It can only be used once concurrently."
-msgstr ""
+msgstr "Πολλοί άνθρωποι χρησιμοποιούν αυτή την εντολή. Μπορεί να χρησιμοποιηθεί μόνο μία φορά ταυτόχρονα."
 
 #: obsidion/core/events.py:147
 msgid "That command is still completing, it can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Αυτή η εντολή εξακολουθεί να εκτελείται, μπορεί να χρησιμοποιηθεί μόνο {number} φορές ανά {type} ταυτόχρονα."
 
 #: obsidion/core/events.py:152
 msgid "That command is still completing, it can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Αυτή η εντολή εξακολουθεί να εκτελείται, μπορεί να χρησιμοποιηθεί μόνο μία φορά ανά {type} ταυτόχρονα."
 
 #: obsidion/core/events.py:158
 msgid "Too many people using this command. It can only be used {number} times per {type} concurrently."
-msgstr ""
+msgstr "Πολλοί άνθρωποι χρησιμοποιούν αυτή την εντολή. Μπορεί να χρησιμοποιηθεί μόνο {number} φορές ανά {type} ταυτόχρονα."
 
 #: obsidion/core/events.py:163
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
-msgstr ""
+msgstr "Πολλοί άνθρωποι χρησιμοποιούν αυτή την εντολή. Μπορεί να χρησιμοποιηθεί μόνο μία φορά ανά {type} ταυτόχρονα."
 
