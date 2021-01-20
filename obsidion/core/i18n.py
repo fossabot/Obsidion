@@ -9,7 +9,7 @@ import discord
 from discord.ext import commands
 
 from pathlib import Path
-from typing import Callable, TYPE_CHECKING, Optional
+from typing import Callable, TYPE_CHECKING, Optional, Dict
 from contextvars import ContextVar
 from .settings_cache import fetch_locale
 
@@ -86,7 +86,7 @@ def reload_locales() -> None:
         translator.load_translations()
 
 
-async def get_locale_from_guild(bot: Obsidion, guild: Optional[discord.Guild]) -> str:
+async def get_locale_from_guild(bot, guild: Optional[discord.Guild]) -> str:
     """
     Get locale set for the given guild.
 
@@ -103,12 +103,10 @@ async def get_locale_from_guild(bot: Obsidion, guild: Optional[discord.Guild]) -
     str
         Guild's locale string.
     """
-    return await fetch_locale(bot, guild)
+    return await bot._i18n_cache.get_locale(guild)
 
 
-async def get_regional_format_from_guild(
-    bot: Obsidion, guild: Optional[discord.Guild]
-) -> str:
+async def get_regional_format_from_guild(bot, guild: Optional[discord.Guild]) -> str:
     """
     Get regional format for the given guild.
 
@@ -125,11 +123,11 @@ async def get_regional_format_from_guild(
     str
         Guild's locale string.
     """
-    return await fetch_locale(bot, guild)
+    return await bot._i18n_cache.get_regional_format(guild)
 
 
 async def set_contextual_locales_from_guild(
-    bot: Obsidion, guild: Optional[discord.Guild]
+    bot, guild: Optional[discord.Guild]
 ) -> None:
     """
     Set contextual locales (locale and regional format) for given guild context.
@@ -143,11 +141,9 @@ async def set_contextual_locales_from_guild(
          Use `None` if the context doesn't involve guild.
     """
     locale = await get_locale_from_guild(bot, guild)
-    # regional_format = await get_regional_format_from_guild(bot, guild)
-    print(3)
-    print(locale)
+    regional_format = await get_regional_format_from_guild(bot, guild)
     set_contextual_locale(locale)
-    set_contextual_regional_format(locale)
+    set_contextual_regional_format(regional_format)
 
 
 def _parse(translation_file: io.TextIOWrapper) -> Dict[str, str]:

@@ -2,27 +2,15 @@
 import logging
 
 from discord import Intents, AllowedMentions, ActivityType, Activity
-from discord.ext.commands import when_mentioned_or
 from obsidion.core.help import Help
 
 from obsidion import _update_event_loop_policy
 from obsidion.core.bot import Obsidion
 from obsidion.core import get_settings
-from obsidion.core.settings_cache import prefix_callable
 
 _update_event_loop_policy()
 
 log = logging.getLogger("obsidion")
-
-
-async def get_prefix(bot, message):
-    """Get prefix for the bot."""
-    if message.guild is None:
-        # Use default prefix in DM's
-        return when_mentioned_or(get_settings().DEFAULT_PREFIX)(bot, message)
-    else:
-        extras = await prefix_callable(bot, message.guild)
-        return when_mentioned_or(*extras)(bot, message)
 
 
 def main():
@@ -42,7 +30,6 @@ def main():
     )
 
     args = {
-        "command_prefix": get_prefix,
         "case_insensitive": True,
         "description": "",
         "self_bot": False,

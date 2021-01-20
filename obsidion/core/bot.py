@@ -5,11 +5,14 @@ import sys
 from enum import IntEnum
 import aioredis
 import asyncpg
+from typing import Optional
 
 from .global_checks import init_global_checks
 from .core_commands import Core
 from .events import Events
 from .config import get_settings
+from .settings_cache import PrefixManager, I18nManager
+from discord.ext.commands import when_mentioned_or
 
 
 class Obsidion(AutoShardedBot):
@@ -17,7 +20,6 @@ class Obsidion(AutoShardedBot):
 
     def __init__(self, *args, **kwargs):
         """Initialise bot with args passed through."""
-        super().__init__(*args, **kwargs)
 
         self._shutdown_mode = ExitCodes.CRITICAL
         self.uptime = None
@@ -26,6 +28,16 @@ class Obsidion(AutoShardedBot):
         self._invite = None
         self.redis = None
         self.db = None
+
+        self._prefix_cache = PrefixManager(self)
+        self._i18n_cache = I18nManager(self)
+
+        async def prefix_manager(bot, message):
+            prefixes = await self._prefix_cache.get_prefixes(message.guild)
+            return when_mentioned_or(*prefixes)(bot, message)
+
+        kwargs["command_prefix"] = prefix_manager
+        super().__init__(*args, **kwargs)
 
     async def pre_flight(self):
         init_global_checks(self)
@@ -92,8 +104,30 @@ class Obsidion(AutoShardedBot):
 
         return True
 
+    async def set_prefixes(self, guild: discord.Guild, prefix: Optional[str] = None):
+        """
+        Set global/server prefixes.
+
+        If ``guild`` is not provided (or None is passed), this will set the global prefixes.
+
+        Parameters
+        ----------
+        prefixes : str
+            The prefixes you want to set. Passing empty list will reset prefixes for the ``guild``
+        guild : Optional[discord.Guild]
+            The guild you want to set the prefixes for. Omit (or pass None) to set the global prefixes
+
+        Raises
+        ------
+        TypeError
+            If ``prefixes`` is not a list of strings
+        ValueError
+            If empty list is passed to ``prefixes`` when setting global prefixes
+        """
+        await self._prefix_cache.set_prefixes(guild=guild, prefix=prefix)
+
     async def shutdown(self, *, restart: bool = False):
-        """Gracefully quit Red.
+        """Gracefully quit Obsidion.
 
         The program will exit with code :code:`0` by default.
 

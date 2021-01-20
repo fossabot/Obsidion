@@ -43,8 +43,6 @@ class Events(commands.Cog):
     async def on_message(self, message):
         await set_contextual_locales_from_guild(self.bot, message.guild)
 
-        await self.bot.process_commands(message)
-
     @commands.Cog.listener("on_ready")
     async def on_ready(self):
         if self.bot.uptime is not None:
