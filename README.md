@@ -53,6 +53,8 @@
   <a href="developing">Developing</a>
 </p>
 
+Currently being rewritten checkout the refactor branch
+
 # Overview
 
 Obsidion is a flexible, reliable Minecraft Bot. This means that msot aspects of how it interectats with your server are controlled by you. It has commands for nearly everything Minecraft related from fun pvp to information about a server. It support Minecraft live servertracking, wiki lookup, pvp commands, viewing your Minecraft profile among other things.
