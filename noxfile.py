@@ -108,7 +108,7 @@ def safety(session: Session) -> None:
 @nox.session(python=python_versions)
 def mypy(session: Session) -> None:
     """Type-check using mypy."""
-    args = session.posargs or ["obsidion", "tests", "docs/conf.py"]
+    args = session.posargs or ["obsidion", "tests"]
     session.install(".")
     session.install("mypy", "pytest")
     session.run("mypy", *args)
