@@ -1,11 +1,12 @@
 import logging
 import traceback
 from datetime import datetime
-from obsidion.core.i18n import cog_i18n
-from obsidion.core.i18n import Translator
 
 import discord
 from discord.ext import commands
+
+from obsidion.core.i18n import Translator
+from obsidion.core.i18n import cog_i18n
 
 from .i18n import set_contextual_locales_from_guild
 from .utils.chat_formatting import format_perms_list
@@ -29,18 +30,17 @@ class Events(commands.Cog):
     async def on_connect(self):
         if self.bot.uptime is None:
             log.info("Connected to Discord. Getting ready...")
-
-        perms = discord.Permissions()
-        perms.add_reactions = True
-        perms.send_messages = True
-        perms.read_messages = True
-        perms.use_external_emojis = True
-        url = discord.utils.oauth_url(
-            self.bot.user.id,
-            permissions=perms,
-            redirect_uri="https://discord.obsidion-dev.com",
-        )
-        self.bot._invite = url
+            perms = discord.Permissions()
+            perms.add_reactions = True
+            perms.send_messages = True
+            perms.read_messages = True
+            perms.use_external_emojis = True
+            url = discord.utils.oauth_url(
+                self.bot.user.id,
+                permissions=perms,
+                redirect_uri="https://discord.obsidion-dev.com",
+            )
+            self.bot._invite = url
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -55,7 +55,6 @@ class Events(commands.Cog):
 
     @commands.Cog.listener("on_command_error")
     async def on_command_error(self, ctx, error, unhandled_by_cog=False):
-
         if not unhandled_by_cog:
             if hasattr(ctx.command, "on_error"):
                 return
