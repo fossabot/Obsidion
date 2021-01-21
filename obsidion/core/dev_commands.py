@@ -9,13 +9,14 @@ import traceback
 import types
 from contextlib import redirect_stdout
 from copy import copy
-from obsidion.core.i18n import cog_i18n
-from obsidion.core.i18n import Translator
 from typing import Optional
 
 import aiohttp
 import discord
 from discord.ext import commands
+
+from obsidion.core.i18n import cog_i18n
+from obsidion.core.i18n import Translator
 
 from .utils.chat_formatting import box
 from .utils.chat_formatting import pagify
