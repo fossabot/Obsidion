@@ -1,5 +1,4 @@
 """Logging management."""
-
 import logging
 
 

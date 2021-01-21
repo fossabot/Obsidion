@@ -1,18 +1,20 @@
 """Main bot file."""
-import discord
-from discord.ext.commands import AutoShardedBot
 import sys
 from enum import IntEnum
-import aioredis
-import asyncpg
 from typing import Optional
 
-from .global_checks import init_global_checks
+import aioredis
+import asyncpg
+import discord
+from discord.ext.commands import AutoShardedBot
+from discord.ext.commands import when_mentioned_or
+
+from .config import get_settings
 from .core_commands import Core
 from .events import Events
-from .config import get_settings
-from .settings_cache import PrefixManager, I18nManager
-from discord.ext.commands import when_mentioned_or
+from .global_checks import init_global_checks
+from .settings_cache import I18nManager
+from .settings_cache import PrefixManager
 
 
 class Obsidion(AutoShardedBot):
@@ -57,7 +59,8 @@ class Obsidion(AutoShardedBot):
 
     async def start(self, *args, **kwargs):
         """
-        Overridden start which ensures cog load and other pre-connection tasks are handled
+        Overridden start which ensures cog load and other
+        pre-connection tasks are handled
         """
         await self.pre_flight()
         return await super().start(*args, **kwargs)
@@ -93,14 +96,8 @@ class Obsidion(AutoShardedBot):
             return False
 
         if guild:
-            assert isinstance(channel, discord.abc.GuildChannel)  # nosec
             if not channel.permissions_for(guild.me).send_messages:
                 return False
-        #     if not (await self.ignored_channel_or_guild(message)):
-        #         return False
-
-        # if not (await self.allowed_by_whitelist_blacklist(message.author)):
-        #     return False
 
         return True
 
@@ -108,14 +105,17 @@ class Obsidion(AutoShardedBot):
         """
         Set global/server prefixes.
 
-        If ``guild`` is not provided (or None is passed), this will set the global prefixes.
+        If ``guild`` is not provided (or None is passed), this
+        will set the global prefixes.
 
         Parameters
         ----------
         prefixes : str
-            The prefixes you want to set. Passing empty list will reset prefixes for the ``guild``
+            The prefixes you want to set. Passing empty list will
+            reset prefixes for the ``guild``
         guild : Optional[discord.Guild]
-            The guild you want to set the prefixes for. Omit (or pass None) to set the global prefixes
+            The guild you want to set the prefixes for. Omit
+            (or pass None) to set the global prefixes
 
         Raises
         ------

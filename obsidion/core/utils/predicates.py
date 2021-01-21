@@ -1,15 +1,13 @@
 import re
-from typing import (
-    Callable,
-    ClassVar,
-    List,
-    Optional,
-    Pattern,
-    Sequence,
-    Tuple,
-    Union,
-    cast,
-)
+from typing import Callable
+from typing import cast
+from typing import ClassVar
+from typing import List
+from typing import Optional
+from typing import Pattern
+from typing import Sequence
+from typing import Tuple
+from typing import Union
 
 import discord
 from discord.ext import commands
@@ -481,7 +479,8 @@ class MessagePredicate(Callable[[discord.Message], bool]):
         if user is None:
             if ctx is None:
                 raise TypeError(
-                    "One of `user` or `ctx` must be supplied to `MessagePredicate.has_role`."
+                    "One of `user` or `ctx` must be supplied to "
+                    "`MessagePredicate.has_role`."
                 )
             user = ctx.author
 
@@ -894,7 +893,8 @@ class ReactionPredicate(Callable[[discord.Reaction, discord.abc.User], bool]):
         "\N{WHITE HEAVY CHECK MARK}",
         "\N{NEGATIVE SQUARED CROSS MARK}",
     )
-    """Tuple[str, str] : A tuple containing the tick emoji and cross emoji, in that order."""
+    """Tuple[str, str] : A tuple containing the tick
+    emoji and cross emoji, in that order."""
 
     ALPHABET_EMOJIS: ClassVar[List[str]] = [
         chr(code)

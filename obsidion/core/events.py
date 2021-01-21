@@ -1,13 +1,16 @@
 import logging
-from datetime import datetime
 import traceback
-import discord
+from datetime import datetime
+from obsidion.core.i18n import cog_i18n
+from obsidion.core.i18n import Translator
 
+import discord
 from discord.ext import commands
 
-from .utils.chat_formatting import humanize_timedelta, inline, format_perms_list
 from .i18n import set_contextual_locales_from_guild
-from obsidion.core.i18n import Translator, cog_i18n
+from .utils.chat_formatting import format_perms_list
+from .utils.chat_formatting import humanize_timedelta
+from .utils.chat_formatting import inline
 
 
 log = logging.getLogger("obsidion")
@@ -82,23 +85,6 @@ class Events(commands.Cog):
                 await ctx.send_help(ctx.command)
         elif isinstance(error, commands.UserInputError):
             await ctx.send_help(ctx.command)
-        elif isinstance(error, commands.CommandInvokeError):
-            log.exception(
-                "Exception in command '{}'".format(ctx.command.qualified_name),
-                exc_info=error.original,
-            )
-
-            message = (
-                "Error in command '{command}'. It has been recorded and should be fixed soon."
-            ).format(command=ctx.command.qualified_name)
-            exception_log = "Exception in command '{}'\n" "".format(
-                ctx.command.qualified_name
-            )
-            exception_log += "".join(
-                traceback.format_exception(type(error), error, error.__traceback__)
-            )
-            self.bot._last_exception = exception_log
-            await ctx.send(inline(message))
         elif isinstance(error, commands.BotMissingPermissions):
             if bin(error.missing.value).count("1") == 1:  # Only one perm missing
                 msg = _(
@@ -163,5 +149,23 @@ class Events(commands.Cog):
                         " It can only be used once per {type} concurrently."
                     ).format(type=error.per.name)
             await ctx.send(msg)
+        elif isinstance(error, commands.CommandInvokeError):
+            log.exception(
+                "Exception in command '{}'".format(ctx.command.qualified_name),
+                exc_info=error.original,
+            )
+
+            message = (
+                "Error in command '{command}'. It has "
+                "been recorded and should be fixed soon."
+            ).format(command=ctx.command.qualified_name)
+            exception_log = "Exception in command '{}'\n" "".format(
+                ctx.command.qualified_name
+            )
+            exception_log += "".join(
+                traceback.format_exception(type(error), error, error.__traceback__)
+            )
+            self.bot._last_exception = exception_log
+            await ctx.send(inline(message))
         else:
             log.exception(type(error).__name__, exc_info=error)

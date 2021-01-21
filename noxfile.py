@@ -80,15 +80,14 @@ def precommit(session: Session) -> None:
     args = session.posargs or ["run", "--all-files"]
     session.install(
         "black",
-        "darglint",
         "flake8",
-        "flake8-bandit",
         "flake8-bugbear",
-        "flake8-docstrings",
-        "flake8-black",
-        "flake8-annotations",
-        "flake8-import-order",
         "pep8-naming",
+        "flake8-builtins",
+        "flake8-bandit",
+        "flake8-eradicate",
+        "flake8-comprehensions",
+        "flake8-import-order",
         "pre-commit",
         "pre-commit-hooks",
         "reorder-python-imports",
@@ -121,27 +120,8 @@ def mypy(session: Session) -> None:
 def tests(session: Session) -> None:
     """Run the test suite."""
     session.install(".")
-    session.install("coverage[toml]", "pytest", "pygments", "pytest-asyncio")
-    try:
-        session.run("coverage", "run", "--parallel", "-m", "pytest", *session.posargs)
-    finally:
-        if session.interactive:
-            session.notify("coverage")
-
-
-@nox.session
-def coverage(session: Session) -> None:
-    """Produce the coverage report."""
-    # Do not use session.posargs unless this is the only session.
-    has_args = session.posargs and len(session._runner.manifest) == 1
-    args = session.posargs if has_args else ["report"]
-
-    session.install("coverage[toml]")
-
-    if not has_args and any(Path().glob(".coverage.*")):
-        session.run("coverage", "combine")
-
-    session.run("coverage", *args)
+    session.install("pytest", "pygments", "pytest-asyncio")
+    session.run("pytest", *session.posargs)
 
 
 @nox.session(python=python_versions)

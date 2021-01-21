@@ -3,21 +3,19 @@ from __future__ import annotations
 import contextlib
 import functools
 import io
-import os
 import logging
-import discord
-from discord.ext import commands
-
-from pathlib import Path
-from typing import Callable, TYPE_CHECKING, Optional, Dict
+import os
 from contextvars import ContextVar
-from .settings_cache import fetch_locale
+from pathlib import Path
+from typing import Callable
+from typing import Dict
+from typing import Optional
+from typing import Union
 
 import babel.localedata
+import discord
 from babel.core import Locale
-
-if TYPE_CHECKING:
-    from obsidion.core.bot import Obsidion
+from discord.ext import commands
 
 
 __all__ = [
@@ -295,7 +293,8 @@ def _get_babel_locale(obsidion_locale: str) -> babel.core.Locale:
         try:
             babel_locale = Locale(*babel.parse_locale(obsidion_locale, sep="-"))
         except (ValueError, babel.core.UnknownLocaleError):
-            # ValueError is Raised by `parse_locale` when an invalid Locale is given to it
+            # ValueError is Raised by `parse_locale`
+            # when an invalid Locale is given to it
             # Lets handle it silently and default to "en_US"
             try:
                 # Try to find a babel locale that's close to the one used by Obsidion
@@ -331,12 +330,14 @@ def get_babel_regional_format(
 ) -> babel.core.Locale:
     """Function to convert a regional format to a `babel.core.Locale`.
 
-    If ``regional_format`` parameter is passed, this behaves the same as `get_babel_locale`.
+    If ``regional_format`` parameter is passed, this behaves the
+    same as `get_babel_locale`.
 
     Parameters
     ----------
     regional_format : Optional[str]
-        The regional format to convert, if not specified it defaults to the bot's regional format.
+        The regional format to convert, if not specified it defaults
+        to the bot's regional format.
 
     Returns
     -------

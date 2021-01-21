@@ -1,10 +1,12 @@
-from discord.ext.commands import HelpCommand
 import itertools
-from discord.ext.commands import Command
-import discord
-from .i18n import Translator
 
-from fuzzywuzzy import fuzz, process
+import discord
+from discord.ext.commands import Command
+from discord.ext.commands import HelpCommand
+from fuzzywuzzy import fuzz
+from fuzzywuzzy import process
+
+from .i18n import Translator
 
 _ = Translator("Help", __file__)
 
@@ -32,23 +34,28 @@ class Help(HelpCommand):
     sort_commands: :class:`bool`
         Whether to sort the commands in the output alphabetically. Defaults to ``True``.
     commands_heading: :class:`str`
-        The command list's heading string used when the help command is invoked with a category name.
+        The command list's heading string
+        used when the help command is invoked with a category name.
         Useful for i18n. Defaults to ``"Commands"``
     aliases_heading: :class:`str`
-        The alias list's heading string used to list the aliases of the command. Useful for i18n.
+        The alias list's heading string used to
+        list the aliases of the command. Useful for i18n.
         Defaults to ``"Aliases:"``.
     dm_help: Optional[:class:`bool`]
         A tribool that indicates if the help command should DM the user instead of
         sending it to the channel it received it from. If the boolean is set to
         ``True``, then all help output is DM'd. If ``False``, none of the help
         output is DM'd. If ``None``, then the bot will only DM when the help
-        message becomes too long (dictated by more than :attr:`dm_help_threshold` characters).
+        message becomes too long (dictated by
+        more than :attr:`dm_help_threshold` characters).
         Defaults to ``False``.
     dm_help_threshold: Optional[:class:`int`]
-        The number of characters the paginator must accumulate before getting DM'd to the
+        The number of characters the paginator must accumulate
+        before getting DM'd to the
         user if :attr:`dm_help` is set to ``None``. Defaults to 1000.
     no_category: :class:`str`
-        The string used when there is a command which does not belong to any category(cog).
+        The string used when there is a command which does
+        not belong to any category(cog).
         Useful for i18n. Defaults to ``"No Category"``
     """
 
@@ -151,15 +158,18 @@ class Help(HelpCommand):
         return HelpQueryNotFound(f'Query "{string}" not found.', dict(result))
 
     async def send_embed(self):
-        """A helper utility to send the page output from :attr:`paginator` to the destination."""
+        """A helper utility to send the page output
+        from :attr:`paginator` to the destination."""
         destination = self.get_destination()
         await destination.send(embed=self.embed)
 
     def get_opening_note(self):
-        """Returns help command's opening note. This is mainly useful to override for i18n purposes.
+        """Returns help command's opening note.
+        This is mainly useful to override for i18n purposes.
         The default implementation returns ::
             Use `{prefix}{command_name} [command]` for more info on a command.
-            You can also use `{prefix}{command_name} [category]` for more info on a category.
+            You can also use `{prefix}{command_name}
+            [category]` for more info on a category.
         Returns
         -------
         :class:`str`
@@ -175,7 +185,8 @@ class Help(HelpCommand):
         )
 
     def get_ending_note(self):
-        """Return the help command's ending note. This is mainly useful to override for i18n purposes.
+        """Return the help command's ending note.
+        This is mainly useful to override for i18n purposes.
         The default implementation does nothing.
         Returns
         -------
@@ -311,24 +322,26 @@ class Help(HelpCommand):
         await self.send_embed()
 
     async def send_group_help(self, group):
-        self.add_command_formatting(group)
 
+        if group.help:
+            self.embed.description = group.help
+        self.embed.add_field(
+            name="Usage",
+            value=f"`{self.clean_prefix}{group.qualified_name} {group.signature}`",
+        )
+        ending = self.get_ending_note()
+        if ending:
+            self.embed.set_footer(text=self.get_ending_note())
+        self.add_command_formatting(group)
         filtered = await self.filter_commands(group.commands, sort=self.sort_commands)
         if filtered:
-            note = self.get_opening_note()
-            if note:
-                self.paginator.add_line(note, empty=True)
-
-            self.paginator.add_line("**%s**" % self.commands_heading)
             for command in filtered:
                 self.add_subcommand_formatting(command)
-
-            note = self.get_ending_note()
-            if note:
-                self.paginator.add_line()
-                self.paginator.add_line(note)
-
-        await self.send_pages()
+        self.embed.set_author(
+            name=f"Obsidion {group.qualified_name} Help",
+            icon_url=self.context.me.avatar_url,
+        )
+        await self.send_embed()
 
     async def send_command_help(self, command):
         if command.help:

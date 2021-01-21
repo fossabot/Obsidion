@@ -1,12 +1,12 @@
 """create guild table
 
 Revision ID: 851d11b8a33e
-Revises: 
+Revises:
 Create Date: 2021-01-18 13:02:51.910663
 
 """
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
 
 
 # revision identifiers, used by Alembic.

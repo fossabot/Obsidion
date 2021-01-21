@@ -1,12 +1,14 @@
 """Initialise and run the bot."""
 import logging
-
-from discord import Intents, AllowedMentions, ActivityType, Activity
+from obsidion import _update_event_loop_policy
+from obsidion.core import get_settings
+from obsidion.core.bot import Obsidion
 from obsidion.core.help import Help
 
-from obsidion import _update_event_loop_policy
-from obsidion.core.bot import Obsidion
-from obsidion.core import get_settings
+from discord import Activity
+from discord import ActivityType
+from discord import AllowedMentions
+from discord import Intents
 
 _update_event_loop_policy()
 
@@ -42,13 +44,10 @@ def main():
 
     obsidion = Obsidion(**args)
 
-    # obsidion.remove_command("help")
-
     log.info("Ready to go, spinning up the gears")
     obsidion.run(get_settings().DISCORD_TOKEN)
 
     log.info("GearBot shutting down, cleaning up")
-    # obsidion.database_connection.close()
 
     log.info("Cleanup complete")
 

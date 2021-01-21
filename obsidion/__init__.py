@@ -1,12 +1,12 @@
 """Obsidion Minecraft Discord Bot."""
-
 import asyncio as _asyncio
-from importlib.metadata import PackageNotFoundError, version
-import sys as _sys
 import logging
+import sys as _sys
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version
+from obsidion.core.logging import setup_logging
 
 # Start logging
-from obsidion.core.logging import setup_logging
 
 setup_logging()
 

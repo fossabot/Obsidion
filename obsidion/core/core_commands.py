@@ -1,25 +1,26 @@
 """Core Commands."""
-import datetime
-import sys
 import asyncio
 import contextlib
-import logging
+import datetime
 import inspect
+import logging
 import os
-from typing import List, Optional
-import aiohttp
-import re
-
+import sys
+from obsidion import __version__
+from obsidion.core.i18n import cog_i18n
+from obsidion.core.i18n import Translator
+from typing import Optional
 
 import discord
-from obsidion import __version__
-from .utils.chat_formatting import pagify, box, humanize_timedelta
-from .utils.predicates import MessagePredicate
-from obsidion.core.i18n import Translator, cog_i18n
-from . import i18n
-from babel import Locale as BabelLocale, UnknownLocaleError
-
+from babel import Locale as BabelLocale
+from babel import UnknownLocaleError
 from discord.ext import commands
+
+from . import i18n
+from .utils.chat_formatting import box
+from .utils.chat_formatting import humanize_timedelta
+from .utils.chat_formatting import pagify
+from .utils.predicates import MessagePredicate
 
 log = logging.getLogger("obsidion")
 
@@ -126,7 +127,7 @@ class Core(commands.Cog):
     @commands.is_owner()
     async def servers(self, ctx: commands.Context):
         """Lists and allows Obsidion to leave servers."""
-        guilds = sorted(list(self.bot.guilds), key=lambda s: s.name.lower())
+        guilds = sorted(self.bot.guilds, key=lambda s: s.name.lower())
         msg = ""
         responses = []
         for i, server in enumerate(guilds, 1):
@@ -168,8 +169,10 @@ class Core(commands.Cog):
             else:
                 await ctx.send(_("Alright, I'll stay then. :)"))
 
-    # Removing this command from forks is a violation of the AGPLv3 under which it is licensed.
-    # Otherwise interfering with the ability for this command to be accessible is also a violation.
+    # Removing this command from forks is a violation of the
+    # AGPLv3 under which it is licensed.
+    # Otherwise interfering with the ability for this command
+    # to be accessible is also a violation.
     @commands.command(name="licenseinfo", aliases=["license"])
     async def license_info_command(self, ctx: commands.Context):
         """
@@ -340,7 +343,8 @@ class Core(commands.Cog):
         if locale.territory is None:
             await ctx.send(
                 _(
-                    "Invalid format - language code has to include country code, e.g. `en-US`"
+                    "Invalid format - language code has to "
+                    "include country code, e.g. `en-US`"
                 )
             )
             return
@@ -353,19 +357,22 @@ class Core(commands.Cog):
     @commands.has_guild_permissions(manage_guild=True)
     async def regionalformat(self, ctx: commands.Context, language_code: str = None):
         """
-        Changes bot's regional format in this server. This is used for formatting date, time and numbers.
+        Changes bot's regional format in this server. This
+        is used for formatting date, time and numbers.
 
         `<language_code>` can be any language code with country code included,
         e.g. `en-US`, `de-DE`, `fr-FR`, `pl-PL`, etc.
 
-        Leave `<language_code>` empty to base regional formatting on bot's locale in this server.
+        Leave `<language_code>` empty to base regional formatting on
+        bot's locale in this server.
         """
         if language_code is None:
             i18n.set_contextual_regional_format(None)
             await self.bot._i18n_cache.set_regional_format(ctx.guild, None)
             await ctx.send(
                 _(
-                    "Regional formatting will now be based on bot's locale in this server."
+                    "Regional formatting will now be based "
+                    "on bot's locale in this server."
                 )
             )
             return
@@ -378,7 +385,8 @@ class Core(commands.Cog):
         if locale.territory is None:
             await ctx.send(
                 _(
-                    "Invalid format - language code has to include country code, e.g. `en-US`"
+                    "Invalid format - language code has to "
+                    "include country code, e.g. `en-US`"
                 )
             )
             return

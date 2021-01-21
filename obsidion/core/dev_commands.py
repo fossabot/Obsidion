@@ -1,24 +1,26 @@
 """Development Commands."""
 import ast
 import asyncio
-import aiohttp
 import inspect
 import io
+import re
 import textwrap
 import traceback
 import types
-import re
 from contextlib import redirect_stdout
 from copy import copy
+from obsidion.core.i18n import cog_i18n
+from obsidion.core.i18n import Translator
 from typing import Optional
 
+import aiohttp
 import discord
 from discord.ext import commands
 
-from .utils.chat_formatting import box, pagify
+from .utils.chat_formatting import box
+from .utils.chat_formatting import pagify
 from .utils.predicates import MessagePredicate
 from .utils.utils import send_interactive
-from obsidion.core.i18n import Translator, cog_i18n
 
 START_CODE_BLOCK_RE = re.compile(r"^((```py)(?=\s)|(```))")
 
@@ -145,7 +147,7 @@ class Dev(commands.Cog):
             author   - command author's member object
             message  - the command's message object
             discord  - discord.py library
-            commands - redbot.core.commands
+            commands - discord.ext.commands
             _        - The result of the last dev command.
         """
         env = {
@@ -167,7 +169,7 @@ class Dev(commands.Cog):
 
         try:
             compiled = self.async_compile(code, "<string>", "eval")
-            result = await self.maybe_await(eval(compiled, env))
+            result = await self.maybe_await(eval(compiled, env))  # noqa: S307
         except SyntaxError as e:
             await ctx.send(self.get_syntax_error(e))
             return
@@ -199,7 +201,7 @@ class Dev(commands.Cog):
             author   - command author's member object
             message  - the command's message object
             discord  - discord.py library
-            commands - redbot.core.commands
+            commands - discord.ext.commands
             _        - The result of the last dev command.
         """
         env = {
@@ -224,7 +226,7 @@ class Dev(commands.Cog):
 
         try:
             compiled = self.async_compile(to_compile, "<string>", "exec")
-            exec(compiled, env)
+            exec(compiled, env)  # noqa: S102
         except SyntaxError as e:
             return await ctx.send(self.get_syntax_error(e))
 
@@ -233,7 +235,7 @@ class Dev(commands.Cog):
         try:
             with redirect_stdout(stdout):
                 result = await func()
-        except:
+        except Exception:
             printed = "{}{}".format(stdout.getvalue(), traceback.format_exc())
         else:
             printed = stdout.getvalue()
@@ -249,7 +251,7 @@ class Dev(commands.Cog):
 
     @commands.group(invoke_without_command=True)
     @commands.is_owner()
-    async def repl(self, ctx):
+    async def repl(self, ctx):  # noqa C901
         """Open an interactive REPL.
 
         The REPL will only recognise code as messages which start with a
@@ -271,13 +273,15 @@ class Dev(commands.Cog):
             if self.sessions[ctx.channel.id]:
                 await ctx.send(
                     _(
-                        "Already running a REPL session in this channel. Exit it with `quit`."
+                        "Already running a REPL session in"
+                        " this channel. Exit it with `quit`."
                     )
                 )
             else:
                 await ctx.send(
                     _(
-                        "Already running a REPL session in this channel. Resume the REPL with `{}repl resume`."
+                        "Already running a REPL session in this"
+                        " channel. Resume the REPL with `{}repl resume`."
                     ).format(ctx.prefix)
                 )
             return
@@ -285,7 +289,8 @@ class Dev(commands.Cog):
         self.sessions[ctx.channel.id] = True
         await ctx.send(
             _(
-                "Enter code to execute or evaluate. `exit()` or `quit` to exit. `{}repl pause` to pause."
+                "Enter code to execute or evaluate. `exit()`"
+                " or `quit` to exit. `{}repl pause` to pause."
             ).format(ctx.prefix)
         )
 
@@ -334,7 +339,7 @@ class Dev(commands.Cog):
                     else:
                         result = executor(code, variables)
                     result = await self.maybe_await(result)
-            except:
+            except Exception:
                 value = stdout.getvalue()
                 msg = "{}{}".format(value, traceback.format_exc())
             else:

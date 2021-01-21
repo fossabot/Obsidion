@@ -2,9 +2,21 @@ import datetime
 import itertools
 import textwrap
 from io import BytesIO
-from typing import Iterator, List, Optional, Sequence, SupportsInt, Union
+from obsidion.core.i18n import get_babel_locale
+from obsidion.core.i18n import get_babel_regional_format
+from obsidion.core.i18n import Translator
+from typing import Iterator
+from typing import List
+from typing import Optional
+from typing import Sequence
+from typing import SupportsInt
+from typing import Union
 
 import discord
+from babel.lists import format_list as babel_list
+from babel.numbers import format_decimal
+
+_ = Translator("UtilsChatFormatting", __file__)
 
 
 def error(text: str) -> str:
@@ -208,7 +220,7 @@ def bordered(*columns: Sequence[str], ascii_border: bool = False) -> str:
 
 def pagify(
     text: str,
-    delims: Sequence[str] = ["\n"],
+    delims: Sequence[str] = ["\n"],  # noqa B006
     *,
     priority: bool = False,
     escape_mass_mentions: bool = True,
@@ -282,7 +294,8 @@ def pagify(
 def strikethrough(text: str, escape_formatting: bool = True) -> str:
     """Get the given text with a strikethrough.
 
-    Note: By default, this function will escape ``text`` prior to applying a strikethrough.
+    Note: By default, this function will escape ``text``
+        prior to applying a strikethrough.
 
     Parameters
     ----------
@@ -495,12 +508,12 @@ def humanize_timedelta(
 
     seconds = int(obj)
     periods = [
-        ("year", "years", 60 * 60 * 24 * 365),
-        ("month", "months", 60 * 60 * 24 * 30),
-        ("day", "days", 60 * 60 * 24),
-        ("hour", "hours", 60 * 60),
-        ("minute", "minutes", 60),
-        ("second", "seconds", 1),
+        (_("year"), _("years"), 60 * 60 * 24 * 365),
+        (_("month"), _("months"), 60 * 60 * 24 * 30),
+        (_("day"), _("days"), 60 * 60 * 24),
+        (_("hour"), _("hours"), 60 * 60),
+        (_("minute"), _("minutes"), 60),
+        (_("second"), _("seconds"), 1),
     ]
 
     strings = []
@@ -543,8 +556,8 @@ def text_to_file(
 ):
     """Prepares text to be sent as a file on Discord, without character limit.
 
-    This writes text into a bytes object that can be used for the ``file`` or ``files`` parameters
-    of :meth:`discord.abc.Messageable.send`.
+    This writes text into a bytes object that can be used for the `
+    `file`` or ``files`` parameters of :meth:`discord.abc.Messageable.send`.
 
     Parameters
     ----------

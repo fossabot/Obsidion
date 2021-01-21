@@ -1,5 +1,4 @@
 """Main tests."""
-
 from obsidion import __version__
 
 

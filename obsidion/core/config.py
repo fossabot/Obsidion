@@ -1,12 +1,14 @@
 """Settings management for the bot."""
-
-from uuid import UUID
-from functools import lru_cache
 import logging
+from functools import lru_cache
+from uuid import UUID
 
-from pydantic import BaseSettings, HttpUrl, PositiveInt, RedisDsn, PostgresDsn
+from pydantic import BaseSettings
+from pydantic import HttpUrl
+from pydantic import PositiveInt
+from pydantic import PostgresDsn
+from pydantic import RedisDsn
 from pydantic.color import Color
-import discord
 
 log = logging.getLogger("obsidion")
 
