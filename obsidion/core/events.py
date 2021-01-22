@@ -16,7 +16,7 @@ from .utils.chat_formatting import inline
 
 log = logging.getLogger("obsidion")
 
-_ = Translator("Dev", __file__)
+_ = Translator("Events", __file__)
 
 
 @cog_i18n(_)
@@ -34,7 +34,7 @@ class Events(commands.Cog):
             perms.add_reactions = True
             perms.send_messages = True
             perms.read_messages = True
-            perms.use_external_emojis = True
+            perms.embeds = True
             url = discord.utils.oauth_url(
                 self.bot.user.id,
                 permissions=perms,
