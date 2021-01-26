@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
-"POT-Creation-Date: 2021-01-22 19:29+1300\n"
-"PO-Revision-Date: 2021-01-22 08:49\n"
+"POT-Creation-Date: 2021-01-27 06:57+1300\n"
+"PO-Revision-Date: 2021-01-26 18:03\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -377,9 +377,17 @@ msgstr "分派消息事件，就像它是由其他用户发送的一样。\n\n"
 msgid "Important bot events."
 msgstr "重要的机器人事件。"
 
+#: obsidion/core/events.py:72
+msgid "`{user_input}` is not a valid value for `{command}`"
+msgstr ""
+
 #: obsidion/core/events.py:89
 msgid "I require the {permission} permission to execute that command."
 msgstr "我需要 {permission} 许可权才能执行该命令。"
+
+#: obsidion/core/events.py:93
+msgid "I require {permission_list} permissions to execute that command."
+msgstr ""
 
 #: obsidion/core/events.py:110
 msgid "This command is on cooldown. Try again in {delay}."
@@ -412,4 +420,8 @@ msgstr "使用此命令的人员过多。 它只能同时使用 {number} 次每 
 #: obsidion/core/events.py:146
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
 msgstr "使用此命令的人员过多。 它只能同时使用一次 {type} 次。"
+
+#: obsidion/core/events.py:157
+msgid "Error in command '{command}'. It has been recorded and should be fixed soon."
+msgstr ""
 
