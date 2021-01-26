@@ -69,7 +69,7 @@ class Events(commands.Cog):
         if isinstance(error, commands.MissingRequiredArgument):
             await ctx.send_help(ctx.command)
         elif isinstance(error, commands.ArgumentParsingError):
-            msg = "`{user_input}` is not a valid value for `{command}`".format(
+            msg = _("`{user_input}` is not a valid value for `{command}`").format(
                 user_input=error.user_input, command=error.cmd
             )
             if error.custom_help_msg:
@@ -90,7 +90,7 @@ class Events(commands.Cog):
                     "I require the {permission} permission to execute that command."
                 ).format(permission=format_perms_list(error.missing))
             else:
-                msg = (
+                msg = _(
                     "I require {permission_list} permissions to execute that command."
                 ).format(permission_list=format_perms_list(error.missing))
             await ctx.send(msg)
@@ -154,7 +154,7 @@ class Events(commands.Cog):
                 exc_info=error.original,
             )
 
-            message = (
+            message = _(
                 "Error in command '{command}'. It has "
                 "been recorded and should be fixed soon."
             ).format(command=ctx.command.qualified_name)

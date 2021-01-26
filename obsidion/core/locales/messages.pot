@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-01-22 19:29+1300\n"
+"POT-Creation-Date: 2021-01-27 06:57+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -392,8 +392,16 @@ msgstr ""
 msgid "Important bot events."
 msgstr ""
 
+#: obsidion/core/events.py:72
+msgid "`{user_input}` is not a valid value for `{command}`"
+msgstr ""
+
 #: obsidion/core/events.py:89
 msgid "I require the {permission} permission to execute that command."
+msgstr ""
+
+#: obsidion/core/events.py:93
+msgid "I require {permission_list} permissions to execute that command."
 msgstr ""
 
 #: obsidion/core/events.py:110
@@ -437,4 +445,9 @@ msgstr ""
 msgid ""
 "Too many people using this command. It can only be used once per {type} "
 "concurrently."
+msgstr ""
+
+#: obsidion/core/events.py:157
+msgid ""
+"Error in command '{command}'. It has been recorded and should be fixed soon."
 msgstr ""
