@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
-"POT-Creation-Date: 2021-01-20 04:01+1300\n"
-"PO-Revision-Date: 2021-01-19 15:16\n"
+"POT-Creation-Date: 2021-01-27 06:57+1300\n"
+"PO-Revision-Date: 2021-01-26 18:02\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +14,54 @@ msgstr ""
 "X-Crowdin-Project-ID: 437658\n"
 "X-Crowdin-Language: zh-CN\n"
 "X-Crowdin-File: /reformat/core/utils/locales/messages.pot\n"
-"X-Crowdin-File-ID: 26\n"
+"X-Crowdin-File-ID: 28\n"
 "Language: zh_CN\n"
+
+#: obsidion/core/utils/chat_formatting.py:511
+msgid "year"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:511
+msgid "years"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:512
+msgid "month"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:512
+msgid "months"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:513
+msgid "day"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:513
+msgid "days"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:514
+msgid "hour"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:514
+msgid "hours"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:515
+msgid "minute"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:515
+msgid "minutes"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:516
+msgid "second"
+msgstr ""
+
+#: obsidion/core/utils/chat_formatting.py:516
+msgid "seconds"
+msgstr ""
 
