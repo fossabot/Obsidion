@@ -50,14 +50,14 @@ flake8-comprehensions = "^3.3.1"
 flake8-import-order = "^0.18.1"
 
 [tool.coverage.paths]
-source = ["bot"]
+source = ["obsidion"]
 
 [tool.coverage.run]
 branch = true
-source = ["bot"]
+source = ["obsidion"]
 
 [tool.coverage.report]
-fail_under = 100
+fail_under = 0
 show_missing = true
 
 [build-system]
