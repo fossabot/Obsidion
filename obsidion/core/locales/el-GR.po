@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
-"POT-Creation-Date: 2021-01-22 19:29+1300\n"
-"PO-Revision-Date: 2021-01-22 08:49\n"
+"POT-Creation-Date: 2021-01-27 06:57+1300\n"
+"PO-Revision-Date: 2021-01-26 18:03\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "MIME-Version: 1.0\n"
@@ -377,9 +377,17 @@ msgstr "Αποστολή συμβάντος μηνύματος σαν να εσ�
 msgid "Important bot events."
 msgstr "Σημαντικά γεγονότα bot."
 
+#: obsidion/core/events.py:72
+msgid "`{user_input}` is not a valid value for `{command}`"
+msgstr ""
+
 #: obsidion/core/events.py:89
 msgid "I require the {permission} permission to execute that command."
 msgstr "Απαιτώ την άδεια {permission} για την εκτέλεση της εντολής."
+
+#: obsidion/core/events.py:93
+msgid "I require {permission_list} permissions to execute that command."
+msgstr ""
 
 #: obsidion/core/events.py:110
 msgid "This command is on cooldown. Try again in {delay}."
@@ -412,4 +420,8 @@ msgstr "Πολλοί άνθρωποι χρησιμοποιούν αυτή την
 #: obsidion/core/events.py:146
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
 msgstr "Πολλοί άνθρωποι χρησιμοποιούν αυτή την εντολή. Μπορεί να χρησιμοποιηθεί μόνο μία φορά ανά {type} ταυτόχρονα."
+
+#: obsidion/core/events.py:157
+msgid "Error in command '{command}'. It has been recorded and should be fixed soon."
+msgstr ""
 
