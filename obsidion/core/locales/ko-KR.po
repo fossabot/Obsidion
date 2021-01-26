@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: obsidion\n"
-"POT-Creation-Date: 2021-01-22 19:29+1300\n"
-"PO-Revision-Date: 2021-01-22 08:49\n"
+"POT-Creation-Date: 2021-01-27 06:57+1300\n"
+"PO-Revision-Date: 2021-01-26 18:03\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "MIME-Version: 1.0\n"
@@ -377,9 +377,17 @@ msgstr "다른 사용자가 보낸 것처럼 메시지 이벤트를 디스패치
 msgid "Important bot events."
 msgstr "중요한 봇 이벤트"
 
+#: obsidion/core/events.py:72
+msgid "`{user_input}` is not a valid value for `{command}`"
+msgstr ""
+
 #: obsidion/core/events.py:89
 msgid "I require the {permission} permission to execute that command."
 msgstr "이 명령을 실행하려면 {permission} 권한이 필요합니다."
+
+#: obsidion/core/events.py:93
+msgid "I require {permission_list} permissions to execute that command."
+msgstr ""
 
 #: obsidion/core/events.py:110
 msgid "This command is on cooldown. Try again in {delay}."
@@ -412,4 +420,8 @@ msgstr "이 명령을 사용하는 사용자가 너무 많습니다. {type} 번�
 #: obsidion/core/events.py:146
 msgid "Too many people using this command. It can only be used once per {type} concurrently."
 msgstr "이 명령을 사용하는 사용자가 너무 많습니다. {type} 에서 동시에 한 번만 사용할 수 있습니다."
+
+#: obsidion/core/events.py:157
+msgid "Error in command '{command}'. It has been recorded and should be fixed soon."
+msgstr ""
 
