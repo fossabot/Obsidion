@@ -2,8 +2,11 @@
 import sys
 from enum import IntEnum
 from typing import Optional
+import socket
+import json
 
 import aioredis
+import aiohttp
 import asyncpg
 import discord
 from discord.ext.commands import AutoShardedBot
@@ -15,6 +18,7 @@ from .events import Events
 from .global_checks import init_global_checks
 from .settings_cache import I18nManager
 from .settings_cache import PrefixManager
+from .config import PlayerNotExist
 
 
 class Obsidion(AutoShardedBot):
@@ -30,6 +34,9 @@ class Obsidion(AutoShardedBot):
         self._invite = None
         self.redis = None
         self.db = None
+        self.http_session = None
+        self._connector = None
+        self._resolver = None
 
         self._prefix_cache = PrefixManager(self)
         self._i18n_cache = I18nManager(self)
@@ -46,6 +53,17 @@ class Obsidion(AutoShardedBot):
 
         self.redis = await aioredis.create_redis_pool(str(get_settings().REDIS))
         self.db = await asyncpg.create_pool(str(get_settings().DB))
+        self._resolver = aiohttp.AsyncResolver()
+        # Use AF_INET as its socket family to prevent HTTPS related
+        # problems both locally and in production.
+        self._connector = aiohttp.TCPConnector(
+            resolver=self._resolver,
+            family=socket.AF_INET,
+        )
+
+        # Client.login() will call HTTPClient.static_login()
+        # which will create a session using this connector attribute.
+        self.http_session = aiohttp.ClientSession(connector=self._connector)
 
         # Load important cogs
         self.add_cog(Events(self))
@@ -56,6 +74,7 @@ class Obsidion(AutoShardedBot):
             self.add_cog(Dev(self))
 
         # load cogs
+        self.load_extension("obsidion.cogs.images")
 
     async def start(self, *args, **kwargs):
         """
@@ -145,6 +164,31 @@ class Obsidion(AutoShardedBot):
 
         await self.logout()
         sys.exit(self._shutdown_mode)
+
+    async def mojang_player(self, username: str) -> str:
+        """Takes in an mc username and tries to convert it to a mc uuid.
+
+        Args:
+        username (str): username of player which uuid will be from
+        bot (Obsidion): Obsidion bot
+
+        Returns:
+        str: uuid of player
+        """
+        key = f"player_{username}"
+        if await self.redis.exists(key):
+            data = json.loads(await self.redis.get(key))
+        else:
+            url = f"https://api.ashcon.app/mojang/v2/user/{username}"
+            async with self.http_session.get(url) as resp:
+                if resp.status == 200:
+                    data = await resp.json()
+                else:
+                    data = None
+        await self.redis.set(key, json.dumps(data), expire=28800)
+        if data is None:
+            raise PlayerNotExist()
+        return data
 
 
 class ExitCodes(IntEnum):

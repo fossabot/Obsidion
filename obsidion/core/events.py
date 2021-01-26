@@ -12,6 +12,7 @@ from .i18n import set_contextual_locales_from_guild
 from .utils.chat_formatting import format_perms_list
 from .utils.chat_formatting import humanize_timedelta
 from .utils.chat_formatting import inline
+from obsidion.core.config import PlayerNotExist
 
 
 log = logging.getLogger("obsidion")
@@ -34,7 +35,7 @@ class Events(commands.Cog):
             perms.add_reactions = True
             perms.send_messages = True
             perms.read_messages = True
-            perms.embeds = True
+            perms.embed_links = True
             url = discord.utils.oauth_url(
                 self.bot.user.id,
                 permissions=perms,
@@ -149,6 +150,13 @@ class Events(commands.Cog):
                     ).format(type=error.per.name)
             await ctx.send(msg)
         elif isinstance(error, commands.CommandInvokeError):
+            if isinstance(error.original, PlayerNotExist):
+                await ctx.reply(
+                    _(
+                        "The user does not exist, please check wether the username is correct."
+                    ).format(author=ctx.message.author.mention)
+                )
+                return
             log.exception(
                 "Exception in command '{}'".format(ctx.command.qualified_name),
                 exc_info=error.original,

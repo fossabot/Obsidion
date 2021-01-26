@@ -13,6 +13,12 @@ from pydantic.color import Color
 log = logging.getLogger("obsidion")
 
 
+class PlayerNotExist(Exception):
+    """Custom API Error."""
+
+    pass
+
+
 class Settings(BaseSettings):
     """Bot config settings."""
 
