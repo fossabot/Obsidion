@@ -101,7 +101,6 @@ class Core(commands.Cog):
     @commands.command()
     async def invite(self, ctx: commands.Context) -> None:
         """Invite the bot to your server."""
-        await ctx.send(self.bot._invite)
         embed = discord.Embed(
             description=_(
                 "You can invite {name} to your Discord server by"

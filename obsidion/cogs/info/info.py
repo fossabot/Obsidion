@@ -1,0 +1,222 @@
+"""Images cog."""
+import logging
+
+import discord
+from discord.ext import commands
+
+from obsidion.core.i18n import cog_i18n
+from obsidion.core.i18n import Translator
+from obsidion.core import get_settings
+from datetime import datetime
+
+log = logging.getLogger(__name__)
+
+_ = Translator("Info", __file__)
+
+
+@cog_i18n(_)
+class Info(commands.Cog):
+    def __init__(self, bot) -> None:
+        """Init."""
+        self.bot = bot
+
+    @commands.command(
+        aliases=["whois", "p", "names", "namehistory", "pastnames", "namehis"]
+    )
+    async def profile(self, ctx: commands.Context, username: str) -> None:
+        """View a players Minecraft UUID, Username history and skin."""
+        await ctx.channel.trigger_typing()
+        profile_info = await self.bot.mojang_player(username)
+        uuid: str = profile_info["uuid"]
+        names = profile_info["username_history"]
+        h = 0
+        for c in uuid.replace("-", ""):
+            h = (31 * h + ord(c)) & 0xFFFFFFFF
+        skin_type = "Alex"
+        if (((h + 0x80000000) & 0xFFFFFFFF) - 0x80000000) % 2 == 0:
+            skin_type = "Steve"
+
+        name_list = ""
+        for name in names[1:]:
+            name_list += f"**{names.index(name)+1}.** `{name['username']}` - {(datetime.strptime(name['changed_at'], '%Y-%m-%dT0%X.000Z')).strftime('%b %d, %Y')}\n"
+        name_list += _("**1.** `{original}` - First Username").format(
+            original=names[0]["username"]
+        )
+
+        embed = discord.Embed(
+            title=_("Minecraft profile for {username}").format(username=username),
+            color=self.bot.color,
+        )
+
+        embed.add_field(
+            name="Account",
+            inline=False,
+            value=_("Full UUID: `{uuid}`\nShort UUID: `{short}`").format(
+                uuid=uuid, short=uuid.replace("-", "")
+            ),
+        )
+        embed.add_field(
+            name="Textures",
+            inline=True,
+            value=_(
+                "Skin: [Open Skin](https://visage.surgeplay.com/bust/{uuid})\nSkin Type: `{skin_type}`\nSkin History: [link]({skin_history})\nSlim: `{slim}`\nCustom: `{custom}`\nCape: `{cape}`"
+            ).format(
+                uuid=uuid,
+                skin_type=skin_type,
+                skin_history=f"https://mcskinhistory.com/player/{username}",
+                slim=profile_info["textures"]["slim"]
+                if "slim" in profile_info["textures"]
+                else False,
+                custom=profile_info["textures"]["custom"]
+                if "custom" in profile_info["textures"]
+                else False,
+                cape=True if "cape" in profile_info["textures"] else False,
+            ),
+        )
+        embed.add_field(
+            name=_("Information"),
+            inline=True,
+            value=_(
+                "Username Changes: `{changes}`\nNamemc: [link]({namemc})\nLegacy: `{legacy}`\nDemo: `{demo}`"
+            ).format(
+                changes=len(names) - 1,
+                namemc=f"https://namemc.com/profile{uuid}",
+                legacy=profile_info["legacy"] if "legacy" in profile_info else False,
+                demo=profile_info["demo"] if "demo" in profile_info else False,
+            ),
+        )
+        embed.add_field(
+            name=_("Name History"),
+            inline=False,
+            value=name_list,
+        )
+        embed.set_thumbnail(url=(f"https://visage.surgeplay.com/bust/{uuid}"))
+
+        await ctx.send(embed=embed)
+
+    @commands.command()
+    @commands.cooldown(rate=1, per=1.0, type=commands.BucketType.user)
+    async def wiki(self, ctx: commands.Context, *, query: str) -> None:
+        """Get an article from the minecraft wiki."""
+        await ctx.channel.trigger_typing()
+
+        def generate_payload(query: str) -> dict:
+            """Generate the payload for Gamepedia based on a query string."""
+            payload = {
+                "action": "query",
+                "titles": query.replace(" ", "_"),
+                "format": "json",
+                "formatversion": "2",  # Cleaner json results
+                "prop": "extracts",  # Include extract in returned results
+                "exintro": "1",  # Only return summary paragraph(s) before main content
+                "redirects": "1",  # Follow redirects
+                "explaintext": "1",  # Make sure it's plaintext (not HTML)
+            }
+            return payload
+
+        base_url = "https://minecraft.gamepedia.com/api.php"
+        footer_icon = (
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53"
+            "/Wikimedia-logo.png/600px-Wikimedia-logo.png"
+        )
+
+        payload = generate_payload(query)
+        async with self.bot.http_session.get(base_url, params=payload) as resp:
+            if resp.status == 200:
+                result = await resp.json()
+            else:
+                result = None
+
+        try:
+            # Get the last page. Usually this is the only page.
+            page = result["query"]["pages"][-1]
+            title = page["title"]
+            description = page["extract"].strip().replace("\n", "\n\n")
+            url = f"https://minecraft.gamepedia.com/{title.replace(' ', '_')}"
+
+            if len(description) > 1500:
+                description = description[:1500].strip()
+                description += f"... [(read more)]({url})"
+
+            embed = discord.Embed(
+                title=title,
+                description=f"\u2063\n{description}\n\u2063",
+                color=self.bot.color,
+                url=url,
+            )
+            embed.set_footer(
+                text=_("Information provided by Wikimedia"), icon_url=footer_icon
+            )
+            await ctx.send(embed=embed)
+
+        except KeyError:
+            await ctx.reply(
+                _("I'm sorry, I couldn't find \"{query}\" on Gamepedia").format(
+                    query=query
+                )
+            )
+
+    @commands.command()
+    async def mcbug(self, ctx: commands.Context, bug: str) -> None:
+        """Gets info on a bug from bugs.mojang.com."""
+        await ctx.channel.trigger_typing()
+        async with self.bot.http_session.get(
+            f"https://bugs.mojang.com/rest/api/latest/issue/{bug}"
+        ) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+            else:
+                await ctx.reply(_(":x: The bug {bug} was not found.").format(bug=bug))
+            return
+        embed = discord.Embed(
+            description=data["fields"]["description"],
+            color=self.bot.color,
+        )
+
+        embed.set_author(
+            name=f"{data['fields']['project']['name']} - {data['fields']['summary']}",
+            url=f"https://bugs.mojang.com/browse/{bug}",
+        )
+
+        info = _(
+            "Version: {version}\n"
+            "Reporter: {reporter}\n"
+            "Created: {created}\n"
+            "Votes: {votes}\n"
+            "Updates: {updates}\n"
+            "Watchers: {watched}"
+        ).format(
+            version=data["fields"]["project"]["name"],
+            reporter=data["fields"]["creator"]["displayName"],
+            created=data["fields"]["created"],
+            votes=data["fields"]["votes"]["votes"],
+            updates=data["fields"]["updated"],
+            watched=data["fields"]["watches"]["watchCount"],
+        )
+
+        details = (
+            f"Type: {data['fields']['issuetype']['name']}\n"
+            f"Status: {data['fields']['status']['name']}\n"
+        )
+        if data["fields"]["resolution"]["name"]:
+            details += _("Resolution: {resolution}\n").format(
+                resolution=data["fields"]["resolution"]["name"]
+            )
+        if "version" in data["fields"]:
+            details += (
+                _("Affected: ")
+                + f"{', '.join(s['name'] for s in data['fields']['versions'])}\n"
+            )
+        if "fixVersions" in data["fields"]:
+            if len(data["fields"]["fixVersions"]) >= 1:
+                details += (
+                    _("Fixed Version: {fixed} + ").format(
+                        fixed=data["fields"]["fixVersions"][0]
+                    )
+                    + f"{len(data['fields']['fixVersions'])}\n"
+                )
+
+        embed.add_field(name=_("Information"), value=info)
+        embed.add_field(name=_("Details"), value=details)
+
+        await ctx.send(embed=embed)
