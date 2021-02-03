@@ -1,5 +1,6 @@
 """Images cog."""
 import logging
+import json
 
 import discord
 from discord.ext import commands
@@ -91,6 +92,56 @@ class Info(commands.Cog):
             value=name_list,
         )
         embed.set_thumbnail(url=(f"https://visage.surgeplay.com/bust/{uuid}"))
+
+        await ctx.send(embed=embed)
+
+    @commands.command(aliases=["sales"])
+    @commands.cooldown(rate=1, per=5.0, type=commands.BucketType.user)
+    async def status(self, ctx: commands.Context) -> None:
+        """Check the status of all the Mojang services."""
+        await ctx.channel.trigger_typing()
+        async with self.bot.http_session.get(
+            f"{get_settings().API_URL}/mojang/check"
+        ) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+            else:
+                data = None
+        sales_mapping = {
+            "item_sold_minecraft": True,
+            "prepaid_card_redeemed_minecraft": True,
+            "item_sold_cobalt": False,
+            "item_sold_scrolls": False,
+        }
+        payload = {"metricKeys": [k for (k, v) in sales_mapping.items() if v]}
+
+        if await self.bot.redis.exists("status"):
+            sales_data = json.loads(await self.bot.redis.get("status"))
+        else:
+            url = "https://api.mojang.com/orders/statistics"
+            async with ctx.bot.http_session.post(url, json=payload) as resp:
+                if resp.status == 200:
+                    sales_data = await resp.json()
+            await self.bot.redis.set("status", json.dumps(sales_data))
+
+        services = ""
+        for service in data:
+            if data[service] == "green":
+                services += _(
+                    ":green_heart: - {service}: **This service is healthy.** \n"
+                ).format(service=service)
+            else:
+                services += _(
+                    ":heart: - {service}: **This service is offline.** \n"
+                ).format(service=service)
+        embed = discord.Embed(title=_("Minecraft Service Status"), color=0x00FF00)
+        embed.add_field(
+            name="Minecraft Game Sales",
+            value=_("Total Sales: **{total}** Last 24 Hours: **{last}**").format(
+                total=sales_data["total"], last=sales_data["last24h"]
+            ),
+        )
+        embed.add_field(name=_("Minecraft Services:"), value=services, inline=False)
 
         await ctx.send(embed=embed)
 
