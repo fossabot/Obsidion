@@ -8,7 +8,7 @@ from obsidion.core.i18n import cog_i18n
 from obsidion.core.i18n import Translator
 from obsidion.core import get_settings
 
-from hypixel import Hypixel
+from hypixel import _Hypixel
 
 log = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ class Hypixel(commands.Cog):
     def __init__(self, bot) -> None:
         """Init."""
         self.bot = bot
-        self.hypixel = Hypixel(get_settings().HYPIXEL_API_TOKEN)
+        self.hypixel = _Hypixel(get_settings().HYPIXEL_API_TOKEN)
 
     @commands.command()
     async def watchdogstats(self, ctx: commands.Context) -> None:
