@@ -8,7 +8,7 @@ from obsidion.core.i18n import cog_i18n
 from obsidion.core.i18n import Translator
 from obsidion.core import get_settings
 
-from hypixel import _Hypixel
+from asyncpixel import Hypixel as _Hypixel
 
 log = logging.getLogger(__name__)
 
@@ -32,11 +32,11 @@ class Hypixel(commands.Cog):
             name=_("Total Bans"), value=f"{(data.watchdog_total + data.staff_total):,}"
         )
         embed.add_field(
-            name=_("Watchdog Rolling Daily"), value=f"{data.watchdog_rollingDaily:,}"
+            name=_("Watchdog Rolling Daily"), value=f"{data.watchdog_rolling_daily:,}"
         )
         embed.add_field(name=_("Staff Total"), value=f"{data.staff_total:,}")
         embed.add_field(
-            name=_("Staff Rolling Daily"), value=f"{data.staff_rollingDaily:,}"
+            name=_("Staff Rolling Daily"), value=f"{data.staff_rolling_daily:,}"
         )
         embed.timestamp = ctx.message.created_at
         await ctx.send(embed=embed)
