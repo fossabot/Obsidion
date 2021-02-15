@@ -12,6 +12,7 @@
   <a href="https://www.patreon.com/obsidion">
     <img src="https://img.shields.io/badge/Support-Obsidion!-yellow.svg" alt="Support Obsidion on Patreon!">
   </a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2FObsidion-dev%2FObsidion?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FObsidion-dev%2FObsidion.svg?type=shield"/></a>
   <a href="https://www.python.org/downloads/">
     <img src="https://img.shields.io/badge/Made%20With-Python%203.8-blue.svg?style=for-the-badge" alt="Made with Python 3.8">
   </a>
@@ -54,6 +55,9 @@
 </p>
 
 Currently being rewritten checkout the refactor branch
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FObsidion-dev%2FObsidion.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FObsidion-dev%2FObsidion?ref=badge_large)
 
 # Overview
 
